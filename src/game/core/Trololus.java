@@ -28,7 +28,6 @@ public class Trololus extends BasicGame {
 	}
 
 	
-	
 	@Override
 	public void init(GameContainer gc) throws SlickException{
 		background = new Image("src/resources/background.png");
@@ -46,14 +45,12 @@ public class Trololus extends BasicGame {
 	}
 	
 	public static void main(String[] args) throws SlickException {
-		
 		AppGameContainer app = new AppGameContainer(new Trololus(title));
 		app.setDisplayMode(width, height, fullscreen);
 		app.setSmoothDeltas(true);
 		app.setTargetFrameRate(fpslimit);
 		app.start();
-		
-		System.out.println("pepa ho má velkýho");
+		System.out.println("pepa");
 
 }}
 
