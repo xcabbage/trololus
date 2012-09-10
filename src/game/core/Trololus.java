@@ -15,13 +15,13 @@ package game.core;
 import org.newdawn.slick.*;
 
 public class Trololus extends BasicGame {
-	static boolean fullscreen = true;
+	static boolean fullscreen = false;
 	static boolean ShowFPS = true;
 	public Image background;
 	static int fpslimit = 60;
 	static String title = "Trololus NightBuild.0";
-	static int width = 1680;
-	static int height = 1050;
+	static int width = 500;
+	static int height = 500;
 	
 	
 	public Trololus(String title)	{super(title);
@@ -30,7 +30,7 @@ public class Trololus extends BasicGame {
 	
 	@Override
 	public void init(GameContainer gc) throws SlickException{
-		background = new Image("src/resources/background.png");
+		background = new Image("resources/background.png");
 		
 	} 
 	
