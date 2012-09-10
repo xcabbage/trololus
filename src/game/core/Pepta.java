@@ -1,5 +1,7 @@
 package game.core;
 
 public class Pepta {
-//roflLOL
+	public void Pozdrav(){
+		System.out.println("Nazdar");
+	}
 }
