@@ -45,12 +45,15 @@ public class Trololus extends BasicGame {
 	}
 	
 	public static void main(String[] args) throws SlickException {
+		System.out.println("pepa");
+		Pepta pepta = new Pepta();
+		pepta.Pozdrav();
+		
 		AppGameContainer app = new AppGameContainer(new Trololus(title));
 		app.setDisplayMode(width, height, fullscreen);
 		app.setSmoothDeltas(true);
 		app.setTargetFrameRate(fpslimit);
 		app.start();
-		System.out.println("pepa");
-
+		
 }}
 
