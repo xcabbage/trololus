@@ -9,7 +9,7 @@
 package game.core;
 
 /**
- * @author David
+ * @author xCabbage
  *
  */
 import org.newdawn.slick.*;
@@ -20,7 +20,7 @@ public class Trololus extends BasicGame {
 	public Image background;
 	static int fpslimit = 60;
 	static String title = "Trololus NightBuild.0";
-	static int width = 500;
+	static int width = 1000;
 	static int height = 500;
 	
 	
@@ -30,7 +30,7 @@ public class Trololus extends BasicGame {
 	
 	@Override
 	public void init(GameContainer gc) throws SlickException{
-		background = new Image("resources/background.png");
+		background = new Image("resources/UI/menu.png");
 		
 	} 
 	
@@ -41,7 +41,7 @@ public class Trololus extends BasicGame {
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		background.draw(100,100,1);
+		background.draw(0,0, (float)0.5);
 	}
 	
 	public static void main(String[] args) throws SlickException {
