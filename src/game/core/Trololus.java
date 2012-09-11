@@ -2,16 +2,8 @@
 // for the trololus project [github.com/xcabbage/trololus]
 
 
-
-/**
- * 
- */
 package game.core;
 
-/**
- * @author xCabbage
- *
- */
 import org.newdawn.slick.*;
 
 public class Trololus extends BasicGame {
@@ -42,6 +34,8 @@ public class Trololus extends BasicGame {
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		background.draw(0,0, (float)0.5);
+		String pepa = new String("rofl lol");
+		g.drawString(pepa, 100, 100);
 	}
 	
 	public static void main(String[] args) throws SlickException {
