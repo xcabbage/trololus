@@ -10,7 +10,7 @@ public class PlayerList {
 	int players = Pepta.players;
 	
 	private Player[] playerlist = new Player[players];
-	private int playerCount = 1;
+	private int playerCount = 0;
 	
 	public void createPlayer(Player p){
 		if(playerCount<playerlist.length){

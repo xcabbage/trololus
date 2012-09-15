@@ -6,6 +6,8 @@ package game.core;
  *
  */
 
+//DATA CLASS FOR KEEPING TRACK OF PLAYERS' SCORE------------------------------------------------------------------------
+
 public class Leaderboard {
 	static int players = Pepta.players;
 	static int kills[]=new int[players];
@@ -14,9 +16,23 @@ public class Leaderboard {
 	static int deathstreak[]=new int[players];
 	static String playersNames[]=new String[players];
 	
-	public static void start(int playerCount){
-		
+	//METHODS FOR GRAPHIC LEADERBOARD-----------------------------------------------------------------------------------
+	
+	public static int getKills(int playerNumber){
+		return kills[playerNumber];
 	}
+	public static int getDeaths(int playerNumber){
+		return deaths[playerNumber];
+	}
+	public static int getKillstreak(int playerNumber){
+		return killstreak[playerNumber];
+	}
+	public static int getDeathstreak(int playerNumber){
+		return deathstreak[playerNumber];
+	}
+	
+	
+	//METHODS TO COUNT SCORE--------------------------------------------------------------------------------------------
 	
 	public static void countKill(int playerNumber, String playerName){
 		kills[playerNumber]++;

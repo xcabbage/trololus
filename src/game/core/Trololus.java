@@ -23,7 +23,7 @@ public class Trololus extends BasicGame {
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		background = new Image("resources/UI/menu.png");
+		background = new Image("resources/Splash/UI/menu.png");
 		state = GameState.INIT;
 
 

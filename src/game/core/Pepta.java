@@ -6,15 +6,30 @@
 
 package game.core;
 
+import java.util.Scanner;
+
 public class Pepta {
-	static int players = 5;
+	static int players = 6;
+	
 	public void createPlayers(){
+		/*
+		Scanner wantedPlayers = new Scanner(System.in);
+		
+		System.out.println("enter number of players");
+		players = (wantedPlayers.nextInt());
+		wantedPlayers.close();
+		*/
 		PlayerList playerlist = new PlayerList();
 		Player p = new Player();
-		for (int x = 1; x < players ; x++){
+		for (int x = 0; x <= players ; x++){
 			playerlist.createPlayer(p);
 		}
-		playerlist.namePlayer(1,"XCABBAGE");
-		playerlist.namePlayer(2,"DannyUfonek");
+		
+		Scanner nameScanner = new Scanner(System.in);
+		
+		for (int createdPlayers = 1; createdPlayers < players; createdPlayers++){
+			System.out.println("Enter next player's name:");
+			playerlist.namePlayer(createdPlayers, nameScanner.nextLine());
+		}
 	}
 }

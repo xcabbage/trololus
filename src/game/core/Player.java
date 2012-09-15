@@ -8,7 +8,6 @@ package game.core;
 
 public class Player {
 	
-	//boolean alive;
 	String Name;
 	int number;
 	int color;
