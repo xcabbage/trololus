@@ -11,30 +11,21 @@ public class Trololus extends StateBasedGame {
 
 	static boolean fullscreen = false;
 	static boolean ShowFPS = true;
-	
+
 	static int width = 1000;
 	static int height = 500;
 	static int fpslimit = 60;
 	static String title = "Trololus NightBuild.0";
-	
+
 	public Trololus(String title) {
 		super(title);
 	}
 
 	@Override
-	
-		public void initStatesList(GameContainer gc) throws SlickException
-		{
-			addState(new MainState(this));
-//			 addState(new MenuState(this));
-		}
-
-
-
-	
-
-			
-		
+	public void initStatesList(GameContainer gc) throws SlickException {
+		addState(new MainState());
+		 addState(new MenuState());
+	}
 
 	public static void main(String[] args) throws SlickException {
 		System.out.println("pepa");
