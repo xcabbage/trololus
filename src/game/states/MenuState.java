@@ -32,7 +32,7 @@ public class MenuState extends BasicGameState {
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-		background = new Image("resources/Splash/UI/menu.png");
+		background = new Image("/resources/Splash/UI/menu.png");
 		this.game = game;
 
 		// initialize strings
@@ -51,6 +51,7 @@ public class MenuState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 //		background.draw(50, 0, (float) 0.5);
+		g.drawString("MenuPepa",100,100);
 		;
 
 	}

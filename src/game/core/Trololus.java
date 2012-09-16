@@ -24,7 +24,7 @@ public class Trololus extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		addState(new MainState());
-		 addState(new MenuState());
+		addState(new MenuState());
 	}
 
 	public static void main(String[] args) throws SlickException {

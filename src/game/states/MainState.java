@@ -6,12 +6,16 @@
  */
 package game.states;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+
 
 /**
  * @author David
@@ -32,7 +36,7 @@ public class MainState extends BasicGameState {
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-		background = new Image("/resources/Splash/UI/menu.png");
+		background = new Image("resources/Splash/UI/menu.png");
 		this.game = game;
 
 		// initialize strings
@@ -43,15 +47,19 @@ public class MainState extends BasicGameState {
 		S_postgame = "The after game lobby.";
 	}
 
-	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
-			throws SlickException {
+	public void update(GameContainer gc, StateBasedGame mainGame, int delta)throws SlickException {
+		Input input = gc.getInput();
+		int mouseX = Mouse.getX();
+		int mouseY = Mouse.getY();
+//		if (mouseX)
 
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-//		background.draw(0, 0, (float) 0.5);
-		;
+		background.draw(0, 0, (float) 0.5);
+		g.drawString(S_title, 100, 100);
+		
 
 	}
 }
