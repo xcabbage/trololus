@@ -9,7 +9,7 @@ package game.core;
 import java.util.Scanner;
 
 public class Pepta {
-	static int players = 6;
+	static int players = 0;
 	
 	public void createPlayers(){
 		/*
