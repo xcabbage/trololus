@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/lib/lwjgl.jar">
+	<classpathentry exported="true" kind="lib" path="lib/lib/lwjgl.jar" sourcepath="C:/Users/Hynek/Documents/GitHub/trololus/bin/lib/lwjgl.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="trololus/lib/"/>
 		</attributes>
@@ -9,7 +9,7 @@
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="lib/lib/slick.jar">
+	<classpathentry exported="true" kind="lib" path="lib/lib/slick.jar" sourcepath="C:/Users/Hynek/Documents/GitHub/trololus/lib/lib/slick.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://slick.cokeandcode.com/javadoc/"/>
 		</attributes>
