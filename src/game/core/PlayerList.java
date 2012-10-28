@@ -15,7 +15,10 @@ public class PlayerList {
 	public void createPlayer(Player p){
 		if(playerCount<playerlist.length){
 			playerlist[playerCount] = p;
-			System.out.println("Player " + playerCount + " successfully created!");
+			//adds one to the player's number, so that we don't get player 0.
+			//However, player 0 is saved in the array
+			int playerCountReal = playerCount+1;
+			System.out.println("Player " + playerCountReal + " successfully created!");
 			playerCount++;
 			}
 	}

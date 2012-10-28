@@ -12,24 +12,27 @@ public class Pepta {
 	static int players = 6;
 	
 	public void createPlayers(){
-		/*
+		
 		Scanner wantedPlayers = new Scanner(System.in);
 		
-		System.out.println("enter number of players");
+		System.out.println("Enter number of players");
 		players = (wantedPlayers.nextInt());
 		wantedPlayers.close();
-		*/
+		
 		PlayerList playerlist = new PlayerList();
 		Player p = new Player();
-		for (int x = 0; x <= players ; x++){
+		for (int createdPlayers = 0; createdPlayers <= players ; createdPlayers++){
 			playerlist.createPlayer(p);
 		}
 		
+		System.out.println("Now you will be asked to enter players' names");
+		
 		Scanner nameScanner = new Scanner(System.in);
 		
-		for (int createdPlayers = 1; createdPlayers < players; createdPlayers++){
+		
+		for (int namedPlayers = 1; namedPlayers < players; namedPlayers++){
 			System.out.println("Enter next player's name:");
-			playerlist.namePlayer(createdPlayers, nameScanner.nextLine());
+			playerlist.namePlayer(namedPlayers, nameScanner.nextLine());
 		}
 	}
 }
