@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /*
  * PlayerList is the soon-to-be class responsible for creating players!!!
@@ -6,10 +7,19 @@
  * xC: trochu jsem to prekopal hazelo to errory koukni se jestli to funguje hynku
  */
 // 
+=======
+/*
+ * PlayerList is the soon-to-be class responsible for creating players!!!
+ * Pepta could be the program for sending the info to PlayerList
+ * PEPTA = Player Existence Preparation Transcription Apparatus
+ */
 
 package game.core;
 
 import java.util.Scanner;
+
+>>>>>>> fixed Pepta again
+
 
 public class Pepta {
 	static int players = 0;
