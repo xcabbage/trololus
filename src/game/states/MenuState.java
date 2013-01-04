@@ -31,7 +31,7 @@ public class MenuState extends BasicGameState {
 	String menu1, menu2, menu3;
 	String S_ingame, S_loading, S_title, S_postgame;
 	public Image background;
-	public boolean init = false;
+
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
@@ -45,7 +45,7 @@ public class MenuState extends BasicGameState {
 		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
 		S_postgame = "The after game lobby.";
 		System.out.println("Init formula for MenuState ran and done.");
-		init = true;
+
 		
 	}
 
@@ -61,7 +61,7 @@ public class MenuState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 
-//		if (!init) init(gc, game);
+
 		background.draw(0, 0, (float) 0.5);
 		
 		g.drawString(menu1, 320, 20);
