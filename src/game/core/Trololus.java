@@ -3,6 +3,8 @@
 
 package game.core;
 
+import java.awt.Dimension;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 import game.states.*;
@@ -16,12 +18,16 @@ public class Trololus extends StateBasedGame {
 	static int height = 500;
 	static int fpslimit = 60;
 	static String title = "Trololus NightBuild.0";
-
+	static public Dimension res;
+	
+	static public void cleanRes() throws SlickException{
+		app.setDisplayMode((int) (res.width*.75), (int)(res.height*.75), fullscreen);
+	}
 	public Trololus(String title) {
 		super(title);
 	}
 
-	static AppGameContainer app;
+	public static AppGameContainer app;
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
@@ -30,12 +36,12 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void main(String[] args) throws SlickException {
-		System.out.println("pepa");
+		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
 
 		app = new AppGameContainer(new Trololus(title));
-		app.setDisplayMode(width, height, fullscreen);
+		cleanRes();
 		app.setSmoothDeltas(true);
 		app.setTargetFrameRate(fpslimit);
 		app.setVSync(true);

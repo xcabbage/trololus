@@ -47,7 +47,7 @@ public class MainState extends BasicGameState {
 		menu1 = "MENU1";
 		S_ingame = "INGAME";
 		S_loading = "The Game is loading! woooo";
-		S_title = "TROLOLUS NIGHTLY BUILD 0.001/2 :D";
+		S_title = "TROLOLUS NIGHTLY BUILD 0.001/2 :D - Main state";
 		
 		System.out.println("Init formula for MainState ran and done.");
 	}
@@ -64,7 +64,7 @@ public class MainState extends BasicGameState {
 			throws SlickException {
 
 
-		background.draw(0, 0, (float)1);
+		background.draw(0, 0,(float) 1/( ((float) background.getWidth())/(float) (game.getContainer().getWidth())));
 		
 		g.drawString(S_title, 320, 20);
 		

@@ -36,11 +36,11 @@ public class MenuState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		background = new Image("/resources/Splash/UI/menu2.png");
-		menubar = new Image("resources/Splash/UI/menubar.png");
+		menubar = new Image("resources/Splash/UI/Menubar_Placeholder.png");
 		this.game = game;
 
 		// initialize strings
-		menu1 = "MENU1";
+		menu1 = "the MENU phase";
 		S_ingame = "INGAME";
 		S_loading = "The Game is loading! woooo";
 		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
@@ -65,8 +65,9 @@ public class MenuState extends BasicGameState {
 			throws SlickException {
 
 
-		background.draw(0, 0, (float) 0.5);
-		menubar.draw (120,60,(float)0.7);
+		background.draw(0, 0,(float) 1/( ((float) background.getWidth())/(float) (game.getContainer().getWidth())));
+		
+		menubar.draw ((int)(((game.getContainer().getWidth())/2)-((menubar.getWidth()*0.075))),(int) (game.getContainer().getHeight()*.85),(float)0.15);
 		g.drawString(menu1, 320, 20);
 		;
 
