@@ -30,12 +30,13 @@ public class MenuState extends BasicGameState {
 
 	String menu1, menu2, menu3;
 	String S_ingame, S_loading, S_title, S_postgame;
-	public Image background;
-
+	public Image background,menubar;
+	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		background = new Image("/resources/Splash/UI/menu2.png");
+		menubar = new Image("resources/Splash/UI/menubar.png");
 		this.game = game;
 
 		// initialize strings
@@ -56,6 +57,8 @@ public class MenuState extends BasicGameState {
 		int mouseY = Mouse.getY();
 		if (input.isKeyDown(45)){System.out.println("Entering Main state. [source: Menu]");game.enterState(1);}
 		if (input.isKeyDown(1)){System.out.println("Shutting Down.. [command: Menu]");System.exit(0);}
+		if (input.isKeyDown(47)){System.out.println("Shutting Down.. [command: Menu]");;}
+
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
@@ -63,7 +66,7 @@ public class MenuState extends BasicGameState {
 
 
 		background.draw(0, 0, (float) 0.5);
-		
+		menubar.draw (120,60,(float)0.7);
 		g.drawString(menu1, 320, 20);
 		;
 

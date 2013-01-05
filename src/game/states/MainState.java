@@ -6,6 +6,7 @@
  */
 package game.states;
 
+import java.awt.Dimension;
 import java.nio.file.Path;
 
 import org.lwjgl.input.Mouse;
@@ -26,7 +27,8 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MainState extends BasicGameState {
 	public static final int ID = 1;
 	private StateBasedGame game;
-
+	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
+	Dimension res;
 	public int getID() {
 		return ID;
 	}
@@ -48,7 +50,6 @@ public class MainState extends BasicGameState {
 		S_title = "TROLOLUS NIGHTLY BUILD 0.001/2 :D";
 		
 		System.out.println("Init formula for MainState ran and done.");
-
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)throws SlickException {
@@ -57,15 +58,13 @@ public class MainState extends BasicGameState {
 		int mouseY = Mouse.getY();
 		if (input.isKeyDown(46)){System.out.println("Entering Menu state. [source: Main]");game.enterState(2);}
 		if (input.isKeyDown(1)){System.out.println("Shutting Down.. [command: Main]");System.exit(0);}	
-		
-
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 
 
-		background.draw(0, 0, (float) 0.5);
+		background.draw(0, 0, (float)1);
 		
 		g.drawString(S_title, 320, 20);
 		

@@ -11,7 +11,7 @@ public class Trololus extends StateBasedGame {
 
 	static boolean fullscreen = false;
 	static boolean ShowFPS = true;
-
+	static game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	static int width = 1000;
 	static int height = 500;
 	static int fpslimit = 60;
@@ -20,6 +20,8 @@ public class Trololus extends StateBasedGame {
 	public Trololus(String title) {
 		super(title);
 	}
+
+	static AppGameContainer app;
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
@@ -32,7 +34,7 @@ public class Trololus extends StateBasedGame {
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
 
-		AppGameContainer app = new AppGameContainer(new Trololus(title));
+		app = new AppGameContainer(new Trololus(title));
 		app.setDisplayMode(width, height, fullscreen);
 		app.setSmoothDeltas(true);
 		app.setTargetFrameRate(fpslimit);
@@ -40,4 +42,36 @@ public class Trololus extends StateBasedGame {
 		app.start();
 
 	}
+
+	@Override
+	/**
+	 * @see org.newdawn.slick.state.StateBasedGame#keyPressed(int, char)
+	 */
+	public void keyPressed(int key, char c) {
+		super.keyPressed(key, c);
+
+		if (key == Input.KEY_F4) {
+			if (app != null) {
+				try {
+
+					if (!app.isFullscreen()) {
+						System.out.println("Entering FullScreen mode.");
+						app.setDisplayMode(utilGfx.getRes().width,
+								utilGfx.getRes().height, true);
+
+					} else {
+						System.out.println("Returning from fullscreen.");
+						app.setFullscreen(false);
+						app.setDisplayMode(width, height, false);
+
+					}
+				} catch (SlickException e) {
+					e.printStackTrace();
+					;
+				}
+			}
+		}
+
+	}
+
 }
