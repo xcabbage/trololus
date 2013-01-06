@@ -23,10 +23,18 @@ import org.newdawn.slick.state.StateBasedGame;
  * 
  */
 public class MainState extends BasicState {
-	public static final int ID = 1;
-	
-	
 
+	public static int ID = 1;
+
+	public int getID() {
+		return ID;
+	}
+
+	public void init(GameContainer gc, StateBasedGame game)
+			throws SlickException {
+		super.init(gc, game);
+		background = new Image("/resources/Splash/UI/menu2.png");
+	}
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
@@ -47,16 +55,16 @@ public class MainState extends BasicState {
 
 		background.draw(
 				0,
-				(int) (mainGame.getContainer().getHeight() * .06),
+				(int) (game.getContainer().getHeight() * .06),
 				(float) 1
-						/ (((float) 2000.0) / (float) (mainGame
+						/ (((float) background.getWidth()) / (float) (game
 								.getContainer().getWidth())));
 		menubar.draw(
-				(int) (((mainGame.getContainer().getWidth()) / 2) - ((menubar
+				(int) (((game.getContainer().getWidth()) / 2) - ((menubar
 						.getWidth() * 0.075))),
-				(int) ((mainGame.getContainer().getHeight()) - menubar.getHeight() * .15),
+				(int) ((game.getContainer().getHeight()) - menubar.getHeight() * .15),
 				(float) 0.15);
-//		g.drawString(S_title, 320, 20);
+		g.drawString(S_title, 320, 20);
 
 	}
 }

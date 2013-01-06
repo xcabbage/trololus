@@ -13,31 +13,13 @@ public class BasicState extends BasicGameState {
 	public StateBasedGame game;
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	Dimension res;
-	public static final int ID = 0;
-	public int getID() {
-		return ID;
-}
+	
 
 	public Image background, menubar;
 	String menu1, menu2, menu3;
 	String S_ingame, S_loading, S_title, S_postgame;
-	@Override
-	public void init(GameContainer gc, StateBasedGame game)
-			throws SlickException {
-		background = new Image("/resources/Splash/UI/menu.png");
-		menubar = new Image("resources/Splash/UI/Menubar_Placeholder.png");
-		this.game = game;
 
-		// initialize strings
-		menu1 = "the MENU phase";
-		S_ingame = "INGAME";
-		S_loading = "The Game is loading! woooo";
-		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
-		S_postgame = "The after game lobby.";
-		System.out.println("Init formula for MenuState ran and done.");
 
-		
-	}
 
 
 	@Override
@@ -52,6 +34,31 @@ public class BasicState extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void init(GameContainer gc, StateBasedGame game)
+			throws SlickException {
+		System.out.println("init launching");
+		background = new Image("/resources/Splash/UI/menu.png");
+		menubar = new Image("resources/Splash/UI/Menubar_Placeholder.png");
+		this.game = game;
+
+		// initialize strings
+		menu1 = "the MENU phase";
+		S_ingame = "INGAME";
+		S_loading = "The Game is loading! woooo";
+		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
+		S_postgame = "The after game lobby.";
+		System.out.println("Init formula for state ID "+this.getID()+   " ran and done.");
+		System.out.println("init executed");
+		
+	}
+
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	 
 	 
