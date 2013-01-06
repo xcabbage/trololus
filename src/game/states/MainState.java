@@ -24,14 +24,10 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author David
  * 
  */
-public class MainState extends BasicGameState {
+public class MainState extends BasicState {
 	public static final int ID = 1;
-	private StateBasedGame game;
-	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
-	Dimension res;
-	public int getID() {
-		return ID;
-	}
+	
+
 
 	String menu1, menu2, menu3;
 	String S_ingame, S_loading, S_title, S_postgame;
