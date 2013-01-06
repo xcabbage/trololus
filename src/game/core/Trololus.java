@@ -68,7 +68,7 @@ public class Trololus extends StateBasedGame {
 					} else {
 						System.out.println("Returning from fullscreen.");
 						app.setFullscreen(false);
-						app.setDisplayMode(width, height, false);
+						cleanRes();
 
 					}
 				} catch (SlickException e) {

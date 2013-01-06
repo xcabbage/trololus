@@ -35,12 +35,12 @@ public class MainState extends BasicGameState {
 
 	String menu1, menu2, menu3;
 	String S_ingame, S_loading, S_title, S_postgame;
-	public Image background;
+	public Image background, menubar;
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-		
-		background = new Image("/resources/Splash/UI/menu.png");		 
+		menubar = new Image("resources/Splash/UI/Menubar_Placeholder.png");
+		background = new Image("/resources/Splash/UI/menu2.png");		 
 		this.game = game;
 
 		// initialize strings
@@ -64,8 +64,8 @@ public class MainState extends BasicGameState {
 			throws SlickException {
 
 
-		background.draw(0, 0,(float) 1/( ((float) background.getWidth())/(float) (game.getContainer().getWidth())));
-		
+		background.draw(0, (int) (game.getContainer().getHeight()*.06),(float) 1/( ((float) background.getWidth())/(float) (game.getContainer().getWidth())));
+		menubar.draw ((int)(((game.getContainer().getWidth())/2)-((menubar.getWidth()*0.075))),(int) ((game.getContainer().getHeight())-menubar.getHeight()*.15),(float)0.15);
 		g.drawString(S_title, 320, 20);
 		
 
