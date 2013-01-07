@@ -56,11 +56,7 @@ public class MenuState extends BasicState {
 						/ (((float) background.getWidth()) / (float) (game
 								.getContainer().getWidth())));
 
-		menubar.draw(
-				(int) (((game.getContainer().getWidth()) / 2) - ((menubar
-						.getWidth() * 0.125))),
-				(int) ((game.getContainer().getHeight()) - menubar.getHeight() * .25),
-				(float) 0.25);
+		
 		g.drawString(menu1, 320, 20);
 		;
 

@@ -64,11 +64,7 @@ public class MainState extends BasicState {
 				(float) 1
 						/ (((float) background.getWidth()) / (float) (game
 								.getContainer().getWidth())));
-		menubar.draw(
-				(int) (((game.getContainer().getWidth()) / 2) - ((menubar
-						.getWidth() * 0.075))),
-				(int) ((game.getContainer().getHeight()) - menubar.getHeight() * .15),
-				(float) 0.15);
+		drawMenu(1,g);
 		g.drawString(S_title, 320, 20);
 
 	}
