@@ -40,8 +40,13 @@ public class BasicState extends BasicGameState {
 		background = new Image("/resources/Splash/UI/menu.png");
 		menubar = new Image("resources/Splash/UI/Menubar_Back.png");
 		
+		buttonSpriteSheet= new Image("resources/Splash/UI/Menubar_Spritesheet.png");
+		
+		menuScale =(float) ((game.getContainer().getWidth()/(float)buttonSpriteSheet.getWidth())*.75);
+		
+		buttonSpriteSheet= buttonSpriteSheet.getScaledCopy(menuScale);	
+		System.out.println(500*menuScale);
 		menuButtons = new SpriteSheet(buttonSpriteSheet,(int) (500*menuScale), (int) (500*menuScale));
-
 		
 		// initialize strings
 		menu1 = "the MENU phase";
@@ -49,9 +54,8 @@ public class BasicState extends BasicGameState {
 		S_loading = "The Game is loading! woooo";
 		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
 		S_postgame = "The after game lobby.";
-		buttonSpriteSheet= new Image("resources/Splash/UI/Menubar_Spritesheet.png");
-		menuScale = game.getContainer().getWidth()/buttonSpriteSheet.getWidth();
-		buttonSpriteSheet= buttonSpriteSheet.getScaledCopy(menuScale);	
+
+		
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed.");
 
