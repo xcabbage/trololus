@@ -19,7 +19,7 @@ public class Trololus extends StateBasedGame {
 	static int fpslimit = 60;
 	static String title = "Trololus NightBuild.0";
 	static public Dimension res;
-	
+	static BasicState state;
 	static public void cleanRes() throws SlickException{
 		app.setDisplayMode((int) (res.width*.75), (int)(res.height*.75), fullscreen);
 	}
@@ -64,6 +64,7 @@ public class Trololus extends StateBasedGame {
 						System.out.println("Entering FullScreen mode.");
 						app.setDisplayMode(utilGfx.getRes().width,
 								utilGfx.getRes().height, true);
+						
 
 					} else {
 						System.out.println("Returning from fullscreen.");
@@ -71,6 +72,8 @@ public class Trololus extends StateBasedGame {
 						cleanRes();
 
 					}
+					state = (BasicState) this.getCurrentState();
+					state.initRes();
 				} catch (SlickException e) {
 					e.printStackTrace();
 					;
