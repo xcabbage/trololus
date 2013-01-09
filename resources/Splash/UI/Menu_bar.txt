@@ -1,0 +1,4 @@
+Button Y offset from bottom: 120pi (ex 115pi)
+Button X offset: 270pi
+
+1st button X offset from wall: 600pi
