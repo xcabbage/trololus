@@ -25,7 +25,7 @@ public class BasicState extends BasicGameState {
 	
 	//declare gFx constants
 	float menuScale;
-	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX, menuY; 
+	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX, menuY, buttonsX, buttonsOffset; 
 	
 	
 	
@@ -39,6 +39,8 @@ public class BasicState extends BasicGameState {
 		menuOffset = (appWidth-menuBarWidth)/2;
 		menuX = appWidth-menuBarWidth-menuOffset;
 		menuY = appHeight-menuBarHeight;
+		buttonsX =(int) (menuX + menuBarWidth*.085);
+		buttonsOffset = 108;
 		
 	}
 	
@@ -91,16 +93,16 @@ public class BasicState extends BasicGameState {
 	
 //TODO move the variables and computations into init. optimalization :)
 	public void drawMenu(int hover, Graphics g) {
-			menubar.draw(menuX, menuY, menuScale);
+		menubar.draw(menuX, menuY, menuScale);
 System.out.println(menuX + "| " + menuY + "| " + menuScale);
 			for (int a = 0; a < 7; a++) {
 				if (a != hover){
-			menuButtons.getSprite(a, 2).drawCentered(400+(65*a), (int) (game.getContainer().getHeight() * .86));
+			menuButtons.getSprite(a, 2).draw(buttonsX+(buttonsOffset*a), menuY-5);
 				} else {
-			menuButtons.getSprite(a, 1).drawCentered(400+(65*a), (int) (game.getContainer().getHeight() * .86));
+			menuButtons.getSprite(a, 1).draw(buttonsX+(buttonsOffset*a), menuY);
 				}
 			
-
+				
 			}
 		}
 

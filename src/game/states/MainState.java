@@ -25,7 +25,8 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MainState extends BasicState {
 
 	public static int ID = 1;
-
+	float glowF;
+	int glow;
 	public int getID() {
 		return ID;
 	}
@@ -64,7 +65,11 @@ public class MainState extends BasicState {
 				(float) 1
 						/ (((float) background.getWidth()) / (float) (game
 								.getContainer().getWidth())));
-		drawMenu(1,g);
+		glowF= (float) (glowF+.02);
+		glow = (int) glowF;
+		if (glowF >7) 
+			glowF = 0;
+		drawMenu(glow,g);
 		g.drawString(S_title, 320, 20);
 
 	}
