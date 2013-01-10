@@ -6,6 +6,8 @@
  */
 package game.states;
 
+import game.core.Trololus;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -20,8 +22,11 @@ import org.newdawn.slick.state.StateBasedGame;
  * 
  */
 public class MenuState extends BasicState {
-	public static final int ID = 2;
+	public static final int ID = 1;
+	float glowF;
+	int glow;
 
+	
 	public int getID() {
 		return ID;
 	}
@@ -33,7 +38,7 @@ public class MenuState extends BasicState {
 		int mouseY = Mouse.getY();
 		if (input.isKeyDown(45)) {
 			System.out.println("Entering Main state. [source: Menu]");
-			game.enterState(1);
+			game.enterState(0);
 		}
 		if (input.isKeyDown(1)) {
 			System.out.println("Shutting Down.. [command: Menu]");
@@ -49,15 +54,18 @@ public class MenuState extends BasicState {
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 
-		background.draw(
-				0,
-				(int) (game.getContainer().getHeight() * .06),
-				(float) 1
-						/ (((float) background.getWidth()) / (float) (game
-								.getContainer().getWidth())));
-
+		if (Trololus.drawing) {
+			background.draw(0, backgroundY, backgroundScale);
+			glowF = (float) (glowF + .02);
+			glow = (int) glowF;
+			if (glowF > 7)
+				glowF = 0;
+			drawMenu(glow, g);
+			g.drawString(menu1, 320, 20);	
+		} else {
+			;
+		}
 		
-		g.drawString(menu1, 320, 20);
 		;
 
 	}

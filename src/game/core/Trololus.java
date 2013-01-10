@@ -10,7 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import game.states.*;
 
 public class Trololus extends StateBasedGame {
-
+	static public boolean drawing = true;
 	static boolean fullscreen = false;
 	static boolean ShowFPS = true;
 	static game.util.FastGraphics utilGfx = new game.util.FastGraphics();
@@ -19,7 +19,9 @@ public class Trololus extends StateBasedGame {
 	static int fpslimit = 60;
 	static String title = "Trololus NightBuild.0";
 	static public Dimension res;
-	static BasicState state;
+	static BasicState activeState;
+	static BasicState[] state;
+	
 	static public void cleanRes() throws SlickException{
 		app.setDisplayMode((int) (res.width*.75), (int)(res.height*.75), fullscreen);
 	}
@@ -39,7 +41,7 @@ public class Trololus extends StateBasedGame {
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
-
+		
 		app = new AppGameContainer(new Trololus(title));
 		cleanRes();
 		app.setSmoothDeltas(true);
@@ -57,30 +59,49 @@ public class Trololus extends StateBasedGame {
 		super.keyPressed(key, c);
 
 		if (key == Input.KEY_F4) {
+			
+			//TODO reinit gFx in all states on Fullscreen toggle
 			if (app != null) {
+				drawing = false;
 				try {
 
 					if (!app.isFullscreen()) {
+						
 						System.out.println("Entering FullScreen mode.");
 						app.setDisplayMode(utilGfx.getRes().width,
 								utilGfx.getRes().height, true);
+						
 						
 
 					} else {
 						System.out.println("Returning from fullscreen.");
 						app.setFullscreen(false);
 						cleanRes();
+						
 
 					}
-					state = (BasicState) this.getCurrentState();
-					state.initRes();
+					for (int a = 0;a<=1;a++ ){
+					
+					activeState = (BasicState) this.getState(a); 
+					activeState.initRes();
+					}
 				} catch (SlickException e) {
 					e.printStackTrace();
 					;
-				}
+				}drawing = true;
 			}
-		}
+		} else if (key == Input.KEY_F5){
+			if (app!=null){drawing = false;
+				BasicState state = (BasicState) this.getCurrentState();
+				try {
+					state.initRes();
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			drawing = true;}
+		
 
 	}
 
-}
+}}

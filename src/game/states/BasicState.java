@@ -12,58 +12,64 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class BasicState extends BasicGameState {
-	//declare globals
+	// declare globals
 	StateBasedGame game;
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	Dimension res;
 	GameContainer app;
-	
-	//declare graphics
+
+	// declare graphics
 	Image background, menubar, buttonSpriteSheet;
-	String S_ingame, S_loading, S_title, S_postgame,menu1, menu2, menu3;
+	String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3;
 	SpriteSheet menuButtons, menuButtonsScaled;
-	
-	//declare gFx constants
-	float menuScale;
-	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX, menuY, buttonsX, buttonsOffset; 
-	
-	
-	
-	public void initRes() throws SlickException{
-		buttonSpriteSheet= new Image("resources/Splash/UI/Menubar_Spritesheet.png");
+
+	// declare gFx constants
+	float menuScale, backgroundScale;
+	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
+			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY;
+
+	public void initRes() throws SlickException {
+		buttonSpriteSheet = new Image(
+		"resources/Splash/UI/Menubar_Spritesheet.png");
 		appWidth = app.getWidth();
 		appHeight = app.getHeight();
-		menuScale =(float) ((appWidth/(float)buttonSpriteSheet.getWidth())*.75);
-		menuBarWidth = (int) (menubar.getWidth()*menuScale);
-		menuBarHeight = (int)(menubar.getHeight()*menuScale);
-		menuOffset = (appWidth-menuBarWidth)/2;
-		menuX = appWidth-menuBarWidth-menuOffset;
-		menuY = appHeight-menuBarHeight;
-		buttonsX =(int) (menuX + menuBarWidth*.085);
-		buttonsOffset = 108;
-		
+		menuScale = (float) ((appWidth / (float) buttonSpriteSheet.getWidth()) * .75);
+		menuBarWidth = (int) (menubar.getWidth() * menuScale);
+		menuBarHeight = (int) (menubar.getHeight() * menuScale);
+		menuOffset = (appWidth - menuBarWidth) / 2;
+		buttonSpriteSheet = buttonSpriteSheet.getScaledCopy(menuScale);
+		menuButtons = new SpriteSheet(buttonSpriteSheet,
+				(int) (500 * menuScale), (int) (500 * menuScale));
+		menuX = appWidth - menuBarWidth - menuOffset;
+		menuY = appHeight - menuBarHeight;
+		buttonsX = (int) (menuX + 600 * menuScale);
+		buttonsY = (int) ((appHeight - (120 * menuScale) - 135 * menuScale));
+		buttonsOffset = (int) (500 * menuScale);
+		backgroundY = (int) (appHeight * .06);
+		backgroundScale = (float)  appWidth/background.getWidth();
+		System.out.println("Graphics successfully (re)initiated for state ID " + this.getID());
 	}
-	
+
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-		
-		//init globals
+
+		// init globals
 		this.game = game;
 		app = gc;
-		
-		//init images and spritesheets
+
+		// init images and spritesheets
 		background = new Image("/resources/Splash/UI/menu.png");
 		menubar = new Image("resources/Splash/UI/Menubar_Back.png");
-		
-		
-		//init scaling
+		buttonSpriteSheet = new Image(
+				"resources/Splash/UI/Menubar_Spritesheet.png");
+		menuButtons = new SpriteSheet(buttonSpriteSheet, (int) (500),
+				(int) (500));
+
+		// init scaling
 		initRes();
-		
-		//scaled images
-		buttonSpriteSheet= buttonSpriteSheet.getScaledCopy(menuScale);	
-		System.out.println(500*menuScale);
-		menuButtons = new SpriteSheet(buttonSpriteSheet,(int) (500*menuScale), (int) (500*menuScale));
-		
+
+		// scaled images
+
 		// initialize strings
 		menu1 = "the MENU phase";
 		S_ingame = "INGAME";
@@ -71,7 +77,6 @@ public class BasicState extends BasicGameState {
 		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
 		S_postgame = "The after game lobby.";
 
-		
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed.");
 
@@ -90,25 +95,28 @@ public class BasicState extends BasicGameState {
 		// TODO Auto-generated method stub
 
 	}
-	
-//TODO move the variables and computations into init. optimalization :)
+
 	public void drawMenu(int hover, Graphics g) {
 		menubar.draw(menuX, menuY, menuScale);
-System.out.println(menuX + "| " + menuY + "| " + menuScale);
-			for (int a = 0; a < 7; a++) {
-				if (a != hover){
-			menuButtons.getSprite(a, 2).draw(buttonsX+(buttonsOffset*a), menuY-5);
-				} else {
-			menuButtons.getSprite(a, 1).draw(buttonsX+(buttonsOffset*a), menuY);
-				}
-			
-				
+
+		for (int a = 0; a < 7; a++) {
+
+			if (a != hover) {
+				menuButtons.getSprite(a, 0).drawCentered(
+						buttonsX + (buttonsOffset * a), buttonsY);
+
+			} else {
+				menuButtons.getSprite(a, 1).drawCentered(
+						buttonsX + (buttonsOffset * a), buttonsY);
+
 			}
+
 		}
+	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
