@@ -1,6 +1,6 @@
 26-03-2011
 ==========
-This is an unoficial, rough package of the Slick library to be used for 32 and 64 bit JVM's. 
+This is an unofficial, rough package of the Slick library to be used for 32 and 64 bit JVM's. 
 The LIB dir contains all needed JAR files. The DLL's are required for native binding. 
 Using JLWGL 2.7.1
 
