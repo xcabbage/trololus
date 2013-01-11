@@ -28,7 +28,7 @@ public class BasicState extends BasicGameState {
 	// declare gFx constants
 	float menuScale, backgroundScale;
 	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
-			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist, buttonRadius;
+			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist, buttonRadius, buttonsGetY,buttonsSafeY;
 
 	public void initRes() throws SlickException {
 		buttonSpriteSheet = new Image(
@@ -45,11 +45,14 @@ public class BasicState extends BasicGameState {
 		menuX = appWidth - menuBarWidth - menuOffset;
 		menuY = appHeight - menuBarHeight;
 		buttonsX = (int) (menuX + 600 * menuScale);
-		buttonsY = (int) ((appHeight - (120 * menuScale) - 135 * menuScale));
+		buttonsY = (int) (((appHeight - (120 * menuScale) - 135 * menuScale)));
+		buttonRadius = (int)(135*menuScale);
+		buttonsGetY = appHeight - (buttonsY-buttonRadius); 
 		buttonsOffset = (int) (500 * menuScale);
 		backgroundY = (int) (appHeight * .06);
 		backgroundScale = (float)  appWidth/background.getWidth();
-		buttonRadius = (int)(135*menuScale);
+		buttonsSafeY = appHeight/2;
+		
 		
 		System.out.println("Graphics successfully (re)initiated for state ID " + this.getID());
 	}
@@ -105,6 +108,7 @@ public class BasicState extends BasicGameState {
 
 		for (int a = 0; a < 7; a++) {
 
+			
 			if (a != hover) {
 				menuButtons.getSprite(a, 0).drawCentered(
 						buttonsX + (buttonsOffset * a), buttonsY);
@@ -119,16 +123,22 @@ public class BasicState extends BasicGameState {
 	}
 
 	public int isOverButton(int x, int y) {
-		int returnButton = 0;
+		int returnButton=10;
+		
+		
+		
+		
 		for (int a = 0; a <= menuButtons.getHorizontalCount(); a++) {
-			int square_dist = (x - (buttonsX + (buttonsOffset * a)))*(x - (buttonsX + (buttonsOffset * a)))
-					- (y - buttonsY)*(y - buttonsY);
+			int square_dist = (x - (buttonsX + (buttonsOffset * (a+1))))*(x - (buttonsX + (buttonsOffset * (a+1))))
+					- (y - buttonsY)*(y - buttonsGetY);
 			if (square_dist <= (buttonRadius*buttonRadius)) {
+				if (y<buttonsSafeY){
 				System.out.println("BUM NASEL JSEM TO LOL " + a);
-				System.out.println();
-				System.out.println();
-				System.out.println(square_dist);
-			}
+				returnButton = a;
+				
+				System.out.println(square_dist);}
+				
+			} 
 
 		}
 		return returnButton;

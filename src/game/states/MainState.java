@@ -46,7 +46,7 @@ public class MainState extends BasicState {
 		Input input = gc.getInput();
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
-		isOverButton(mouseX,mouseY);
+		glow = isOverButton(mouseX,mouseY);
 		if (input.isKeyDown(46)) {
 			System.out.println("Entering Menu state. [source: Main]");
 			game.enterState(1);
@@ -63,10 +63,10 @@ public class MainState extends BasicState {
 		if (Trololus.drawing) {
 			background.draw(0, backgroundY, backgroundScale);
 			
-			glowF = (float) (glowF + .02);
-			glow = (int) glowF;
-			if (glowF > 7)
-				glowF = 0;
+//			glowF = (float) (glowF + .02);
+//			glow = (int) glowF;
+//			if (glowF > 7)
+//				glowF = 0;
 			drawMenu(glow, g);
 			g.drawString(S_title, 320, 20);
 		} else {
