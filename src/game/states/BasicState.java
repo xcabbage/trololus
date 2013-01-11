@@ -130,7 +130,7 @@ public class BasicState extends BasicGameState {
 		
 		for (int a = 0; a <= menuButtons.getHorizontalCount(); a++) {
 			int square_dist = (x - (buttonsX + (buttonsOffset * (a+1))))*(x - (buttonsX + (buttonsOffset * (a+1))))
-					- (y - buttonsY)*(y - buttonsGetY);
+					+ (y - buttonsGetY)*(y - buttonsGetY);
 			if (square_dist <= (buttonRadius*buttonRadius)) {
 				if (y<buttonsSafeY){
 				System.out.println("BUM NASEL JSEM TO LOL " + a);
