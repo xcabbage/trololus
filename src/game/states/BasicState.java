@@ -2,14 +2,16 @@ package game.states;
 
 import java.awt.Dimension;
 
-import org.newdawn.slick.AppGameContainer;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import java.math.*;
 
 public class BasicState extends BasicGameState {
 	// declare globals
@@ -26,7 +28,7 @@ public class BasicState extends BasicGameState {
 	// declare gFx constants
 	float menuScale, backgroundScale;
 	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
-			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY;
+			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist, buttonRadius;
 
 	public void initRes() throws SlickException {
 		buttonSpriteSheet = new Image(
@@ -47,6 +49,8 @@ public class BasicState extends BasicGameState {
 		buttonsOffset = (int) (500 * menuScale);
 		backgroundY = (int) (appHeight * .06);
 		backgroundScale = (float)  appWidth/background.getWidth();
+		buttonRadius = (int)(135*menuScale);
+		
 		System.out.println("Graphics successfully (re)initiated for state ID " + this.getID());
 	}
 
@@ -83,9 +87,9 @@ public class BasicState extends BasicGameState {
 	}
 
 	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
+	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -114,6 +118,22 @@ public class BasicState extends BasicGameState {
 		}
 	}
 
+	public int isOverButton(int x, int y) {
+		int returnButton = 0;
+		for (int a = 0; a <= menuButtons.getHorizontalCount(); a++) {
+			int square_dist = (x - (buttonsX + (buttonsOffset * a)))*(x - (buttonsX + (buttonsOffset * a)))
+					- (y - buttonsY)*(y - buttonsY);
+			if (square_dist <= (buttonRadius*buttonRadius)) {
+				System.out.println("BUM NASEL JSEM TO LOL " + a);
+				System.out.println();
+				System.out.println();
+				System.out.println(square_dist);
+			}
+
+		}
+		return returnButton;
+
+	}
 	@Override
 	public int getID() {
 

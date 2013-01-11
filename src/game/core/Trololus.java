@@ -60,7 +60,7 @@ public class Trololus extends StateBasedGame {
 
 		if (key == Input.KEY_F4) {
 			
-			//TODO reinit gFx in all states on Fullscreen toggle
+
 			if (app != null) {
 				drawing = false;
 				try {
