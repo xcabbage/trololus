@@ -124,7 +124,7 @@ public class BasicState extends BasicGameState {
 
 	public int isOverButton(int x, int y) {
 		int returnButton=10;
-		y = y+27;
+		y = y+(buttonsGetY/2);
 		
 		
 		
@@ -133,10 +133,11 @@ public class BasicState extends BasicGameState {
 					+ (y - buttonsGetY)*(y - buttonsGetY);
 			if (square_dist <= (buttonRadius*buttonRadius)) {
 				if (y<buttonsSafeY){
-				System.out.println("BUM NASEL JSEM TO LOL " + a);
+//				System.out.println("BUM NASEL JSEM TO LOL " + a);
 				returnButton = a;
 				
-				System.out.println(square_dist);}
+//				System.out.println(square_dist);
+				}
 				
 			} 
 
