@@ -1,5 +1,7 @@
 package game.states;
 
+import game.util.MouseOverAreaDav;
+
 import java.awt.Dimension;
 
 import org.lwjgl.input.Mouse;
@@ -9,6 +11,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import java.math.*;
@@ -19,7 +22,9 @@ public class BasicState extends BasicGameState {
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	Dimension res;
 	GameContainer app;
+public	MouseOverAreaDav[]  button= new MouseOverAreaDav[10];
 
+	
 	// declare graphics
 	Image background, menubar, buttonSpriteSheet;
 	String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3;
@@ -53,7 +58,14 @@ public class BasicState extends BasicGameState {
 		backgroundScale = (float)  appWidth/background.getWidth();
 		buttonsSafeY = appHeight/2;
 		
-		
+
+	
+		for (int a=0;a<menuButtons.getHorizontalCount();a++){
+			button[a] = new MouseOverAreaDav(app, menuButtons.getSprite(a, 0), (buttonsX+buttonsOffset*a)-buttonRadius*2+5, buttonsY-buttonRadius*2+5);
+			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
+			System.out.println("registering " +a+" " );
+		}
+			
 		System.out.println("Graphics successfully (re)initiated for state ID " + this.getID());
 	}
 
@@ -105,25 +117,19 @@ public class BasicState extends BasicGameState {
 
 	public void drawMenu(int hover, Graphics g) {
 		menubar.draw(menuX, menuY, menuScale);
-
+		
 		for (int a = 0; a < 7; a++) {
-
+			button[a].render(app, g);
 			
-			if (a != hover) {
-				menuButtons.getSprite(a, 0).drawCentered(
-						buttonsX + (buttonsOffset * a), buttonsY);
-
-			} else {
-				menuButtons.getSprite(a, 1).drawCentered(
-						buttonsX + (buttonsOffset * a), buttonsY);
 
 			}
-
-		}
+//
+//		}
 	}
 
+	
 	public int isOverButton(int x, int y) {
-		int returnButton=10;
+		int returnButton = 0;
 		y = y+(buttonsGetY/2);
 		
 		
@@ -133,15 +139,16 @@ public class BasicState extends BasicGameState {
 					+ (y - buttonsGetY)*(y - buttonsGetY);
 			if (square_dist <= (buttonRadius*buttonRadius)) {
 				if (y<buttonsSafeY){
-//				System.out.println("BUM NASEL JSEM TO LOL " + a);
+
 				returnButton = a;
 				
-//				System.out.println(square_dist);
+
 				}
 				
 			} 
 
 		}
+		
 		returnButton++;
 		return returnButton;
 

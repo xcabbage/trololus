@@ -46,7 +46,7 @@ public class MainState extends BasicState {
 		Input input = gc.getInput();
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
-		glow = isOverButton(mouseX,mouseY);
+//		glow = isOverButton(mouseX,mouseY);
 		if (input.isKeyDown(46)) {
 			System.out.println("Entering Menu state. [source: Main]");
 			game.enterState(1);
@@ -67,7 +67,7 @@ public class MainState extends BasicState {
 //			glow = (int) glowF;
 //			if (glowF > 7)
 //				glowF = 0;
-			drawMenu(glow, g);
+			drawMenu(11, g);
 			g.drawString(S_title, 320, 20);
 		} else {
 			;

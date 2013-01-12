@@ -13,7 +13,7 @@ Xargo     						[https://github.com/avatarxargo]
 
 Snupicek    					[https://github.com/SnoopCZ]
 
-Nic  （╯°□°）╯︵ ┻━┻     			[https://github.com/nic727]
+Nic      			[https://github.com/nic727]
 
 Trixis      					[https://github.com/trixis]
 
@@ -22,6 +22,6 @@ DannyUfonek      				[https://github.com/DannyUfonek]
 DusanPilka      				[https://github.com/dusanp]
 
 
-Misc
+Misc （╯°□°）╯︵ ┻━┻ 
 ----------
 Fork requests accepted. :D

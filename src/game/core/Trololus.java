@@ -104,4 +104,25 @@ public class Trololus extends StateBasedGame {
 
 	}
 
-}}
+}
+
+	public void mousePressed(int button, int x, int y) {
+//		int state =(((BasicState) getCurrentState()).isOverButton(x, y)); 
+//		if (state !=11)
+//			System.out.println("entering " + (state-1) + " through mouse");
+//			
+//		enterState(state-1);
+		BasicState state = (BasicState) getCurrentState();
+		
+		for(int a = 0;a<7;a++)
+		if (state.button[a].isMouseOver()){
+			if (a<getStateCount()){
+			System.out.println("entering " +a);
+			enterState(a);} else {System.out.println("this state isn't created yet, sorry :(");}
+		}
+		
+	}
+
+
+
+}
