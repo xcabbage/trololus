@@ -124,11 +124,11 @@ public class BasicState extends BasicGameState {
 
 	public int isOverButton(int x, int y) {
 		int returnButton=10;
+		y = y+27;
 		
 		
 		
-		
-		for (int a = 0; a <= menuButtons.getHorizontalCount(); a++) {
+		for (int a = -1; a <= menuButtons.getHorizontalCount(); a++) {
 			int square_dist = (x - (buttonsX + (buttonsOffset * (a+1))))*(x - (buttonsX + (buttonsOffset * (a+1))))
 					+ (y - buttonsGetY)*(y - buttonsGetY);
 			if (square_dist <= (buttonRadius*buttonRadius)) {
@@ -141,6 +141,7 @@ public class BasicState extends BasicGameState {
 			} 
 
 		}
+		returnButton++;
 		return returnButton;
 
 	}
