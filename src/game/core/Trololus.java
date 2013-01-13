@@ -4,6 +4,7 @@
 package game.core;
 
 import java.awt.Dimension;
+import java.util.Scanner;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
@@ -22,6 +23,7 @@ public class Trololus extends StateBasedGame {
 	static BasicState activeState;
 	static BasicState[] state;
 	game.network.NetworkTest pomocnik = new game.network.NetworkTest();	
+	Scanner sc = new Scanner(System.in);
 	static public void cleanRes() throws SlickException{
 		app.setDisplayMode((int) (res.width*.75), (int)(res.height*.75), fullscreen);
 	}
@@ -60,8 +62,8 @@ public class Trololus extends StateBasedGame {
 		super.keyPressed(key, c);
 		switch(key)
 		{
-			case Input.KEY_I: 	if(pomocnik != null){pomocnik.connect("localhost", 25);break;}
-			case Input.KEY_O:	if(pomocnik != null){pomocnik.sendMsg("helo");break;}
+			case Input.KEY_I: 	if(pomocnik != null){System.out.println("Waiting for host input"); String host = sc.nextLine(); pomocnik.connect(host, 25);break;}
+			case Input.KEY_O:	if(pomocnik != null){System.out.println("Waiting for message input"); String msg = sc.nextLine();pomocnik.sendMsg(msg);break;}
 			case Input.KEY_P: 	if(pomocnik != null){pomocnik.setInMsg();break;}
 			default: break;
 		}

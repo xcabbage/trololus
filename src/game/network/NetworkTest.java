@@ -31,6 +31,7 @@ public class NetworkTest
 		catch (IOException e) 
 			{
 			System.err.println("Some kind of IO error occured. That stinks, doesnt it?");
+			e.printStackTrace();
 			}
 	}
 	public void sendMsg(String msg)
