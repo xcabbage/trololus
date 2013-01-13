@@ -58,6 +58,10 @@ public class Trololus extends StateBasedGame {
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 
+		game.network.NetworkTest pomocnik = new game.network.NetworkTest();
+		System.out.println("NetworkTest object initiated");
+		pomocnik.connect("localhost", 8081);
+		pomocnik.sendMsg("svet je krasny");
 		if (key == Input.KEY_F4) {
 			
 

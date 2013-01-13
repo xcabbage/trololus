@@ -4,17 +4,25 @@ import java.net.*;
 public class NetworkTest 
 {
 	PrintStream outStream = null;
-	DataInputStream inStream = null;
+	BufferedReader inStream = null;
 	Socket testSocket = null;
+	public String inMsg = null;
 	public void connect(String server, int port)
 	{
 		try 
 			{
-			testSocket = new Socket(server, port);
-			System.out.println("Just connected to "+ testSocket.getRemoteSocketAddress());
-			outStream = new PrintStream(testSocket.getOutputStream()) ;
-			inStream = new DataInputStream(testSocket.getInputStream());
-			System.out.println("Streams connected");
+				if(testSocket != null)
+				{
+					testSocket = new Socket(server, port);
+					System.out.println("Just connected to "+ testSocket.getRemoteSocketAddress());
+					outStream = new PrintStream(testSocket.getOutputStream()) ;
+					inStream = new BufferedReader (new InputStreamReader(testSocket.getInputStream()));
+					System.out.println("Streams connected");
+				}
+				else
+				{
+					System.out.println("You should be alreade connected to "+ testSocket.getRemoteSocketAddress());
+				}
 			}
 		catch (UnknownHostException e)
 			{
@@ -27,8 +35,35 @@ public class NetworkTest
 	}
 	public void sendMsg(String msg)
 	{
-		outStream.println(msg);
-		System.out.println("Sent the message "+msg+" to server");
+		if(outStream != null)
+		{
+			outStream.println(msg);
+			System.out.println("Sent the message "+msg+" to server");
+		}
+		else
+		{
+			System.err.println("Your outStream hasnt been connected yet");
+		}
 	}
-
+	
+	public void setInMsg(String inMsg) 
+	{
+		if(inStream != null)
+		{
+			try 
+			{
+				inMsg = inStream.readLine();
+				System.out.println("Received the message "+inMsg+" from server");
+				this.inMsg = inMsg;
+			}
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.err.println("Your inStream hasnt been connected yet");
+		}
+	}
 }
