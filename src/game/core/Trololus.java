@@ -21,7 +21,7 @@ public class Trololus extends StateBasedGame {
 	static public Dimension res;
 	static BasicState activeState;
 	static BasicState[] state;
-	
+	game.network.NetworkTest pomocnik = new game.network.NetworkTest();	
 	static public void cleanRes() throws SlickException{
 		app.setDisplayMode((int) (res.width*.75), (int)(res.height*.75), fullscreen);
 	}
@@ -49,6 +49,7 @@ public class Trololus extends StateBasedGame {
 		app.setVSync(true);
 		app.start();
 
+		System.out.println("NetworkTest object initiated");
 	}
 
 	@Override
@@ -57,11 +58,13 @@ public class Trololus extends StateBasedGame {
 	 */
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-
-		game.network.NetworkTest pomocnik = new game.network.NetworkTest();
-		System.out.println("NetworkTest object initiated");
-		pomocnik.connect("localhost", 8081);
-		pomocnik.sendMsg("svet je krasny");
+		switch(key)
+		{
+			case Input.KEY_I: 	if(pomocnik != null){pomocnik.connect("localhost", 25);break;}
+			case Input.KEY_O:	if(pomocnik != null){pomocnik.sendMsg("helo");break;}
+			case Input.KEY_P: 	if(pomocnik != null){pomocnik.setInMsg();break;}
+			default: break;
+		}
 		if (key == Input.KEY_F4) {
 			
 

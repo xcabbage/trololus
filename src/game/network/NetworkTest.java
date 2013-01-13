@@ -11,7 +11,7 @@ public class NetworkTest
 	{
 		try 
 			{
-				if(testSocket != null)
+				if(testSocket == null)
 				{
 					testSocket = new Socket(server, port);
 					System.out.println("Just connected to "+ testSocket.getRemoteSocketAddress());
@@ -46,7 +46,7 @@ public class NetworkTest
 		}
 	}
 	
-	public void setInMsg(String inMsg) 
+	public void setInMsg() 
 	{
 		if(inStream != null)
 		{
@@ -54,7 +54,6 @@ public class NetworkTest
 			{
 				inMsg = inStream.readLine();
 				System.out.println("Received the message "+inMsg+" from server");
-				this.inMsg = inMsg;
 			}
 			catch (IOException e) 
 			{
