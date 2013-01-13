@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
@@ -26,7 +27,8 @@ public class BasicState extends BasicGameState {
 	GameContainer app;
 	public Circle[] buttonHoverCircle = new Circle[10];
 	public MouseOverArea[] button = new MouseOverArea[10];
-
+	
+	Music music; 
 	// declare graphics
 	Image background, menubar, buttonSpriteSheet;
 	String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3;
@@ -91,8 +93,9 @@ public class BasicState extends BasicGameState {
 		// init scaling
 		initRes();
 
-		// scaled images
-
+		// init sound
+//		music = new Music("/resources/Audio/MainMenuTheme_loop.ogg");
+//		music.play();
 		// initialize strings
 		menu1 = "the MENU phase";
 		S_ingame = "INGAME";
