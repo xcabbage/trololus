@@ -1,6 +1,6 @@
 package game.states;
 
-import game.util.MouseOverAreaDav;
+//import game.util.MouseOverAreaDav;
 
 import java.awt.Dimension;
 
@@ -11,6 +11,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -22,9 +24,9 @@ public class BasicState extends BasicGameState {
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	Dimension res;
 	GameContainer app;
-public	MouseOverAreaDav[]  button= new MouseOverAreaDav[10];
+	public Circle[] buttonHoverCircle = new Circle[10];
+	public MouseOverArea[] button = new MouseOverArea[10];
 
-	
 	// declare graphics
 	Image background, menubar, buttonSpriteSheet;
 	String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3;
@@ -33,11 +35,12 @@ public	MouseOverAreaDav[]  button= new MouseOverAreaDav[10];
 	// declare gFx constants
 	float menuScale, backgroundScale;
 	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
-			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist, buttonRadius, buttonsGetY,buttonsSafeY;
+			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist,
+			buttonRadius, buttonsGetY, buttonsSafeY;
 
 	public void initRes() throws SlickException {
 		buttonSpriteSheet = new Image(
-		"resources/Splash/UI/Menubar_Spritesheet.png");
+				"resources/Splash/UI/Menubar_Spritesheet.png");
 		appWidth = app.getWidth();
 		appHeight = app.getHeight();
 		menuScale = (float) ((appWidth / (float) buttonSpriteSheet.getWidth()) * .75);
@@ -51,22 +54,23 @@ public	MouseOverAreaDav[]  button= new MouseOverAreaDav[10];
 		menuY = appHeight - menuBarHeight;
 		buttonsX = (int) (menuX + 600 * menuScale);
 		buttonsY = (int) (((appHeight - (120 * menuScale) - 135 * menuScale)));
-		buttonRadius = (int)(135*menuScale);
-		buttonsGetY = appHeight - (buttonsY-buttonRadius); 
+		buttonRadius = (int) (135 * menuScale);
+		buttonsGetY = appHeight - (buttonsY - buttonRadius);
 		buttonsOffset = (int) (500 * menuScale);
 		backgroundY = (int) (appHeight * .06);
-		backgroundScale = (float)  appWidth/background.getWidth();
-		buttonsSafeY = appHeight/2;
-		
+		backgroundScale = (float) appWidth / background.getWidth();
+		buttonsSafeY = appHeight / 2;
 
-	
-		for (int a=0;a<menuButtons.getHorizontalCount();a++){
-			button[a] = new MouseOverAreaDav(app, menuButtons.getSprite(a, 0), (buttonsX+buttonsOffset*a)-buttonRadius*2+5, buttonsY-buttonRadius*2+5);
+		for (int a = 0; a < menuButtons.getHorizontalCount(); a++) {
+//			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0),(buttonsX + buttonsOffset * a) - buttonRadius * 2 + 5,buttonsY - buttonRadius * 2 + 5);
+			buttonHoverCircle[a] = new Circle(buttonsX + buttonsOffset * a, buttonsY, buttonRadius);
+			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0), buttonHoverCircle[a]);
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
-			System.out.println("registering " +a+" " );
+			System.out.println("registering " + a + " done.");
 		}
-			
-		System.out.println("Graphics successfully (re)initiated for state ID " + this.getID());
+
+		System.out.println("Graphics successfully (re)initiated for state ID "
+				+ this.getID());
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
@@ -104,7 +108,6 @@ public	MouseOverAreaDav[]  button= new MouseOverAreaDav[10];
 	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
-		
 
 	}
 
@@ -117,42 +120,41 @@ public	MouseOverAreaDav[]  button= new MouseOverAreaDav[10];
 
 	public void drawMenu(int hover, Graphics g) {
 		menubar.draw(menuX, menuY, menuScale);
-		
+
 		for (int a = 0; a < 7; a++) {
-			button[a].render(app, g);
+			g.draw(buttonHoverCircle[a]);
 			
-
-			}
-//
-//		}
-	}
-
-	
-	public int isOverButton(int x, int y) {
-		int returnButton = 0;
-		y = y+(buttonsGetY/2);
-		
-		
-		
-		for (int a = -1; a <= menuButtons.getHorizontalCount(); a++) {
-			int square_dist = (x - (buttonsX + (buttonsOffset * (a+1))))*(x - (buttonsX + (buttonsOffset * (a+1))))
-					+ (y - buttonsGetY)*(y - buttonsGetY);
-			if (square_dist <= (buttonRadius*buttonRadius)) {
-				if (y<buttonsSafeY){
-
-				returnButton = a;
-				
-
-				}
-				
-			} 
+			button[a].render(app, g);
 
 		}
-		
+		//
+		// }
+	}
+
+	public int isOverButton(int x, int y) {
+		int returnButton = 0;
+		y = y + (buttonsGetY / 2);
+
+		for (int a = -1; a <= menuButtons.getHorizontalCount(); a++) {
+			int square_dist = (x - (buttonsX + (buttonsOffset * (a + 1))))
+					* (x - (buttonsX + (buttonsOffset * (a + 1))))
+					+ (y - buttonsGetY) * (y - buttonsGetY);
+			if (square_dist <= (buttonRadius * buttonRadius)) {
+				if (y < buttonsSafeY) {
+
+					returnButton = a;
+
+				}
+
+			}
+
+		}
+
 		returnButton++;
 		return returnButton;
 
 	}
+
 	@Override
 	public int getID() {
 
