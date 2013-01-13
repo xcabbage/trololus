@@ -94,8 +94,8 @@ public class BasicState extends BasicGameState {
 		initRes();
 
 		// init sound
-//		music = new Music("/resources/Audio/MainMenuTheme_loop.ogg");
-//		music.play();
+		music = new Music("/resources/Audio/MainMenuTheme_loop.wav");
+		music.play();
 		// initialize strings
 		menu1 = "the MENU phase";
 		S_ingame = "INGAME";
