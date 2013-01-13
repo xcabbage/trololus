@@ -1,6 +1,7 @@
 package game.network;
 import java.io.*;
 import java.net.*;
+@SuppressWarnings("deprecation")
 public class NetworkTest 
 {
 	PrintStream outStream = null;
@@ -30,5 +31,12 @@ public class NetworkTest
 		outStream.println(msg);
 		System.out.println("Sent the message "+msg+" to server");
 	}
-
+	public String retrieve;
+	{
+		try {
+			retrieve = inStream.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
