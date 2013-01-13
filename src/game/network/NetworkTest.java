@@ -5,7 +5,7 @@ public class NetworkTest
 {
 	PrintStream outStream = null;
 	BufferedReader inStream = null;
-	Socket testSocket = null;
+	public Socket testSocket = null;
 	public String inMsg = null;
 	public void connect(String server, int port)
 	{
@@ -65,5 +65,14 @@ public class NetworkTest
 		{
 			System.err.println("Your inStream hasnt been connected yet");
 		}
+	}
+	public void terminate() throws IOException
+	{
+		outStream.close();
+		System.out.println("outStream closed.");
+		inStream.close();
+		System.out.println("inStream closed.");
+		testSocket.close();
+		System.out.println("testSocket closed.");
 	}
 }

@@ -4,6 +4,7 @@
 package game.core;
 
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.newdawn.slick.*;
@@ -62,7 +63,27 @@ public class Trololus extends StateBasedGame {
 		super.keyPressed(key, c);
 		switch(key)
 		{
-			case Input.KEY_I: 	if(pomocnik != null){System.out.println("Waiting for host input"); String host = sc.nextLine(); pomocnik.connect(host, 25);break;}
+			case Input.KEY_I: 	
+				if(pomocnik.testSocket == null)
+				{
+					System.out.println("Waiting for host input");
+					String host = sc.nextLine();
+					System.out.println("Waiting for port input");
+					int port = sc.nextInt();
+					pomocnik.connect(host, port);
+					break;
+				}
+				else
+				{
+					try
+					{
+						pomocnik.terminate();
+					}
+					catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+					break;}
 			case Input.KEY_O:	if(pomocnik != null){System.out.println("Waiting for message input"); String msg = sc.nextLine();pomocnik.sendMsg(msg);break;}
 			case Input.KEY_P: 	if(pomocnik != null){pomocnik.setInMsg();break;}
 			default: break;
