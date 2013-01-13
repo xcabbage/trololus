@@ -62,9 +62,9 @@ public class BasicState extends BasicGameState {
 		buttonsSafeY = appHeight / 2;
 
 		for (int a = 0; a < menuButtons.getHorizontalCount(); a++) {
-//			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0),(buttonsX + buttonsOffset * a) - buttonRadius * 2 + 5,buttonsY - buttonRadius * 2 + 5);
-			buttonHoverCircle[a] = new Circle(buttonsX + buttonsOffset * a, buttonsY, buttonRadius);
-			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0), buttonHoverCircle[a]);
+			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0),(buttonsX + buttonsOffset * a) - buttonRadius * 2 + 5,buttonsY - buttonRadius * 2 + 5);
+//			buttonHoverCircle[a] = new Circle(buttonsX + buttonsOffset * a, buttonsY, buttonRadius);
+//			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0), buttonHoverCircle[a]);
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
 			System.out.println("registering " + a + " done.");
 		}
@@ -122,7 +122,7 @@ public class BasicState extends BasicGameState {
 		menubar.draw(menuX, menuY, menuScale);
 
 		for (int a = 0; a < 7; a++) {
-			g.draw(buttonHoverCircle[a]);
+//			g.draw(buttonHoverCircle[a]);
 			
 			button[a].render(app, g);
 
