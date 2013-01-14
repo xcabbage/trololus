@@ -12,7 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class OptionsState extends BasicState{
 
-	public static int ID = 0;
+	public static int ID = 6;
 	float glowF;
 	int glow;
 
@@ -23,7 +23,7 @@ public class OptionsState extends BasicState{
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
-		background = new Image("/resources/Splash/UI/menu2.png");
+		
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -45,14 +45,5 @@ public class OptionsState extends BasicState{
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		
-		if (Trololus.drawing) {
-			background.draw(0, backgroundY, backgroundScale);
-			
-//			
-			drawMenu(11, g);
-			g.drawString(S_title, 320, 20);
-		} else {
-			;
-}
+			super.render(gc,mainGame,g);
 }}

@@ -37,9 +37,17 @@ public class Trololus extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		addState(new MainState());
-		addState(new MenuState());
+		addState(new SecondState());
+		addState(new ThirdState());
+		addState(new FourthState());
+		addState(new FifthState());
+		addState(new SixthState());
+		
 	}
 
+	public void init(){
+
+	} 
 	public static void main(String[] args) throws SlickException {
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
@@ -146,9 +154,9 @@ public class Trololus extends StateBasedGame {
 		
 		for(int a = 0;a<7;a++)
 		if (state.button[a].isMouseOver()){
-			if (a<getStateCount()){
+			if (a<6){
 			System.out.println("entering " +a);
-			enterState(a);} else {System.out.println("this state isn't created yet, sorry :(");}
+			enterState(a);} else if (a ==6) System.exit(0); else {System.out.println("There was a really weird error. You clicked on a nonexisting button, " + a + " :O");}
 		}
 		
 	}

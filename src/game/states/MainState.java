@@ -37,7 +37,8 @@ public class MainState extends BasicState {
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
-		background = new Image("/resources/Splash/UI/menu2.png");
+		StateTitle = "Main State for trololus 0.1Alpha";
+//		background = new Image("/resources/Splash/UI/menu2.png");
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -59,19 +60,9 @@ public class MainState extends BasicState {
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
+	super.render(gc, mainGame, g);
 		
-		if (Trololus.drawing) {
-			background.draw(0, backgroundY, backgroundScale);
-			
-//			glowF = (float) (glowF + .02);
-//			glow = (int) glowF;
-//			if (glowF > 7)
-//				glowF = 0;
-			drawMenu(11, g);
-			g.drawString(S_title, 320, 20);
-		} else {
-			;
-		}
+		
 
 	}
 }

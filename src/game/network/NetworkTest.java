@@ -20,7 +20,7 @@ public class NetworkTest {
 						testSocket.getInputStream()));
 				System.out.println("Streams connected");
 			} else {
-				System.out.println("You should be alreade connected to "
+				System.out.println("You should be already connected to "
 						+ testSocket.getRemoteSocketAddress());
 			}
 		} catch (UnknownHostException e) {

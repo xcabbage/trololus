@@ -2,6 +2,8 @@ package game.states;
 
 //import game.util.MouseOverAreaDav;
 
+import game.core.Trololus;
+
 import java.awt.Dimension;
 
 import org.lwjgl.input.Mouse;
@@ -30,11 +32,12 @@ public class BasicState extends BasicGameState {
 	
 	Music music; 
 	// declare graphics
-	Image background, menubar, buttonSpriteSheet;
-	String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3;
+	Image backgroundBack, menubar, buttonSpriteSheet, background;
+	String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3, StateTitle;
 	SpriteSheet menuButtons, menuButtonsScaled;
 
 	// declare gFx constants
+	boolean gFxInited = false;
 	float menuScale, backgroundScale;
 	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
 			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist,
@@ -68,9 +71,9 @@ public class BasicState extends BasicGameState {
 //			buttonHoverCircle[a] = new Circle(buttonsX + buttonsOffset * a, buttonsY, buttonRadius);
 //			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0), buttonHoverCircle[a]);
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
-			System.out.println("registering " + a + " done.");
+//			System.out.println("registering " + a + " done.");
 		}
-
+		gFxInited = true;
 		System.out.println("Graphics successfully (re)initiated for state ID "
 				+ this.getID());
 	}
@@ -83,7 +86,10 @@ public class BasicState extends BasicGameState {
 		app = gc;
 
 		// init images and spritesheets
-		background = new Image("/resources/Splash/UI/menu.png");
+		String bgPath = "resources/Splash/UI/BG_Split/Menu_"+(this.getID()+1)+".png";
+		backgroundBack = new Image(bgPath);
+		background = new Image("/resources/Splash/UI/BG_Split/Menu_Front.png");
+		
 		menubar = new Image("resources/Splash/UI/Menubar_Back.png");
 		buttonSpriteSheet = new Image(
 				"resources/Splash/UI/Menubar_Spritesheet.png");
@@ -97,6 +103,7 @@ public class BasicState extends BasicGameState {
 		music = new Music("/resources/Audio/MainMenuTheme_loop.wav");
 		music.play();
 		// initialize strings
+		StateTitle = "A Newly created state :)";
 		menu1 = "the MENU phase";
 		S_ingame = "INGAME";
 		S_loading = "The Game is loading! woooo";
@@ -115,9 +122,16 @@ public class BasicState extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
+	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		// TODO Auto-generated method stub
+		if (gFxInited){
+		if (Trololus.drawing) {
+			backgroundBack.draw(0,backgroundY, backgroundScale);
+			background.draw(0, backgroundY, backgroundScale);
+			g.drawString(StateTitle, 320, 20);
+			drawMenu(11,g);
+		}
+		} else {initRes(); render(gc,mainGame,g);}
 
 	}
 

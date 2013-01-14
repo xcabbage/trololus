@@ -21,7 +21,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author David
  * 
  */
-public class MenuState extends BasicState {
+public class SecondState extends BasicState {
 	public static final int ID = 1;
 	float glowF;
 	int glow;
@@ -53,19 +53,9 @@ public class MenuState extends BasicState {
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
+super.render(gc, mainGame, g);
 
-		if (Trololus.drawing) {
-			background.draw(0, backgroundY, backgroundScale);
-			glowF = (float) (glowF + .02);
-			glow = (int) glowF;
-			if (glowF > 7)
-				glowF = 0;
-			drawMenu(glow, g);
-			g.drawString(menu1, 320, 20);	
-		} else {
-			;
-		}
-		
+	
 		;
 
 	}

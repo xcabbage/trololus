@@ -62,3 +62,8 @@ hover
 
 
 
+glowF = (float) (glowF + .02);
+			glow = (int) glowF;
+			if (glowF > 7)
+				glowF = 0;
+			drawMenu(glow, g);
