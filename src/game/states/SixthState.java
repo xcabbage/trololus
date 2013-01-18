@@ -23,6 +23,7 @@ public class SixthState extends BasicState{
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
+		Trololus.initAfterStates();
 		
 	}
 

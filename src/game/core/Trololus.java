@@ -143,6 +143,14 @@ public class Trololus extends StateBasedGame {
 	}
 
 }
+	public static void initAfterStates() throws SlickException{
+		// init sound
+		
+		Music music = new Music("/resources/Audio/MainMenuTheme_loop.wav");
+		music.play();
+	}
+	
+	
 
 	public void mousePressed(int button, int x, int y) {
 //		int state =(((BasicState) getCurrentState()).isOverButton(x, y)); 

@@ -99,9 +99,7 @@ public class BasicState extends BasicGameState {
 		// init scaling
 		initRes();
 
-		// init sound
-		music = new Music("/resources/Audio/MainMenuTheme_loop.wav");
-		music.play();
+
 		// initialize strings
 		StateTitle = "A Newly created state :)";
 		menu1 = "the MENU phase";
