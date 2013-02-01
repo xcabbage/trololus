@@ -24,4 +24,6 @@ DusanPilka      				[https://github.com/dusanp]
 
 Misc （╯°□°）╯︵ ┻━┻ 
 ----------
+Development MindMap on [http://bit.ly/TrololusMap]. For edit rights, PM me (gh/xCabbage)
+
 Fork requests accepted. :D
