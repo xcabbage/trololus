@@ -13,13 +13,13 @@ package game.ship;
 public enum ShipType {
 
 //Imperial ships
-Striker(4,1,4), ImperialMedium (5,1,5), Fathership(6,2,6), 
+Striker(4,1,4,300), ImperialMedium (5,1,5,600), Fathership(6,2,6,1500), 
 
 //Space Pirates' ships
-SpacePiratesLight(4,1,4), SpacePiratesMedium(4,2,5), OrbitalPowerplant(4,3,7), 
+SpacePiratesLight(4,1,4,200), SpacePiratesMedium(4,2,5,500), OrbitalPowerplant(4,3,7,1200), 
 
 //Xerox Ships
-Wisp(5,1,3), XeroxMedium(6,1,4), XeroxHeavy(6,1,7);
+Wisp(5,1,3,250), XeroxMedium(6,1,4,500), XeroxHeavy(6,1,7,1400);
 
 /*TODO Add names of ship types currently unnamed &
  * Fiddle with number of slots to balance game (current balance is based on slot total -
@@ -27,20 +27,22 @@ Wisp(5,1,3), XeroxMedium(6,1,4), XeroxHeavy(6,1,7);
 */
 
 final int WeaponSlots;
-final int HullSlots;
-final int UpgradeSlots;
+final int HullSlots;		//I guess you can't put stuff onto already full ships, therefore final
+final int UpgradeSlots;		//but with space pirates it might be possible.
+final int Cost;				//When you're buyin' yo' ship, this is what you're payin'
 // private int XSize;
 // private int YSize;
 // private int MaxHP;
 
-/*TODO sort out ship HP & Size
+/*TODO sort out ship HP, Size & Cost
  * MaxHP is meant as the limit up to which you can upgrade using ability slots, but can be thrown out in the future
 */
 
-ShipType(int WeaponSlots, int HullSlots, int UpgradeSlots/*, int XSize, int YSize */) {
+ShipType(int WeaponSlots, int HullSlots, int UpgradeSlots, int Cost /*, int XSize, int YSize */) {
 this.WeaponSlots = WeaponSlots;
 this.HullSlots = HullSlots;
 this.UpgradeSlots = UpgradeSlots;
+this.Cost = Cost;
 //this.XSize = XSize;
 //this.YSize = YSize;
 	}

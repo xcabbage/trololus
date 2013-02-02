@@ -7,6 +7,7 @@ package game.core;
  */
 
 //DATA CLASS FOR KEEPING TRACK OF PLAYERS' SCORE------------------------------------------------------------------------
+//Cookies offered to anyone who can make it graphic*
 
 public class Leaderboard {
 	static int players = Pepta.players;
@@ -110,3 +111,4 @@ public class Leaderboard {
 	
 	
 }
+//*Disclaimer: conditions regarding cookie delivery may change without notice.
