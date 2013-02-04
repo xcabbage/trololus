@@ -19,12 +19,12 @@ public class FifthState extends BasicState{
 	public int getID() {
 		return ID;
 	}
-
+@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-		super.init(gc, game);
-		
-	}
+System.out.println("INIT 4 LOL?");
+	//		super.init(gc, game);
+		}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
@@ -34,7 +34,7 @@ public class FifthState extends BasicState{
 		int mouseY = Mouse.getY();
 
 		if (input.isKeyDown(46)) {
-			System.out.println("Entering Menu state. [source: Main]");
+			System.out.println("aldkjasdjsald[source: Main]");
 			game.enterState(1);
 		}
 		if (input.isKeyDown(1)) {
@@ -45,5 +45,5 @@ public class FifthState extends BasicState{
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-			super.render(gc,mainGame,g);
+//			super.render(gc,mainGame,g);
 }}
