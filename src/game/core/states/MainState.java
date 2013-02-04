@@ -4,9 +4,12 @@
 /**
  * 
  */
-package game.states;
+package game.core.states;
 
 import game.core.Trololus;
+
+import java.awt.Dimension;
+import java.nio.file.Path;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
@@ -21,42 +24,45 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author David
  * 
  */
-public class SecondState extends BasicState {
-	public static final int ID = 1;
+public class MainState extends BasicState {
+
+	public static int ID = 0;
 	float glowF;
 	int glow;
 
-	
 	public int getID() {
 		return ID;
 	}
 
+	public void init(GameContainer gc, StateBasedGame game)
+			throws SlickException {
+		super.init(gc, game);
+		StateTitle = "Main State for trololus 0.1Alpha";
+//		background = new Image("/resources/Splash/UI/menu2.png");
+	}
+
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
+		
 		Input input = gc.getInput();
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
-		if (input.isKeyDown(45)) {
-			System.out.println("Entering Main state. [source: Menu]");
-			game.enterState(0);
+//		glow = isOverButton(mouseX,mouseY);
+		if (input.isKeyDown(46)) {
+			System.out.println("Entering Menu state. [source: Main]");
+			game.enterState(1);
 		}
 		if (input.isKeyDown(1)) {
-			System.out.println("Shutting Down.. [command: Menu]");
+			System.out.println("Shutting Down.. [command: Main]");
 			System.exit(0);
 		}
-		if (input.isKeyDown(47)) {
-			System.out.println("Shutting Down.. [command: Menu]");
-			;
-		}
-
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-super.render(gc, mainGame, g);
-
-	
-		;
+	super.render(gc, mainGame, g);
+		
+		
 
 	}
 }

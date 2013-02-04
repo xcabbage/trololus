@@ -1,4 +1,4 @@
-package game.states;
+package game.core.states;
 
 //import game.util.MouseOverAreaDav;
 

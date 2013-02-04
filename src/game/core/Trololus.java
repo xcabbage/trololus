@@ -6,10 +6,12 @@ package game.core;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.Scanner;
-import game.network.NetworkTest;
+
+import game.core.states.*;
+import game.nonstatic.system.Pepta;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
-import game.states.*;
 
 public class Trololus extends StateBasedGame {
 	static public boolean drawing = true;
@@ -23,7 +25,7 @@ public class Trololus extends StateBasedGame {
 	static public Dimension res;
 	static BasicState activeState;
 	static BasicState[] state;
-	static NetworkTest pomocnik = new game.network.NetworkTest();	
+	static NetworkTest pomocnik = new game.core.NetworkTest();	
 	Scanner sc = new Scanner(System.in);
 	static public void cleanRes() throws SlickException{
 		app.setDisplayMode((int) (res.width*.75), (int)(res.height*.75), fullscreen);

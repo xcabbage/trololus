@@ -3,7 +3,8 @@
  * 
  */
 
-package game.core;
+package game.nonstatic.system;
+
 
 public class PlayerList {
 	

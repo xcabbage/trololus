@@ -5,7 +5,8 @@
  * xC: trochu jsem to prekopal hazelo to errory koukni se jestli to funguje hynku
  */
 
-package game.core;
+package game.nonstatic.system;
+
 
 import java.util.Scanner;
 

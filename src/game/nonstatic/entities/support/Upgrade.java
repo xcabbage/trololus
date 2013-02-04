@@ -3,7 +3,7 @@
 * @Author DannyUfonek
 *
 */
-package game.ship;
+package game.nonstatic.entities.support;
 /*
  * This class serves as the place to define any upgrades that are not weapons and those 
  * that are placed on hull slots or the upgrade slots

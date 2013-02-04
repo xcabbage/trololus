@@ -4,7 +4,7 @@
  * 
  */
 
-package game.ship;
+package game.nonstatic.entities.controllables;
 
 /*This enum takes care of the different ship types - currently it only defines how many slots each ship has, 
  * but could be used to house ship ownership and HP in the future. However, this could be sorted out better 

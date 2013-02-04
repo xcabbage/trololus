@@ -1,4 +1,4 @@
-package game.states;
+package game.core.states;
 
 import game.core.Trololus;
 
@@ -10,9 +10,9 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class FourthState extends BasicState{
+public class ThirdState extends BasicState{
 
-	public static int ID = 3;
+	public static int ID = 2;
 	float glowF;
 	int glow;
 

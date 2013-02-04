@@ -4,7 +4,8 @@
  * 
  */
 
-package game.ship;
+package game.nonstatic.entities.support;
+
 
 /*
  * We need to make some decisions regarding game design before we start creating weapons, 

@@ -3,7 +3,7 @@
 * @Author DannyUfonek
 *
 */
-package game.ship;
+package game.nonstatic.entities.support;
 /*
  * Currently something made just off the top of my head, feel free to add if you've got some ideas
  */
