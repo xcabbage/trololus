@@ -1,9 +1,7 @@
 // Class created by xCabbage [github.com/xcabbage] 
 // for the trololus project [github.com/xcabbage/trololus]
 
-/**
- * 
- */
+
 package game.core.states;
 
 import game.core.Trololus;
@@ -21,7 +19,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * @author David
+ * @author xCabbage
  * 
  */
 public class MainState extends BasicState {

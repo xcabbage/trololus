@@ -1,6 +1,10 @@
 package game.core.states;
 
+import org.newdawn.slick.Color;
+
 import game.core.Trololus;
+import game.nonstatic.GameInstance;
+import game.nonstatic.system.Player;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
@@ -15,15 +19,19 @@ public class FifthState extends BasicState{
 	public static int ID = 4;
 	float glowF;
 	int glow;
-
+	GameInstance instance;
+	Player player = new Player("Davefinek", Color.white);
+	
 	public int getID() {
 		return ID;
 	}
-@Override
+	
+	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-System.out.println("INIT 4 LOL?");
-	//		super.init(gc, game);
+			super.init(gc, game);
+			instance = new GameInstance(player);
+			StateTitle = "State 5 - Game - GfX test!";
 		}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -34,9 +42,15 @@ System.out.println("INIT 4 LOL?");
 		int mouseY = Mouse.getY();
 
 		if (input.isKeyDown(46)) {
-			System.out.println("aldkjasdjsald[source: Main]");
-			game.enterState(1);
+			System.out.println("switching Player color");
+			player.setColor(Color.orange);
 		}
+		
+		if (input.isKeyDown(47)) {
+			System.out.println("switching Player color");
+			player.setColor(Color.magenta);
+		}
+		
 		if (input.isKeyDown(1)) {
 			System.out.println("Shutting Down.. [command: Main]");
 			System.exit(0);
@@ -45,5 +59,8 @@ System.out.println("INIT 4 LOL?");
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-//			super.render(gc,mainGame,g);
+			super.render(gc,mainGame,g);
+			instance.draw(g);
+			
+			
 }}

@@ -134,16 +134,13 @@ public class BasicState extends BasicGameState {
 	}
 
 	public void drawMenu(int hover, Graphics g) {
-		menubar.draw(menuX, menuY, menuScale);
+		this.menubar.draw(menuX, menuY, menuScale);
 
 		for (int a = 0; a < 7; a++) {
-//			g.draw(buttonHoverCircle[a]);
-			
 			button[a].render(app, g);
 
 		}
-		//
-		// }
+		
 	}
 
 	public int isOverButton(int x, int y) {
