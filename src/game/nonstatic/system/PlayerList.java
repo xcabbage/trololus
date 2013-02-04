@@ -5,6 +5,8 @@
 
 package game.nonstatic.system;
 
+import org.newdawn.slick.Color;
+
 
 public class PlayerList {
 	
@@ -27,7 +29,7 @@ public class PlayerList {
 		playerlist[playerNumber].setName(playerName);
 		System.out.println("Player " + playerNumber + "'s name changed to " + playerName);
 	}
-	public void colorPlayer(int playerNumber, int color){
+	public void colorPlayer(int playerNumber, Color color){
 		playerlist[playerNumber].setColor(color);
 		System.out.println("Player " + playerNumber + "'s color changed to " + color);
 	}

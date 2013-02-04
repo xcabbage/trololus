@@ -11,8 +11,8 @@ package game.nonstatic.entities.support;
  */
 public class Upgrade {
 
-	int CurrentHP;
-	int MaxHP;
+	int UpgradeCurrentHP;
+	int UpgradeMaxHP;
 	boolean attached;	//when a ship blows up, weapons & upgrades could be thrown into space to be picked up by others?
 	
 }
