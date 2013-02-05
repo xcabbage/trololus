@@ -5,6 +5,8 @@ import org.newdawn.slick.Color;
 import game.core.Trololus;
 import game.nonstatic.BattleField;
 import game.nonstatic.GameInstance;
+import game.nonstatic.entities.controllables.Ship;
+import game.nonstatic.entities.controllables.ShipType;
 import game.nonstatic.system.Player;
 
 import org.lwjgl.input.Mouse;
@@ -26,7 +28,7 @@ public class FifthState extends BasicState{
 	FifthState state = this;
 	BattleField field;
 	int SPEED = 4;
-	
+	Ship controlledShip;
 	
 	
 	
@@ -42,6 +44,9 @@ public class FifthState extends BasicState{
 			super.init(gc, game);
 			instance = new GameInstance((BasicState) state, player);
 			field = instance.getField();
+			controlledShip = new Ship(ShipType.Striker);
+			field.placeEntity(controlledShip);
+			instance.centerShip(controlledShip.getID());
 			gameRunning = true;
 			StateTitle = "State 5 - Game - GfX test!";
 		}
@@ -76,25 +81,25 @@ public class FifthState extends BasicState{
 		
 			//rotation
 		if (input.isKeyDown(30)){
-			field.setRotation(field.getRotation()-SPEED);
+			field.setRotation(field.getRotation(controlledShip.getID())-SPEED, controlledShip.getID());
 					}
 
 		if (input.isKeyDown(32)){
-			field.setRotation(field.getRotation()+SPEED);
+			field.setRotation(field.getRotation(controlledShip.getID())+SPEED,controlledShip.getID());
 		}
 		
 			//movement
 		if (input.isKeyDown(17)){
-			field.moveShipForwards();
+			field.moveShipForwards(controlledShip.getID());
 								}
 		if (input.isKeyDown(31)){
-			field.moveShipBackwards();
+			field.moveShipBackwards(controlledShip.getID());
 					}
 		
 			//reset ship coords
 		if (input.isKeyDown(29)){
-			field.setShipX(500);
-			field.setShipY(300);
+			field.setShipX(500,controlledShip.getID());
+			field.setShipY(300,controlledShip.getID());
 		}
 		}
 	}

@@ -42,7 +42,7 @@ public class GameInstance {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		field.setShipX(500);field.setShipY(300);
+		
 		
 		
 	}
@@ -82,12 +82,18 @@ public class GameInstance {
 			System.out.println("playyer 0 is null");
 		g.fill(drawGround);
 		
-		ship.rotate(field.getRotation()-rotation2);
-		rotation2 = field.getRotation();
-		ship.drawCentered((float)field.getShipX(), (float)field.getShipY()); 
-		
+		for (int a = 0; a <field.getEntitiesCount(); a++){
+		ship.rotate(field.getRotation(a)-rotation2);
+		rotation2 = field.getRotation(a);
+		ship.drawCentered((float)field.getShipX(a), (float)field.getShipY(a)); 
+		}
 		g.drawString("JOSEF", 250, 250);
 
+	}
+
+	public void centerShip(int id) {
+		field.setShipX(500, id);field.setShipY(300,id);
+		
 	}
 
 }
