@@ -3,6 +3,7 @@ package game.core.states;
 import org.newdawn.slick.Color;
 
 import game.core.Trololus;
+import game.nonstatic.BattleField;
 import game.nonstatic.GameInstance;
 import game.nonstatic.system.Player;
 
@@ -21,16 +22,27 @@ public class FifthState extends BasicState{
 	int glow;
 	GameInstance instance;
 	Player player = new Player("Davefinek", Color.white);
+	boolean gameRunning = false;
+	FifthState state = this;
+	BattleField field;
+	int SPEED = 4;
+	
+	
+	
 	
 	public int getID() {
 		return ID;
 	}
 	
+	
+	
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 			super.init(gc, game);
-			instance = new GameInstance(player);
+			instance = new GameInstance((BasicState) state, player);
+			field = instance.getField();
+			gameRunning = true;
 			StateTitle = "State 5 - Game - GfX test!";
 		}
 
@@ -41,12 +53,14 @@ public class FifthState extends BasicState{
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
 
-		if (input.isKeyDown(46)) {
+		
+		//state switching 
+		if (input.isKeyPressed(46)) {
 			System.out.println("switching Player color");
 			player.setColor(Color.orange);
 		}
 		
-		if (input.isKeyDown(47)) {
+		if (input.isKeyPressed(47)) {
 			System.out.println("switching Player color");
 			player.setColor(Color.magenta);
 		}
@@ -54,6 +68,34 @@ public class FifthState extends BasicState{
 		if (input.isKeyDown(1)) {
 			System.out.println("Shutting Down.. [command: Main]");
 			System.exit(0);
+		}
+		
+		
+		//ship movement
+		if (gameRunning){
+		
+			//rotation
+		if (input.isKeyDown(30)){
+			field.setRotation(field.getRotation()-SPEED);
+					}
+
+		if (input.isKeyDown(32)){
+			field.setRotation(field.getRotation()+SPEED);
+		}
+		
+			//movement
+		if (input.isKeyDown(17)){
+			field.moveShipForwards();
+								}
+		if (input.isKeyDown(31)){
+			field.moveShipBackwards();
+					}
+		
+			//reset ship coords
+		if (input.isKeyDown(29)){
+			field.setShipX(500);
+			field.setShipY(300);
+		}
 		}
 	}
 

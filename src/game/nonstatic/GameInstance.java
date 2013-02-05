@@ -1,11 +1,14 @@
 package game.nonstatic;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.ShapeFill;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.Color;
 
+import game.core.states.BasicState;
 import game.nonstatic.system.Player;
 import game.util.FastGraphics;
 import game.util.MoreColors;
@@ -19,24 +22,52 @@ import game.util.MoreColors;
 
 public class GameInstance {
 	FastGraphics gF = new FastGraphics();
-	Player [] player;
+	Player[] player;
 	Rectangle drawGround = new Rectangle(400, 200, 250, 250);
 	Color fillColor;
+	BattleField field;
+	Image ship;
+	BasicState state;
+	int rotation2;
 	// constructor for a new game
-	public GameInstance(Player... players) {
+	
+	void init(){
+		field = new BattleField();
+		
+		//load images and stuff
+		try {
+			ship = new Image("resources/Splash/Imperial/Striker/Imperial_Striker_Hull.png");
+			ship = ship.getScaledCopy((float)0.1);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		field.setShipX(500);field.setShipY(300);
+		
+		
+	}
+	
+	public BattleField getField() {
+		return field;
+	}
+	
+	public GameInstance(BasicState state, Player... players) {
+		this.state = state; 
 		player = new Player[players.length];
 		// set up our players (get them from the main frame)
-			for (int a = 0; a < players.length; a++) {
+		for (int a = 0; a < players.length; a++) {
 			player[a] = players[a];
-		
+
 		}
 
 		// initialize the rest of the game
-
+		init();
 	}
 
 	public GameInstance() {
-		;
+		player = new Player[1];
+		player[0] = new Player();
+		init();
 	}
 
 	public void draw(Graphics g) {
@@ -44,11 +75,19 @@ public class GameInstance {
 		g.setAntiAlias(true);
 		g.setLineWidth(5);
 		g.draw(drawGround);
-		if (player[0] != null){g.setColor(player[0].getColor());} else System.out.println("playyer 0 is null");
+		
+		if (player[0] != null) {
+			g.setColor(player[0].getColor());
+		} else
+			System.out.println("playyer 0 is null");
 		g.fill(drawGround);
 		
-		g.drawString("JOSEF", 250, 250);
+		ship.rotate(field.getRotation()-rotation2);
+		rotation2 = field.getRotation();
+		ship.drawCentered((float)field.getShipX(), (float)field.getShipY()); 
 		
+		g.drawString("JOSEF", 250, 250);
+
 	}
 
 }
