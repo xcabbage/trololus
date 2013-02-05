@@ -25,7 +25,8 @@ public class Trololus extends StateBasedGame {
 	static public Dimension res;
 	static BasicState activeState;
 	static BasicState[] state;
-	static NetworkTest pomocnik = new game.core.NetworkTest();	
+	static NetworkTest pomocnik = new game.core.NetworkTest();
+	static Image icon; 
 	Scanner sc = new Scanner(System.in);
 	static public void cleanRes() throws SlickException{
 		app.setDisplayMode((int) (res.width*.75), (int)(res.height*.75), fullscreen);
@@ -48,13 +49,15 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public void init(){
-
+		
+		
 	} 
 	public static void main(String[] args) throws SlickException {
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
-		
+//		try {app.setIcon("/resources/Splash/trololus_icon.png");}
+//		catch (SlickException e) {	e.printStackTrace();}
 		app = new AppGameContainer(new Trololus(title));
 		cleanRes();
 		app.setSmoothDeltas(true);
