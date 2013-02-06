@@ -22,7 +22,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author xCabbage
  * 
  */
-public class MainState extends BasicState {
+public class FirstState extends BasicState {
 
 	public static int ID = 0;
 	float glowF;
@@ -35,8 +35,7 @@ public class MainState extends BasicState {
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
-		StateTitle = "Main State for trololus 0.1Alpha";
-//		background = new Image("/resources/Splash/UI/menu2.png");
+		StateTitle = "Main State for trololus 0.1 Alpha - to be Training?";
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)

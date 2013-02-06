@@ -22,9 +22,9 @@ public class FourthState extends BasicState{
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
-		
+		StateTitle = "Fourth State - Garage";
 	}
-
+	
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		

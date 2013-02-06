@@ -23,7 +23,7 @@ public class ThirdState extends BasicState{
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
-		
+		StateTitle = "Third State: Host a Game";
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)

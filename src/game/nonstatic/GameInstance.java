@@ -13,10 +13,11 @@ import game.nonstatic.system.Player;
 import game.util.FastGraphics;
 import game.util.MoreColors;
 
-/**
+/** The GameInstance class that holds each instance of the actual game.
+ *  Responsible for drawing the situation and holding all the variables.
  * @author xCabbage [github.com/xcabbage]
  * 
- *         for the Trololus project [github.com/xcabbage/trololus] created
+ * @info  for the Trololus project [github.com/xcabbage/trololus] created
  *         4.2.2013 14:56:16
  */
 
@@ -39,7 +40,7 @@ public class GameInstance {
 			ship = new Image("resources/Splash/Imperial/Striker/Imperial_Striker_Hull.png");
 			ship = ship.getScaledCopy((float)0.1);
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -71,28 +72,23 @@ public class GameInstance {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.green);
-		g.setAntiAlias(true);
-		g.setLineWidth(5);
-		g.draw(drawGround);
 		
+		g.setAntiAlias(true);
 		if (player[0] != null) {
 			g.setColor(player[0].getColor());
 		} else
 			System.out.println("playyer 0 is null");
-		g.fill(drawGround);
-		
+				
 		for (int a = 0; a <field.getEntitiesCount(); a++){
 		ship.rotate(field.getRotation(a)-rotation2);
 		rotation2 = field.getRotation(a);
 		ship.drawCentered((float)field.getShipX(a), (float)field.getShipY(a)); 
 		}
-		g.drawString("JOSEF", 250, 250);
-
+		g.setColor(Color.white);
 	}
 
 	public void centerShip(int id) {
-		field.setShipX(500, id);field.setShipY(300,id);
+		field.setShipX(500, id);field.setShipY(300,id);field.setRotation(0, id);
 		
 	}
 

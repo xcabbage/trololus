@@ -27,7 +27,7 @@ public class FifthState extends BasicState{
 	boolean gameRunning = false;
 	FifthState state = this;
 	BattleField field;
-	int SPEED = 4;
+	int SPEED = 5;
 	Ship controlledShip;
 	
 	
@@ -35,9 +35,7 @@ public class FifthState extends BasicState{
 	public int getID() {
 		return ID;
 	}
-	
-	
-	
+		
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
@@ -48,7 +46,7 @@ public class FifthState extends BasicState{
 			field.placeEntity(controlledShip);
 			instance.centerShip(controlledShip.getID());
 			gameRunning = true;
-			StateTitle = "State 5 - Game - GfX test!";
+			StateTitle = "State 5 - Game - GfX test! (once to be Player Profile)";
 		}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -100,6 +98,7 @@ public class FifthState extends BasicState{
 		if (input.isKeyDown(29)){
 			field.setShipX(500,controlledShip.getID());
 			field.setShipY(300,controlledShip.getID());
+			field.setRotation(0, controlledShip.getID());
 		}
 		}
 	}
@@ -110,4 +109,5 @@ public class FifthState extends BasicState{
 			instance.draw(g);
 			
 			
-}}
+}
+	}

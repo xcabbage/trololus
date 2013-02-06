@@ -21,7 +21,7 @@ SpacePiratesLight(4,1,4,200), SpacePiratesMedium(4,2,5,500), OrbitalPowerplant(4
 //Xerox Ships
 Wisp(5,1,3,250), XeroxMedium(6,1,4,500), XeroxHeavy(6,1,7,1400);
 
-/*TODO Add names of ship types currently unnamed &
+/*TODO HP | Add names of ship types currently unnamed &
  * Fiddle with number of slots to balance game (current balance is based on slot total -
  * - Light=9 slots, Medium=11, Heavy=14) - to sort out in future
 */
@@ -34,7 +34,7 @@ final int Cost;				//When you're buyin' yo' ship, this is what you're payin'
 // private int YSize;
 // private int MaxHP;
 
-/*TODO sort out ship HP, Size & Cost
+/*TODO HP | sort out ship HP, Size & Cost
  * MaxHP is meant as the limit up to which you can upgrade using ability slots, but can be thrown out in the future
 */
 

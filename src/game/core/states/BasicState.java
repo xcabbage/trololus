@@ -1,7 +1,5 @@
 package game.core.states;
 
-//import game.util.MouseOverAreaDav;
-
 import game.core.Trololus;
 
 import java.awt.Dimension;
@@ -21,6 +19,15 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import java.math.*;
 
+
+
+/** The BasicState.java class defining the base state of the game's UI. 
+ *
+ * @author xCabbage [github.com/xcabbage]
+ *
+ * @info for the Trololus project [github.com/xcabbage/trololus]
+ *      created 6.2.2013 9:55:02
+ */
 public class BasicState extends BasicGameState {
 	// declare globals
 	StateBasedGame game;

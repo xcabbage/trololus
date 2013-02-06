@@ -31,6 +31,12 @@ public class SecondState extends BasicState {
 		return ID;
 	}
 
+	public void init(GameContainer gc, StateBasedGame game)
+			throws SlickException {
+		super.init(gc, game);
+		StateTitle = "Second state - Connect to another game";
+	}
+	
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
