@@ -16,11 +16,14 @@ import com.sun.org.apache.xpath.internal.operations.Variable;
 public class Util {
 	
 	
-	@SuppressWarnings("rawtypes")
-	public static void prolongArray(int length, Array[]... objects) {
+
+	public static void prolongArray(int length, int[]... objects) {
 		for (int a = 0; a < objects.length; a++) 
 			objects[a] = Arrays.copyOf(objects[a], objects[a].length+ length);
 		}
-
+	public static void prolongArray(int length, Object[]... objects) {
+		for (int a = 0; a < objects.length; a++) 
+			objects[a] = Arrays.copyOf(objects[a], objects[a].length+ length);
+		}
 
 }

@@ -23,12 +23,13 @@ public class BattleField {
 	int SHIP_SPEED = 4, MOVE_TIME = 1;
 
 	public void placeEntity(Ship entity) {
-Util.prolongArray(1, entities,shipX,shipY,rotation);
+//	Util.prolongArray(1, shipX,shipY,rotation);
+//	Util.prolongArray(1, entities); <-- this one is bugged
 		
-		//		entities = Arrays.copyOf(entities, entities.length + 1);
-//		shipX = Arrays.copyOf(shipX, shipX.length + 1);
-//		shipY = Arrays.copyOf(shipY, shipY.length + 1);
-//		rotation = Arrays.copyOf(rotation, rotation.length + 1);
+				entities = Arrays.copyOf(entities, entities.length + 1);
+		shipX = Arrays.copyOf(shipX, shipX.length + 1);
+		shipY = Arrays.copyOf(shipY, shipY.length + 1);
+		rotation = Arrays.copyOf(rotation, rotation.length + 1);
 		entities[entities.length - 1] = entity;
 		System.out.println(entities.length - 1);
 		System.out.println("Placed a new ship on the battlefield..: "
