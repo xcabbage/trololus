@@ -127,7 +127,7 @@ public class Trololus extends StateBasedGame {
 						cleanRes();
 
 					}
-					for (int a = 0; a <= 1; a++) {
+					for (int a = 0; a < this.getStateCount(); a++) {
 
 						activeState = (BasicState) this.getState(a);
 						activeState.initRes();

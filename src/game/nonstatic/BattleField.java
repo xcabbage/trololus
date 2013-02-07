@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import game.nonstatic.entities.controllables.Ship;
 import game.nonstatic.entities.controllables.ShipType;
+import game.util.Util;
 
 /**
  * The battlefield class storing the map, map type, entities on the battlefield\
@@ -22,10 +23,12 @@ public class BattleField {
 	int SHIP_SPEED = 4, MOVE_TIME = 1;
 
 	public void placeEntity(Ship entity) {
-		entities = Arrays.copyOf(entities, entities.length + 1);
-		shipX = Arrays.copyOf(shipX, shipX.length + 1);
-		shipY = Arrays.copyOf(shipY, shipY.length + 1);
-		rotation = Arrays.copyOf(rotation, rotation.length + 1);
+Util.prolongArray(1, entities,shipX,shipY,rotation);
+		
+		//		entities = Arrays.copyOf(entities, entities.length + 1);
+//		shipX = Arrays.copyOf(shipX, shipX.length + 1);
+//		shipY = Arrays.copyOf(shipY, shipY.length + 1);
+//		rotation = Arrays.copyOf(rotation, rotation.length + 1);
 		entities[entities.length - 1] = entity;
 		System.out.println(entities.length - 1);
 		System.out.println("Placed a new ship on the battlefield..: "
