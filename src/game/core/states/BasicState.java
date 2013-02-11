@@ -11,6 +11,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
@@ -78,7 +79,9 @@ public class BasicState extends BasicGameState {
 //			buttonHoverCircle[a] = new Circle(buttonsX + buttonsOffset * a, buttonsY, buttonRadius);
 //			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0), buttonHoverCircle[a]);
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
-//			System.out.println("registering " + a + " done.");
+			button[a].setMouseOverSound(new Sound("resources/Audio/UI/mouseover_click.wav"));
+			button[a].setMouseDownSound(new Sound("resources/Audio/UI/hard_click.wav"));
+			System.out.println("registering " + a + " done.");
 		}
 		gFxInited = true;
 		System.out.println("Graphics successfully (re)initiated for state ID "

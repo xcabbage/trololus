@@ -29,6 +29,9 @@ public class Trololus extends StateBasedGame {
 	static NetworkTest pomocnik = new game.core.NetworkTest();
 	static Image icon;
 	Scanner sc = new Scanner(System.in);
+	
+	static String MUSIC_PATH = "resources/Audio/BGM4.wav";
+	static float MUSIC_VOLUME = 0.18f;
 
 	static public void cleanRes() throws SlickException {
 		app.setDisplayMode((int) (res.width * .75), (int) (res.height * .75),
@@ -68,7 +71,7 @@ public class Trololus extends StateBasedGame {
 		app.setVSync(true);
 		app.start();
 
-		System.out.println("NetworkTest object initiated");
+
 	}
 
 	@Override
@@ -158,8 +161,10 @@ public class Trololus extends StateBasedGame {
 	public static void initAfterStates() throws SlickException {
 		// init sound
 
-		Music music = new Music("/resources/Audio/BGM4.wav");
+		Music music = new Music(MUSIC_PATH);
+		
 		music.play();
+		music.setVolume(MUSIC_VOLUME);
 	}
 
 	public void mousePressed(int button, int x, int y) {
