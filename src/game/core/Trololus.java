@@ -27,7 +27,7 @@ public class Trololus extends StateBasedGame {
 	static BasicState activeState;
 	static BasicState[] state;
 	static NetworkTest pomocnik = new game.core.NetworkTest();
-	static Image icon;
+	static String[] icons = {"resources/Splash/EXEico/trololus_icon16.tga", "resources/Splash/EXEico/trololus_icon32.tga", "resources/Splash/EXEico/trololus_icon64.tga"}; 
 	Scanner sc = new Scanner(System.in);
 	
 	static String MUSIC_PATH = "resources/Audio/BGM4.wav";
@@ -54,23 +54,19 @@ public class Trololus extends StateBasedGame {
 
 	}
 
-	public void init() {
-
-	}
 
 	public static void main(String[] args) throws SlickException {
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
-		// try {app.setIcon("/resources/Splash/trololus_icon.png");}
-		// catch (SlickException e) { e.printStackTrace();}
 		app = new AppGameContainer(new Trololus(title));
 		cleanRes();
 		app.setSmoothDeltas(true);
 		app.setTargetFrameRate(fpslimit);
 		app.setVSync(true);
+		app.setIcons(icons);
 		app.start();
-
+	
 
 	}
 
@@ -159,12 +155,13 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void initAfterStates() throws SlickException {
-		// init sound
+		// init sound;
 
 		Music music = new Music(MUSIC_PATH);
 		
 		music.play();
 		music.setVolume(MUSIC_VOLUME);
+		
 	}
 
 	public void mousePressed(int button, int x, int y) {
