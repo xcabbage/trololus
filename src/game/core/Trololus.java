@@ -18,7 +18,7 @@ public class Trololus extends StateBasedGame {
 	static public AppGameContainer app;
 	static public Dimension res;
 	static boolean fullscreen = false;
-	static boolean ShowFPS = true;
+	static boolean ShowFPS = false;
 	static game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	static int width = 1000;
 	static int height = 500;
