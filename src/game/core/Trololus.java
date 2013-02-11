@@ -27,33 +27,22 @@ public class Trololus extends StateBasedGame {
 	static BasicState activeState;
 	static BasicState[] state;
 	static NetworkTest pomocnik = new game.core.NetworkTest();
-	static String[] icons = {"resources/Splash/EXEico/trololus_icon16.tga", "resources/Splash/EXEico/trololus_icon32.tga", "resources/Splash/EXEico/trololus_icon64.tga"}; 
+	static String[] icons = { "resources/Splash/EXEico/trololus_icon16.tga",
+			"resources/Splash/EXEico/trololus_icon32.tga",
+			"resources/Splash/EXEico/trololus_icon64.tga" };
 	Scanner sc = new Scanner(System.in);
-	
-	static String MUSIC_PATH = "resources/Audio/BGM4.wav";
+
+	static String MUSIC_PATH_INIT = "resources/Audio/BGM1_a.wav";
+	static String MUSIC_PATH_LOOP = "resources/Audio/BGM4.wav";
+	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
 	static float MUSIC_VOLUME = 0.18f;
+	static boolean MUSIC_END_REQUESTED;
 
-	static public void cleanRes() throws SlickException {
-		app.setDisplayMode((int) (res.width * .75), (int) (res.height * .75),
-				fullscreen);
-	}
-
+	
+	// ---------------------------------------------------MainMethod-&-Constructors----------------------------------------------------------------
 	public Trololus(String title) {
 		super(title);
 	}
-
-	@Override
-	public void initStatesList(GameContainer gc) throws SlickException {
-		addState(new FirstState());
-		addState(new SecondState());
-		addState(new ThirdState());
-		addState(new FourthState());
-		addState(new FifthState());
-		addState(new SixthState());
-		initAfterStates();
-
-	}
-
 
 	public static void main(String[] args) throws SlickException {
 		res = utilGfx.getRes();
@@ -66,10 +55,89 @@ public class Trololus extends StateBasedGame {
 		app.setVSync(true);
 		app.setIcons(icons);
 		app.start();
-	
 
 	}
 
+	// -------------------------------------------------------The-Game's-Methods-------------------------------------------------------------------
+	@Override
+	public void initStatesList(GameContainer gc) throws SlickException {
+		addState(new FirstState());
+		addState(new SecondState());
+		addState(new ThirdState());
+		addState(new FourthState());
+		addState(new FifthState());
+		addState(new SixthState());
+		initAfterStates();
+
+	}
+
+	public static void initAfterStates() throws SlickException {
+		// init sound;
+
+		Music musicStart = new Music(MUSIC_PATH_INIT);
+		final Music musicLoop = new Music(MUSIC_PATH_LOOP);
+		final Music musicEnd = new Music(MUSIC_PATH_END);
+		musicStart.play();
+		musicStart.setVolume(MUSIC_VOLUME);
+		musicStart.addListener(new MusicListener() {
+
+			@Override
+			public void musicEnded(Music music) {
+				musicLoop.play();
+				musicLoop.setVolume(MUSIC_VOLUME);
+				
+			}
+
+			@Override
+			public void musicSwapped(Music music, Music newMusic) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		musicLoop.addListener(new MusicListener() {
+
+			@Override
+			public void musicEnded(Music music) {
+				
+				if (!MUSIC_END_REQUESTED) {
+					System.out.println("looping?");
+					musicLoop.play();
+					musicLoop.setVolume(MUSIC_VOLUME);
+				} else {
+					musicEnd.play();
+					musicLoop.setVolume(MUSIC_VOLUME);
+				}
+				
+			}
+
+			@Override
+			public void musicSwapped(Music music, Music newMusic) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		musicEnd.addListener(new MusicListener() {
+
+			@Override
+			public void musicEnded(Music music) {
+				System.exit(0);
+				
+			}
+
+			@Override
+			public void musicSwapped(Music music, Music newMusic) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
+	public static void cleanRes() throws SlickException {
+		app.setDisplayMode((int) (res.width * .75), (int) (res.height * .75),
+				fullscreen);
+	}
+
+	// ---------------------------------------------------Keyboard-&-Mouse-Listeners---------------------------------------------------------------
 	@Override
 	/**
 	 * @see org.newdawn.slick.state.StateBasedGame#keyPressed(int, char)
@@ -144,7 +212,7 @@ public class Trololus extends StateBasedGame {
 				try {
 					state.initRes();
 				} catch (SlickException e) {
-					
+
 					e.printStackTrace();
 				}
 				drawing = true;
@@ -152,16 +220,6 @@ public class Trololus extends StateBasedGame {
 
 		}
 
-	}
-
-	public static void initAfterStates() throws SlickException {
-		// init sound;
-
-		Music music = new Music(MUSIC_PATH);
-		
-		music.play();
-		music.setVolume(MUSIC_VOLUME);
-		
 	}
 
 	public void mousePressed(int button, int x, int y) {
@@ -173,7 +231,7 @@ public class Trololus extends StateBasedGame {
 					System.out.println("entering " + a);
 					enterState(a);
 				} else if (a == 6)
-					System.exit(0);
+					MUSIC_END_REQUESTED=true;
 				else {
 					System.out
 							.println("There was a really weird error. You clicked on a nonexisting button, "
@@ -182,9 +240,9 @@ public class Trololus extends StateBasedGame {
 			}
 
 	}
-	
-//-----------------------------------------The-Project's-TO-DO-repository-dump!---------------------------------------------------------------
-	// TODO HP | Properties 
+
+	// -----------------------------------------The-Project's-TO-DO-repository-dump!---------------------------------------------------------------
+	// TODO HP | Properties
 	// TODO DH | Icons for the game
 	// TODO DH | Rest of ship models
 	// TODO DH | Game map & borders
@@ -194,5 +252,5 @@ public class Trololus extends StateBasedGame {
 	// TODO DK | Fix Sound play order
 	// TODO DP | Connection stream for BattleField sync
 	// TODO DP | TextAreas (input) to set the IPs outside console?
-	// TODO NC | DrawArea panel class for the text and shit  
+	// TODO NC | DrawArea panel class for the text and shit
 }
