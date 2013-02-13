@@ -19,6 +19,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class FifthState extends BasicState{
 
+	BasicState stateRes;
 	public static int ID = 4;
 	float glowF;
 	int glow;
@@ -47,6 +48,7 @@ public class FifthState extends BasicState{
 			instance.centerShip(controlledShip.getID());
 			gameRunning = true;
 			StateTitle = "State 5 - Game - GfX test! (once to be Player Profile)";
+			
 		}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -105,9 +107,17 @@ public class FifthState extends BasicState{
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-			super.render(gc,mainGame,g);
+			super.render(gc,mainGame,g,stateRes);
 			instance.draw(g);
-			
-			
-}
+			}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}

@@ -26,6 +26,7 @@ public class Trololus extends StateBasedGame {
 	static String title = "Trololus NightBuild.0";
 	static BasicState activeState;
 	static BasicState[] state;
+	static BasicState resState;
 	static NetworkTest pomocnik = new game.core.NetworkTest();
 	static String[] icons = { "resources/Splash/EXEico/trololus_icon16.tga",
 			"resources/Splash/EXEico/trololus_icon32.tga",
@@ -37,6 +38,8 @@ public class Trololus extends StateBasedGame {
 	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
 	static float MUSIC_VOLUME = 0.18f;
 	static boolean MUSIC_END_REQUESTED;
+	
+	
 
 	
 	// ---------------------------------------------------MainMethod-&-Constructors----------------------------------------------------------------
@@ -61,12 +64,18 @@ public class Trololus extends StateBasedGame {
 	// -------------------------------------------------------The-Game's-Methods-------------------------------------------------------------------
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
+		
+		resState = new BasicState();
+			resState.init(gc, this);
+			resState.initVars();
+		
 		addState(new FirstState());
 		addState(new SecondState());
 		addState(new ThirdState());
 		addState(new FourthState());
 		addState(new FifthState());
 		addState(new SixthState());
+		
 		initAfterStates();
 
 	}
@@ -135,6 +144,10 @@ public class Trololus extends StateBasedGame {
 	public static void cleanRes() throws SlickException {
 		app.setDisplayMode((int) (res.width * .75), (int) (res.height * .75),
 				fullscreen);
+	}
+	
+	public BasicState getResState(){
+		return resState;
 	}
 
 	// ---------------------------------------------------Keyboard-&-Mouse-Listeners---------------------------------------------------------------

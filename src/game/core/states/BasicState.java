@@ -37,17 +37,19 @@ public class BasicState extends BasicGameState {
 	GameContainer app;
 	public Circle[] buttonHoverCircle = new Circle[10];
 	public MouseOverArea[] button = new MouseOverArea[10];
+	BasicState stateRes;
 	
 	Music music; 
 	// declare graphics
-	Image backgroundBack, menubar, buttonSpriteSheet, background;
-	String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3, StateTitle;
-	SpriteSheet menuButtons, menuButtonsScaled;
+	public Image backgroundBack, menubar, buttonSpriteSheet, background;
+	public String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3, StateTitle;
+	public SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown;
+	public int ID;
 
 	// declare gFx constants
-	boolean gFxInited = false;
-	float menuScale, backgroundScale;
-	int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
+	public boolean gFxInited = false;
+	public float menuScale, backgroundScale;
+	public int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
 			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist,
 			buttonRadius, buttonsGetY, buttonsSafeY;
 
@@ -57,7 +59,9 @@ public class BasicState extends BasicGameState {
 		appWidth = app.getWidth();
 		appHeight = app.getHeight();
 		menuScale = (float) ((appWidth / (float) buttonSpriteSheet.getWidth()) * .75);
+		System.out.println("running initRes from " + ID);
 		menuBarWidth = (int) (menubar.getWidth() * menuScale);
+		System.out.println("initres ran");
 		menuBarHeight = (int) (menubar.getHeight() * menuScale);
 		menuOffset = (appWidth - menuBarWidth) / 2;
 		buttonSpriteSheet = buttonSpriteSheet.getScaledCopy(menuScale);
@@ -76,13 +80,11 @@ public class BasicState extends BasicGameState {
 
 		for (int a = 0; a < menuButtons.getHorizontalCount(); a++) {
 			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0),(buttonsX + buttonsOffset * a) - buttonRadius * 2 + 5,buttonsY - buttonRadius * 2 + 5);
-//			buttonHoverCircle[a] = new Circle(buttonsX + buttonsOffset * a, buttonsY, buttonRadius);
-//			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0), buttonHoverCircle[a]);
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
+			button[a].setMouseDownImage(menuButtons.getSprite(a, 2));
 			button[a].setMouseOverSound(new Sound("resources/Audio/UI/mouseover_click.wav"));
 			button[a].setMouseDownSound(new Sound("resources/Audio/UI/hard_click.wav"));
-			button[a].setMouseDownImage(menuButtonsDown.)
-			System.out.println("registering " + a + " done.");
+
 		}
 		gFxInited = true;
 		System.out.println("Graphics successfully (re)initiated for state ID "
@@ -95,35 +97,36 @@ public class BasicState extends BasicGameState {
 		// init globals
 		this.game = game;
 		app = gc;
-
-		// init images and spritesheets
-		String bgPath = "resources/Splash/UI/BG_Split/Menu_"+(this.getID()+1)+".png";
-		backgroundBack = new Image(bgPath);
-		background = new Image("/resources/Splash/UI/BG_Split/Menu_Front.png");
+		if (this.getID()>=0) stateRes = ((Trololus) game).getResState();
 		
-		menubar = new Image("resources/Splash/UI/Menubar_Back.png");
-		buttonSpriteSheet = new Image(
-				"resources/Splash/UI/Menubar_Spritesheet.png");
-		menuButtons = new SpriteSheet(buttonSpriteSheet, (int) (500),
-				(int) (500));
-
-		// init scaling
-		initRes();
-
-
-		// initialize strings
-		StateTitle = "A Newly created state :)";
-		menu1 = "the MENU phase";
-		S_ingame = "INGAME";
-		S_loading = "The Game is loading! woooo";
-		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
-		S_postgame = "The after game lobby.";
-
 		System.out.println("Init formula for state ID " + this.getID()
-				+ " completed.");
+				+ " completed and stateRes set.");
 
 	}
+public void initVars() throws SlickException{
+	// init images and spritesheets
+	String bgPath = "resources/Splash/UI/BG_Split/Menu_"+(this.getID()+1)+".png";
+	backgroundBack = new Image(bgPath);
+	background = new Image("/resources/Splash/UI/BG_Split/Menu_Front.png");
+	
+	menubar = new Image("resources/Splash/UI/Menubar_Back.png");
+	buttonSpriteSheet = new Image(
+			"resources/Splash/UI/Menubar_Spritesheet.png");
+	menuButtons = new SpriteSheet(buttonSpriteSheet, (int) (500),
+			(int) (500));
 
+	// init scaling
+	initRes();
+
+
+	// initialize strings
+	StateTitle = "A Newly created state :)";
+	menu1 = "the MENU phase";
+	S_ingame = "INGAME";
+	S_loading = "The Game is loading! woooo";
+	S_title = "TROLOLUS NIGHTLY BUILD 0,0";
+	S_postgame = "The after game lobby.";
+}
 	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
@@ -138,13 +141,36 @@ public class BasicState extends BasicGameState {
 			backgroundBack.draw(0,backgroundY, backgroundScale);
 			background.draw(0, backgroundY, backgroundScale);
 			g.drawString(StateTitle, 320, 20);
-			drawMenu(11,g);
+			drawMenu(g);
 		}
-		} else {initRes(); render(gc,mainGame,g);}
+		} else {
+			
+			render(gc,mainGame,g);}
+
+	}
+	
+	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g, BasicState state)
+			throws SlickException {
+
+		if (Trololus.drawing) {
+			state.backgroundBack.draw(0,backgroundY, backgroundScale);
+			state.background.draw(0, backgroundY, backgroundScale);
+			g.drawString(StateTitle, 320, 20);
+			drawMenu(g, state);
+		}
+		
 
 	}
 
-	public void drawMenu(int hover, Graphics g) {
+	public void drawMenu(Graphics g, BasicState state) {
+		state.menubar.draw(menuX, menuY, menuScale);
+
+		for (int a = 0; a < 7; a++) {
+			state.button[a].render(app, g);
+
+		}
+		
+	}	public void drawMenu(Graphics g) {
 		this.menubar.draw(menuX, menuY, menuScale);
 
 		for (int a = 0; a < 7; a++) {
