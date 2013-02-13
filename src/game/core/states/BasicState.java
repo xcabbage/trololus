@@ -81,6 +81,7 @@ public class BasicState extends BasicGameState {
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
 			button[a].setMouseOverSound(new Sound("resources/Audio/UI/mouseover_click.wav"));
 			button[a].setMouseDownSound(new Sound("resources/Audio/UI/hard_click.wav"));
+			button[a].setMouseDownImage(menuButtonsDown.)
 			System.out.println("registering " + a + " done.");
 		}
 		gFxInited = true;
