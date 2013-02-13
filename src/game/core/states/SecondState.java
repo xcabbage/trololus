@@ -59,8 +59,8 @@ public class SecondState extends BasicState {
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-super.render(gc, mainGame, g);
 
+super.render(gc,mainGame,g,stateRes);
 	}
 	
 	

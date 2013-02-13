@@ -19,7 +19,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class FifthState extends BasicState{
 
-	BasicState stateRes;
+	
 	public static int ID = 4;
 	float glowF;
 	int glow;
@@ -107,6 +107,7 @@ public class FifthState extends BasicState{
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
+		 
 			super.render(gc,mainGame,g,stateRes);
 			instance.draw(g);
 			}

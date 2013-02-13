@@ -239,7 +239,7 @@ public class Trololus extends StateBasedGame {
 		BasicState state = (BasicState) getCurrentState();
 
 		for (int a = 0; a < 7; a++)
-			if (state.button[a].isMouseOver()) {
+			if (state.stateRes.button[a].isMouseOver()) {
 				if (a < 6) {
 					System.out.println("entering " + a);
 					enterState(a);

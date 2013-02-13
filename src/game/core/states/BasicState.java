@@ -37,7 +37,7 @@ public class BasicState extends BasicGameState {
 	GameContainer app;
 	public Circle[] buttonHoverCircle = new Circle[10];
 	public MouseOverArea[] button = new MouseOverArea[10];
-	BasicState stateRes;
+	public BasicState stateRes;
 	
 	Music music; 
 	// declare graphics
@@ -153,8 +153,8 @@ public void initVars() throws SlickException{
 			throws SlickException {
 
 		if (Trololus.drawing) {
-			state.backgroundBack.draw(0,backgroundY, backgroundScale);
-			state.background.draw(0, backgroundY, backgroundScale);
+			state.backgroundBack.draw(0,state.backgroundY, state.backgroundScale);
+			state.background.draw(0, state.backgroundY, state.backgroundScale);
 			g.drawString(StateTitle, 320, 20);
 			drawMenu(g, state);
 		}
@@ -163,7 +163,7 @@ public void initVars() throws SlickException{
 	}
 
 	public void drawMenu(Graphics g, BasicState state) {
-		state.menubar.draw(menuX, menuY, menuScale);
+		state.menubar.draw(state.menuX, state.menuY, state.menuScale);
 
 		for (int a = 0; a < 7; a++) {
 			state.button[a].render(app, g);
