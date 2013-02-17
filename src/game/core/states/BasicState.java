@@ -20,14 +20,13 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import java.math.*;
 
-
-
-/** The BasicState.java class defining the base state of the game's UI. 
- *
+/**
+ * The BasicState.java class defining the base state of the game's UI.
+ * 
  * @author xCabbage [github.com/xcabbage]
- *
- * @info for the Trololus project [github.com/xcabbage/trololus]
- *      created 6.2.2013 9:55:02
+ * 
+ * @info for the Trololus project [github.com/xcabbage/trololus] created
+ *       6.2.2013 9:55:02
  */
 public class BasicState extends BasicGameState {
 	// declare globals
@@ -38,20 +37,21 @@ public class BasicState extends BasicGameState {
 	public Circle[] buttonHoverCircle = new Circle[10];
 	public MouseOverArea[] button = new MouseOverArea[10];
 	public BasicState stateRes;
-	
-	Music music; 
+
+	Music music;
 	// declare graphics
 	public Image backgroundBack, menubar, buttonSpriteSheet, background;
-	public String S_ingame, S_loading, S_title, S_postgame, menu1, menu2, menu3, StateTitle;
+	public String S_ingame, S_loading, S_title, S_postgame, menu1, menu2,
+			menu3, StateTitle;
 	public SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown;
 	public int ID;
 
 	// declare gFx constants
 	public boolean gFxInited = false;
 	public float menuScale, backgroundScale;
-	public int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset, menuX,
-			menuY, buttonsX, buttonsY, buttonsOffset, backgroundY, buttonDist,
-			buttonRadius, buttonsGetY, buttonsSafeY;
+	public int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset,
+			menuX, menuY, buttonsX, buttonsY, buttonsOffset, backgroundY,
+			buttonDist, buttonRadius, buttonsGetY, buttonsSafeY;
 
 	public void initRes() throws SlickException {
 		buttonSpriteSheet = new Image(
@@ -79,11 +79,15 @@ public class BasicState extends BasicGameState {
 		buttonsSafeY = appHeight / 2;
 
 		for (int a = 0; a < menuButtons.getHorizontalCount(); a++) {
-			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0),(buttonsX + buttonsOffset * a) - buttonRadius * 2 + 5,buttonsY - buttonRadius * 2 + 5);
+			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0),
+					(buttonsX + buttonsOffset * a) - buttonRadius * 2 + 5,
+					buttonsY - buttonRadius * 2 + 5);
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
 			button[a].setMouseDownImage(menuButtons.getSprite(a, 2));
-			button[a].setMouseOverSound(new Sound("resources/Audio/UI/mouseover_click.wav"));
-			button[a].setMouseDownSound(new Sound("resources/Audio/UI/hard_click.wav"));
+			button[a].setMouseOverSound(new Sound(
+					"resources/Audio/UI/mouseover_click.wav"));
+			button[a].setMouseDownSound(new Sound(
+					"resources/Audio/UI/hard_click.wav"));
 
 		}
 		gFxInited = true;
@@ -97,36 +101,48 @@ public class BasicState extends BasicGameState {
 		// init globals
 		this.game = game;
 		app = gc;
-		if (this.getID()>=0) stateRes = ((Trololus) game).getResState();
-		
+		if (this.getID() >= 0)
+			stateRes = ((Trololus) game).getResState();
+
+		initDiffGfx();
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed and stateRes set.");
 
 	}
-public void initVars() throws SlickException{
-	// init images and spritesheets
-	String bgPath = "resources/Splash/UI/BG_Split/Menu_"+(this.getID()+1)+".png";
-	backgroundBack = new Image(bgPath);
-	background = new Image("/resources/Splash/UI/BG_Split/Menu_Front.png");
-	
-	menubar = new Image("resources/Splash/UI/Menubar_Back.png");
-	buttonSpriteSheet = new Image(
-			"resources/Splash/UI/Menubar_Spritesheet.png");
-	menuButtons = new SpriteSheet(buttonSpriteSheet, (int) (500),
-			(int) (500));
 
-	// init scaling
-	initRes();
+	void initDiffGfx() throws SlickException {
+		String bgPath = "resources/Splash/UI/BG_Split/Menu_"
+				+ (this.getID() + 1) + ".png";
+		backgroundBack = new Image(bgPath);
+	}
 
+	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g, BasicState state) {
+		
+	}
 
-	// initialize strings
-	StateTitle = "A Newly created state :)";
-	menu1 = "the MENU phase";
-	S_ingame = "INGAME";
-	S_loading = "The Game is loading! woooo";
-	S_title = "TROLOLUS NIGHTLY BUILD 0,0";
-	S_postgame = "The after game lobby.";
-}
+	public void initVars() throws SlickException {
+		// init images and spritesheets
+
+		background = new Image("/resources/Splash/UI/BG_Split/Menu_Front.png");
+
+		menubar = new Image("resources/Splash/UI/Menubar_Back.png");
+		buttonSpriteSheet = new Image(
+				"resources/Splash/UI/Menubar_Spritesheet.png");
+		menuButtons = new SpriteSheet(buttonSpriteSheet, (int) (500),
+				(int) (500));
+
+		// init scaling
+		initRes();
+
+		// initialize strings
+		StateTitle = "A Newly created state :)";
+		menu1 = "the MENU phase";
+		S_ingame = "INGAME";
+		S_loading = "The Game is loading! woooo";
+		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
+		S_postgame = "The after game lobby.";
+	}
+
 	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
@@ -136,29 +152,31 @@ public void initVars() throws SlickException{
 	@Override
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		if (gFxInited){
-		if (Trololus.drawing) {
-			backgroundBack.draw(0,backgroundY, backgroundScale);
-			background.draw(0, backgroundY, backgroundScale);
-			g.drawString(StateTitle, 320, 20);
-			drawMenu(g);
-		}
+		if (gFxInited) {
+			if (Trololus.drawing) {
+				
+				backgroundBack.draw(0, backgroundY, backgroundScale);
+				background.draw(0, backgroundY, backgroundScale);
+				g.drawString(StateTitle, 320, 20);
+				drawMenu(g);
+			}
 		} else {
-			
-			render(gc,mainGame,g);}
+
+			render(gc, mainGame, g);
+		}
 
 	}
-	
-	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g, BasicState state)
-			throws SlickException {
+
+	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g,
+			BasicState state) throws SlickException {
 
 		if (Trololus.drawing) {
-			state.backgroundBack.draw(0,state.backgroundY, state.backgroundScale);
+			backgroundBack.draw(0, state.backgroundY,
+					state.backgroundScale);
 			state.background.draw(0, state.backgroundY, state.backgroundScale);
 			g.drawString(StateTitle, 320, 20);
 			drawMenu(g, state);
 		}
-		
 
 	}
 
@@ -169,15 +187,17 @@ public void initVars() throws SlickException{
 			state.button[a].render(app, g);
 
 		}
-		
-	}	public void drawMenu(Graphics g) {
+
+	}
+
+	public void drawMenu(Graphics g) {
 		this.menubar.draw(menuX, menuY, menuScale);
 
 		for (int a = 0; a < 7; a++) {
 			button[a].render(app, g);
 
 		}
-		
+
 	}
 
 	public int isOverButton(int x, int y) {

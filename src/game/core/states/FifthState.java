@@ -105,11 +105,19 @@ public class FifthState extends BasicState{
 		}
 	}
 
+
+	@Override
+	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g,
+			BasicState state) {
+				
+		instance.draw(g);
+	}
+
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		 
+		
 			super.render(gc,mainGame,g,stateRes);
-			instance.draw(g);
+			renderDiffGfx(gc, mainGame, g, stateRes);
 			}
 	
 	

@@ -10,7 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class SixthState extends BasicState{
+public class SixthState extends BasicState {
 
 	public static int ID = 5;
 	float glowF;
@@ -28,7 +28,7 @@ public class SixthState extends BasicState{
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
-		
+
 		Input input = gc.getInput();
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
@@ -45,5 +45,8 @@ public class SixthState extends BasicState{
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		super.render(gc,mainGame,g,stateRes);
-}}
+		renderDiffGfx(gc, mainGame, g, stateRes);
+		super.render(gc, mainGame, g, stateRes);
+
+	}
+}

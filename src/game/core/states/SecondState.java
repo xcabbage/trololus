@@ -59,7 +59,7 @@ public class SecondState extends BasicState {
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-
+		renderDiffGfx(gc, mainGame, g, stateRes);
 super.render(gc,mainGame,g,stateRes);
 	}
 	
