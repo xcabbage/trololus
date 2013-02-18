@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import game.core.NetworkTest;
 import game.core.Trololus;
+import game.core.parts.ContentPane;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
@@ -20,7 +21,7 @@ public class ThirdState extends BasicState {
 	float glowF;
 	int glow;
 	NetworkTest network = new game.core.NetworkTest();
-
+	ContentPane togglePane;
 	public int getID() {
 		return ID;
 	}
@@ -36,7 +37,8 @@ public class ThirdState extends BasicState {
 		sb.addTextField(stateRes.appWidth / 2,
 				((int) (stateRes.appHeight * 0.2)) + 50, 300, 25);
 		sb.addContentPane(50, 150, 100, 100);
-		sb.getPane(-1).addLabel(50, 50, "Hosting - use the U, I, O keys to navigate.");
+		togglePane = sb.getPane(-1);
+		togglePane.addLabel(50, 50, "Hosting - use the U, I, O keys to navigate.");
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -86,6 +88,8 @@ public class ThirdState extends BasicState {
 				network.setInMsg();
 				break;
 			}
+		case Input.KEY_NUMPAD5:
+			togglePane.toggleVisibility();
 		default:
 			break;
 		}

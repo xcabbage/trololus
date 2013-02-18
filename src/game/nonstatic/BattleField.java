@@ -26,7 +26,7 @@ public class BattleField {
 //	Util.prolongArray(1, shipX,shipY,rotation);
 //	Util.prolongArray(1, entities); <-- this one is bugged
 		
-				entities = Arrays.copyOf(entities, entities.length + 1);
+		entities = Arrays.copyOf(entities, entities.length + 1);
 		shipX = Arrays.copyOf(shipX, shipX.length + 1);
 		shipY = Arrays.copyOf(shipY, shipY.length + 1);
 		rotation = Arrays.copyOf(rotation, rotation.length + 1);
