@@ -1,4 +1,4 @@
-package game.util;
+package game.core.parts;
 
 /** The FontType.java class responsible for 
  *

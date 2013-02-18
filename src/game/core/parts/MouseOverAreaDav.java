@@ -1,4 +1,4 @@
-package game.util;
+package game.core.parts;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
