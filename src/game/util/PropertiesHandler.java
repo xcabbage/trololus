@@ -12,8 +12,14 @@ import java.util.Properties;
 public class PropertiesHandler 
 {
     public static void saveProperties(String[] args){
-    	Properties prop = new Properties(prop defaults);
+    	Properties prop = new Properties();
 
+    	//KOMENTAR - DK 
+    	// fajny ale ty cesty na ty I/O streamy dej obe do jednoho variablu co se bude inicializovat nahore at je to jednotne ovladany (konstanta)
+    	// + ta cesta by mela bejt absolutni, ne v packagi, ale nekde venku ze hry: treba C://Users/<uzivatel>/myDocuments nebo tak 
+    	//                                                    at to nedela bordel se syncem pres git kdyz to bude spustest vic lidi
+    	
+    	
     	try {
     		//set the properties value
     		prop.setProperty("musicvolume", "100");
