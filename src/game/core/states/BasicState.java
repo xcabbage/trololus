@@ -175,8 +175,8 @@ public class BasicState extends BasicGameState {
 
 	}
 
-	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g,
-			BasicState state) throws SlickException {
+	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g, BasicState state)
+			throws SlickException {
 
 		if (Trololus.drawing) {
 			backgroundBack.draw(0, state.backgroundY, state.backgroundScale);

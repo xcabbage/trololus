@@ -56,6 +56,7 @@ public class Trololus extends StateBasedGame {
 		app.setVSync(true);
 		app.setIcons(icons);
 		app.setVerbose(false);
+		app.setShowFPS(ShowFPS);
 //		app.setMouseCursor(cursor, 5, 5);
 		app.start();
 
