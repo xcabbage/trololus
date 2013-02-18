@@ -72,12 +72,12 @@ public class BattleField {
 	}
 
 	/**
-	 * @param shipY
+	 * @param shipX
 	 *            the ship's X to set
 	 */
 	public void setShipX(int shipX, int ship) {
 		// for (int a = 0; a<)
-		System.out.println("starting. " + shipX + " " + ship);
+//		System.out.println("starting. " + shipX + " " + ship);
 		this.shipX[ship] = shipX;
 	}
 
@@ -99,7 +99,7 @@ public class BattleField {
 	}
 
 	/**
-	 * @return the rotation
+	 * @return the rotation,
 	 */
 	public int getRotation(int ship) {
 		return rotation[ship];

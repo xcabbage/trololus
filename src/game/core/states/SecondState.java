@@ -7,8 +7,10 @@
 package game.core.states;
 
 import game.core.Trololus;
+import game.util.StateBuilder;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -25,7 +27,7 @@ public class SecondState extends BasicState {
 	public static final int ID = 1;
 	float glowF;
 	int glow;
-
+	
 	
 	public int getID() {
 		return ID;
@@ -35,32 +37,29 @@ public class SecondState extends BasicState {
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "Second state - Connect to another game";
+		sb.addTextField(50,50,250,25);
+		sb.addTextField(50,100,250,25);
 	}
 	
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
-		Input input = gc.getInput();
-		int mouseX = Mouse.getX();
-		int mouseY = Mouse.getY();
-		if (input.isKeyDown(45)) {
-			System.out.println("Entering Main state. [source: Menu]");
-			game.enterState(0);
-		}
-		if (input.isKeyDown(1)) {
-			System.out.println("Shutting Down.. [command: Menu]");
-			System.exit(0);
-		}
-		if (input.isKeyDown(47)) {
-			System.out.println("Shutting Down.. [command: Menu]");
-			;
-		}
+		super.update(gc, mainGame, delta);
+	}
 
+	
+	
+		@Override
+	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g,
+			BasicState state) throws SlickException {
+			super.renderDiffGfx(gc, mainGame, g, state);
+			
+			
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		renderDiffGfx(gc, mainGame, g, stateRes);
-super.render(gc,mainGame,g,stateRes);
+		super.render(gc,mainGame,g,stateRes);
+		
 	}
 	
 	

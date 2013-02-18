@@ -17,9 +17,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class FifthState extends BasicState{
+public class FifthState extends BasicState {
 
-	
 	public static int ID = 4;
 	float glowF;
 	int glow;
@@ -30,103 +29,74 @@ public class FifthState extends BasicState{
 	BattleField field;
 	int SPEED = 5;
 	Ship controlledShip;
-	
-	
-	
+
 	public int getID() {
 		return ID;
 	}
-		
+
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-			super.init(gc, game);
-			instance = new GameInstance((BasicState) state, player);
-			field = instance.getField();
-			controlledShip = new Ship(ShipType.Striker);
-			field.placeEntity(controlledShip);
-			instance.centerShip(controlledShip.getID());
-			gameRunning = true;
-			StateTitle = "State 5 - Game - GfX test! (once to be Player Profile)";
-			
-		}
+		super.init(gc, game);
+		StateTitle = "State 5 - Game - GfX test! (once to be Player Profile)";
+		initTestingShip();
+	}
+
+	void initTestingShip() {
+		instance = new GameInstance((BasicState) state, player);
+		field = instance.getField();
+		controlledShip = new Ship(ShipType.Striker);
+		field.placeEntity(controlledShip);
+		instance.centerShip(controlledShip.getID());
+		gameRunning = true;
+	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
-		
-		Input input = gc.getInput();
-		int mouseX = Mouse.getX();
-		int mouseY = Mouse.getY();
+		super.update(gc, mainGame, delta);
+		// ship movement
+		if (gameRunning) {
 
-		
-		//state switching 
-		if (input.isKeyPressed(46)) {
-			System.out.println("switching Player color");
-			player.setColor(Color.orange);
-		}
-		
-		if (input.isKeyPressed(47)) {
-			System.out.println("switching Player color");
-			player.setColor(Color.magenta);
-		}
-		
-		if (input.isKeyDown(1)) {
-			System.out.println("Shutting Down.. [command: Main]");
-			System.exit(0);
-		}
-		
-		
-		//ship movement
-		if (gameRunning){
-		
-			//rotation
-		if (input.isKeyDown(30)){
-			field.setRotation(field.getRotation(controlledShip.getID())-SPEED, controlledShip.getID());
-					}
+			// rotation
+			if (input.isKeyDown(30)) {
+				field.setRotation(field.getRotation(controlledShip.getID())
+						- SPEED, controlledShip.getID());
+			}
 
-		if (input.isKeyDown(32)){
-			field.setRotation(field.getRotation(controlledShip.getID())+SPEED,controlledShip.getID());
-		}
-		
-			//movement
-		if (input.isKeyDown(17)){
-			field.moveShipForwards(controlledShip.getID());
-								}
-		if (input.isKeyDown(31)){
-			field.moveShipBackwards(controlledShip.getID());
-					}
-		
-			//reset ship coords
-		if (input.isKeyDown(29)){
-			field.setShipX(500,controlledShip.getID());
-			field.setShipY(300,controlledShip.getID());
-			field.setRotation(0, controlledShip.getID());
-		}
+			if (input.isKeyDown(32)) {
+				field.setRotation(field.getRotation(controlledShip.getID())
+						+ SPEED, controlledShip.getID());
+			}
+
+			// movement
+			if (input.isKeyDown(17)) {
+				field.moveShipForwards(controlledShip.getID());
+			}
+			if (input.isKeyDown(31)) {
+				field.moveShipBackwards(controlledShip.getID());
+			}
+
+			// reset ship coords
+			if (input.isKeyPressed(29)) {
+				field.setShipX(500, controlledShip.getID());
+				field.setShipY(300, controlledShip.getID());
+				field.setRotation(0, controlledShip.getID());
+			}
 		}
 	}
-
 
 	@Override
 	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g,
 			BasicState state) {
-				
+
 		instance.draw(g);
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		
-			super.render(gc,mainGame,g,stateRes);
-			renderDiffGfx(gc, mainGame, g, stateRes);
-			}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+		super.render(gc, mainGame, g, stateRes);
+		renderDiffGfx(gc, mainGame, g, stateRes);
 	}
+
+}

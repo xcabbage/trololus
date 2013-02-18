@@ -10,7 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class ThirdState extends BasicState{
+public class ThirdState extends BasicState {
 
 	public static int ID = 2;
 	float glowF;
@@ -28,24 +28,13 @@ public class ThirdState extends BasicState{
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
-		
-		Input input = gc.getInput();
-		int mouseX = Mouse.getX();
-		int mouseY = Mouse.getY();
-
-		if (input.isKeyDown(46)) {
-			System.out.println("Entering Menu state. [source: Main]");
-			game.enterState(1);
-		}
-		if (input.isKeyDown(1)) {
-			System.out.println("Shutting Down.. [command: Main]");
-			System.exit(0);
-		}
+		super.update(gc, mainGame, delta);
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 		renderDiffGfx(gc, mainGame, g, stateRes);
-		super.render(gc,mainGame,g,stateRes);
-		
-}}
+		super.render(gc, mainGame, g, stateRes);
+
+	}
+}

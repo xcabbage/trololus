@@ -57,6 +57,7 @@ public class Trololus extends StateBasedGame {
 		app.setTargetFrameRate(fpslimit);
 		app.setVSync(true);
 		app.setIcons(icons);
+		app.setVerbose(false);
 		app.start();
 
 	}
@@ -109,12 +110,11 @@ public class Trololus extends StateBasedGame {
 			public void musicEnded(Music music) {
 				
 				if (!MUSIC_END_REQUESTED) {
-					System.out.println("looping?");
 					musicLoop.play();
 					musicLoop.setVolume(MUSIC_VOLUME);
 				} else {
 					musicEnd.play();
-					musicLoop.setVolume(MUSIC_VOLUME);
+					musicEnd.setVolume(MUSIC_VOLUME);
 				}
 				
 			}

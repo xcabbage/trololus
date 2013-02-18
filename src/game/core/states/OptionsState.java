@@ -28,19 +28,7 @@ public class OptionsState extends BasicState {
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
-
-		Input input = gc.getInput();
-		int mouseX = Mouse.getX();
-		int mouseY = Mouse.getY();
-
-		if (input.isKeyDown(46)) {
-			System.out.println("Entering Menu state. [source: Main]");
-			game.enterState(1);
-		}
-		if (input.isKeyDown(1)) {
-			System.out.println("Shutting Down.. [command: Main]");
-			System.exit(0);
-		}
+		super.update(gc, mainGame, delta);
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)

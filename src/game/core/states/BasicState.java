@@ -1,10 +1,12 @@
 package game.core.states;
 
 import game.core.Trololus;
+import game.util.StateBuilder;
 
 import java.awt.Dimension;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -34,6 +36,8 @@ public class BasicState extends BasicGameState {
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	Dimension res;
 	GameContainer app;
+	StateBuilder sb;
+	Input input;
 	public Circle[] buttonHoverCircle = new Circle[10];
 	public MouseOverArea[] button = new MouseOverArea[10];
 	public BasicState stateRes;
@@ -59,9 +63,7 @@ public class BasicState extends BasicGameState {
 		appWidth = app.getWidth();
 		appHeight = app.getHeight();
 		menuScale = (float) ((appWidth / (float) buttonSpriteSheet.getWidth()) * .75);
-		System.out.println("running initRes from " + ID);
 		menuBarWidth = (int) (menubar.getWidth() * menuScale);
-		System.out.println("initres ran");
 		menuBarHeight = (int) (menubar.getHeight() * menuScale);
 		menuOffset = (appWidth - menuBarWidth) / 2;
 		buttonSpriteSheet = buttonSpriteSheet.getScaledCopy(menuScale);
@@ -103,7 +105,7 @@ public class BasicState extends BasicGameState {
 		app = gc;
 		if (this.getID() >= 0)
 			stateRes = ((Trololus) game).getResState();
-
+		sb = new StateBuilder((AppGameContainer) gc);
 		initDiffGfx();
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed and stateRes set.");
@@ -116,8 +118,9 @@ public class BasicState extends BasicGameState {
 		backgroundBack = new Image(bgPath);
 	}
 
-	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g, BasicState state) {
-		
+	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g,
+			BasicState state) throws SlickException {
+		sb.drawComponents(g);
 	}
 
 	public void initVars() throws SlickException {
@@ -146,7 +149,12 @@ public class BasicState extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
+		input = gc.getInput();
 
+		if (input.isKeyDown(1)) {
+			System.out.println("Shutting Down.. [command: " + ID + ".]");
+			System.exit(0);
+		}
 	}
 
 	@Override
@@ -154,7 +162,7 @@ public class BasicState extends BasicGameState {
 			throws SlickException {
 		if (gFxInited) {
 			if (Trololus.drawing) {
-				
+
 				backgroundBack.draw(0, backgroundY, backgroundScale);
 				background.draw(0, backgroundY, backgroundScale);
 				g.drawString(StateTitle, 320, 20);
@@ -171,11 +179,11 @@ public class BasicState extends BasicGameState {
 			BasicState state) throws SlickException {
 
 		if (Trololus.drawing) {
-			backgroundBack.draw(0, state.backgroundY,
-					state.backgroundScale);
+			backgroundBack.draw(0, state.backgroundY, state.backgroundScale);
 			state.background.draw(0, state.backgroundY, state.backgroundScale);
 			g.drawString(StateTitle, 320, 20);
 			drawMenu(g, state);
+			renderDiffGfx(gc, mainGame, g, stateRes);
 		}
 
 	}
