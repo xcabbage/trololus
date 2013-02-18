@@ -25,7 +25,8 @@ public class StateBuilder {
 	AppGameContainer gc;
 
 	AbstractComponent[] components = new AbstractComponent[1];
-
+	Label[] labels = new Label[1];
+	
 	public StateBuilder(AppGameContainer gc) {
 		this.gc = gc;
 
@@ -36,6 +37,10 @@ public class StateBuilder {
 				new Font("Garamond", 10, 25), true), x, y, width, height);
 		field.setConsumeEvents(true);
 		addComponents(field);
+	}
+	public void addLabel(int x, int y, String string){
+		Label label = new Label(x,y,string);
+		addLabels(label);
 	}
 
 	void addComponents(AbstractComponent... component) {
@@ -60,11 +65,43 @@ public class StateBuilder {
 
 	}
 
+	void addLabels(Label... label) {
+		int lengthBeginning = labels.length;
+
+		// if labels array is full, extend the array
+		if (labels[labels.length - 1] != null) {
+			labels = Arrays.copyOf(labels, lengthBeginning
+					+ label.length);
+		}
+
+		// add the requested labels to the array
+		for (int a = 0; a < label.length; a++) {
+
+			if (labels[0] == null) {
+				labels[lengthBeginning + a - 1] = label[a];
+			} else {
+				labels[lengthBeginning + a] = label[a];
+			}
+
+		}
+
+	}
+
+	public AbstractComponent getComponent(int a){
+		return components[a];
+	}
 	public void drawComponents(Graphics g) throws SlickException {
 		if (components[0]!=null)		
 		for (int a = 0; a < components.length; a++) {
 			components[a].render((GUIContext) gc, g);
 
 		}
+		if (labels[0]!=null)		
+			for (int a = 0; a < labels.length; a++) {
+				labels[a].render();
+
+			}
+		
+		
 	}
 }

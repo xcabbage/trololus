@@ -31,6 +31,7 @@ public class Trololus extends StateBasedGame {
 	static String[] icons = { "resources/Splash/EXEico/trololus_icon16.tga",
 			"resources/Splash/EXEico/trololus_icon32.tga",
 			"resources/Splash/EXEico/trololus_icon64.tga" };
+	static Image cursor;
 	Scanner sc = new Scanner(System.in);
 
 	static String MUSIC_PATH_INIT = "resources/Audio/BGM1_a.wav";
@@ -38,10 +39,7 @@ public class Trololus extends StateBasedGame {
 	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
 	static float MUSIC_VOLUME = 0.18f;
 	static boolean MUSIC_END_REQUESTED;
-	
-	
 
-	
 	// ---------------------------------------------------MainMethod-&-Constructors----------------------------------------------------------------
 	public Trololus(String title) {
 		super(title);
@@ -58,6 +56,7 @@ public class Trololus extends StateBasedGame {
 		app.setVSync(true);
 		app.setIcons(icons);
 		app.setVerbose(false);
+//		app.setMouseCursor(cursor, 5, 5);
 		app.start();
 
 	}
@@ -65,22 +64,25 @@ public class Trololus extends StateBasedGame {
 	// -------------------------------------------------------The-Game's-Methods-------------------------------------------------------------------
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		
+
 		resState = new BasicState();
-			resState.init(gc, this);
-			resState.initVars();
-		
+		resState.init(gc, this);
+		resState.initVars();
+
 		addState(new FirstState());
 		addState(new SecondState());
 		addState(new ThirdState());
 		addState(new FourthState());
 		addState(new FifthState());
 		addState(new SixthState());
-		
+
 		initAfterStates();
 
 	}
 
+	void init() throws SlickException{
+		cursor = new Image("resources/Splash/UI/mouse.png");
+	}
 	public static void initAfterStates() throws SlickException {
 		// init sound;
 
@@ -95,20 +97,18 @@ public class Trololus extends StateBasedGame {
 			public void musicEnded(Music music) {
 				musicLoop.play();
 				musicLoop.setVolume(MUSIC_VOLUME);
-				
+
 			}
 
 			@Override
 			public void musicSwapped(Music music, Music newMusic) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 		musicLoop.addListener(new MusicListener() {
 
 			@Override
 			public void musicEnded(Music music) {
-				
+
 				if (!MUSIC_END_REQUESTED) {
 					musicLoop.play();
 					musicLoop.setVolume(MUSIC_VOLUME);
@@ -116,13 +116,11 @@ public class Trololus extends StateBasedGame {
 					musicEnd.play();
 					musicEnd.setVolume(MUSIC_VOLUME);
 				}
-				
+
 			}
 
 			@Override
 			public void musicSwapped(Music music, Music newMusic) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 		musicEnd.addListener(new MusicListener() {
@@ -130,13 +128,11 @@ public class Trololus extends StateBasedGame {
 			@Override
 			public void musicEnded(Music music) {
 				System.exit(0);
-				
+
 			}
 
 			@Override
 			public void musicSwapped(Music music, Music newMusic) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 	}
@@ -145,8 +141,8 @@ public class Trololus extends StateBasedGame {
 		app.setDisplayMode((int) (res.width * .75), (int) (res.height * .75),
 				fullscreen);
 	}
-	
-	public BasicState getResState(){
+
+	public BasicState getResState() {
 		return resState;
 	}
 
@@ -244,7 +240,7 @@ public class Trololus extends StateBasedGame {
 					System.out.println("entering " + a);
 					enterState(a);
 				} else if (a == 6)
-					MUSIC_END_REQUESTED=true;
+					MUSIC_END_REQUESTED = true;
 				else {
 					System.out
 							.println("There was a really weird error. You clicked on a nonexisting button, "
@@ -256,13 +252,12 @@ public class Trololus extends StateBasedGame {
 
 	// -----------------------------------------The-Project's-TO-DO-repository-dump!---------------------------------------------------------------
 	// TODO HP | Properties
-	// TODO DH | Icons for the game
+	//
 	// TODO DH | Rest of ship models
-	// TODO DH | Game map & borders
+
 	// TODO DK | Projectile system
 	// TODO DK | Ships rendering img based on their type
-	// TODO DK | Sort out the states
-	// TODO DK | Fix Sound play order
+
 	// TODO DP | Connection stream for BattleField sync
 	// TODO DP | TextAreas (input) to set the IPs outside console?
 	// TODO NC | DrawArea panel class for the text and shit

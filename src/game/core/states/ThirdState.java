@@ -1,5 +1,8 @@
 package game.core.states;
 
+import java.io.IOException;
+
+import game.core.NetworkTest;
 import game.core.Trololus;
 
 import org.lwjgl.input.Mouse;
@@ -8,6 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class ThirdState extends BasicState {
@@ -15,6 +19,7 @@ public class ThirdState extends BasicState {
 	public static int ID = 2;
 	float glowF;
 	int glow;
+	NetworkTest network = new game.core.NetworkTest();
 
 	public int getID() {
 		return ID;
@@ -24,6 +29,14 @@ public class ThirdState extends BasicState {
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "Third State: Host a Game";
+		
+		
+		sb.addTextField(stateRes.appWidth / 2,
+				(int) (stateRes.appHeight * 0.2), 300, 25);
+		sb.addTextField(stateRes.appWidth / 2,
+				((int) (stateRes.appHeight * 0.2)) + 50, 300, 25);
+		
+		sb.addLabel(50, 50, "Hosting - use the U, I, O keys to navigate.");
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -36,5 +49,45 @@ public class ThirdState extends BasicState {
 		renderDiffGfx(gc, mainGame, g, stateRes);
 		super.render(gc, mainGame, g, stateRes);
 
+	}
+
+	public void keyPressed(int key, char c) {
+		super.keyPressed(key, c);
+		TextField field = (TextField) sb.getComponent(0);
+		TextField field2 = (TextField) sb.getComponent(1);
+		switch (key) {
+
+		case Input.KEY_I:
+			if (network.testSocket == null) {
+				String host = field.getText();
+				int port = Integer.parseInt(field2.getText());
+				System.out.println("Connecting to " + host + ":" + port);
+				network.connect(host, port);
+				
+				break;
+			} else {
+				try {
+					network.terminate();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		case Input.KEY_O:
+			if (network != null) {
+				
+				String msg = field.getText();
+				System.out.println("Sending message \"" + msg + "\"." );
+				network.sendMsg(msg);
+				break;
+			}
+		case Input.KEY_P:
+			if (network != null) {
+				network.setInMsg();
+				break;
+			}
+		default:
+			break;
+		}
 	}
 }
