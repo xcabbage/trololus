@@ -31,7 +31,6 @@ public class BattleField {
 		shipY = Arrays.copyOf(shipY, shipY.length + 1);
 		rotation = Arrays.copyOf(rotation, rotation.length + 1);
 		entities[entities.length - 1] = entity;
-		System.out.println(entities.length - 1);
 		System.out.println("Placed a new ship on the battlefield..: "
 				+ entities[entities.length - 1]);
 		entity.setID(entities.length - 1);

@@ -1,12 +1,13 @@
-package game.util;
+package game.core.parts;
 
 import java.awt.Font;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.geom.Rectangle;
 
 /**
- * The Label.java class responsible for
+ * The Label.java class representing a single text label (entry) in the game.
  * 
  * @author xCabbage [github.com/xcabbage]
  * 
@@ -17,6 +18,7 @@ public class Label {
 	int x, y;
 	String string;
 	TrueTypeFont font;
+	Rectangle gui;
 
 	/**
 	 * @param x
@@ -42,6 +44,11 @@ public class Label {
 
 	public void render() {
 		font.drawString(x, y, string);
+
+	}
+
+	public void render(Rectangle rect) {
+		font.drawString(x+rect.getMinX(), y+rect.getMinY(), string);
 	}
 
 	public Label(int x, int y, String string, FontType type) {

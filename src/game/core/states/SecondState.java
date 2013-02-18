@@ -7,7 +7,7 @@
 package game.core.states;
 
 import game.core.Trololus;
-import game.util.StateBuilder;
+import game.core.parts.StateBuilder;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
