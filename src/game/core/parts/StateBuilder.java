@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.AbstractComponent;
@@ -41,7 +42,14 @@ public class StateBuilder {
 				new Font("Garamond", 10, 25), true), x, y, width, height);
 		field.setConsumeEvents(true);
 		addComponents(field);
+		
 	}
+	
+	public void addButton(int x, int y, String image) throws SlickException{
+		MouseOverAreaDav button= new MouseOverAreaDav(gc, new Image(image),x,y);
+		addComponents(button);
+	}
+	
 	public void addLabel(int type, int x, int y,String string) throws SlickException {
 		Label label = new Label(type, x, y, string);
 		addLabels(label);
