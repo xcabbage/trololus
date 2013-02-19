@@ -5,7 +5,6 @@ import game.core.parts.StateBuilder;
 
 import java.awt.Dimension;
 
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -16,11 +15,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import java.math.*;
 
 /**
  * The BasicState.java class defining the base state of the game's UI.
@@ -97,6 +94,10 @@ public class BasicState extends BasicGameState {
 				+ this.getID());
 	}
 
+	public void createContent() throws SlickException{
+		
+	}
+	
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 
@@ -109,6 +110,7 @@ public class BasicState extends BasicGameState {
 		initDiffGfx();
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed and stateRes set.");
+		createContent();
 
 	}
 

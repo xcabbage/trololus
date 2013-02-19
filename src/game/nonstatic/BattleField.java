@@ -3,8 +3,6 @@ package game.nonstatic;
 import java.util.Arrays;
 
 import game.nonstatic.entities.controllables.Ship;
-import game.nonstatic.entities.controllables.ShipType;
-import game.util.Util;
 
 /**
  * The battlefield class storing the map, map type, entities on the battlefield\

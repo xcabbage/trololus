@@ -3,18 +3,9 @@
 
 package game.core.states;
 
-import game.core.Trololus;
-
-import java.awt.Dimension;
-import java.nio.file.Path;
-
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -24,17 +15,19 @@ import org.newdawn.slick.state.StateBasedGame;
 public class FirstState extends BasicState {
 
 	public static int ID = 0;
-	float glowF;
-	int glow;
 
-	public int getID() {
-		return ID;
+	public void createContent() throws SlickException {
+
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "Main State for trololus 0.1 Alpha - to be Training?";
+	}
+
+	public int getID() {
+		return ID;
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)

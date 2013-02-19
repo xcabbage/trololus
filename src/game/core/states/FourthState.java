@@ -1,24 +1,18 @@
 package game.core.states;
 
-import game.core.Trololus;
-
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class FourthState extends BasicState {
 
 	public static int ID = 3;
-	float glowF;
-	int glow;
 
-	public int getID() {
-		return ID;
+	public void createContent() throws SlickException {
+
 	}
+
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
@@ -26,6 +20,11 @@ public class FourthState extends BasicState {
 		StateTitle = "Fourth State - Garage";
 	}
 
+	public int getID() {
+		return ID;
+	}
+
+	
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);

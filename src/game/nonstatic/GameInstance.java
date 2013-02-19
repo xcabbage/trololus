@@ -2,16 +2,13 @@ package game.nonstatic;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.Color;
 
 import game.core.states.BasicState;
 import game.nonstatic.system.Player;
 import game.util.FastGraphics;
-import game.util.MoreColors;
 
 /** The GameInstance class that holds each instance of the actual game.
  *  Responsible for drawing the situation and holding all the variables.

@@ -5,9 +5,6 @@
  */
 package game.nonstatic.entities.controllables;
 
-import game.nonstatic.entities.support.Upgrade;
-import game.nonstatic.entities.support.Weapon;
-
 /*
  * Main class of SHIPS, will most probably include all behaviour & info related to type, (size), speed, position, HP, ownership etc.
  */

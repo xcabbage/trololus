@@ -34,5 +34,6 @@ public class Pepta {
 			System.out.println("Enter next player's name:");
 			playerlist.namePlayer(createdPlayers, nameScanner.nextLine());
 		}
+		nameScanner.close();
 	}
 }

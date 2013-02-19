@@ -2,26 +2,21 @@ package game.core.states;
 
 import org.newdawn.slick.Color;
 
-import game.core.Trololus;
 import game.nonstatic.BattleField;
 import game.nonstatic.GameInstance;
 import game.nonstatic.entities.controllables.Ship;
 import game.nonstatic.entities.controllables.ShipType;
 import game.nonstatic.system.Player;
 
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class FifthState extends BasicState {
 
 	public static int ID = 4;
-	float glowF;
-	int glow;
+
 	GameInstance instance;
 	Player player = new Player("Davefinek", Color.white);
 	boolean gameRunning = false;
@@ -30,18 +25,25 @@ public class FifthState extends BasicState {
 	int SPEED = 5;
 	Ship controlledShip;
 
-	public int getID() {
-		return ID;
+	public void createContent() throws SlickException {
+		initTestingShip();
 	}
 
+	
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "State 5 - Game - GfX test! (once to be Player Profile)";
-		initTestingShip();
+
 	}
 
+	public int getID() {
+		return ID;
+	}
+
+
+	
 	void initTestingShip() {
 		instance = new GameInstance((BasicState) state, player);
 		field = instance.getField();

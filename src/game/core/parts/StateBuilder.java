@@ -8,7 +8,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.AbstractComponent;
-import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.gui.TextField;
 
@@ -43,8 +42,8 @@ public class StateBuilder {
 		field.setConsumeEvents(true);
 		addComponents(field);
 	}
-	public void addLabel(int x, int y, String string) {
-		Label label = new Label(x, y, string);
+	public void addLabel(int type, int x, int y,String string) throws SlickException {
+		Label label = new Label(type, x, y, string);
 		addLabels(label);
 	}
 	public void addContentPane(int x, int y, int width, int height) {

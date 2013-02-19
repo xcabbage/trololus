@@ -3,13 +3,10 @@ package game.core.states;
 import java.io.IOException;
 
 import game.core.NetworkTest;
-import game.core.Trololus;
 import game.core.parts.ContentPane;
 
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.TextField;
@@ -22,6 +19,17 @@ public class ThirdState extends BasicState {
 	int glow;
 	NetworkTest network = new game.core.NetworkTest();
 	ContentPane togglePane;
+
+	public void createContent() throws SlickException {
+
+		sb.addTextField(stateRes.appWidth / 2,
+				(int) (stateRes.appHeight * 0.2), 300, 25);
+		sb.addTextField(stateRes.appWidth / 2,
+				((int) (stateRes.appHeight * 0.2)) + 50, 300, 25);
+		sb.addContentPane(50, 150, 100, 100);
+		sb.addLabel(1, 50, 50, "Hosting - use the U, I, O keys to navigate.");
+	}
+
 	public int getID() {
 		return ID;
 	}
@@ -30,15 +38,6 @@ public class ThirdState extends BasicState {
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "Third State: Host a Game";
-		
-		
-		sb.addTextField(stateRes.appWidth / 2,
-				(int) (stateRes.appHeight * 0.2), 300, 25);
-		sb.addTextField(stateRes.appWidth / 2,
-				((int) (stateRes.appHeight * 0.2)) + 50, 300, 25);
-		sb.addContentPane(50, 150, 100, 100);
-		togglePane = sb.getPane(-1);
-		togglePane.addLabel(50, 50, "Hosting - use the U, I, O keys to navigate.");
 	}
 
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
@@ -65,7 +64,7 @@ public class ThirdState extends BasicState {
 				int port = Integer.parseInt(field2.getText());
 				System.out.println("Connecting to " + host + ":" + port);
 				network.connect(host, port);
-				
+
 				break;
 			} else {
 				try {
@@ -77,9 +76,9 @@ public class ThirdState extends BasicState {
 			}
 		case Input.KEY_O:
 			if (network != null) {
-				
+
 				String msg = field.getText();
-				System.out.println("Sending message \"" + msg + "\"." );
+				System.out.println("Sending message \"" + msg + "\".");
 				network.sendMsg(msg);
 				break;
 			}

@@ -1,9 +1,6 @@
 package game.util;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-
-import com.sun.org.apache.xpath.internal.operations.Variable;
 
 /**
  * The Util.java class containing various methods providing utitity for the game
@@ -33,5 +30,8 @@ public class Util {
 		prolongedArray = Arrays.copyOf(array, array.length + length);
 		System.out.println("Copied. New array length: "+  array.length+ ".");
 
+	}
+	public static void print(String string){
+		System.out.println(string);
 	}
 }
