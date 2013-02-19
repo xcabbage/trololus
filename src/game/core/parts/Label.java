@@ -41,15 +41,16 @@ public class Label {
 		this.type = 1;
 	}
 
-	public Label(int type,int x, int y,  String content) throws SlickException {
+
+	public Label(int type, int x, int y, String content) throws SlickException {
 		super();
 		this.x = x;
 		this.y = y;
 		this.type = type;
-		
-		if (type == 2){
-			this.img = new Image(content);}
-		else if (type == 1) {
+
+		if (type == 2) {
+			this.img = new Image(content);
+		} else if (type == 1) {
 			this.string = content;
 			this.font = new TrueTypeFont(new Font("Garamond", 10, 25), true);
 		} else
@@ -61,11 +62,11 @@ public class Label {
 	public void render() {
 		switch (type) {
 		case 1: {
-			font.drawString(x , y , string);
+			font.drawString(x, y, string);
 			break;
 		}
 		case 2: {
-			img.draw(x , y);
+			img.draw(x, y);
 			break;
 		}
 		default:
@@ -81,7 +82,7 @@ public class Label {
 			break;
 		}
 		case 2: {
-			img.draw(x + rect.getMinX(), y+rect.getMinY());
+			img.draw(x + rect.getMinX(), y + rect.getMinY());
 			break;
 		}
 		default:
@@ -90,7 +91,8 @@ public class Label {
 		}
 	}
 
-	public Label(int x, int y, String string, FontType type) {
+	public void setScale(float scale) {
+		img = img.getScaledCopy(scale);
+	}
 
 	}
-}

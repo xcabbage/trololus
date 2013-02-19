@@ -124,9 +124,11 @@ public class StateBuilder {
 
 	// interface methods returning any of the stored variables
 	public AbstractComponent getComponent(int a) {
+		if (a == -1) return components[components.length-1]; else
 		return components[a];
 	}
 	public Label getLabel(int a) {
+		if (a == -1) return labels[labels.length-1]; else
 		return labels[a];
 	}
 	public ContentPane getPane(int a) {
