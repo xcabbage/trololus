@@ -10,8 +10,11 @@ public class FourthState extends BasicState {
 	public static int ID = 3;
 
 	public void createContent() throws SlickException {
-
-	}
+	
+	sb.addLabel(2,-250,-350,"/resources/Splash/pilots/Pilot4a.png");
+	sb.addLabel(1, 550,650, "GIVE ME YOUR CHICKEN, HUMAN!");
+		
+  	}
 
 
 	public void init(GameContainer gc, StateBasedGame game)
