@@ -1,11 +1,15 @@
 package game.nonstatic;
 
+import java.util.Arrays;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Color;
 
+import game.core.Trololus;
 import game.core.states.BasicState;
 import game.nonstatic.entities.controllables.Ship;
 import game.nonstatic.entities.controllables.ShipType;
@@ -28,38 +32,45 @@ public class GameInstance {
 	BattleField field;
 	Image[] ship = new Image[1];
 	BasicState state;
-	int rotation2[];
-	// constructor for a new game
+	Trololus game;
+	int rotation2[]= new int[1];
 	
-	void init(){
-		field = new BattleField();
+	// creation of a new game
+	void init() throws SlickException{
+		field = new BattleField(this);
 		
-		//load images and stuff
-		try {
-			ship[0] = new Image("resources/Splash/Imperial/Striker/Imperial_Striker_Hull.png");
-			ship[0] = ship[0].getScaledCopy((float)0.1);
-		} catch (SlickException e) {
-			
-			e.printStackTrace();
+				
+	}
+	
+	@SuppressWarnings("static-access")
+	public	void addShip(Ship ship) throws SlickException{
+
+		//If ship model array is full, make new one 
+		if (this.ship[this.ship.length - 1] != null) {
+			this.ship = Arrays.copyOf(this.ship, this.ship.length
+					+ 1);
 		}
 		
 		
+		//Then add desired ship into the array
+//			if (this.ship[0] == null) {
 		
-	}
-	
-	void addShip(Ship ship){
-		this.ship[this.ship.length-1] = new Image(ship.getType().				
-				)
-		
-	}
+			this.ship[this.ship.length- 1] = new Image(ship.getType().getImgPath()).getScaledCopy(game.ShipScale);
+//			} else {
+//				this.ship[this.ship.length] = new Image(ship.getType().getImgPath()).getScaledCopy(game.ShipScale);
+//			}
+
+			
+		}
 	
 	
 	public BattleField getField() {
 		return field;
 	}
 	
-	public GameInstance(BasicState state, Player... players) {
+	public GameInstance(BasicState state,StateBasedGame game,  Player... players) throws SlickException {
 		this.state = state; 
+		this.game = (Trololus) game;
 		player = new Player[players.length];
 		// set up our players (get them from the main frame)
 		for (int a = 0; a < players.length; a++) {
@@ -71,7 +82,7 @@ public class GameInstance {
 		init();
 	}
 
-	public GameInstance() {
+	public GameInstance() throws SlickException {
 		player = new Player[1];
 		player[0] = new Player();
 		init();
@@ -83,11 +94,12 @@ public class GameInstance {
 		if (player[0] != null) {
 			g.setColor(player[0].getColor());
 		} else
-			System.out.println("playyer 0 is null");
+			System.out.println("Player 0 is null, can't draw stuff!");
 				
 		for (int a = 0; a <field.getEntitiesCount(); a++){
-		ship[a].rotate(field.getRotation(a)-rotation2[a]);
-		rotation2[a] = field.getRotation(a);
+					
+		ship[a].rotate(field.getRotation(a) -field.getRotation2(a));
+		field.setRotation2(field.getRotation(a),a );
 		ship[a].drawCentered((float)field.getShipX(a), (float)field.getShipY(a)); 
 		}
 		g.setColor(Color.white);

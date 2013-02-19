@@ -46,7 +46,7 @@ public class Label {
 		this.x = x;
 		this.y = y;
 		this.type = type;
-		System.out.println("type is " + type);
+		
 		if (type == 2){
 			this.img = new Image(content);}
 		else if (type == 1) {

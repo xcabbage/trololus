@@ -2,6 +2,8 @@ package game.nonstatic;
 
 import java.util.Arrays;
 
+import org.newdawn.slick.SlickException;
+
 import game.nonstatic.entities.controllables.Ship;
 
 /**
@@ -15,23 +17,28 @@ import game.nonstatic.entities.controllables.Ship;
  */
 public class BattleField {
 	Ship[] entities = new Ship[0];
-	int[] shipX = new int[0], shipY = new int[0], rotation = new int[0];
+	int[] shipX = new int[0], shipY = new int[0], rotation = new int[0],
+			rotation2 = new int[0];
 	int movementRotation;
 	// constants
 	int SHIP_SPEED = 4, MOVE_TIME = 1;
+	GameInstance instance;
 
-	public void placeEntity(Ship entity) {
-//	Util.prolongArray(1, shipX,shipY,rotation);
-//	Util.prolongArray(1, entities); <-- this one is bugged
-		
+	public BattleField(GameInstance gameInstance) {
+		 instance = gameInstance;
+	}
+
+	public void placeEntity(Ship entity) throws SlickException {
 		entities = Arrays.copyOf(entities, entities.length + 1);
 		shipX = Arrays.copyOf(shipX, shipX.length + 1);
 		shipY = Arrays.copyOf(shipY, shipY.length + 1);
 		rotation = Arrays.copyOf(rotation, rotation.length + 1);
+		rotation2 = Arrays.copyOf(rotation2, rotation2.length + 1);
 		entities[entities.length - 1] = entity;
 		System.out.println("Placed a new ship on the battlefield..: "
 				+ entities[entities.length - 1]);
 		entity.setID(entities.length - 1);
+		instance.addShip(entity);
 	}
 
 	// ENTITY MOVEMENT
@@ -74,7 +81,7 @@ public class BattleField {
 	 */
 	public void setShipX(int shipX, int ship) {
 		// for (int a = 0; a<)
-//		System.out.println("starting. " + shipX + " " + ship);
+		// System.out.println("starting. " + shipX + " " + ship);
 		this.shipX[ship] = shipX;
 	}
 
@@ -110,8 +117,17 @@ public class BattleField {
 		this.rotation[ship] = rotation;
 	}
 
+	public void setRotation2(int rotation, int ship) {
+		this.rotation2[ship] = rotation;
+	}
+
 	public int getEntitiesCount() {
 		return entities.length;
+	}
+
+	public int getRotation2(int ship) {
+		// TODO Auto-generated method stub
+		return rotation2[ship];
 	}
 
 }

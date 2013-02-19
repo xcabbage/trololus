@@ -43,9 +43,9 @@ public class FifthState extends BasicState {
 	}
 
 
-	
-	void initTestingShip() {
-		instance = new GameInstance((BasicState) state, player);
+	 
+	void initTestingShip() throws SlickException {
+		instance = new GameInstance((BasicState) state,game, player);
 		field = instance.getField();
 		controlledShip = new Ship(ShipType.Striker);
 		field.placeEntity(controlledShip);

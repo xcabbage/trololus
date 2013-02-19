@@ -14,16 +14,13 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Trololus extends StateBasedGame {
+	
 	static public boolean drawing = true;
 	static public AppGameContainer app;
 	static public Dimension res;
 	static boolean fullscreen = false;
-	static boolean ShowFPS = false;
+	
 	static game.util.FastGraphics utilGfx = new game.util.FastGraphics();
-	static int width = 1000;
-	static int height = 500;
-	static int fpslimit = 60;
-	static String title = "Trololus NightBuild.0";
 	static BasicState activeState;
 	static BasicState[] state;
 	static BasicState resState;
@@ -34,6 +31,17 @@ public class Trololus extends StateBasedGame {
 	static Image cursor;
 	Scanner sc = new Scanner(System.in);
 
+	
+	
+	//CONSTANTS
+	static int width = 1000;
+	static int height = 500;
+	static int fpslimit = 60;
+	static boolean ShowFPS = false;
+	
+	public static final float ShipScale = 0.1f;
+	
+	static String title = "Trololus NightBuild.0";
 	static String MUSIC_PATH_INIT = "resources/Audio/BGM1_a.wav";
 	static String MUSIC_PATH_LOOP = "resources/Audio/BGM4.wav";
 	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
