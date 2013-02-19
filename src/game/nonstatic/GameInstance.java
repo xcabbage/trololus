@@ -7,6 +7,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.Color;
 
 import game.core.states.BasicState;
+import game.nonstatic.entities.controllables.Ship;
+import game.nonstatic.entities.controllables.ShipType;
 import game.nonstatic.system.Player;
 import game.util.FastGraphics;
 
@@ -24,9 +26,9 @@ public class GameInstance {
 	Rectangle drawGround = new Rectangle(400, 200, 250, 250);
 	Color fillColor;
 	BattleField field;
-	Image ship;
+	Image[] ship = new Image[1];
 	BasicState state;
-	int rotation2;
+	int rotation2[];
 	// constructor for a new game
 	
 	void init(){
@@ -34,8 +36,8 @@ public class GameInstance {
 		
 		//load images and stuff
 		try {
-			ship = new Image("resources/Splash/Imperial/Striker/Imperial_Striker_Hull.png");
-			ship = ship.getScaledCopy((float)0.1);
+			ship[0] = new Image("resources/Splash/Imperial/Striker/Imperial_Striker_Hull.png");
+			ship[0] = ship[0].getScaledCopy((float)0.1);
 		} catch (SlickException e) {
 			
 			e.printStackTrace();
@@ -44,6 +46,13 @@ public class GameInstance {
 		
 		
 	}
+	
+	void addShip(Ship ship){
+		this.ship[this.ship.length-1] = new Image(ship.getType().				
+				)
+		
+	}
+	
 	
 	public BattleField getField() {
 		return field;
@@ -77,9 +86,9 @@ public class GameInstance {
 			System.out.println("playyer 0 is null");
 				
 		for (int a = 0; a <field.getEntitiesCount(); a++){
-		ship.rotate(field.getRotation(a)-rotation2);
-		rotation2 = field.getRotation(a);
-		ship.drawCentered((float)field.getShipX(a), (float)field.getShipY(a)); 
+		ship[a].rotate(field.getRotation(a)-rotation2[a]);
+		rotation2[a] = field.getRotation(a);
+		ship[a].drawCentered((float)field.getShipX(a), (float)field.getShipY(a)); 
 		}
 		g.setColor(Color.white);
 	}
