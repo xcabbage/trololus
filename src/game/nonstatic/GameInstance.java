@@ -12,7 +12,6 @@ import org.newdawn.slick.Color;
 import game.core.Trololus;
 import game.core.states.BasicState;
 import game.nonstatic.entities.controllables.Ship;
-import game.nonstatic.entities.controllables.ShipType;
 import game.nonstatic.system.Player;
 import game.util.FastGraphics;
 

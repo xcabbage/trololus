@@ -14,12 +14,12 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Trololus extends StateBasedGame {
-	
+
 	static public boolean drawing = true;
 	static public AppGameContainer app;
 	static public Dimension res;
 	static boolean fullscreen = false;
-	
+
 	static game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	static BasicState activeState;
 	static BasicState[] state;
@@ -31,16 +31,14 @@ public class Trololus extends StateBasedGame {
 	static Image cursor;
 	Scanner sc = new Scanner(System.in);
 
-	
-	
-	//CONSTANTS
+	// CONSTANTS
 	static int width = 1000;
 	static int height = 500;
 	static int fpslimit = 60;
 	static boolean ShowFPS = false;
-	
+
 	public static final float ShipScale = 0.1f;
-	
+
 	static String title = "Trololus NightBuild.0";
 	static String MUSIC_PATH_INIT = "resources/Audio/BGM1_a.wav";
 	static String MUSIC_PATH_LOOP = "resources/Audio/BGM4.wav";
@@ -65,7 +63,7 @@ public class Trololus extends StateBasedGame {
 		app.setIcons(icons);
 		app.setVerbose(false);
 		app.setShowFPS(ShowFPS);
-//		app.setMouseCursor(cursor, 5, 5);
+		// app.setMouseCursor(cursor, 5, 5);
 		app.start();
 
 	}
@@ -89,9 +87,10 @@ public class Trololus extends StateBasedGame {
 
 	}
 
-	void init() throws SlickException{
+	void init() throws SlickException {
 		cursor = new Image("resources/Splash/UI/mouse.png");
 	}
+
 	public static void initAfterStates() throws SlickException {
 		// init sound;
 
@@ -196,34 +195,34 @@ public class Trololus extends StateBasedGame {
 		}
 		if (key == Input.KEY_F4) {
 
-			if (app != null) {
+			try {
+
 				drawing = false;
-				try {
 
-					if (!app.isFullscreen()) {
+				if (!app.isFullscreen()) {
 
-						System.out.println("Entering FullScreen mode.");
-						app.setDisplayMode(utilGfx.getRes().width,
-								utilGfx.getRes().height, true);
+					System.out.println("Entering FullScreen mode.");
+					app.setDisplayMode(utilGfx.getRes().width,
+							utilGfx.getRes().height, true);
 
-					} else {
-						System.out.println("Returning from fullscreen.");
-						app.setFullscreen(false);
-						cleanRes();
+				} else {
+					System.out.println("Returning from fullscreen.");
+					app.setFullscreen(false);
+					cleanRes();
 
-					}
-					for (int a = 0; a < this.getStateCount(); a++) {
-
-						activeState = (BasicState) this.getState(a);
-						activeState.initRes();
-					}
-				} catch (SlickException e) {
-					e.printStackTrace();
-					;
 				}
+
+				for (int a = 0; a < this.getStateCount(); a++) {
+					resState.initRes();
+				}
+
 				drawing = true;
+			} catch (SlickException e) {
+				e.printStackTrace();
 			}
-		} else if (key == Input.KEY_F5) {
+		}
+
+		else if (key == Input.KEY_F5) {
 			if (app != null) {
 				drawing = false;
 				BasicState state = (BasicState) this.getCurrentState();
@@ -261,7 +260,7 @@ public class Trololus extends StateBasedGame {
 
 	// -----------------------------------------The-Project's-TO-DO-repository-dump!---------------------------------------------------------------
 	// TODO HP | Properties
-	//
+
 	// TODO DH | Rest of ship models
 
 	// TODO DK | Projectile system
@@ -269,5 +268,6 @@ public class Trololus extends StateBasedGame {
 
 	// TODO DP | Connection stream for BattleField sync
 	// TODO DP | TextAreas (input) to set the IPs outside console?
+
 	// TODO NC | DrawArea panel class for the text and shit
 }

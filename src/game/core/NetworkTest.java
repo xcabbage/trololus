@@ -21,13 +21,13 @@ public class NetworkTest {
 				System.out.println("Streams connected");
 			} else {
 				System.out.println("You should be already connected to "
-						+ testSocket.getRemoteSocketAddress());
+						+ testSocket.getRemoteSocketAddress() + ".");
 			}
 		} catch (UnknownHostException e) {
 			System.err.println("Don't know about host: " + server);
 		} catch (IOException e) {
 			System.err
-					.println("Some kind of IO error occured. That stinks, doesnt it?");
+					.println("Some kind of network I/O error occured. That stinks, doesn't it?");
 			e.printStackTrace();
 		}
 	}
@@ -35,9 +35,9 @@ public class NetworkTest {
 	public void sendMsg(String msg) {
 		if (outStream != null) {
 			outStream.println(msg);
-			System.out.println("Sent the message " + msg + " to server");
+			System.out.println("Sent message " + msg + " to the server.");
 		} else {
-			System.err.println("Your outStream hasnt been connected yet");
+			System.err.println("Your outStream hasn't been connected yet.");
 		}
 	}
 
@@ -45,13 +45,13 @@ public class NetworkTest {
 		if (inStream != null) {
 			try {
 				inMsg = inStream.readLine();
-				System.out.println("Received the message " + inMsg
-						+ " from server");
+				System.out.println("Received message " + inMsg
+						+ " from the server.");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
-			System.err.println("Your inStream hasnt been connected yet");
+			System.err.println("Your inStream hasn't been connected yet");
 		}
 	}
 
