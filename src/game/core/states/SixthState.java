@@ -10,7 +10,15 @@ public class SixthState extends BasicState {
 	public static int ID = 5;
 
 	public void createContent() throws SlickException {
-
+	    //FPS
+		sb.addLabel(2,965,0,"/resources/Splash/UI/IG/IG_fps.png");
+		sb.getLabel(-1).setScale(0.525f);
+		//MAP
+	    sb.addLabel(2,0,0,"/resources/Splash/UI/IG/IG_map.png");
+	    sb.getLabel(-1).setScale(0.525f);
+	    //HUD
+	    sb.addLabel(2,0,620,"/resources/Splash/UI/IG/IG_sta.png");
+	    sb.getLabel(-1).setScale(0.525f);
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
