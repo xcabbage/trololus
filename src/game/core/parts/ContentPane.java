@@ -1,11 +1,14 @@
 package game.core.parts;
 
+import game.util.Util;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.GUIContext;
 
 /**
@@ -19,6 +22,10 @@ import org.newdawn.slick.gui.GUIContext;
  */
 public class ContentPane extends StateBuilder {
 
+	private int scaling = 0;
+
+
+	private float scalingXf,scalingYf, scalingW,scalingH;
 	//Constructors
 	/**
 	 * @param gc
@@ -27,6 +34,7 @@ public class ContentPane extends StateBuilder {
 	public ContentPane(AppGameContainer gc) {
 		super(gc);
 	}
+	
 	public ContentPane(AppGameContainer gc, int x, int y, int width, int height) {
 		super(gc);
 		this.area = new Rectangle(x, y, width, height);
@@ -35,7 +43,58 @@ public class ContentPane extends StateBuilder {
 		g = new Graphics();
 		isVisible = true;
 	}
-
+	
+	public ContentPane(AppGameContainer gc, float x, float y, int width, int height) {
+		super(gc);
+		this.area = new Rectangle(gc.getWidth()*x, gc.getHeight()*y, width, height);
+		scaling = 1;
+		scalingXf = x;
+		scalingYf = y;
+		this.bgColor = Color.green;
+		this.outlineColor = Color.white;
+		g = new Graphics();
+		isVisible = true;
+	}
+	
+	public ContentPane(AppGameContainer gc, float x, float y, float width, float height) {
+		super(gc);
+		scalingXf = x;
+		scalingYf = y;
+		scalingW = width;
+		scalingH = height;
+		this.area = new Rectangle(gc.getWidth()*x, gc.getHeight()*y, gc.getWidth()*width, gc.getHeight()*height);
+		scaling = 2;
+		this.bgColor = Color.green;
+		this.outlineColor = Color.white;
+		g = new Graphics();
+		isVisible = true;
+	}
+	
+public void rescale(){
+	switch (scaling){
+	case 0:
+		break;
+	case 1:{
+		this.area = new Rectangle(gc.getWidth()*scalingXf, gc.getHeight()*scalingYf, area.getWidth(), area.getHeight());
+		break;}
+	case 2:{
+		this.area = new Rectangle(gc.getWidth()*scalingXf, gc.getHeight()*scalingYf, gc.getWidth()*scalingW, gc.getHeight()*scalingH);
+		break;}
+	default:
+		Util.print("This shit doesn't really work. ContentPane not properly initialized");
+		break;
+	}
+	for (ContentPane pane : panes) {
+		pane.rescale();
+	}
+	
+	for (Label label : labels) {
+		label.rescale();
+	}
+	for (AbstractComponent comp : components) {
+		if (comp.getClass().equals(MouseOverAreaDav.class)) ;
+	}
+}
 	
 	//Variable declarations
 	Rectangle area;
