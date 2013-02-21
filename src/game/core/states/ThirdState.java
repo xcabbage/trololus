@@ -27,6 +27,7 @@ public class ThirdState extends BasicState {
 		sb.addTextField(stateRes.appWidth / 2,
 				((int) (stateRes.appHeight * 0.2)) + 50, 300, 25);
 		sb.addContentPane(50, 150, 100, 100);
+		togglePane = sb.getPane(-1);
 		sb.addLabel(1, 50, 50, "Hosting - use the U, I, O keys to navigate.");
 	}
 
