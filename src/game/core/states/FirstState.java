@@ -17,13 +17,16 @@ public class FirstState extends BasicState {
 	public static int ID = 0;
 
 	public void createContent() throws SlickException {
-
+		
+		sb.addLabel(2,260,50,"/resources/Splash/Tlogo.png");
+	    sb.getLabel(-1).setScale(0.25f);
+		
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
-		StateTitle = "Main State for trololus 0.1 Alpha - to be Training?";
+		StateTitle = "Main State for trololus 0.1 Alpha - Welcome Screen";
 	}
 
 	public int getID() {
