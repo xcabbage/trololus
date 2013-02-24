@@ -54,6 +54,13 @@ public class StateBuilder {
 		Label label = new Label(type, x, y, string);
 		addLabels(label);
 	}
+	
+	public void addLabel(int type, float x, float y,String string) throws SlickException {
+		Label label = new Label(type, x, y, string);
+		addLabels(label);
+	}
+	
+	
 	public void addContentPane(int x, int y, int width, int height) {
 		ContentPane pane = new ContentPane(gc, x,y,width,height);
 		addPanes(pane);

@@ -28,7 +28,7 @@ public class ThirdState extends BasicState {
 				((int) (stateRes.appHeight * 0.2)) + 50, 300, 25);
 		sb.addContentPane(50, 150, 100, 100);
 		togglePane = sb.getPane(-1);
-		sb.addLabel(1, 50, 50, "Hosting - use the U, I, O keys to navigate.");
+		sb.addLabel(1, 0.2f, 0.2f, "Hosting - use the U, I, O keys to navigate.");
 	}
 
 	public int getID() {
