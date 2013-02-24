@@ -30,6 +30,7 @@ public class Label {
 	private int scaling = 0;
 	private float scalingX;
 	private float scalingY;
+
 	/**
 	 * @param x
 	 * @param y
@@ -45,7 +46,6 @@ public class Label {
 		this.type = 1;
 	}
 
-
 	public Label(int type, int x, int y, String content) throws SlickException {
 		super();
 		this.x = x;
@@ -60,32 +60,30 @@ public class Label {
 		} else
 			Util.print("Wrong Label type initialized: Type " + type
 					+ "; Content: " + content);
-		
+
 	}
 
-		public Label(int type, float x, float y, String content) throws SlickException {
-			super();
-			
-			scaling = 1;
-			
-			
-			scalingX= x;
-			scalingY =y;
-			rescale();
-			
-			this.type = type;
+	public Label(int type, float x, float y, String content)
+			throws SlickException {
+		super();
 
-			if (type == 2) {
-				this.img = new Image(content);
-			} else if (type == 1) {
-				this.string = content;
-				this.font = new TrueTypeFont(new Font("Garamond", 10, 25), true);
-			} else
-				Util.print("Wrong Label type initialized: Type " + type
-						+ "; Content: " + content);
+		scaling = 1;
 
-		
-		
+		scalingX = x;
+		scalingY = y;
+		rescale();
+
+		this.type = type;
+
+		if (type == 2) {
+			this.img = new Image(content);
+		} else if (type == 1) {
+			this.string = content;
+			this.font = new TrueTypeFont(new Font("Garamond", 10, 25), true);
+		} else
+			Util.print("Wrong Label type initialized: Type " + type
+					+ "; Content: " + content);
+
 	}
 
 	public void render() {
@@ -103,19 +101,24 @@ public class Label {
 			break;
 		}
 	}
-	public void rescale(){
-		
-	switch (scaling) {
+
+	public void rescale() {
+
+		switch (scaling) {
 		case 0:
 			break;
-		case 1:{
-			x = (int) (Trololus.app.getWidth()*scalingX);
-			x = (int) (Trololus.app.getHeight()*scalingY);
-			break;}
+		case 1: {
+			x = (int) (Trololus.app.getWidth() * scalingX);
+			y = (int) (Trololus.app.getHeight() * scalingY);
+			break;
+		
+			
+		}
 		default: {
 			Util.print("Label incorectly initialized - scaling has fucked up");
-			break;}
-	}
+			break;
+		}
+		}
 	}
 
 	public void render(Rectangle rect) {
@@ -138,4 +141,4 @@ public class Label {
 		img = img.getScaledCopy(scale);
 	}
 
-	}
+}
