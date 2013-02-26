@@ -3,6 +3,8 @@
 
 package game.core.states;
 
+import game.core.parts.ContentPosition;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -18,8 +20,12 @@ public class FirstState extends BasicState {
 
 	public void createContent() throws SlickException {
 		
-		sb.addLabel(2,260,50,"/resources/Splash/Tlogo.png");
-	    sb.getLabel(-1).setScale(0.25f);
+		sb.addLabel(0.5f,0.5f,"/resources/Splash/Tlogo.png", 0.25f);
+		sb.getLabel(-1).setPosition(ContentPosition.Center);
+		//		sb.getLabel(-1).setCentering(true);
+		
+
+	    
 		
 	}
 

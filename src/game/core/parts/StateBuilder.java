@@ -60,6 +60,10 @@ public class StateBuilder {
 		addLabels(label);
 	}
 	
+	public void addLabel( float x, float y,String string, float scale) throws SlickException {
+		Label label = new Label(x, y, string, scale);
+		addLabels(label);
+	}
 	
 	public void addContentPane(int x, int y, int width, int height) {
 		ContentPane pane = new ContentPane(gc, x,y,width,height);

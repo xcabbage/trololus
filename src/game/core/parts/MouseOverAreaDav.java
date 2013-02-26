@@ -71,6 +71,22 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/** True if the mouse has been up since last press */
 	private boolean mouseUp;
 
+	private boolean centered;
+
+	/**
+	 * @return Whether this component is set to draw using the Centered method.
+	 */
+	public boolean isCentered() {
+		return centered;
+	}
+
+	/**
+	 * @param centered Whether this component should be drawn centered at its coordinates 
+	 */
+	public void setCentered(boolean centered) {
+		this.centered = centered;
+	}
+
 	/**
 	 * Create a new mouse over area
 	 * 
@@ -293,6 +309,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 *      org.newdawn.slick.Graphics)
 	 */
 	public void render(GUIContext container, Graphics g) {
+		if (!centered){
 		if (currentImage != null) {
 			
 			int xp = (int) (area.getX() + ((getWidth() - currentImage.getWidth()) / 2));
@@ -303,7 +320,10 @@ public class MouseOverAreaDav extends AbstractComponent {
 			g.setColor(currentColor);
 			g.fill(area);
 		}
-		updateImage();
+		updateImage();}
+		else if (centered){
+			renderCentered(container, g);
+		}
 	}
 	
 	public void renderCentered(GUIContext container, Graphics g) {
