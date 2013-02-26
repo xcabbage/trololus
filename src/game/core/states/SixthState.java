@@ -1,5 +1,7 @@
 package game.core.states;
 
+import game.core.parts.ContentPosition;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -11,14 +13,17 @@ public class SixthState extends BasicState {
 
 	public void createContent() throws SlickException {
 	    //FPS
-		sb.addLabel(2,965,0,"/resources/Splash/UI/IG/IG_fps.png");
+		sb.addLabel(2,0,0,"/resources/Splash/UI/IG/IG_fps.png");
 		sb.getLabel(-1).setScale(0.525f);
+		sb.getLabel(-1).setPosition(ContentPosition.TopRight);
 		//MAP
 	    sb.addLabel(2,0,0,"/resources/Splash/UI/IG/IG_map.png");
 	    sb.getLabel(-1).setScale(0.525f);
+		sb.getLabel(-1).setPosition(ContentPosition.TopLeft);
 	    //HUD
-	    sb.addLabel(2,0,620,"/resources/Splash/UI/IG/IG_sta.png");
+	    sb.addLabel(2,0,0,"/resources/Splash/UI/IG/IG_sta.png");
 	    sb.getLabel(-1).setScale(0.525f);
+		sb.getLabel(-1).setPosition(ContentPosition.BottomCenter);
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
