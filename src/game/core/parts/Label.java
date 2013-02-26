@@ -27,6 +27,7 @@ public class Label {
 	Image img;
 	int type;
 
+	private int currW;
 	private int scaling = 0;
 	private float scalingX;
 	private float scalingY;
@@ -34,6 +35,7 @@ public class Label {
 	private boolean inited = false;
 	private ContentPosition position;
 	private boolean centering;
+	private boolean initScaled;
 
 	/**
 	 * @param x
@@ -48,6 +50,7 @@ public class Label {
 		this.string = string;
 		this.font = font;
 		this.type = 1;
+		currW = Trololus.app.getWidth();
 	}
 
 	public Label(int type, int x, int y, String content) throws SlickException {
@@ -64,6 +67,7 @@ public class Label {
 		} else
 			Util.print("Wrong Label type initialized: Type " + type
 					+ "; Content: " + content);
+		currW = Trololus.app.getWidth();
 
 	}
 
@@ -85,7 +89,9 @@ public class Label {
 		this.scale = scale;
 		this.img = new Image(content);
 		img = img.getScaledCopy(scale);
+		currW = Trololus.app.getWidth();
 		rescale();
+		
 
 	}
 
@@ -202,7 +208,13 @@ public class Label {
 		
 		}
 		
-	}
+		if (type ==2){
+			
+			img = img.getScaledCopy(currW/Trololus.app.getWidth());
+			currW = Trololus.app.getWidth();}
+			
+		}
+	
 
 	public void render() {
 		if (!centering) {
