@@ -212,9 +212,11 @@ public class Trololus extends StateBasedGame {
 
 				}
 
-				for (int a = 0; a < this.getStateCount(); a++) {
-					resState.initRes();
+				resState.initRes();
+				for (int a = 0; a < getStateCount();a++) {
+				 ((BasicState) getState(a)).rescale();	
 				}
+				
 
 				drawing = true;
 			} catch (SlickException e) {

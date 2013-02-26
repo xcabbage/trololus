@@ -85,14 +85,14 @@ public void rescale(){
 		break;
 	}
 	for (ContentPane pane : panes) {
-		pane.rescale();
+//		if (pane !=null) pane.rescale(); else Util.print("A pane attempted to be rescaled is null.");
 	}
 	
 	for (Label label : labels) {
-		label.rescale();
+//		label.rescale();
 	}
 	for (AbstractComponent comp : components) {
-		if (comp.getClass().equals(MouseOverAreaDav.class)) ;
+//		if (comp.getClass().equals(MouseOverAreaDav.class)) ;
 	}
 }
 	

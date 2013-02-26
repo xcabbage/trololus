@@ -167,4 +167,25 @@ public class StateBuilder {
 			}
 
 	}
+
+	public void rescale() {
+		if (panes[0] != null)
+			for (int a = 0; a < panes.length; a++) {
+				panes[a].rescale();
+
+			}
+		if (components[0] != null)
+			for (int a = 0; a < components.length; a++) {
+//				components[a].rescale();
+
+			}
+
+		if (labels[0] != null)
+			for (int a = 0; a < labels.length; a++) {
+				labels[a].rescale();
+
+			}
+	
+		
+	}
 }

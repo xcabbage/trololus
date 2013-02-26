@@ -22,7 +22,7 @@ public class FirstState extends BasicState {
 		
 		sb.addLabel(0.5f,0.5f,"/resources/Splash/Tlogo.png", 0.25f);
 		sb.getLabel(-1).setPosition(ContentPosition.Center);
-		//		sb.getLabel(-1).setCentering(true);
+
 		
 
 	    

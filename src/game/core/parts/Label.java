@@ -83,10 +83,9 @@ public class Label {
 		scalingY = y;
 		type = 2;
 		this.scale = scale;
-		rescale();
-
 		this.img = new Image(content);
 		img = img.getScaledCopy(scale);
+		rescale();
 
 	}
 
@@ -200,7 +199,9 @@ public class Label {
 			Util.print("Label incorrectly initialized - scaling has fucked up");
 			break;
 		}
+		
 		}
+		
 	}
 
 	public void render() {

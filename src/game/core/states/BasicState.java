@@ -210,6 +210,10 @@ public class BasicState extends BasicGameState {
 
 	}
 
+	public void rescale(){
+		sb.rescale();
+	}
+	
 	public int isOverButton(int x, int y) {
 		int returnButton = 0;
 		y = y + (buttonsGetY / 2);
