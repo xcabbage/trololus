@@ -27,6 +27,7 @@ public class Label {
 	Image img;
 	int type;
 
+	public Rectangle containingElement;
 	private int currW;
 	private int scaling = 0;
 	private float scalingX;
@@ -36,6 +37,9 @@ public class Label {
 	private ContentPosition position;
 	private boolean centering;
 	private boolean initScaled;
+	private float scaleRequested;
+	private int relativeScaling;
+	private boolean rescaleRelativePaused;
 
 	/**
 	 * @param x
@@ -43,6 +47,11 @@ public class Label {
 	 * @param string
 	 * @param font
 	 */
+
+	public void setContainer(Rectangle rect) {
+		containingElement = rect;
+	}
+
 	public Label(int x, int y, String string, TrueTypeFont font) {
 		super();
 		this.x = x;
@@ -50,7 +59,18 @@ public class Label {
 		this.string = string;
 		this.font = font;
 		this.type = 1;
-		currW = Trololus.app.getWidth();
+		commonInit();
+
+	}
+
+	/**
+	 * 
+	 */
+	private void commonInit() {
+		containingElement = new Rectangle(0, 0, Trololus.app.getWidth(),
+				Trololus.app.getHeight());
+		currW = (int) containingElement.getWidth();
+
 	}
 
 	public Label(int type, int x, int y, String content) throws SlickException {
@@ -67,7 +87,7 @@ public class Label {
 		} else
 			Util.print("Wrong Label type initialized: Type " + type
 					+ "; Content: " + content);
-		currW = Trololus.app.getWidth();
+		commonInit();
 
 	}
 
@@ -82,16 +102,14 @@ public class Label {
 		super();
 
 		scaling = 1;
-
 		scalingX = x;
 		scalingY = y;
 		type = 2;
 		this.scale = scale;
 		this.img = new Image(content);
 		img = img.getScaledCopy(scale);
-		currW = Trololus.app.getWidth();
+		commonInit();
 		rescale();
-		
 
 	}
 
@@ -119,7 +137,67 @@ public class Label {
 
 	}
 
+	public void scaleToWidth(float arg) {
+		int newWidth = (int) (arg * containingElement.getWidth());
+		img = img.getScaledCopy(newWidth,
+				((img.getWidth() * img.getHeight()) / newWidth));
+		scaleRequested = arg;
+		rescaleRelativePaused = true;
+		rescale();
+		rescaleRelativePaused = false;
+	}
+
+	public void scaleToHeight(float arg) {
+		int newHeight = (int) (arg * containingElement.getHeight());
+		img = img.getScaledCopy((newHeight * img.getWidth()) / img.getHeight(),
+				newHeight);
+		scaleRequested = arg;
+		relativeScaling = 2;
+
+		rescaleRelativePaused = true;
+		rescale();
+		rescaleRelativePaused = false;
+
+	}
+
+	public void scaleToWidth(int arg) {
+
+		img = img.getScaledCopy(arg,
+				((img.getWidth() * img.getHeight()) / arg));
+		scaleRequested = arg;
+		rescaleRelativePaused = true;
+		rescale();
+		rescaleRelativePaused = false;
+	}
+
+	public void scaleToHeight(int arg) {
+		
+		img = img.getScaledCopy((arg * img.getWidth()) / img.getHeight(),
+				arg);
+		scaleRequested = arg;
+		relativeScaling = 2;
+
+		rescaleRelativePaused = true;
+		rescale();
+		rescaleRelativePaused = false;
+
+	}
+
+	
+	
+	
 	public void rescale() {
+
+		if (type == 2) {
+			
+			img = img.getScaledCopy((float) Trololus.app.getWidth()
+					/ (float) currW);
+
+			currW = Trololus.app.getWidth();
+
+			
+
+		}
 
 		switch (scaling) {
 		case 0:
@@ -154,8 +232,8 @@ public class Label {
 
 			appW = Trololus.app.getWidth();
 			appH = Trololus.app.getHeight();
-			
-			//set the actual new X's and Y's
+
+			// set the actual new X's and Y's
 			switch (position) {
 			case TopLeft:
 				x = 0;
@@ -196,7 +274,7 @@ public class Label {
 			default:
 				Util.print("Label Position fucked up - unknown value passed to the method");
 				break;
-			
+
 			}
 			break;
 		}
@@ -205,16 +283,10 @@ public class Label {
 			Util.print("Label incorrectly initialized - scaling has fucked up");
 			break;
 		}
-		
+
 		}
-		
-		if (type ==2){
-			
-			img = img.getScaledCopy(currW/Trololus.app.getWidth());
-			currW = Trololus.app.getWidth();}
-			
-		}
-	
+
+	}
 
 	public void render() {
 		if (!centering) {

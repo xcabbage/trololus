@@ -19,14 +19,10 @@ public class FirstState extends BasicState {
 	public static int ID = 0;
 
 	public void createContent() throws SlickException {
-		
-		sb.addLabel(0.5f,0.5f,"/resources/Splash/Tlogo.png", 0.25f);
+
+		sb.addLabel(0.5f, 0.5f, "/resources/Splash/Tlogo.png", 0.25f);
 		sb.getLabel(-1).setPosition(ContentPosition.Center);
-
-		
-
-	    
-		
+		sb.getLabel(-1).scaleToHeight(0.1f);
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
