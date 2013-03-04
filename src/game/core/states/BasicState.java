@@ -29,11 +29,11 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class BasicState extends BasicGameState {
 	// declare globals
-	StateBasedGame game;
+	public StateBasedGame game;
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	Dimension res;
 	GameContainer app;
-	StateBuilder sb;
+	public	StateBuilder sb;
 	Input input;
 	public Circle[] buttonHoverCircle = new Circle[10];
 	public MouseOverArea[] button = new MouseOverArea[10];

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import game.core.states.*;
 import game.nonstatic.system.Pepta;
+import game.util.Util;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
@@ -75,7 +76,7 @@ public class Trololus extends StateBasedGame {
 		resState = new BasicState();
 		resState.init(gc, this);
 		resState.initVars();
-
+		Util.init(resState.game);
 		addState(new FirstState());
 		addState(new SecondState());
 		addState(new ThirdState());
@@ -92,6 +93,9 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void initAfterStates() throws SlickException {
+		// init the utility class
+		
+
 		// init sound;
 
 		Music musicStart = new Music(MUSIC_PATH_INIT);
@@ -161,38 +165,38 @@ public class Trololus extends StateBasedGame {
 	 */
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-		switch (key) {
-		case Input.KEY_I:
-			if (pomocnik.testSocket == null) {
-				System.out.println("Waiting for host input");
-				String host = sc.nextLine();
-				System.out.println("Waiting for port input");
-				int port = sc.nextInt();
-				pomocnik.connect(host, port);
-				break;
-			} else {
-				try {
-					pomocnik.terminate();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		case Input.KEY_O:
-			if (pomocnik != null) {
-				System.out.println("Waiting for message input");
-				String msg = sc.nextLine();
-				pomocnik.sendMsg(msg);
-				break;
-			}
-		case Input.KEY_P:
-			if (pomocnik != null) {
-				pomocnik.setInMsg();
-				break;
-			}
-		default:
-			break;
-		}
+		// switch (key) {
+		// case Input.KEY_I:
+		// if (pomocnik.testSocket == null) {
+		// Util.print("Waiting for host input");
+		// String host = sc.nextLine();
+		// Util.print("Waiting for port input");
+		// int port = sc.nextInt();
+		// pomocnik.connect(host, port);
+		// break;
+		// } else {
+		// try {
+		// pomocnik.terminate();
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		// break;
+		// }
+		// case Input.KEY_O:
+		// if (pomocnik != null) {
+		// Util.print("Waiting for message input");
+		// String msg = sc.nextLine();
+		// pomocnik.sendMsg(msg);
+		// break;
+		// }
+		// case Input.KEY_P:
+		// if (pomocnik != null) {
+		// pomocnik.setInMsg();
+		// break;
+		// }
+		// default:
+		// break;
+		// }
 		if (key == Input.KEY_F4) {
 
 			try {
@@ -201,22 +205,21 @@ public class Trololus extends StateBasedGame {
 
 				if (!app.isFullscreen()) {
 
-					System.out.println("Entering FullScreen mode.");
+					Util.printDebug("Entering FullScreen mode.");
 					app.setDisplayMode(utilGfx.getRes().width,
 							utilGfx.getRes().height, true);
 
 				} else {
-					System.out.println("Returning from fullscreen.");
+					Util.printDebug("Returning from fullscreen.");
 					app.setFullscreen(false);
 					cleanRes();
 
 				}
 
 				resState.initRes();
-				for (int a = 0; a < getStateCount();a++) {
-				 ((BasicState) getState(a)).rescale();	
+				for (int a = 0; a < getStateCount(); a++) {
+					((BasicState) getState(a)).rescale();
 				}
-				
 
 				drawing = true;
 			} catch (SlickException e) {
@@ -247,7 +250,7 @@ public class Trololus extends StateBasedGame {
 		for (int a = 0; a < 7; a++)
 			if (state.stateRes.button[a].isMouseOver()) {
 				if (a < 6) {
-					System.out.println("entering " + a);
+					Util.printDebug("entering " + a);
 					enterState(a);
 				} else if (a == 6)
 					MUSIC_END_REQUESTED = true;

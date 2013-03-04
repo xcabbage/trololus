@@ -2,6 +2,8 @@ package game.core.parts;
 
 import java.awt.Font;
 import java.util.Arrays;
+import game.util.MoreColors;
+import org.newdawn.slick.Color;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Graphics;
@@ -149,6 +151,7 @@ public class StateBuilder {
 
 	// drawing of the current situation
 	public void drawComponents(Graphics g) throws SlickException {
+
 		if (panes[0] != null)
 			for (int a = 0; a < panes.length; a++) {
 				panes[a].render();
@@ -162,8 +165,10 @@ public class StateBuilder {
 
 		if (labels[0] != null)
 			for (int a = 0; a < labels.length; a++) {
+				Color col = g.getColor();
+				g.setColor(MoreColors.getTrans(labels[a].getColor(), labels[a].getAlpha()));
 				labels[a].render();
-
+				g.setColor(col);
 			}
 
 	}

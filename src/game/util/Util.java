@@ -1,6 +1,19 @@
 package game.util;
 
+import game.core.Trololus;
+import game.core.parts.ContentPosition;
+import game.core.parts.Label;
+import game.core.states.BasicState;
+
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * The Util.java class containing various methods providing utitity for the game
@@ -12,6 +25,16 @@ import java.util.Arrays;
  */
 public class Util {
 	static Object[] prolongedArray;
+//	public static Trololus game = Trololus;
+	private static Trololus game;
+	
+	public static void init( StateBasedGame game)
+			throws SlickException {
+
+		// init globals
+		Util.game = (Trololus) game;}
+
+	
 	public static void prolongArray(int length, int[]... objects) {
 		for (int a = 0; a < objects.length; a++)
 			objects[a] = Arrays.copyOf(objects[a], objects[a].length + length);
@@ -31,7 +54,59 @@ public class Util {
 		System.out.println("Copied. New array length: "+  array.length+ ".");
 
 	}
-	public static void print(String string){
-		System.out.println(string);
+	public static void print(String string) {
+		System.out.println("[UPrint] "+string);
+		BasicState state = (BasicState) game.getCurrentState();
+		try {
+			state.sb.addLabel(1, 0.5f, 0.5f, string);
+			final Label notification = state.sb.getLabel(-1);
+			notification.setColor(Color.blue);
+			notification.setPosition(ContentPosition.Center);
+			Timer time = new Timer();
+			time.schedule(new TimerTask() {
+				
+				@Override
+				public void run() {
+					notification.toggleVisibility();
+					
+				}
+			}, 2000);
+			
+		} catch (SlickException e) {printDebug("Error with Util.print(): " + string );
+		}
 	}
+	public static void printDebug(String string){
+		System.out.println("[UDebug] "+string);
+	}
+
+
+	/**
+	 * @param string
+	 */
+	public static void printErr(String string) {
+		System.out.println("[UErr] "+string);
+		BasicState state = (BasicState) game.getCurrentState();
+		try {
+			state.sb.addLabel(1, 0.5f, 0.6f, string);
+			final Label notification = state.sb.getLabel(-1);
+			notification.setColor(Color.red);
+			notification.setPosition(ContentPosition.Center,0, 100);
+			notification.setBackground(Color.white, Color.blue);
+			Timer time = new Timer();
+			time.schedule(new TimerTask() {
+				
+				@Override
+				public void run() {
+					notification.toggleVisibility();
+					
+				}
+			}, 2000);
+			
+		} catch (SlickException e) {printDebug("Error with Util.print(): " + string );
+		}
+		
+	}
+
+
 }
+

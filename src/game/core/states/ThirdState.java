@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import game.core.NetworkTest;
 import game.core.parts.ContentPane;
+import game.util.Util;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -63,7 +64,7 @@ public class ThirdState extends BasicState {
 			if (network.testSocket == null) {
 				String host = field.getText();
 				int port = Integer.parseInt(field2.getText());
-				System.out.println("Connecting to " + host + ":" + port);
+				Util.print("Connecting to " + host + ":" + port);
 				network.connect(host, port);
 
 				break;
@@ -79,7 +80,7 @@ public class ThirdState extends BasicState {
 			if (network != null) {
 
 				String msg = field.getText();
-				System.out.println("Sending message \"" + msg + "\".");
+				Util.print("Sending message \"" + msg + "\".");
 				network.sendMsg(msg);
 				break;
 			}

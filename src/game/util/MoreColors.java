@@ -19,17 +19,28 @@ public class MoreColors extends java.awt.Color {
 	static public Color transCyan = new Color(0, 255, 255, 100);
 	static public Color transPurple = new Color(255, 0, 255, 100);
 
-	public Color getTrans(Color c) {
+	public static Color getTrans(Color c) {
 		return new Color(c.getRed(), c.getGreen(), c.getBlue(), 100);
 
 	}
 
-	public Color getTrans(Color c, int alpha) {
+	static public Color getTrans(Color c, int alpha) {
 		return new Color(c.getRed(), c.getGreen(), c.getBlue(), alpha);
 
 	}
 
 	public MoreColors() {
 		super(0);
+	}
+
+	/**
+	 * @param color
+	 * @param alpha
+	 * @return
+	 */
+	public static org.newdawn.slick.Color getTrans(
+			org.newdawn.slick.Color c, int alpha) {
+		
+		return new org.newdawn.slick.Color(c.getRed(), c.getGreen(), c.getBlue(), alpha);
 	}
 }

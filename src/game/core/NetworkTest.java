@@ -1,5 +1,7 @@
 package game.core;
 
+import game.util.Util;
+
 import java.io.*;
 import java.net.*;
 
@@ -28,9 +30,14 @@ public class NetworkTest {
 		} catch (IOException e) {
 			System.err
 					.println("Some kind of network I/O error occured. That stinks, doesn't it?");
-			e.printStackTrace();
+			e.printStackTrace();}
+			catch (IllegalArgumentException e){
+				Util.printErr("The port specified was out of range. (" + port + ")");
 		}
+		
+			Util.printErr("The port specified was out of range. (" + port + ")");
 	}
+	
 
 	public void sendMsg(String msg) {
 		if (outStream != null) {
