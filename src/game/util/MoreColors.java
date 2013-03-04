@@ -43,4 +43,9 @@ public class MoreColors extends java.awt.Color {
 		
 		return new org.newdawn.slick.Color(c.getRed(), c.getGreen(), c.getBlue(), alpha);
 	}
+
+	public static org.newdawn.slick.Color getTrans(
+			org.newdawn.slick.Color c, float alpha) {
+		return new org.newdawn.slick.Color(c.getRed(), c.getGreen(), c.getBlue(), alpha);
+	}
 }

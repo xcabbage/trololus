@@ -94,7 +94,6 @@ public class Trololus extends StateBasedGame {
 
 	public static void initAfterStates() throws SlickException {
 		// init the utility class
-		
 
 		// init sound;
 
@@ -165,39 +164,9 @@ public class Trololus extends StateBasedGame {
 	 */
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-		// switch (key) {
-		// case Input.KEY_I:
-		// if (pomocnik.testSocket == null) {
-		// Util.print("Waiting for host input");
-		// String host = sc.nextLine();
-		// Util.print("Waiting for port input");
-		// int port = sc.nextInt();
-		// pomocnik.connect(host, port);
-		// break;
-		// } else {
-		// try {
-		// pomocnik.terminate();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// break;
-		// }
-		// case Input.KEY_O:
-		// if (pomocnik != null) {
-		// Util.print("Waiting for message input");
-		// String msg = sc.nextLine();
-		// pomocnik.sendMsg(msg);
-		// break;
-		// }
-		// case Input.KEY_P:
-		// if (pomocnik != null) {
-		// pomocnik.setInMsg();
-		// break;
-		// }
-		// default:
-		// break;
-		// }
-		if (key == Input.KEY_F4) {
+		switch (key) {
+
+		case Input.KEY_F4: {
 
 			try {
 
@@ -225,9 +194,10 @@ public class Trololus extends StateBasedGame {
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
+			break;
 		}
 
-		else if (key == Input.KEY_F5) {
+		case Input.KEY_F5: {
 			if (app != null) {
 				drawing = false;
 				BasicState state = (BasicState) this.getCurrentState();
@@ -239,9 +209,16 @@ public class Trololus extends StateBasedGame {
 				}
 				drawing = true;
 			}
-
+			break;
 		}
 
+		case Input.KEY_LALT:{
+			Util.printErr("debug Error");
+			break;
+		}
+			
+		
+		}
 	}
 
 	public void mousePressed(int button, int x, int y) {

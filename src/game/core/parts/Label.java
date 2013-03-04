@@ -6,6 +6,8 @@ import game.util.Util;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -70,6 +72,10 @@ public class Label {
 	private Color backgroundBorder;
 	private Color backgroundFill;
 	private boolean backgroundEnabled;
+	private Image backgroundImage;
+	private boolean backgroundImgEnabled;
+	private int backgroundOffsetY = 20;
+	private int backgroundOffsetX = 20;
 
 	/**
 	 * @param x
@@ -78,6 +84,37 @@ public class Label {
 	 * @param font
 	 */
 
+	public void fadeIn(long timeMillis){
+		final Timer time = new Timer();
+		
+		time.scheduleAtFixedRate(new TimerTask() {
+			
+			@Override
+			public void run() {
+				if (getAlpha() <= 0.97f){
+				setAlpha(getAlpha()+0.02f);
+				} else time.cancel();
+		
+		}}, 0, timeMillis/50);
+		
+	}
+	
+	public void fadeOut(long timeMillis){
+	final Timer time = new Timer();
+		
+		time.scheduleAtFixedRate(new TimerTask() {
+			
+			@Override
+			public void run() {
+				if (getAlpha() != 0f){
+					setAlpha(getAlpha()-0.02f);
+					} else time.cancel();
+				}
+		
+		}, 0, timeMillis/50);
+		
+	}
+	
 	public void setVisible(boolean visible) {
 		isVisible = visible;
 	}
@@ -171,6 +208,15 @@ public class Label {
 		backgroundEnabled = true;
 	}
 
+	public void setBackground(String path) throws SlickException {
+		backgroundRect = getBounds();
+		backgroundImage = new Image(path);
+		backgroundImage = backgroundImage.getScaledCopy((int) getBounds().getWidth() +backgroundOffsetX, (int) getBounds().getHeight() + backgroundOffsetY);
+		backgroundImgEnabled = true;
+		
+	}
+	
+	
 	public Rectangle getBounds() {
 		int width = 0, height = 0;
 
@@ -374,18 +420,33 @@ public class Label {
 		y = y + yOffset;
 	}
 
-	public void setAlpha(int alpha) {
+	public void setAlpha(float alpha) {
 		color = MoreColors.getTrans(color, alpha);
+		System.out.println("Color set for " + alpha);
 	}
 
-	public int getAlpha() {
-		return color.getAlpha();
+	public float getAlpha() {
+		return color.a;
 	}
 
 	public void render() {
-		if (isVisible)
+		if (isVisible){
 
-		{
+			if (backgroundEnabled) {
+				Graphics g = Trololus.app.getGraphics();
+				
+				g.setColor(MoreColors.getTrans(backgroundBorder, color.getAlpha()));
+				g.draw(backgroundRect);
+				g.setColor(MoreColors.getTrans(backgroundFill, color.getAlpha()));
+				g.fill(backgroundRect);
+			}
+
+			if(backgroundImgEnabled){
+				backgroundImage.setAlpha( getAlpha());
+			
+				backgroundImage.draw(x-backgroundOffsetX/2, y-backgroundOffsetY/2);
+			}
+		
 			if (!centering) {
 				switch (type) {
 				case 1: {
@@ -420,14 +481,7 @@ public class Label {
 				}
 
 			}
-			if (backgroundEnabled) {
-				Graphics g = Trololus.app.getGraphics();
-				g.setColor(backgroundBorder);
-				g.draw(backgroundRect);
-				g.setColor(backgroundFill);
-				g.fill(backgroundRect);
-
-			}
+			
 
 		}
 	}

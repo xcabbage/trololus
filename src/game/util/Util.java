@@ -25,16 +25,15 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Util {
 	static Object[] prolongedArray;
-//	public static Trololus game = Trololus;
+	// public static Trololus game = Trololus;
 	private static Trololus game;
-	
-	public static void init( StateBasedGame game)
-			throws SlickException {
+
+	public static void init(StateBasedGame game) throws SlickException {
 
 		// init globals
-		Util.game = (Trololus) game;}
+		Util.game = (Trololus) game;
+	}
 
-	
 	public static void prolongArray(int length, int[]... objects) {
 		for (int a = 0; a < objects.length; a++)
 			objects[a] = Arrays.copyOf(objects[a], objects[a].length + length);
@@ -44,18 +43,19 @@ public class Util {
 		for (int a = 0; a < objects.length; a++) {
 			objects[a] = Arrays.copyOf(objects[a], objects[a].length + length);
 		}
-		System.out.println("prolonged arrays for "+ length);
+		System.out.println("prolonged arrays for " + length);
 	}
 
 	public static void prolongArray(int length, Object[] array) {
-	//broken and doesn't do anything. the one up above probably too
+		// broken and doesn't do anything. the one up above probably too
 		prolongedArray = array;
 		prolongedArray = Arrays.copyOf(array, array.length + length);
-		System.out.println("Copied. New array length: "+  array.length+ ".");
+		System.out.println("Copied. New array length: " + array.length + ".");
 
 	}
+
 	public static void print(String string) {
-		System.out.println("[UPrint] "+string);
+		System.out.println("[UPrint] " + string);
 		BasicState state = (BasicState) game.getCurrentState();
 		try {
 			state.sb.addLabel(1, 0.5f, 0.5f, string);
@@ -64,49 +64,52 @@ public class Util {
 			notification.setPosition(ContentPosition.Center);
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
-				
+
 				@Override
 				public void run() {
 					notification.toggleVisibility();
-					
+
 				}
 			}, 2000);
-			
-		} catch (SlickException e) {printDebug("Error with Util.print(): " + string );
+
+		} catch (SlickException e) {
+			printDebug("Error with Util.print(): " + string);
 		}
 	}
-	public static void printDebug(String string){
-		System.out.println("[UDebug] "+string);
-	}
 
+	public static void printDebug(String string) {
+		System.out.println("[UDebug] " + string);
+	}
 
 	/**
 	 * @param string
 	 */
 	public static void printErr(String string) {
-		System.out.println("[UErr] "+string);
+		System.out.println("[UErr] " + string);
 		BasicState state = (BasicState) game.getCurrentState();
 		try {
 			state.sb.addLabel(1, 0.5f, 0.6f, string);
 			final Label notification = state.sb.getLabel(-1);
 			notification.setColor(Color.red);
-			notification.setPosition(ContentPosition.Center,0, 100);
-			notification.setBackground(Color.white, Color.blue);
+			notification.setPosition(ContentPosition.Center, 0, 100);
+			notification.setBackground("resources/splash/ui/ps/Lore_Frame.png");
+			notification.setAlpha(0f);
+			notification.fadeIn(2000);
+
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
-				
+
 				@Override
 				public void run() {
-					notification.toggleVisibility();
-					
+					notification.fadeOut(2000);
+
 				}
 			}, 2000);
-			
-		} catch (SlickException e) {printDebug("Error with Util.print(): " + string );
+
+		} catch (SlickException e) {
+			printDebug("Error with Util.print(): " + string);
 		}
-		
+
 	}
 
-
 }
-
