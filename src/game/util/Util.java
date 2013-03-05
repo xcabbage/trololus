@@ -62,15 +62,18 @@ public class Util {
 			final Label notification = state.sb.getLabel(-1);
 			notification.setColor(Color.blue);
 			notification.setPosition(ContentPosition.Center);
+
+			notification.fadeIn(1000);
+
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
 
 				@Override
 				public void run() {
-					notification.toggleVisibility();
+					notification.fadeOut(1000);
 
 				}
-			}, 2000);
+			}, 3000);
 
 		} catch (SlickException e) {
 			printDebug("Error with Util.print(): " + string);
@@ -91,20 +94,20 @@ public class Util {
 			state.sb.addLabel(1, 0.5f, 0.6f, string);
 			final Label notification = state.sb.getLabel(-1);
 			notification.setColor(Color.red);
-			notification.setPosition(ContentPosition.Center, 0, 100);
+			notification.setPosition(ContentPosition.Center, 0, 200);
 			notification.setBackground("resources/splash/ui/ps/Lore_Frame.png");
 			notification.setAlpha(0f);
-			notification.fadeIn(2000);
+			notification.fadeIn(1000);
 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
 
 				@Override
 				public void run() {
-					notification.fadeOut(2000);
+					notification.fadeOut(1000);
 
 				}
-			}, 2000);
+			}, 3000);
 
 		} catch (SlickException e) {
 			printDebug("Error with Util.print(): " + string);
@@ -112,4 +115,34 @@ public class Util {
 
 	}
 
+	public static void notify(String string) {
+		System.out.println("[UNoti] " + string);
+		BasicState state = (BasicState) game.getCurrentState();
+		try {
+			state.sb.addLabel(1, 0.5f, 0.6f, string);
+			final Label notification = state.sb.getLabel(-1);
+			notification.setColor(Color.blue);
+			notification.setPosition(ContentPosition.Center, 0, 100);
+			notification.setBackground(Color.black,Color.blue.darker());
+			notification.setAlpha(0f);
+			notification.fadeIn(1000);
+
+			Timer time = new Timer();
+			time.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					notification.fadeOut(1000);
+
+				}
+			}, 3000);
+
+		} catch (SlickException e) {
+			printDebug("Error with Util.print(): " + string);
+		}
+
+	}
+
+	
+	
 }

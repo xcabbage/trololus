@@ -43,6 +43,20 @@ public class Label {
 	}
 
 	/**
+	 * @return the font
+	 */
+	public TrueTypeFont getFont() {
+		return font;
+	}
+
+	/**
+	 * @param font the font to set
+	 */
+	public void setFont(TrueTypeFont font) {
+		this.font = font;
+	}
+
+	/**
 	 * @param color
 	 *            the color to set
 	 */
@@ -422,7 +436,6 @@ public class Label {
 
 	public void setAlpha(float alpha) {
 		color = MoreColors.getTrans(color, alpha);
-		System.out.println("Color set for " + alpha);
 	}
 
 	public float getAlpha() {

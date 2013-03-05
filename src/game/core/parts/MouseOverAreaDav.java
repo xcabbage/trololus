@@ -121,6 +121,18 @@ public class MouseOverAreaDav extends AbstractComponent {
 	public MouseOverAreaDav(GUIContext container, Image image, int x, int y) {
 		this(container, image, x, y, image.getWidth(), image.getHeight());
 	}
+	
+	public void scaleImage(float scale){
+	int	imgWidth= normalImage.getWidth();
+	int imgHeight= normalImage.getHeight();
+	
+		normalImage = normalImage.getScaledCopy(scale);
+//		mouseOverImage = normalImage.getScaledCopy(scale);
+//		mouseDownImage = normalImage.getScaledCopy(scale);
+	
+		area.setLocation(area.getMinX()-(imgWidth/2)+normalImage.getWidth()/2, area.getMinY()-imgHeight/2+normalImage.getHeight()/2);
+				
+	}
 
 	/**
 	 * Create a new mouse over area

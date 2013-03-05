@@ -52,6 +52,10 @@ public class StateBuilder {
 		addComponents(button);
 	}
 	
+	public void addButton(int x, int y, Image image) throws SlickException{
+		MouseOverAreaDav button= new MouseOverAreaDav(gc, image,x,y);
+		addComponents(button);
+	}
 	public void addLabel(int type, int x, int y,String string) throws SlickException {
 		Label label = new Label(type, x, y, string);
 		addLabels(label);
@@ -72,6 +76,17 @@ public class StateBuilder {
 		addPanes(pane);
 	}
 
+	public void addContentPane(float x, float y, int width, int height) {
+		ContentPane pane = new ContentPane(gc, x,y,width,height);
+		addPanes(pane);
+	}
+
+	public void addContentPane(float x, float y, int xOffset, int yOffset, int width, int height) {
+		ContentPane pane = new ContentPane(gc, x,y,xOffset,yOffset,width,height);
+		addPanes(pane);
+	}
+	
+	
 	// internal methods extending the arrays
 	void addComponents(AbstractComponent... component) {
 		int lengthBeginning = components.length;
@@ -193,4 +208,12 @@ public class StateBuilder {
 	
 		
 	}
+
+	/**
+	 * @param i
+	 * @param j
+	 * @param width
+	 * @param height
+	 */
+	
 }

@@ -53,6 +53,7 @@ public class BasicState extends BasicGameState {
 	public int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset,
 			menuX, menuY, buttonsX, buttonsY, buttonsOffset, backgroundY,
 			buttonDist, buttonRadius, buttonsGetY, buttonsSafeY;
+	private boolean stateTitleEnabled;
 
 	public void initRes() throws SlickException {
 		buttonSpriteSheet = new Image(
@@ -167,7 +168,7 @@ public class BasicState extends BasicGameState {
 
 				backgroundBack.draw(0, backgroundY, backgroundScale);
 				background.draw(0, backgroundY, backgroundScale);
-				g.drawString(StateTitle, 320, 20);
+				if (stateTitleEnabled) g.drawString(StateTitle, 320, 20);
 				drawMenu(g);
 			}
 		} else {
@@ -183,7 +184,7 @@ public class BasicState extends BasicGameState {
 		if (Trololus.drawing) {
 			backgroundBack.draw(0, state.backgroundY, state.backgroundScale);
 			state.background.draw(0, state.backgroundY, state.backgroundScale);
-			g.drawString(StateTitle, 320, 20);
+			if (stateTitleEnabled) g.drawString(StateTitle, 320, 20);
 			drawMenu(g, state);
 			renderDiffGfx(gc, mainGame, g, stateRes);
 		}

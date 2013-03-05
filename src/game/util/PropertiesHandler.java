@@ -1,6 +1,6 @@
 /**
 *
-* @author DannyUfonek
+* @author DannyUfonek & xCabbage & avatarXargo
 *
 */
 package game.util;
