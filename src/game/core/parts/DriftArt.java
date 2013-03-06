@@ -1,4 +1,4 @@
-package game.core;
+package game.core.parts;
 /**
  * For moving objects that slow down as they aproach their location
  * 

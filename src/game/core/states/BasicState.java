@@ -54,6 +54,7 @@ public class BasicState extends BasicGameState {
 			menuX, menuY, buttonsX, buttonsY, buttonsOffset, backgroundY,
 			buttonDist, buttonRadius, buttonsGetY, buttonsSafeY;
 	private boolean stateTitleEnabled;
+	public boolean driftRequested;
 
 	public void initRes() throws SlickException {
 		buttonSpriteSheet = new Image(

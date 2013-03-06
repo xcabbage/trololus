@@ -6,9 +6,11 @@ package game.core.states;
 import java.awt.Font;
 
 import game.core.parts.ContentPosition;
+import game.util.Util;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
@@ -20,9 +22,12 @@ import org.newdawn.slick.state.StateBasedGame;
 public class FirstState extends BasicState {
 
 	public static int ID = 0;
+	
 
 	public void createContent() throws SlickException {
-		sb.addLabel(2, 0, 0, "resources/splash/ui/FPS.png");
+//		sb.addLabel(2, 0, 0, "resources/splash/ui/FPS.png");
+		
+		sb.addButton(0, 0, "resources/splash/ui/FPS.png");
 		
 	
 		
@@ -41,12 +46,32 @@ public class FirstState extends BasicState {
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
+		Input input = gc.getInput();
+		
+		if(driftRequested){
+			sb.driftComponentContinue(this);	
+		}
+		
+		
+		if(input.isMousePressed(0)){
+			sb.driftComponentTo(input.getMouseX(), input.getMouseY(), sb.getComponent(-1));	
+			driftRequested = true;
+			Util.notify("Requesting drift to "+ input.getMouseX()+ "," +input.getMouseY());
+		}
+		
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 		renderDiffGfx(gc, mainGame, g, stateRes);
 		super.render(gc, mainGame, g, stateRes);
+
+	}
+	
+	public void mousePressed(int button, int x, int y) {
+		
+
+
 
 	}
 }

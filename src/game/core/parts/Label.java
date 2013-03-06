@@ -311,7 +311,7 @@ public class Label {
 				Trololus.app.getHeight());
 		currW = (int) containingElement.getWidth();
 		color = new Color(Color.white);
-		System.out.println(currW);
+		
 		rescale();
 	}
 

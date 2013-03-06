@@ -2,6 +2,8 @@ package game.core.parts;
 
 import java.awt.Font;
 import java.util.Arrays;
+
+import game.core.states.BasicState;
 import game.util.MoreColors;
 import org.newdawn.slick.Color;
 
@@ -30,6 +32,9 @@ public class StateBuilder {
 	AbstractComponent[] components = new AbstractComponent[1];
 	Label[] labels = new Label[1];
 	ContentPane[] panes = new ContentPane[1];
+	private int driftRequestedX;
+	private int driftRequestedY;
+	private AbstractComponent driftingComponent;
 
 	// constructor
 	public StateBuilder(AppGameContainer gc) {
@@ -44,49 +49,130 @@ public class StateBuilder {
 				new Font("Garamond", 10, 25), true), x, y, width, height);
 		field.setConsumeEvents(true);
 		addComponents(field);
-		
+
 	}
-	
-	public void addButton(int x, int y, String image) throws SlickException{
-		MouseOverAreaDav button= new MouseOverAreaDav(gc, new Image(image),x,y);
+
+	public void driftComponentTo(int targetX, int targetY,
+			AbstractComponent comp) {
+
+		int posX = comp.getX();
+		int posY = comp.getY();
+		int speed = 4;
+		if ((targetX - posX) * (targetX - posX) + (targetY - posY)
+				* (targetY - posY) > 0) {
+
+			comp.setLocation(posX + ((targetX - posX) / speed), posY
+					+ ((targetY - posY) / speed));
+
+			if ((targetX - posX) * (targetX - posX) + (targetY - posY)
+					* (targetY - posY) < 1.2) {
+				posX = targetX;
+				posY = targetY;
+
+			}
+			posX = comp.getX();
+			posY = comp.getY();
+			driftingComponent = comp;
+
+		}
+	}
+
+	public void driftComponentContinue(BasicState state) {
+
+		int targetX = driftRequestedX;
+		int targetY = driftRequestedY;
+
+		int posX = driftingComponent.getX();
+		int posY = driftingComponent.getY();
+		int speed = 10;
+		if ((targetX - posX) * (targetX - posX) + (targetY - posY)
+				* (targetY - posY) > 0) {
+
+			driftingComponent.setLocation(posX + ((targetX - posX) / speed),
+					posY + ((targetY - posY) / speed));
+
+			if ((targetX - posX) * (targetX - posX) + (targetY - posY)
+					* (targetY - posY) < 1.2) {
+				driftingComponent.setLocation(targetX, targetY);
+
+				state.driftRequested = true;
+
+			}
+			posX = driftingComponent.getX();
+			posY = driftingComponent.getY();
+
+		}
+
+	}
+
+	public void driftComponentTo(int targetX, int targetY, Label comp) {
+
+		int posX = (int) comp.getBounds().getX();
+		int posY = (int) comp.getBounds().getY();
+		int speed = 4;
+		while ((targetX - posX) * (targetX - posX) + (targetY - posY)
+				* (targetY - posY) > 0) {
+
+			// comp.setLocation(posX + ((targetX - posX) / speed), posY
+			// + ((targetY - posY) / speed));
+
+			if ((targetX - posX) * (targetX - posX) + (targetY - posY)
+					* (targetY - posY) < 1.2) {
+				posX = targetX;
+				posY = targetY;
+
+			}
+			// posX = comp.getX();
+			// posY = comp.getY();
+		}
+	}
+
+	public void addButton(int x, int y, String image) throws SlickException {
+		MouseOverAreaDav button = new MouseOverAreaDav(gc, new Image(image), x,
+				y);
 		addComponents(button);
 	}
-	
-	public void addButton(int x, int y, Image image) throws SlickException{
-		MouseOverAreaDav button= new MouseOverAreaDav(gc, image,x,y);
+
+	public void addButton(int x, int y, Image image) throws SlickException {
+		MouseOverAreaDav button = new MouseOverAreaDav(gc, image, x, y);
 		addComponents(button);
 	}
-	public void addLabel(int type, int x, int y,String string) throws SlickException {
+
+	public void addLabel(int type, int x, int y, String string)
+			throws SlickException {
 		Label label = new Label(type, x, y, string);
 		addLabels(label);
 	}
-	
-	public void addLabel(int type, float x, float y,String string) throws SlickException {
+
+	public void addLabel(int type, float x, float y, String string)
+			throws SlickException {
 		Label label = new Label(type, x, y, string);
 		addLabels(label);
 	}
-	
-	public void addLabel( float x, float y,String string, float scale) throws SlickException {
+
+	public void addLabel(float x, float y, String string, float scale)
+			throws SlickException {
 		Label label = new Label(x, y, string, scale);
 		addLabels(label);
 	}
-	
+
 	public void addContentPane(int x, int y, int width, int height) {
-		ContentPane pane = new ContentPane(gc, x,y,width,height);
+		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}
 
 	public void addContentPane(float x, float y, int width, int height) {
-		ContentPane pane = new ContentPane(gc, x,y,width,height);
+		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}
 
-	public void addContentPane(float x, float y, int xOffset, int yOffset, int width, int height) {
-		ContentPane pane = new ContentPane(gc, x,y,xOffset,yOffset,width,height);
+	public void addContentPane(float x, float y, int xOffset, int yOffset,
+			int width, int height) {
+		ContentPane pane = new ContentPane(gc, x, y, xOffset, yOffset, width,
+				height);
 		addPanes(pane);
 	}
-	
-	
+
 	// internal methods extending the arrays
 	void addComponents(AbstractComponent... component) {
 		int lengthBeginning = components.length;
@@ -109,6 +195,7 @@ public class StateBuilder {
 		}
 
 	}
+
 	void addPanes(ContentPane... pane) {
 		int lengthBeginning = panes.length;
 
@@ -129,6 +216,7 @@ public class StateBuilder {
 		}
 
 	}
+
 	void addLabels(Label... label) {
 		int lengthBeginning = labels.length;
 
@@ -152,16 +240,24 @@ public class StateBuilder {
 
 	// interface methods returning any of the stored variables
 	public AbstractComponent getComponent(int a) {
-		if (a == -1) return components[components.length-1]; else
-		return components[a];
+		if (a == -1)
+			return components[components.length - 1];
+		else
+			return components[a];
 	}
+
 	public Label getLabel(int a) {
-		if (a == -1) return labels[labels.length-1]; else
-		return labels[a];
+		if (a == -1)
+			return labels[labels.length - 1];
+		else
+			return labels[a];
 	}
+
 	public ContentPane getPane(int a) {
-		if (a == -1) return panes[panes.length-1]; else
-		return panes[a];
+		if (a == -1)
+			return panes[panes.length - 1];
+		else
+			return panes[a];
 	}
 
 	// drawing of the current situation
@@ -181,7 +277,8 @@ public class StateBuilder {
 		if (labels[0] != null)
 			for (int a = 0; a < labels.length; a++) {
 				Color col = g.getColor();
-				g.setColor(MoreColors.getTrans(labels[a].getColor(), labels[a].getAlpha()));
+				g.setColor(MoreColors.getTrans(labels[a].getColor(),
+						labels[a].getAlpha()));
 				labels[a].render();
 				g.setColor(col);
 			}
@@ -196,7 +293,7 @@ public class StateBuilder {
 			}
 		if (components[0] != null)
 			for (int a = 0; a < components.length; a++) {
-//				components[a].rescale();
+				// components[a].rescale();
 
 			}
 
@@ -205,8 +302,7 @@ public class StateBuilder {
 				labels[a].rescale();
 
 			}
-	
-		
+
 	}
 
 	/**
@@ -215,5 +311,5 @@ public class StateBuilder {
 	 * @param width
 	 * @param height
 	 */
-	
+
 }
