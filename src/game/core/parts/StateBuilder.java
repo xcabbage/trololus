@@ -54,28 +54,12 @@ public class StateBuilder {
 
 	public void driftComponentTo(int targetX, int targetY,
 			AbstractComponent comp) {
-
-		int posX = comp.getX();
-		int posY = comp.getY();
-		int speed = 4;
-		if ((targetX - posX) * (targetX - posX) + (targetY - posY)
-				* (targetY - posY) > 0) {
-
-			comp.setLocation(posX + ((targetX - posX) / speed), posY
-					+ ((targetY - posY) / speed));
-
-			if ((targetX - posX) * (targetX - posX) + (targetY - posY)
-					* (targetY - posY) < 1.2) {
-				posX = targetX;
-				posY = targetY;
-
-			}
-			posX = comp.getX();
-			posY = comp.getY();
+			driftRequestedX = targetX;
+			driftRequestedY = targetY;
 			driftingComponent = comp;
 
 		}
-	}
+	
 
 	public void driftComponentContinue(BasicState state) {
 
@@ -84,7 +68,10 @@ public class StateBuilder {
 
 		int posX = driftingComponent.getX();
 		int posY = driftingComponent.getY();
-		int speed = 10;
+		
+
+		
+		int speed = 50;
 		if ((targetX - posX) * (targetX - posX) + (targetY - posY)
 				* (targetY - posY) > 0) {
 
