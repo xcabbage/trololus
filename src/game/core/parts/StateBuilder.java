@@ -71,7 +71,7 @@ public class StateBuilder {
 		
 
 		
-		int speed = 50;
+		int speed = 5;
 		if ((targetX - posX) * (targetX - posX) + (targetY - posY)
 				* (targetY - posY) > 0) {
 
@@ -79,7 +79,7 @@ public class StateBuilder {
 					posY + ((targetY - posY) / speed));
 
 			if ((targetX - posX) * (targetX - posX) + (targetY - posY)
-					* (targetY - posY) < 1.2) {
+					* (targetY - posY) < 100) {
 				driftingComponent.setLocation(targetX, targetY);
 
 				state.driftRequested = true;
