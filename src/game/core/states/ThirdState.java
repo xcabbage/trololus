@@ -11,12 +11,16 @@ import game.util.Util;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.gui.AbstractComponent;
+import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 import game.core.parts.*;
+
 public class ThirdState extends BasicState {
 
 	public static int ID = 2;
@@ -27,25 +31,43 @@ public class ThirdState extends BasicState {
 	private ContentPane menuPane;
 
 	public void createContent() throws SlickException {
+		Image buttonImg = new Image("resources/Splash/UI/IG/IG_fps.png")
+				.getScaledCopy(0.15f);
 
 		sb.addContentPane(0.5f, 0.5f, -175, -50, 420, 100);
 		menuPane = sb.getPane(-1);
-			menuPane.addTextField(20, 10, 300, 25);
-			menuPane.addTextField(20, 60, 300, 25);
-			menuPane.addButton(325, 10, "resources/Splash/UI/IG/IG_fps.png");
-			
-			menuPane.addButton(325, 60, "resources/Splash/UI/IG/IG_fps.png");
-			((MouseOverAreaDav) menuPane.getComponent(-1)).scaleImage(0.15f);
-			menuPane.addLabel(1, 0.5f, -50, "Create a game - HOST");
-			menuPane.getLabel(-1).setFont(
-					new TrueTypeFont(new Font("Cambria", 25, 20), true));
-			
+		menuPane.addTextField(20, 10, 300, 25);
+		menuPane.addTextField(20, 60, 300, 25);
+		menuPane.addButton(325, 10, buttonImg);
+		menuPane.getComponent(-1).addListener(new ComponentListener() {
+
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				Util.notify("Button1 pressed");
+
+			}
+		});
+		menuPane.addButton(325, 60, buttonImg);
+		menuPane.getComponent(-1).addListener(new ComponentListener() {
+
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				Util.notify("Button1 pressed");
+
+			}
+		});
+		
+		menuPane.addLabel(1, 0, 0, "Create a game - HOST");
+		menuPane.getLabel(-1).setFont(
+				new TrueTypeFont(new Font("Cambria", 25, 20), true));
+		menuPane.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, -13);
+		
+		
 		sb.addLabel(1, 0.5f, 0.5f, "Create a game - HOST");
 		sb.getLabel(-1).setFont(
 				new TrueTypeFont(new Font("Cambria", 25, 43), true));
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 
-		
 		sb.addLabel(1, 0.5f, 0.5f, "Host a game over LAN, IP or hotseat");
 		sb.getLabel(-1).setFont(
 				new TrueTypeFont(new Font("Cambria", 25, 25), true));
@@ -87,10 +109,11 @@ public class ThirdState extends BasicState {
 				String host = field.getText();
 				int port = 0;
 				try {
-				port = Integer.parseInt(field2.getText());}
-				catch (Exception e){
+					port = Integer.parseInt(field2.getText());
+				} catch (Exception e) {
 					Util.printErr(e.getLocalizedMessage());
-				}			Util.notify("Connecting to " + host + ":" + port);
+				}
+				Util.notify("Connecting to " + host + ":" + port);
 				network.connect(host, port);
 
 				break;

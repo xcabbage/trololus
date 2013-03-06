@@ -50,7 +50,8 @@ public class Label {
 	}
 
 	/**
-	 * @param font the font to set
+	 * @param font
+	 *            the font to set
 	 */
 	public void setFont(TrueTypeFont font) {
 		this.font = font;
@@ -90,6 +91,7 @@ public class Label {
 	private boolean backgroundImgEnabled;
 	private int backgroundOffsetY = 20;
 	private int backgroundOffsetX = 20;
+	private Rectangle container;
 
 	/**
 	 * @param x
@@ -98,37 +100,40 @@ public class Label {
 	 * @param font
 	 */
 
-	public void fadeIn(long timeMillis){
+	public void fadeIn(long timeMillis) {
 		final Timer time = new Timer();
-		
+
 		time.scheduleAtFixedRate(new TimerTask() {
-			
+
 			@Override
 			public void run() {
-				if (getAlpha() <= 0.97f){
-				setAlpha(getAlpha()+0.02f);
-				} else time.cancel();
-		
-		}}, 0, timeMillis/50);
-		
+				if (getAlpha() <= 0.97f) {
+					setAlpha(getAlpha() + 0.02f);
+				} else
+					time.cancel();
+
+			}
+		}, 0, timeMillis / 50);
+
 	}
-	
-	public void fadeOut(long timeMillis){
-	final Timer time = new Timer();
-		
+
+	public void fadeOut(long timeMillis) {
+		final Timer time = new Timer();
+
 		time.scheduleAtFixedRate(new TimerTask() {
-			
+
 			@Override
 			public void run() {
-				if (getAlpha() != 0f){
-					setAlpha(getAlpha()-0.02f);
-					} else time.cancel();
-				}
-		
-		}, 0, timeMillis/50);
-		
+				if (getAlpha() != 0f) {
+					setAlpha(getAlpha() - 0.02f);
+				} else
+					time.cancel();
+			}
+
+		}, 0, timeMillis / 50);
+
 	}
-	
+
 	public void setVisible(boolean visible) {
 		isVisible = visible;
 	}
@@ -143,45 +148,6 @@ public class Label {
 
 	public void setContainer(Rectangle rect) {
 		containingElement = rect;
-	}
-
-	public Label(int x, int y, String string, TrueTypeFont font) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.string = string;
-		this.font = font;
-		this.type = 1;
-		commonInit();
-
-	}
-
-	/**
-	 * 
-	 */
-	private void commonInit() {
-		containingElement = new Rectangle(0, 0, Trololus.app.getWidth(),
-				Trololus.app.getHeight());
-		currW = (int) containingElement.getWidth();
-		color = new Color(Color.white);
-	}
-
-	public Label(int type, int x, int y, String content) throws SlickException {
-		super();
-		this.x = x;
-		this.y = y;
-		this.type = type;
-
-		if (type == 2) {
-			this.img = new Image(content);
-		} else if (type == 1) {
-			this.string = content;
-			this.font = new TrueTypeFont(new Font("Garamond", 10, 25), true);
-		} else
-			Util.print("Wrong Label type initialized: Type " + type
-					+ "; Content: " + content);
-		commonInit();
-
 	}
 
 	public void setPosition(ContentPosition pos) {
@@ -225,12 +191,13 @@ public class Label {
 	public void setBackground(String path) throws SlickException {
 		backgroundRect = getBounds();
 		backgroundImage = new Image(path);
-		backgroundImage = backgroundImage.getScaledCopy((int) getBounds().getWidth() +backgroundOffsetX, (int) getBounds().getHeight() + backgroundOffsetY);
+		backgroundImage = backgroundImage.getScaledCopy((int) getBounds()
+				.getWidth() + backgroundOffsetX, (int) getBounds().getHeight()
+				+ backgroundOffsetY);
 		backgroundImgEnabled = true;
-		
+
 	}
-	
-	
+
 	public Rectangle getBounds() {
 		int width = 0, height = 0;
 
@@ -248,6 +215,36 @@ public class Label {
 		return new Rectangle(x, y, width, height);
 	}
 
+	// CONSTRUCTORS
+	public Label(int x, int y, String string, TrueTypeFont font) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.string = string;
+		this.font = font;
+		this.type = 1;
+		commonInit();
+
+	}
+
+	public Label(int type, int x, int y, String content) throws SlickException {
+		super();
+		this.x = x;
+		this.y = y;
+		this.type = type;
+
+		if (type == 2) {
+			this.img = new Image(content);
+		} else if (type == 1) {
+			this.string = content;
+			this.font = new TrueTypeFont(new Font("Garamond", 10, 25), true);
+		} else
+			Util.print("Wrong Label type initialized: Type " + type
+					+ "; Content: " + content);
+		commonInit();
+
+	}
+
 	public Label(float x, float y, String content, float scale)
 			throws SlickException {
 		super();
@@ -260,7 +257,6 @@ public class Label {
 		this.img = new Image(content);
 		img = img.getScaledCopy(scale);
 		commonInit();
-		rescale();
 
 	}
 
@@ -272,7 +268,6 @@ public class Label {
 
 		scalingX = x;
 		scalingY = y;
-		rescale();
 
 		this.type = type;
 
@@ -288,6 +283,39 @@ public class Label {
 		commonInit();
 	}
 
+	public Label(int type, float x, float y, String content, Rectangle rect)
+			throws SlickException {
+		super();
+		container = rect;
+		scaling = 1;
+
+		scalingX = x;
+		scalingY = y;
+
+		this.type = type;
+
+		if (type == 2) {
+			this.img = new Image(content);
+
+		} else if (type == 1) {
+			this.string = content;
+			this.font = new TrueTypeFont(new Font("Garamond", 10, 25), true);
+		} else
+			Util.print("Wrong Label type initialized: Type " + type
+					+ "; Content: " + content);
+		commonInit();
+	}
+
+	private void commonInit() {
+		containingElement = new Rectangle(0, 0, Trololus.app.getWidth(),
+				Trololus.app.getHeight());
+		currW = (int) containingElement.getWidth();
+		color = new Color(Color.white);
+		System.out.println(currW);
+		rescale();
+	}
+
+	// SCALING METHODS
 	public void scaleToWidth(float arg) {
 		int newWidth = (int) (arg * containingElement.getWidth());
 		img = img.getScaledCopy(newWidth,
@@ -335,12 +363,30 @@ public class Label {
 
 	public void rescale() {
 
+		int containerW, containerH;
+
+		if (container != null) {
+			float scaleForContainer = (float) Trololus.app.getWidth()
+					/ (float) currW;
+
+			container = new Rectangle(container.getMinX() * scaleForContainer,
+					container.getMinY() * scaleForContainer,
+					container.getWidth() * scaleForContainer,
+					container.getHeight() * scaleForContainer);
+
+
+
+			containerW = (int) container.getWidth();
+			containerH = (int) container.getHeight();
+		} else {
+			containerW = (int) Trololus.app.getWidth();
+			containerH = (int) Trololus.app.getHeight();
+		}
+
 		if (type == 2) {
 
 			img = img.getScaledCopy((float) Trololus.app.getWidth()
 					/ (float) currW);
-
-			currW = Trololus.app.getWidth();
 
 		}
 
@@ -348,14 +394,14 @@ public class Label {
 		case 0:
 			break;
 		case 1: {
-			x = (int) (Trololus.app.getWidth() * scalingX);
-			y = (int) (Trololus.app.getHeight() * scalingY);
+			x = (int) (containerW * scalingX);
+			y = (int) (containerH * scalingY);
 			break;
 		}
 		case 2: {
 			int scale = x;
-			x = (int) (Trololus.app.getWidth() * scalingX);
-			y = (int) (Trololus.app.getHeight() * scalingY);
+			x = (int) (containerW * scalingX);
+			y = (int) (containerH * scalingY);
 
 			if (inited)
 				img.getScaledCopy(scale / x);
@@ -365,7 +411,7 @@ public class Label {
 		}
 		case 3: {
 			// initialize starting values
-			int contentW = 0, contentH = 0, appW, appH;
+			int contentW = 0, contentH = 0;
 			if (type == 1) {
 				contentW = font.getWidth(string);
 				contentH = font.getHeight();
@@ -375,9 +421,6 @@ public class Label {
 			} else
 				Util.print("An error occured in a label : type not properly initialized");
 
-			appW = Trololus.app.getWidth();
-			appH = Trololus.app.getHeight();
-
 			// set the actual new X's and Y's
 			switch (position) {
 			case TopLeft:
@@ -385,42 +428,43 @@ public class Label {
 				y = 0;
 				break;
 			case TopCenter:
-				x = appW / 2 - contentW / 2;
+				x = containerW / 2 - contentW / 2;
 				y = 0;
 				break;
 			case TopRight:
-				x = appW - contentW;
+				x = containerW - contentW;
 				y = 0;
 				break;
 			case CenterLeft:
 				x = 0;
-				y = (appH / 2) - (contentH / 2);
+				y = (containerH / 2) - (contentH / 2);
 				break;
 			case Center:
-				x = (appW / 2) - (contentW / 2);
-				y = (appH / 2) - (contentH / 2);
+				x = (containerW / 2) - (contentW / 2);
+				y = (containerH / 2) - (contentH / 2);
 				break;
 			case CenterRight:
-				x = appW - contentW;
-				y = (appH / 2) - (contentH / 2);
+				x = containerW - contentW;
+				y = (containerH / 2) - (contentH / 2);
 				break;
 			case BottomLeft:
 				x = 0;
-				y = appH - contentH;
+				y = containerH - contentH;
 				break;
 			case BottomCenter:
-				x = appW / 2 - contentW / 2;
-				y = appH - contentH;
+				x = containerW / 2 - contentW / 2;
+				y = containerH - contentH;
 				break;
 			case BottomRight:
-				x = appW - contentW;
-				y = appH - contentH;
+				x = containerW - contentW;
+				y = containerH - contentH;
 				break;
 			default:
 				Util.print("Label Position fucked up - unknown value passed to the method");
 				break;
 
 			}
+
 			break;
 		}
 
@@ -430,10 +474,20 @@ public class Label {
 		}
 
 		}
+		if (container != null) {
+			x = (int) (x + container.getMinX());
+			y = (int) (y + container.getMinY());
+		}
 		x = x + xOffset;
 		y = y + yOffset;
+		currW = Trololus.app.getWidth();
 	}
 
+	public void setScale(float scale) {
+		img = img.getScaledCopy(scale);
+	}
+
+	// ALPHA AND RENDERING METHODS
 	public void setAlpha(float alpha) {
 		color = MoreColors.getTrans(color, alpha);
 	}
@@ -443,23 +497,25 @@ public class Label {
 	}
 
 	public void render() {
-		if (isVisible){
+		if (isVisible) {
 
 			if (backgroundEnabled) {
 				Graphics g = Trololus.app.getGraphics();
-				
-				g.setColor(MoreColors.getTrans(backgroundBorder, color.getAlpha()));
+
+				g.setColor(MoreColors.getTrans(backgroundBorder,
+						color.getAlpha()));
 				g.draw(backgroundRect);
 				g.setColor(MoreColors.getTrans(backgroundFill, color.getAlpha()));
 				g.fill(backgroundRect);
 			}
 
-			if(backgroundImgEnabled){
-				backgroundImage.setAlpha( getAlpha());
-			
-				backgroundImage.draw(x-backgroundOffsetX/2, y-backgroundOffsetY/2);
+			if (backgroundImgEnabled) {
+				backgroundImage.setAlpha(getAlpha());
+
+				backgroundImage.draw(x - backgroundOffsetX / 2, y
+						- backgroundOffsetY / 2);
 			}
-		
+
 			if (!centering) {
 				switch (type) {
 				case 1: {
@@ -494,32 +550,68 @@ public class Label {
 				}
 
 			}
-			
 
 		}
 	}
 
 	public void render(Rectangle rect) {
+		if (isVisible) {
 
-		switch (type) {
-		case 1: {
-			font.drawString(x + rect.getMinX(), y + rect.getMinY(), string,
-					color);
-			break;
-		}
-		case 2: {
-			img.draw(x + rect.getMinX(), y + rect.getMinY());
-			break;
-		}
-		default:
-			Util.print("Label " + string + "can't be drawn; Wrong label type.");
-			break;
-		}
+			if (backgroundEnabled) {
+				Graphics g = Trololus.app.getGraphics();
 
-	}
+				g.setColor(MoreColors.getTrans(backgroundBorder,
+						color.getAlpha()));
+				g.draw(backgroundRect);
+				g.setColor(MoreColors.getTrans(backgroundFill, color.getAlpha()));
+				g.fill(backgroundRect);
+			}
 
-	public void setScale(float scale) {
-		img = img.getScaledCopy(scale);
+			if (backgroundImgEnabled) {
+				backgroundImage.setAlpha(getAlpha());
+
+				backgroundImage.draw(
+						(x - backgroundOffsetX / 2) + rect.getMinX(),
+						rect.getMinY() + y - backgroundOffsetY / 2);
+			}
+
+			if (!centering) {
+				switch (type) {
+				case 1: {
+					font.drawString(x, y, string, color);
+					break;
+				}
+				case 2: {
+					img.draw(x + rect.getMinX(), y + rect.getMinY());
+					break;
+				}
+				default:
+					Util.print("Label " + string
+							+ "can't be drawn; Wrong label type.");
+					break;
+				}
+			} else {
+				switch (type) {
+				case 1: {
+					font.drawString(x - font.getWidth(string) + rect.getMinX(),
+							y - font.getHeight() + rect.getMinY(), string,
+							color);
+					break;
+				}
+				case 2: {
+					img.draw(rect.getMinX() + x - (img.getWidth() / 2),
+							rect.getMinY() + y - (img.getHeight() / 2));
+					break;
+				}
+				default:
+					Util.print("Label " + string
+							+ "can't be drawn; Wrong label type.");
+					break;
+				}
+
+			}
+
+		}
 	}
 
 	/**
@@ -528,6 +620,14 @@ public class Label {
 	public void setCentering(boolean b) {
 		centering = b;
 
+	}
+
+	@Override
+	public String toString() {
+		return "Label [x=" + x + ", y=" + y + ", string=" + string + ", type="
+				+ type + ", container=" + container + ", scaling=" + scaling
+				+ ", scalingX=" + scalingX + ", scalingY=" + scalingY
+				+ ", xOffset=" + xOffset + ", yOffset=" + yOffset + "]";
 	}
 
 }
