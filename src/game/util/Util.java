@@ -151,6 +151,11 @@ public class Util {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		try {
 			ge.registerFont(java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File("resources/fonts/orena.ttf")));
+			ge.registerFont(java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File("resources/fonts/basica.ttf")));
+			ge.registerFont(java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File("resources/fonts/moiser.ttf")));
+			ge.registerFont(java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File("resources/fonts/complex.ttf")));
+			ge.registerFont(java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File("resources/fonts/freedom.ttf")));
+			
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

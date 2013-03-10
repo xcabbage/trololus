@@ -20,9 +20,9 @@ public class SixthState extends BasicState {
 
 	public void createContent() throws SlickException {
 		//create independent content
-		sb.addLabel(1, 0.5f, 0.5f, "Game Options - Prefences");
+		sb.addLabel(1, 0.5f, 0.5f, "game options");
 		sb.getLabel(-1).setFont(
-				new TrueTypeFont(new Font("Orena", 25, 43), true));
+				new TrueTypeFont(new Font("Basica v.2012", 25, 43), true));
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 		
 		

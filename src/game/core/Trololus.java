@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import game.core.states.*;
 import game.nonstatic.system.Pepta;
+import game.util.PropertiesHandler;
 import game.util.Util;
 
 import org.newdawn.slick.*;
@@ -57,7 +58,16 @@ public class Trololus extends StateBasedGame {
 
 	public static void main(String[] args) throws SlickException {
 		Util.initFonts();
-		
+		try {
+			PropertiesHandler.init();
+			
+			PropertiesHandler.saveProperty("musicvolume", "640");
+			System.out.println(PropertiesHandler.getProperty("musicvolume"));
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+	
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
@@ -82,6 +92,7 @@ public class Trololus extends StateBasedGame {
 		resState.init(gc, this);
 		resState.initVars();
 		Util.init(resState.game);
+
 		addState(new FirstState());
 		addState(new SecondState());
 		addState(new ThirdState());

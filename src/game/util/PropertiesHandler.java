@@ -24,7 +24,8 @@ import java.util.Properties;
 
 public class PropertiesHandler {
 	static Path savedpropspath = Paths.get(System.getenv("APPDATA") + "\\TrololusGame\\game.properties"); 		//path to saved non-default props
-
+	static Properties prop = new Properties();
+	 
 	public static void init() throws IOException{
 
 		// create and load default properties
@@ -33,8 +34,10 @@ public class PropertiesHandler {
 			FileInputStream DIStream = new FileInputStream(savedpropspath.toString());
 			defaultProps.load(DIStream);
 //			defaultProps.list(System.out);
+
 			DIStream.close();
 		} catch (FileNotFoundException e1) {
+			System.out.println("Could not find properties; creating default.");
 			e1.printStackTrace();
 			//create folder if it isn't found
 			System.out.println("Creating new folder TrololusGame at " + savedpropspath);
@@ -66,29 +69,46 @@ public class PropertiesHandler {
 		FileInputStream IStream = new FileInputStream(savedpropspath.toString());
 		try{
 			applicationProps.load(IStream);
-			System.out.println("Listing saved properties");
-			applicationProps.list(System.out);
+			
+			
 			IStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		prop.load( new FileInputStream(savedpropspath.toString()));
+		
+		
 	}
+	
+	public static  String getProperty(String key){
+		return prop.getProperty(key);
+	}
+	
 	public static void saveProperty(String propname, String propvalue) throws IOException{
 
     	
     	Properties prop = new Properties();
     	
     	try {
-    		FileInputStream IStream = new FileInputStream(savedpropspath.toString());
-        	FileOutputStream OStream = new FileOutputStream(savedpropspath.toString());
-    		//set the properties value
-        	prop.load(IStream);
-    		prop.setProperty(propname, propvalue);
-    		prop.list(System.out);
+    	
+        	
+//    		set the properties value
+        	prop.load(new FileInputStream(new File(savedpropspath.toString())));
+        	
+        	System.out.println("printing from SaveProperty!");
+        	
+    		prop.put(propname, propvalue);
+  
+        	
+    		
     		//save properties to project root folder
-    		prop.store(OStream, null);
+
+    		prop.store(new FileOutputStream(savedpropspath.toString()), null);
+    		
  
-    	} catch (IOException ex) {
+    	} 
+    	catch (IOException ex) {
     		ex.printStackTrace();
     		PropertiesHandler.init();
     		FileInputStream IStream = new FileInputStream(savedpropspath.toString());
@@ -100,16 +120,26 @@ public class PropertiesHandler {
     		prop.list(System.out);
     		prop.store(OStream, "Non-Default PRops");
         }
+    	reloadProperties();
     }
+	
+	static void reloadProperties(){
+		try {
+			prop.load( new FileInputStream(savedpropspath.toString()));
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+	}
     public static void loadProperties() throws FileNotFoundException{
-    	FileInputStream IStream = new FileInputStream("user.home/AppData/Trololus/game.properties");//*
     	
-    	Properties prop = new Properties();
- 
+    	FileInputStream IStream = new FileInputStream(new File(savedpropspath.toString()));
+    	prop = new Properties();
+    	
     	try {
                //load a properties file
     		prop.load(IStream);
-    		prop.list(System.out);
+    		
                //get the property value and print it out
     		System.out.println(prop.getProperty("musicvolume"));
             System.out.println(prop.getProperty("soundvolume"));
