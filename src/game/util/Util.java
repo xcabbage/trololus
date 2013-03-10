@@ -5,6 +5,10 @@ import game.core.parts.ContentPosition;
 import game.core.parts.Label;
 import game.core.states.BasicState;
 
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -143,6 +147,17 @@ public class Util {
 
 	}
 
-	
+	public static void initFonts(){
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		try {
+			ge.registerFont(java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File("resources/fonts/orena.ttf")));
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

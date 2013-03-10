@@ -4,6 +4,9 @@
 package game.core;
 
 import java.awt.Dimension;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -53,6 +56,8 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void main(String[] args) throws SlickException {
+		Util.initFonts();
+		
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();

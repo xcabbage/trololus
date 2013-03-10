@@ -22,7 +22,7 @@ public class SixthState extends BasicState {
 		//create independent content
 		sb.addLabel(1, 0.5f, 0.5f, "Game Options - Prefences");
 		sb.getLabel(-1).setFont(
-				new TrueTypeFont(new Font("Cambria", 25, 43), true));
+				new TrueTypeFont(new Font("Orena", 25, 43), true));
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 		
 		
