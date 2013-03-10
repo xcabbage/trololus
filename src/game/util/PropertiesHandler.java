@@ -73,32 +73,32 @@ public class PropertiesHandler {
 			e.printStackTrace();
 		}
 	}
-    public static void saveProperty(String[] args) throws IOException{
-    	FileOutputStream OStream = new FileOutputStream("user.home/AppData/Trololus/game.properties");//*
+	public static void saveProperty(String propname, String propvalue) throws IOException{
+
     	
     	Properties prop = new Properties();
-    	//KOMENTAR - DK 
-    	// fajny ale ty cesty na ty I/O streamy dej obe do jednoho variablu co se bude inicializovat nahore at je to jednotne ovladany (konstanta)
-    	// + ta cesta by mela bejt absolutni, ne v packagi, ale nekde venku ze hry: treba C://Users/<uzivatel>/myDocuments nebo tak 
-    	//                                                    at to nedela bordel se syncem pres git kdyz to bude spustest vic lidi
-    	//Koment - HP
-    	//delam to dobre?
-    	
     	
     	try {
+    		FileInputStream IStream = new FileInputStream(savedpropspath.toString());
+        	FileOutputStream OStream = new FileOutputStream(savedpropspath.toString());
     		//set the properties value
-    		prop.setProperty("musicvolume", "100");
-    		prop.setProperty("soundvolume", "100");
-    		prop.setProperty("speechvolume", "100");
-    		prop.setProperty("database", "localhost");
-    		prop.setProperty("dbuser", "defaultuser");
-    		prop.setProperty("graphicsquality", "high");
- 
+        	prop.load(IStream);
+    		prop.setProperty(propname, propvalue);
+    		prop.list(System.out);
     		//save properties to project root folder
     		prop.store(OStream, null);
  
     	} catch (IOException ex) {
     		ex.printStackTrace();
+    		PropertiesHandler.init();
+    		FileInputStream IStream = new FileInputStream(savedpropspath.toString());
+        	FileOutputStream OStream = new FileOutputStream(savedpropspath.toString());
+    		//set the properties value
+        	prop.load(IStream);
+    		prop.setProperty(propname, propvalue);
+    		System.out.println("Listing new saved Properties");
+    		prop.list(System.out);
+    		prop.store(OStream, "Non-Default PRops");
         }
     }
     public static void loadProperties() throws FileNotFoundException{
