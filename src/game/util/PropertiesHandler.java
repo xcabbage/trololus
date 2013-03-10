@@ -4,6 +4,7 @@
 *
 */
 package game.util;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,24 +15,47 @@ import java.util.Properties;
 
 //IMPORTANT: Vyzkoušejte si to, mìlo by to hodit prázdnou konzoli, popø. FileNotFound exception když tam ten file nemáte
 
-public class PropertiesHandler
-{
-	public static void init() throws FileNotFoundException{
-		Path savedinputpath = Paths.get(System.getProperty("user.home") + "\\AppData\\TrololusGame\\game.properties"); 		//path to saved non-default props
-		Path defaultpath = Paths.get(System.getProperty("user.home") + "\\AppData\\TrololusGame\\gamedefault.properties");	//path to saved default props
-		FileInputStream IStream = new FileInputStream(savedinputpath.toString());
-		FileInputStream DIStream = new FileInputStream(defaultpath.toString());
-		
+//KOMENTAR - DK 
+// fajny ale ty cesty na ty I/O streamy dej obe do jednoho variablu co se bude inicializovat nahore at je to jednotne ovladany (konstanta)
+// + ta cesta by mela bejt absolutni, ne v packagi, ale nekde venku ze hry: treba C://Users/<uzivatel>/myDocuments nebo tak 
+//                                                    at to nedela bordel se syncem pres git kdyz to bude spustest vic lidi
+//Koment - HP
+//delam to dobre?
+
+public class PropertiesHandler {
+	static Path savedpropspath = Paths.get(System.getenv("APPDATA") + "\\TrololusGame\\game.properties"); 		//path to saved non-default props
+
+	public static void init() throws IOException{
+
 		// create and load default properties
 		Properties defaultProps = new Properties();
 		try {
+			FileInputStream DIStream = new FileInputStream(savedpropspath.toString());
 			defaultProps.load(DIStream);
+//			defaultProps.list(System.out);
 			DIStream.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
-		//	System.out.println("Writing default props to " + System.getProperty("user.home") + "\\AppData\\TrololusGame\\gamedefault.properties");
-			
+			//create folder if it isn't found
+			System.out.println("Creating new folder TrololusGame at " + savedpropspath);
+			File dir = new File(System.getenv("APPDATA") + "\\TrololusGame");
+			dir.mkdir();
+
+			//if they are not found, set the default properties value
+			defaultProps.setProperty("musicvolume", "100");
+			defaultProps.setProperty("soundvolume", "100");
+			defaultProps.setProperty("speechvolume", "100");
+			defaultProps.setProperty("database", "localhost");
+			defaultProps.setProperty("dbuser", "defaultuser");
+			defaultProps.setProperty("graphicsquality", "high");
+ 
+    		//save default properties to properties folder
+			System.out.println("Writing new default properties to " + savedpropspath);
+			File DPropsFile = new File(savedpropspath.toString());
+			FileOutputStream fileOut = new FileOutputStream(DPropsFile);
+			defaultProps.store(fileOut, "Default Game Properties");
+			fileOut.close();
+//			defaultProps.store(new FileOutputStream(defaultpath.toString()), null);
 		}
 		
 		// create application properties with default
@@ -39,16 +63,17 @@ public class PropertiesHandler
 
 		// now load properties 
 		// from last invocation
-		IStream = new FileInputStream(savedinputpath.toString());
+		FileInputStream IStream = new FileInputStream(savedpropspath.toString());
 		try{
 			applicationProps.load(IStream);
+			System.out.println("Listing saved properties");
+			applicationProps.list(System.out);
 			IStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-    public static void saveProperties(String[] args) throws IOException{
+    public static void saveProperty(String[] args) throws IOException{
     	FileOutputStream OStream = new FileOutputStream("user.home/AppData/Trololus/game.properties");//*
     	
     	Properties prop = new Properties();
