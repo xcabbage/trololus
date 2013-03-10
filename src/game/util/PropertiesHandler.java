@@ -8,12 +8,46 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
+//IMPORTANT: Vyzkoušejte si to, mìlo by to hodit prázdnou konzoli, popø. FileNotFound exception když tam ten file nemáte
 
-public class PropertiesHandler 
+public class PropertiesHandler
 {
-	
+	public static void init() throws FileNotFoundException{
+		Path savedinputpath = Paths.get(System.getProperty("user.home") + "\\AppData\\TrololusGame\\game.properties"); 		//path to saved non-default props
+		Path defaultpath = Paths.get(System.getProperty("user.home") + "\\AppData\\TrololusGame\\gamedefault.properties");	//path to saved default props
+		FileInputStream IStream = new FileInputStream(savedinputpath.toString());
+		FileInputStream DIStream = new FileInputStream(defaultpath.toString());
+		
+		// create and load default properties
+		Properties defaultProps = new Properties();
+		try {
+			defaultProps.load(DIStream);
+			DIStream.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		//	System.out.println("Writing default props to " + System.getProperty("user.home") + "\\AppData\\TrololusGame\\gamedefault.properties");
+			
+		}
+		
+		// create application properties with default
+		Properties applicationProps = new Properties(defaultProps);
+
+		// now load properties 
+		// from last invocation
+		IStream = new FileInputStream(savedinputpath.toString());
+		try{
+			applicationProps.load(IStream);
+			IStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     public static void saveProperties(String[] args) throws IOException{
     	FileOutputStream OStream = new FileOutputStream("user.home/AppData/Trololus/game.properties");//*
     	
@@ -64,4 +98,5 @@ public class PropertiesHandler
         }
  
     }
+    
 }
