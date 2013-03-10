@@ -56,7 +56,7 @@ public class FirstState extends BasicState {
 		if(input.isMousePressed(0)){
 			sb.driftComponentTo(input.getMouseX(), input.getMouseY(), sb.getComponent(-1));	
 			driftRequested = true;
-			Util.notify("Requesting drift to "+ input.getMouseX()+ "," +input.getMouseY());
+			
 		}
 		
 	}
