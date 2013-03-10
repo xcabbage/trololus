@@ -1,7 +1,9 @@
 package game.core.states;
 
 import game.core.Trololus;
+import game.core.parts.MouseOverAreaDav;
 import game.core.parts.StateBuilder;
+import game.util.Util;
 
 import java.awt.Dimension;
 
@@ -33,10 +35,10 @@ public class BasicState extends BasicGameState {
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	Dimension res;
 	GameContainer app;
-	public	StateBuilder sb;
+	public StateBuilder sb;
 	Input input;
 	public Circle[] buttonHoverCircle = new Circle[10];
-	public MouseOverArea[] button = new MouseOverArea[10];
+	public MouseOverAreaDav [] button = new MouseOverAreaDav[10];
 	public BasicState stateRes;
 
 	Music music;
@@ -80,7 +82,7 @@ public class BasicState extends BasicGameState {
 		buttonsSafeY = appHeight / 2;
 
 		for (int a = 0; a < menuButtons.getHorizontalCount(); a++) {
-			button[a] = new MouseOverArea(app, menuButtons.getSprite(a, 0),
+			button[a] = new MouseOverAreaDav(app, menuButtons.getSprite(a, 0),
 					(buttonsX + buttonsOffset * a) - buttonRadius * 2 + 5,
 					buttonsY - buttonRadius * 2 + 5);
 			button[a].setMouseOverImage(menuButtons.getSprite(a, 1));
@@ -96,10 +98,10 @@ public class BasicState extends BasicGameState {
 				+ this.getID());
 	}
 
-	public void createContent() throws SlickException{
-		
+	public void createContent() throws SlickException {
+
 	}
-	
+
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 
@@ -169,7 +171,8 @@ public class BasicState extends BasicGameState {
 
 				backgroundBack.draw(0, backgroundY, backgroundScale);
 				background.draw(0, backgroundY, backgroundScale);
-				if (stateTitleEnabled) g.drawString(StateTitle, 320, 20);
+				if (stateTitleEnabled)
+					g.drawString(StateTitle, 320, 20);
 				drawMenu(g);
 			}
 		} else {
@@ -179,13 +182,14 @@ public class BasicState extends BasicGameState {
 
 	}
 
-	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g, BasicState state)
-			throws SlickException {
+	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g,
+			BasicState state) throws SlickException {
 
 		if (Trololus.drawing) {
 			backgroundBack.draw(0, state.backgroundY, state.backgroundScale);
 			state.background.draw(0, state.backgroundY, state.backgroundScale);
-			if (stateTitleEnabled) g.drawString(StateTitle, 320, 20);
+			if (stateTitleEnabled)
+				g.drawString(StateTitle, 320, 20);
 			drawMenu(g, state);
 			renderDiffGfx(gc, mainGame, g, stateRes);
 		}
@@ -212,10 +216,10 @@ public class BasicState extends BasicGameState {
 
 	}
 
-	public void rescale(){
+	public void rescale() {
 		sb.rescale();
 	}
-	
+
 	public int isOverButton(int x, int y) {
 		int returnButton = 0;
 		y = y + (buttonsGetY / 2);
@@ -246,4 +250,47 @@ public class BasicState extends BasicGameState {
 		return 0;
 	}
 
+	// STATE SWITCHING BASED ON KEY PRESSES
+	public void keyPressed(int key, char c) {
+		super.keyPressed(key, c);
+		switch (key) {
+
+		case Input.KEY_1:
+		case Input.KEY_NUMPAD1:{
+			game.enterState(0);
+			break;
+		}
+		case Input.KEY_2:
+		case Input.KEY_NUMPAD2: {
+			game.enterState(1);
+			break;
+		}
+		case Input.KEY_3:
+		case Input.KEY_NUMPAD3:{
+			game.enterState(2);
+			break;
+		}
+		case Input.KEY_4:
+		case Input.KEY_NUMPAD4: {
+			game.enterState(3);
+			break;
+		}
+		case Input.KEY_5:
+		case Input.KEY_NUMPAD5:{
+			game.enterState(4);
+			break;
+		}
+		case Input.KEY_6:
+		case Input.KEY_NUMPAD6:{
+			game.enterState(5);
+			break;
+		}
+	
+
+		default: {
+			break;
+		}
+		}
+
+	}
 }
