@@ -25,9 +25,7 @@ public class FirstState extends BasicState {
 	
 
 	public void createContent() throws SlickException {
-//		sb.addLabel(2, 0, 0, "resources/splash/ui/FPS.png");
-		
-		sb.addButton(0, 0, "resources/splash/ui/FPS.png");
+
 		
 	
 		
@@ -47,17 +45,18 @@ public class FirstState extends BasicState {
 			throws SlickException {
 		super.update(gc, mainGame, delta);
 		Input input = gc.getInput();
+	
 		
-		if(driftRequested){
-			sb.driftComponentContinue(this);	
-		}
-		
-		
-		if(input.isMousePressed(0)){
-			sb.driftComponentTo(input.getMouseX(), input.getMouseY(), sb.getComponent(-1));	
-			driftRequested = true;
-			
-		}
+//		if(driftRequested){
+//			sb.driftComponentContinue(this);	
+//		}
+//		
+//		
+//		if(input.isMousePressed(0)){
+//			sb.driftComponentTo(input.getMouseX(), input.getMouseY(), sb.getComponent(-1));	
+//			driftRequested = true;
+//			
+//		}
 		
 	}
 

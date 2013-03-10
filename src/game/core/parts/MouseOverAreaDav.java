@@ -1,5 +1,8 @@
 package game.core.parts;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -19,6 +22,8 @@ import org.newdawn.slick.gui.GUIContext;
 public class MouseOverAreaDav extends AbstractComponent {
 	/** The default state */
 	private static final int NORMAL = 1;
+
+	Timer timer = new Timer();
 
 	/** The mouse down state */
 	private static final int MOUSE_DOWN = 2;
@@ -64,7 +69,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 
 	/** True if the mouse button is pressed */
 	private boolean mouseDown;
-	
+
 	/** The state of the area */
 	private int state = NORMAL;
 
@@ -72,6 +77,10 @@ public class MouseOverAreaDav extends AbstractComponent {
 	private boolean mouseUp;
 
 	private boolean centered;
+
+	private boolean mouseOverSoundPlaying;
+
+	private int mouseOverSoundDelay = 1000;
 
 	/**
 	 * @return Whether this component is set to draw using the Centered method.
@@ -81,7 +90,9 @@ public class MouseOverAreaDav extends AbstractComponent {
 	}
 
 	/**
-	 * @param centered Whether this component should be drawn centered at its coordinates 
+	 * @param centered
+	 *            Whether this component should be drawn centered at its
+	 *            coordinates
 	 */
 	public void setCentered(boolean centered) {
 		this.centered = centered;
@@ -101,11 +112,12 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 * @param listener
 	 *            A listener to add to the area
 	 */
-	public MouseOverAreaDav(GUIContext container, Image image, int x, int y, ComponentListener listener) {
+	public MouseOverAreaDav(GUIContext container, Image image, int x, int y,
+			ComponentListener listener) {
 		this(container, image, x, y, image.getWidth(), image.getHeight());
 		addListener(listener);
 	}
-	
+
 	/**
 	 * Create a new mouse over area
 	 * 
@@ -121,17 +133,19 @@ public class MouseOverAreaDav extends AbstractComponent {
 	public MouseOverAreaDav(GUIContext container, Image image, int x, int y) {
 		this(container, image, x, y, image.getWidth(), image.getHeight());
 	}
-	
-	public void scaleImage(float scale){
-	int	imgWidth= normalImage.getWidth();
-	int imgHeight= normalImage.getHeight();
-	
+
+	public void scaleImage(float scale) {
+		int imgWidth = normalImage.getWidth();
+		int imgHeight = normalImage.getHeight();
+
 		normalImage = normalImage.getScaledCopy(scale);
-//		mouseOverImage = normalImage.getScaledCopy(scale);
-//		mouseDownImage = normalImage.getScaledCopy(scale);
-	
-		area.setLocation(area.getMinX()-(imgWidth/2)+normalImage.getWidth()/2, area.getMinY()-imgHeight/2+normalImage.getHeight()/2);
-				
+		// mouseOverImage = normalImage.getScaledCopy(scale);
+		// mouseDownImage = normalImage.getScaledCopy(scale);
+
+		area.setLocation(
+				area.getMinX() - (imgWidth / 2) + normalImage.getWidth() / 2,
+				area.getMinY() - imgHeight / 2 + normalImage.getHeight() / 2);
+
 	}
 
 	/**
@@ -153,8 +167,8 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 *            A listener to add to the area
 	 */
 	public MouseOverAreaDav(GUIContext container, Image image, int x, int y,
-			             int width, int height, ComponentListener listener) {
-		this(container,image,x,y,width,height);
+			int width, int height, ComponentListener listener) {
+		this(container, image, x, y, width, height);
 		addListener(listener);
 	}
 
@@ -176,9 +190,9 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 */
 	public MouseOverAreaDav(GUIContext container, Image image, int x, int y,
 			int width, int height) {
-		this(container,image,new Rectangle(x,y,width,height));
+		this(container, image, new Rectangle(x, y, width, height));
 	}
-	
+
 	/**
 	 * Create a new mouse over area
 	 * 
@@ -210,8 +224,10 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * Moves the component.
 	 * 
-	 * @param x X coordinate
-	 * @param y Y coordinate
+	 * @param x
+	 *            X coordinate
+	 * @param y
+	 *            Y coordinate
 	 */
 	public void setLocation(float x, float y) {
 		if (area != null) {
@@ -223,21 +239,23 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * Set the x coordinate of this area
 	 * 
-	 * @param x The new x coordinate of this area
+	 * @param x
+	 *            The new x coordinate of this area
 	 */
 	public void setX(float x) {
 		area.setX(x);
 	}
-	
+
 	/**
 	 * Set the y coordinate of this area
 	 * 
-	 * @param y The new y coordinate of this area
+	 * @param y
+	 *            The new y coordinate of this area
 	 */
 	public void setY(float y) {
 		area.setY(y);
 	}
-	
+
 	/**
 	 * Returns the position in the X coordinate
 	 * 
@@ -255,7 +273,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	public int getY() {
 		return (int) area.getY();
 	}
-	
+
 	/**
 	 * Set the normal color used on the image in the default state
 	 * 
@@ -274,6 +292,10 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 */
 	public void setMouseOverColor(Color color) {
 		mouseOverColor = color;
+	}
+
+	public void setMouseOverSoundDelay(int delay) {
+		mouseOverSoundDelay = delay;
 	}
 
 	/**
@@ -321,28 +343,32 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 *      org.newdawn.slick.Graphics)
 	 */
 	public void render(GUIContext container, Graphics g) {
-		if (!centered){
-		if (currentImage != null) {
-			
-			int xp = (int) (area.getX() + ((getWidth() - currentImage.getWidth()) / 2));
-			int yp = (int) (area.getY() + ((getHeight() - currentImage.getHeight()) / 2));
+		if (!centered) {
+			if (currentImage != null) {
 
-			currentImage.draw(xp, yp, currentColor);
-		} else {
-			g.setColor(currentColor);
-			g.fill(area);
-		}
-		updateImage();}
-		else if (centered){
+				int xp = (int) (area.getX() + ((getWidth() - currentImage
+						.getWidth()) / 2));
+				int yp = (int) (area.getY() + ((getHeight() - currentImage
+						.getHeight()) / 2));
+
+				currentImage.draw(xp, yp, currentColor);
+			} else {
+				g.setColor(currentColor);
+				g.fill(area);
+			}
+			updateImage();
+		} else if (centered) {
 			renderCentered(container, g);
 		}
 	}
-	
+
 	public void renderCentered(GUIContext container, Graphics g) {
 		if (currentImage != null) {
-			
-			int xp = (int) (area.getX() + ((getWidth() - currentImage.getWidth()) / 2 ));
-			int yp = (int) (area.getY() + ((getHeight() - currentImage.getHeight()) / 2) );
+
+			int xp = (int) (area.getX() + ((getWidth() - currentImage
+					.getWidth()) / 2));
+			int yp = (int) (area.getY() + ((getHeight() - currentImage
+					.getHeight()) / 2));
 
 			currentImage.draw(xp, yp, currentColor);
 		} else {
@@ -352,6 +378,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 		updateImage();
 
 	}
+
 	/**
 	 * Update the current normalImage based on the mouse state
 	 */
@@ -370,17 +397,28 @@ public class MouseOverAreaDav extends AbstractComponent {
 					currentImage = mouseDownImage;
 					currentColor = mouseDownColor;
 					state = MOUSE_DOWN;
-					
+
 					notifyListeners();
 					mouseUp = false;
 				}
-				
+
 				return;
 			} else {
 				mouseUp = true;
 				if (state != MOUSE_OVER) {
-					if (mouseOverSound != null) {
+					if (mouseOverSound != null && !mouseOverSoundPlaying) {
 						mouseOverSound.play();
+						mouseOverSoundPlaying = true;
+
+						timer.schedule(new TimerTask() {
+
+							@Override
+							public void run() {
+								mouseOverSoundPlaying = false;
+
+							}
+						}, mouseOverSoundDelay);
+
 					}
 					currentImage = mouseOverImage;
 					currentColor = mouseOverColor;
@@ -401,6 +439,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 */
 	public void setMouseOverSound(Sound sound) {
 		mouseOverSound = sound;
+
 	}
 
 	/**
@@ -419,7 +458,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
 		over = area.contains(newx, newy);
 	}
-	
+
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseDragged(int, int, int, int)
 	 */
@@ -433,17 +472,17 @@ public class MouseOverAreaDav extends AbstractComponent {
 	public void mousePressed(int button, int mx, int my) {
 		over = area.contains(mx, my);
 		if (button == 0) {
-			mouseDown = true; 
+			mouseDown = true;
 		}
 	}
-	
+
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseReleased(int, int, int)
 	 */
 	public void mouseReleased(int button, int mx, int my) {
 		over = area.contains(mx, my);
 		if (button == 0) {
-			mouseDown = false; 
+			mouseDown = false;
 		}
 	}
 
@@ -460,7 +499,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	public int getWidth() {
 		return (int) (area.getMaxX() - area.getX());
 	}
-	
+
 	/**
 	 * Check if the mouse is over this area
 	 * 
@@ -473,10 +512,12 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * Set the location of this area
 	 * 
-	 * @param x The x coordinate of this area
-	 * @param y The y coordiante of this area
+	 * @param x
+	 *            The x coordinate of this area
+	 * @param y
+	 *            The y coordiante of this area
 	 */
 	public void setLocation(int x, int y) {
-		setLocation((float) x,(float) y);
+		setLocation((float) x, (float) y);
 	}
 }

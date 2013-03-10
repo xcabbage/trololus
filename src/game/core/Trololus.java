@@ -212,12 +212,11 @@ public class Trololus extends StateBasedGame {
 			break;
 		}
 
-		case Input.KEY_LALT:{
+		case Input.KEY_LALT: {
 			Util.printErr("debug Error");
 			break;
 		}
-			
-		
+
 		}
 	}
 

@@ -130,18 +130,19 @@ public class ContentPane extends StateBuilder {
 			e.printStackTrace();
 		}
 	}
-	
-	public void addLabel(int type, float x, float y,String string) throws SlickException {
+
+	public void addLabel(int type, float x, float y, String string)
+			throws SlickException {
 		Label label = new Label(type, x, y, string, area);
 		addLabels(label);
 	}
-	
-	public void addLabel(int type, int x, int y,String string) throws SlickException {
+
+	public void addLabel(int type, int x, int y, String string)
+			throws SlickException {
 		Label label = new Label(type, x, y, string, area);
 		addLabels(label);
 	}
-	
-	
+
 	public void rescale() {
 		int baseAreaX = (int) area.getMinX(), baseAreaY = (int) area.getMinY();
 		switch (scaling) {
@@ -169,7 +170,7 @@ public class ContentPane extends StateBuilder {
 		}
 
 		for (Label label : labels) {
-			 label.rescale();
+			label.rescale();
 		}
 		for (AbstractComponent comp : components) {
 			// if (comp.getClass().equals(MouseOverAreaDav.class)) ;
@@ -188,7 +189,12 @@ public class ContentPane extends StateBuilder {
 	boolean isVisible;
 	Graphics g;
 
+	private boolean backgroundEnabled;
+
+	private boolean backgroundImgEnabled;
+
 	// Variable methods (getters/setters/any other work with variables)
+	// visibility
 	public void setVisible(boolean visible) {
 		isVisible = visible;
 	}
@@ -201,15 +207,35 @@ public class ContentPane extends StateBuilder {
 		return isVisible;
 	}
 
+	// background
+	public void setBackground(Color fill, Color border) {
+
+		bgColor = fill;
+		outlineColor = border;
+		backgroundEnabled = true;
+	}
+
+	public void setBackground(String path) throws SlickException {
+
+		bgImg = new Image(path);
+		bgImg = bgImg.getScaledCopy((int) area.getWidth(),
+				(int) area.getHeight());
+		backgroundImgEnabled = true;
+
+	}
+
 	// Draw this ContentPane and all its contents.
 	public void render() throws SlickException {
 		if (isVisible) {
 			// render the Pane itself
-			g.setColor(outlineColor);
-			g.draw(area);
-			g.setColor(bgColor);
-			g.fill(area);
-
+			if (backgroundEnabled) {
+				g.setColor(outlineColor);
+				g.draw(area);
+				g.setColor(bgColor);
+				g.fill(area);
+			} else if (backgroundImgEnabled) {
+				bgImg.draw(area.getMinX(), area.getMinY());
+			}
 			// render the individual components
 			g.setColor(contentColor);
 			if (components[0] != null)
@@ -221,9 +247,8 @@ public class ContentPane extends StateBuilder {
 			if (labels[0] != null)
 				for (int a = 0; a < labels.length; a++) {
 					labels[a].render(area);
-					
+
 				}
 		}
 	}
-
 }

@@ -152,6 +152,11 @@ public class StateBuilder {
 		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}
+	
+	public void addContentPane(float x, float y, float width, float height) {
+		ContentPane pane = new ContentPane(gc, x, y, width, height);
+		addPanes(pane);
+	}
 
 	public void addContentPane(float x, float y, int xOffset, int yOffset,
 			int width, int height) {
