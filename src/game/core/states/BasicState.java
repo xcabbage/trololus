@@ -3,6 +3,7 @@ package game.core.states;
 import game.core.Trololus;
 import game.core.parts.MouseOverAreaDav;
 import game.core.parts.StateBuilder;
+import game.util.PropertiesHandler;
 import game.util.Util;
 
 import java.awt.Dimension;
@@ -30,6 +31,12 @@ import org.newdawn.slick.state.StateBasedGame;
  *       6.2.2013 9:55:02
  */
 public class BasicState extends BasicGameState {
+	// CONSTANTS
+	String fontGreatHeader;
+	String fontNormalHeader;
+	String fontEntry;
+	String fontText;
+
 	// declare globals
 	public StateBasedGame game;
 	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
@@ -38,14 +45,14 @@ public class BasicState extends BasicGameState {
 	public StateBuilder sb;
 	Input input;
 	public Circle[] buttonHoverCircle = new Circle[10];
-	public MouseOverAreaDav [] button = new MouseOverAreaDav[10];
+	public MouseOverAreaDav[] button = new MouseOverAreaDav[10];
 	public BasicState stateRes;
 
 	Music music;
 	// declare graphics
+
 	public Image backgroundBack, menubar, buttonSpriteSheet, background;
-	public String S_ingame, S_loading, S_title, S_postgame, menu1, menu2,
-			menu3, StateTitle;
+	public String StateTitle;
 	public SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown;
 	public int ID;
 
@@ -64,7 +71,8 @@ public class BasicState extends BasicGameState {
 		appWidth = app.getWidth();
 		appHeight = app.getHeight();
 		menuScale = (float) ((appWidth / (float) buttonSpriteSheet.getWidth()) * .75);
-		menuBarWidth = (int) (menubar.getWidth() * menuScale);
+		menuBarWidth = (int) (menubar.getWidth() * 
+				menuScale);
 		menuBarHeight = (int) (menubar.getHeight() * menuScale);
 		menuOffset = (appWidth - menuBarWidth) / 2;
 		buttonSpriteSheet = buttonSpriteSheet.getScaledCopy(menuScale);
@@ -114,8 +122,19 @@ public class BasicState extends BasicGameState {
 		initDiffGfx();
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed and stateRes set.");
+		reloadProperties();
 		createContent();
 
+		
+	}
+
+	void reloadProperties() {
+		// load from properties
+		fontGreatHeader = PropertiesHandler.getProperty("fontGreatHeader");
+		fontNormalHeader = PropertiesHandler.getProperty("fontNormalHeader");
+		fontEntry = PropertiesHandler.getProperty("fontEntry");
+		fontText = PropertiesHandler.getProperty("fontText");
+		
 	}
 
 	void initDiffGfx() throws SlickException {
@@ -145,11 +164,6 @@ public class BasicState extends BasicGameState {
 
 		// initialize strings
 		StateTitle = "A Newly created state :)";
-		menu1 = "the MENU phase";
-		S_ingame = "INGAME";
-		S_loading = "The Game is loading! woooo";
-		S_title = "TROLOLUS NIGHTLY BUILD 0,0";
-		S_postgame = "The after game lobby.";
 	}
 
 	@Override
@@ -218,6 +232,7 @@ public class BasicState extends BasicGameState {
 
 	public void rescale() {
 		sb.rescale();
+		System.out.println("rescaled successfully " + this.ID);
 	}
 
 	public int isOverButton(int x, int y) {
@@ -256,7 +271,7 @@ public class BasicState extends BasicGameState {
 		switch (key) {
 
 		case Input.KEY_1:
-		case Input.KEY_NUMPAD1:{
+		case Input.KEY_NUMPAD1: {
 			game.enterState(0);
 			break;
 		}
@@ -266,7 +281,7 @@ public class BasicState extends BasicGameState {
 			break;
 		}
 		case Input.KEY_3:
-		case Input.KEY_NUMPAD3:{
+		case Input.KEY_NUMPAD3: {
 			game.enterState(2);
 			break;
 		}
@@ -276,16 +291,15 @@ public class BasicState extends BasicGameState {
 			break;
 		}
 		case Input.KEY_5:
-		case Input.KEY_NUMPAD5:{
+		case Input.KEY_NUMPAD5: {
 			game.enterState(4);
 			break;
 		}
 		case Input.KEY_6:
-		case Input.KEY_NUMPAD6:{
+		case Input.KEY_NUMPAD6: {
 			game.enterState(5);
 			break;
 		}
-	
 
 		default: {
 			break;

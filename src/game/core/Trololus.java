@@ -60,9 +60,9 @@ public class Trololus extends StateBasedGame {
 		Util.initFonts();
 		try {
 			PropertiesHandler.init();
+			MUSIC_VOLUME = Float.parseFloat(PropertiesHandler.getProperty("musicvolume"));
 			
-			PropertiesHandler.saveProperty("musicvolume", "640");
-			System.out.println(PropertiesHandler.getProperty("musicvolume"));
+			
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -213,20 +213,6 @@ public class Trololus extends StateBasedGame {
 			break;
 		}
 
-		case Input.KEY_F5: {
-			if (app != null) {
-				drawing = false;
-				BasicState state = (BasicState) this.getCurrentState();
-				try {
-					state.initRes();
-				} catch (SlickException e) {
-
-					e.printStackTrace();
-				}
-				drawing = true;
-			}
-			break;
-		}
 
 		case Input.KEY_LALT: {
 			Util.printErr("debug Error");

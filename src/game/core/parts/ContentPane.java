@@ -164,20 +164,26 @@ public class ContentPane extends StateBuilder {
 			Util.print("This shit doesn't really work. ContentPane not properly initialized");
 			break;
 		}
-		for (ContentPane pane : panes) {
-			// if (pane !=null) pane.rescale(); else
-			// Util.print("A pane attempted to be rescaled is null.");
+		if (panes[0] != null) {
+			for (ContentPane pane : panes) {
+				pane.rescale();
+
+			}
 		}
 
-		for (Label label : labels) {
-			label.rescale();
+		if (labels[0] != null) {
+			for (Label label : labels) {
+				label.rescale();
+			}
 		}
-		for (AbstractComponent comp : components) {
-			// if (comp.getClass().equals(MouseOverAreaDav.class)) ;
+		if (components[0] != null) {
+			for (AbstractComponent comp : components) {
 
-			comp.setLocation((int) (area.getMinX() - baseAreaX + comp.getX()),
-					(int) (area.getMinY() - baseAreaY + comp.getY()));
-			Util.notify("rescaling " + area.getMinX() + xOffset);
+				comp.setLocation(
+						(int) (area.getMinX() - baseAreaX + comp.getX()),
+						(int) (area.getMinY() - baseAreaY + comp.getY()));
+				Util.notify("rescaling " + area.getMinX() + xOffset);
+			}
 		}
 	}
 

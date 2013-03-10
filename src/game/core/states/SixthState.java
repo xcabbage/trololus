@@ -22,7 +22,7 @@ public class SixthState extends BasicState {
 		//create independent content
 		sb.addLabel(1, 0.5f, 0.5f, "game options");
 		sb.getLabel(-1).setFont(
-				new TrueTypeFont(new Font("Basica v.2012", 25, 43), true));
+				new TrueTypeFont(new Font(fontGreatHeader, 25, 43), true));
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 		
 		
@@ -31,9 +31,22 @@ public class SixthState extends BasicState {
 		optionsPane = sb.getPane(-1);
 		optionsPane.setBackground(MoreColors.getTrans(Color.black, 150), Color.cyan);
 		
-		optionsPane.addLabel(1, 0, 0, "Better Solve LOL");
-		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter);
+		optionsPane.addLabel(1, 0, 0, "GENERAL");
+		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, 0,20);
+		optionsPane.getLabel(-1).setFont(new TrueTypeFont(new Font(fontNormalHeader, 50, 30),true));
+		optionsPane.getLabel(-1).setColor(Color.white);
 		
+
+		optionsPane.addLabel(1, 0, 0, "SOUND");
+		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, (int) (optionsPane.getLabel(-2).getBounds().getWidth()+50),12);
+		optionsPane.getLabel(-1).setFont(new TrueTypeFont(new Font(fontNormalHeader, 50, 30),true));
+		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
+		
+		optionsPane.addLabel(1, 0, 0, "GRAPHICS");
+		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, (int) -(optionsPane.getLabel(-3).getBounds().getWidth()+50),12);
+		optionsPane.getLabel(-1).setFont(new TrueTypeFont(new Font(fontNormalHeader, 50, 30),true));
+		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
+
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)

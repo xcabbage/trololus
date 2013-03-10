@@ -239,8 +239,9 @@ public class StateBuilder {
 	}
 
 	public Label getLabel(int a) {
-		if (a == -1)
-			return labels[labels.length - 1];
+		if (a < 0)
+			return labels[labels.length + a ];
+		
 		else
 			return labels[a];
 	}

@@ -38,19 +38,25 @@ public class PropertiesHandler {
 			DIStream.close();
 		} catch (FileNotFoundException e1) {
 			System.out.println("Could not find properties; creating default.");
-			e1.printStackTrace();
+			
 			//create folder if it isn't found
 			System.out.println("Creating new folder TrololusGame at " + savedpropspath);
 			File dir = new File(System.getenv("APPDATA") + "\\TrololusGame");
 			dir.mkdir();
 
 			//if they are not found, set the default properties value
-			defaultProps.setProperty("musicvolume", "100");
-			defaultProps.setProperty("soundvolume", "100");
+			defaultProps.setProperty("musicvolume", "0.18f");
+			defaultProps.setProperty("soundvolume", "1f");
 			defaultProps.setProperty("speechvolume", "100");
 			defaultProps.setProperty("database", "localhost");
 			defaultProps.setProperty("dbuser", "defaultuser");
 			defaultProps.setProperty("graphicsquality", "high");
+			defaultProps.setProperty("fontGreatHeader", "Basica v.2012");
+			
+			defaultProps.setProperty("fontNormalHeader","Freedom");
+			defaultProps.setProperty("fontEntry","Complex");
+			defaultProps.setProperty("fontText","Orena");
+			
  
     		//save default properties to properties folder
 			System.out.println("Writing new default properties to " + savedpropspath);
@@ -96,7 +102,7 @@ public class PropertiesHandler {
 //    		set the properties value
         	prop.load(new FileInputStream(new File(savedpropspath.toString())));
         	
-        	System.out.println("printing from SaveProperty!");
+        	
         	
     		prop.put(propname, propvalue);
   
