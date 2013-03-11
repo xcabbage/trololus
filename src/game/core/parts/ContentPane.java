@@ -6,9 +6,12 @@ import game.util.Util;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
+import java.awt.Font;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.GUIContext;
@@ -24,13 +27,16 @@ import org.newdawn.slick.gui.GUIContext;
  */
 public class ContentPane extends StateBuilder {
 
+	private static final boolean debugTextEnabled = false;
+
 	private int scaling = 0;
 
-	private float scalingXf, scalingYf, scalingW, scalingH;
+	private float scalingXf = 0, scalingYf = 0, scalingW = 0, scalingH = 0;
 
-	private int xOffset;
+	private int xOffset = 0, yOffset = 0, posX = 0, posY = 0, posW = 0,
+			posH = 0;
 
-	private int yOffset;
+	private Rectangle container;
 
 	// Constructors
 	/**
@@ -43,45 +49,53 @@ public class ContentPane extends StateBuilder {
 
 	public ContentPane(AppGameContainer gc, int x, int y, int width, int height) {
 		super(gc);
-		this.area = new Rectangle(x, y, width, height);
+		// this.area = new Rectangle(x, y, width, height);
 		initDefaultColors();
 		g = new Graphics();
 		isVisible = true;
-	}
-
-	void initDefaultColors() {
-		this.bgColor = MoreColors.getTrans(Color.black, 0.15f);
-		this.outlineColor = Color.white;
-		this.contentColor = MoreColors.getTrans(Color.orange.darker(), 0.7f);
-
+		posX = x;
+		posY = y;
+		posW = width;
+		posH = height;
+		container = new Rectangle(0, 0, gc.getWidth(), gc.getHeight());
+		rescale();
 	}
 
 	public ContentPane(AppGameContainer gc, float x, float y, int width,
 			int height) {
 		super(gc);
-		this.area = new Rectangle(gc.getWidth() * x, gc.getHeight() * y, width,
-				height);
+		// this.area = new Rectangle(gc.getWidth() * x, gc.getHeight() * y,
+		// width,
+		// height);
 		scaling = 1;
 		scalingXf = x;
 		scalingYf = y;
+		posW = width;
+		posH = height;
 		initDefaultColors();
 		g = new Graphics();
 		isVisible = true;
+		container = new Rectangle(0, 0, gc.getWidth(), gc.getHeight());
+		rescale();
 	}
 
 	public ContentPane(AppGameContainer gc, float x, float y, int xOffset,
 			int yOffset, int width, int height) {
 		super(gc);
-		this.area = new Rectangle(gc.getWidth() * x + xOffset, gc.getHeight()
-				* y + yOffset, width, height);
+		// this.area = new Rectangle(gc.getWidth() * x + xOffset, gc.getHeight()
+		// * y + yOffset, width, height);
 		scaling = 1;
 		scalingXf = x;
 		scalingYf = y;
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
+		posW = width;
+		posH = height;
 		initDefaultColors();
 		g = new Graphics();
 		isVisible = true;
+		container = new Rectangle(0, 0, gc.getWidth(), gc.getHeight());
+		rescale();
 	}
 
 	public ContentPane(AppGameContainer gc, float x, float y, float width,
@@ -91,12 +105,85 @@ public class ContentPane extends StateBuilder {
 		scalingYf = y;
 		scalingW = width;
 		scalingH = height;
-		this.area = new Rectangle(gc.getWidth() * x, gc.getHeight() * y,
-				gc.getWidth() * width, gc.getHeight() * height);
+		// this.area = new Rectangle(gc.getWidth() * x, gc.getHeight() * y,
+		// gc.getWidth() * width, gc.getHeight() * height);
 		scaling = 2;
 		initDefaultColors();
 		g = new Graphics();
 		isVisible = true;
+		container = new Rectangle(0, 0, gc.getWidth(), gc.getHeight());
+		rescale();
+	}
+
+	public ContentPane(AppGameContainer gc, int x, int y, int width,
+			int height, Rectangle area) {
+		super(gc);
+		// this.area = new Rectangle(x, y, width, height);
+		initDefaultColors();
+		g = new Graphics();
+		posX = x;
+		posY = y;
+		posW = width;
+		posH = height;
+		isVisible = true;
+		container = area;
+		rescale();
+	}
+
+	public ContentPane(AppGameContainer gc, float x, float y, int width,
+			int height, Rectangle area) {
+		super(gc);
+		// this.area = new Rectangle(gc.getWidth() * x, gc.getHeight() * y,
+		// width,
+		// height);
+		scaling = 1;
+		scalingXf = x;
+		scalingYf = y;
+
+		posW = width;
+		posH = height;
+		initDefaultColors();
+		g = new Graphics();
+		isVisible = true;
+		container = area;
+		rescale();
+	}
+
+	public ContentPane(AppGameContainer gc, float x, float y, int xOffset,
+			int yOffset, int width, int height, Rectangle area) {
+		super(gc);
+		// this.area = new Rectangle(gc.getWidth() * x + xOffset, gc.getHeight()
+		// * y + yOffset, width, height);
+		scaling = 1;
+		scalingXf = x;
+		scalingYf = y;
+
+		posW = width;
+		posH = height;
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+		initDefaultColors();
+		g = new Graphics();
+		isVisible = true;
+		container = area;
+		rescale();
+	}
+
+	public ContentPane(AppGameContainer gc, float x, float y, float width,
+			float height, Rectangle area) {
+		super(gc);
+		scalingXf = x;
+		scalingYf = y;
+		scalingW = width;
+		scalingH = height;
+
+		scaling = 2;
+		initDefaultColors();
+		g = new Graphics();
+		isVisible = true;
+		container = area;
+
+		rescale();
 	}
 
 	/*
@@ -109,6 +196,34 @@ public class ContentPane extends StateBuilder {
 
 		super.addTextField((int) (x + this.area.getMinX()),
 				(int) (y + this.area.getMinY()), width, height);
+	}
+
+	public void addContentPane(int x, int y, int width, int height) {
+		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
+		addPanes(pane);
+	}
+
+	public void addContentPane(float x, float y, int width, int height) {
+		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
+		addPanes(pane);
+	}
+
+	public void addContentPane(float x, float y, float width, float height) {
+		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
+		addPanes(pane);
+	}
+
+	public void addContentPane(float x, float y, float width, float height,
+			Rectangle area) {
+		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
+		addPanes(pane);
+	}
+
+	public void addContentPane(float x, float y, int xOffset, int yOffset,
+			int width, int height) {
+		ContentPane pane = new ContentPane(gc, x, y, xOffset, yOffset, width,
+				height, area);
+		addPanes(pane);
 	}
 
 	public void addButton(int x, int y, String image) {
@@ -143,27 +258,74 @@ public class ContentPane extends StateBuilder {
 		addLabels(label);
 	}
 
-	public void rescale() {
+	public void rescaleA() {
 		int baseAreaX = (int) area.getMinX(), baseAreaY = (int) area.getMinY();
 		switch (scaling) {
 		case 0:
 			break;
 		case 1: {
-			this.area = new Rectangle(gc.getWidth() * scalingXf + xOffset,
-					gc.getHeight() * scalingYf + yOffset, area.getWidth(),
-					area.getHeight());
+			this.area = new Rectangle(container.getWidth() * scalingXf
+					+ xOffset, container.getHeight() * scalingYf + yOffset,
+					area.getWidth(), area.getHeight());
 			break;
 		}
 		case 2: {
-			this.area = new Rectangle(gc.getWidth() * scalingXf + xOffset,
-					gc.getHeight() * scalingYf + yOffset, gc.getWidth()
-							* scalingW, gc.getHeight() * scalingH);
+			this.area = new Rectangle(container.getWidth() * scalingXf
+					+ xOffset, container.getHeight() * scalingYf + yOffset,
+					container.getWidth() * scalingW, container.getHeight()
+							* scalingH);
 			break;
 		}
 		default:
 			Util.print("This shit doesn't really work. ContentPane not properly initialized");
 			break;
 		}
+		if (panes[0] != null) {
+			for (ContentPane pane : panes) {
+				pane.rescale();
+
+			}
+		}
+
+		if (labels[0] != null) {
+			for (Label label : labels) {
+				label.rescale();
+			}
+		}
+		if (components[0] != null) {
+			for (AbstractComponent comp : components) {
+
+				comp.setLocation(
+						(int) (area.getMinX() - baseAreaX + comp.getX()),
+						(int) (area.getMinY() - baseAreaY + comp.getY()));
+				Util.notify("rescaling " + area.getMinX() + xOffset);
+			}
+		}
+	}
+
+	public void scale() {
+
+		switch (scaling) {
+		case 0:
+			break;
+		case 1: {
+			this.area = new Rectangle(container.getWidth() * scalingXf
+					+ xOffset, container.getHeight() * scalingYf + yOffset,
+					area.getWidth(), area.getHeight());
+			break;
+		}
+		case 2: {
+			this.area = new Rectangle(container.getWidth() * scalingXf
+					+ xOffset, container.getHeight() * scalingYf + yOffset,
+					container.getWidth() * scalingW, container.getHeight()
+							* scalingH);
+			break;
+		}
+		default:
+			Util.print("This shit doesn't really work. ContentPane not properly initialized");
+			break;
+		}
+		int baseAreaX = (int) area.getMinX(), baseAreaY = (int) area.getMinY();
 		if (panes[0] != null) {
 			for (ContentPane pane : panes) {
 				pane.rescale();
@@ -199,6 +361,10 @@ public class ContentPane extends StateBuilder {
 
 	private boolean backgroundImgEnabled;
 
+	private ContentPosition position;
+
+	private float currW;
+
 	// Variable methods (getters/setters/any other work with variables)
 	// visibility
 	public void setVisible(boolean visible) {
@@ -230,15 +396,37 @@ public class ContentPane extends StateBuilder {
 
 	}
 
+	void initDefaultColors() {
+		this.bgColor = MoreColors.getTrans(Color.black, 0.15f);
+		this.outlineColor = Color.white;
+		this.contentColor = MoreColors.getTrans(Color.orange.darker(), 0.7f);
+
+	}
+
 	// Draw this ContentPane and all its contents.
 	public void render() throws SlickException {
 		if (isVisible) {
+
+			if (debugTextEnabled) {
+				TrueTypeFont font = new TrueTypeFont(
+						new Font("Cambria", 25, 10), true);
+
+				font.drawString(0 + area.getMinX(), 0, ("posX : " + posX));
+				font.drawString(0 + area.getMinX(), 25, ("posY : " + posY));
+				font.drawString(0 + area.getMinX(), 50, ("posW : " + posW));
+				font.drawString(0 + area.getMinX(), 75, ("posH : " + posH));
+				font.drawString(0 + area.getMinX(), 100, ("scX : " + scalingXf));
+				font.drawString(0 + area.getMinX(), 125, ("scY : " + scalingYf));
+				font.drawString(0 + area.getMinX(), 150, ("scW : " + scalingW));
+				font.drawString(0 + area.getMinX(), 175, ("scH : " + scalingH));
+			}
 			// render the Pane itself
 			if (backgroundEnabled) {
 				g.setColor(outlineColor);
 				g.draw(area);
 				g.setColor(bgColor);
 				g.fill(area);
+
 			} else if (backgroundImgEnabled) {
 				bgImg.draw(area.getMinX(), area.getMinY());
 			}
@@ -255,6 +443,159 @@ public class ContentPane extends StateBuilder {
 					labels[a].render(area);
 
 				}
+			if (panes[0] != null)
+				for (int a = 0; a < panes.length; a++) {
+					panes[a].render();
+
+				}
+
 		}
 	}
+
+	/**
+	 * @param center
+	 */
+	public void setPosition(ContentPosition pos) {
+		position = pos;
+		scaling = 3;
+		rescale();
+	}
+
+	/**
+	 * @param pos
+	 *            the ContentPosition of the component (search the enum and/or
+	 *            source/jdoc for values)
+	 * @param x
+	 *            the x offset of the component from the ContentPosition default
+	 * @param y
+	 *            the Y offset of the component from the ContentPosition default
+	 */
+	public void setPosition(ContentPosition pos, int x, int y) {
+		position = pos;
+		scaling = 3;
+		xOffset = x;
+		yOffset = y;
+		rescale();
+
+	}
+
+	public void rescale() {
+
+		// if (area == null) {
+
+		area = new Rectangle((int) ((scalingXf * container.getWidth()) + posX+xOffset)
+				+ container.getMinX(),
+				(int) ((scalingYf * container.getHeight()) + posY+yOffset)
+						+ container.getMinY(),
+				(int) ((scalingW * container.getWidth()) + posW),
+				(int) ((scalingH * container.getHeight()) + posH));
+		// }
+
+		int containerW, containerH, x = 0, y = 0;
+		float scaleForContainer = 0;
+		if (currW == 0.0) {
+			currW = Trololus.app.getWidth();
+		}
+		if (container != null) {
+
+			scaleForContainer = (float) Trololus.app.getWidth() / (float) currW;
+
+			// container = new Rectangle(container.getMinX() *
+			// scaleForContainer,
+			// container.getMinY() * scaleForContainer,
+			// container.getWidth() * scaleForContainer,
+			// container.getHeight() * scaleForContainer);
+
+			containerW = (int) container.getWidth();
+			containerH = (int) container.getHeight();
+		} else {
+			containerW = (int) Trololus.app.getWidth();
+			containerH = (int) Trololus.app.getHeight();
+		}
+
+		switch (scaling) {
+		case 0:
+			break;
+		case 1: {
+			x = (int) (containerW * scalingXf);
+			y = (int) (containerH * scalingYf);
+			break;
+		}
+		case 2: {
+
+			x = (int) (containerW * scalingXf);
+			y = (int) (containerH * scalingYf);
+
+			break;
+		}
+		case 3: {
+			// initialize starting values
+			int contentW = 0, contentH = 0;
+
+			contentW = (int) area.getWidth();
+			contentH = (int) area.getHeight();
+
+			// set the actual new X's and Y's
+			switch (position) {
+			case TopLeft:
+				x = 0;
+				y = 0;
+				break;
+			case TopCenter:
+				x = containerW / 2 - contentW / 2;
+				y = 0;
+				break;
+			case TopRight:
+				x = containerW - contentW;
+				y = 0;
+				break;
+			case CenterLeft:
+				x = 0;
+				y = (containerH / 2) - (contentH / 2);
+				break;
+			case Center:
+				x = (containerW / 2) - (contentW / 2);
+				y = (containerH / 2) - (contentH / 2);
+				break;
+			case CenterRight:
+				x = containerW - contentW;
+				y = (containerH / 2) - (contentH / 2);
+				break;
+			case BottomLeft:
+				x = 0;
+				y = containerH - contentH;
+				break;
+			case BottomCenter:
+				x = containerW / 2 - contentW / 2;
+				y = containerH - contentH;
+				break;
+			case BottomRight:
+				x = containerW - contentW;
+				y = containerH - contentH;
+				break;
+			default:
+				Util.print("Label Position fucked up - unknown value passed to the method");
+				break;
+
+			}
+
+			break;
+		}
+
+		default: {
+			Util.print("Label incorrectly initialized - scaling has fucked up");
+			break;
+		}
+
+		}
+		if (container != null) {
+			x = (int) (x + container.getMinX());
+			y = (int) (y + container.getMinY());
+		}
+		x = (int) ((x + xOffset) * scaleForContainer);
+		y = (int) (y + yOffset * scaleForContainer);
+		// area = new Rectangle(x, y, area.getWidth(), area.getHeight());
+		currW = Trololus.app.getWidth();
+	}
+
 }

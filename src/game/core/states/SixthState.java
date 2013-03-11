@@ -17,7 +17,8 @@ public class SixthState extends BasicState {
 
 	public static int ID = 5;
 	private ContentPane optionsPane;
-
+	private ContentPane[] optionsPanes;
+	
 	public void createContent() throws SlickException {
 		//create independent content
 		sb.addLabel(1, 0.5f, 0.5f, "game options");
@@ -46,9 +47,42 @@ public class SixthState extends BasicState {
 		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, (int) -(optionsPane.getLabel(-3).getBounds().getWidth()+50),12);
 		optionsPane.getLabel(-1).setFont(new TrueTypeFont(new Font(fontNormalHeader, 50, 30),true));
 		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
+		
+		
+	//!!Menu Settings Panes!!!
+		
+		//GENERAL
+		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
+		optionsPaneGeneral = optionsPane.getPane(-1);
+		optionsPaneGeneral.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPaneGeneral.setPosition(ContentPosition.Center);
+		
+		//SOUND
+		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
+		optionsPaneSound = optionsPane.getPane(-1);
+		optionsPaneSound.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPaneSound.setPosition(ContentPosition.Center);
+		
 
+		//GRAPHICS
+		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
+		optionsPaneGraphics = optionsPane.getPane(-1);
+		optionsPaneGraphics.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPaneGraphics.setPosition(ContentPosition.Center);
+		
+		//GAMEPLAY
+		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
+		optionsPaneGameplay = optionsPane.getPane(-1);
+		optionsPaneGameplay.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPaneGameplay.setPosition(ContentPosition.Center);
 	}
-
+public void switchToPane(int a){
+	for (int b = 0; b<4;b++){
+		if (b == a){
+			
+		}
+	}
+}
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);

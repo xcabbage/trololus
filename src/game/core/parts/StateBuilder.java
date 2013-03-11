@@ -12,6 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.gui.TextField;
@@ -154,6 +155,11 @@ public class StateBuilder {
 	}
 	
 	public void addContentPane(float x, float y, float width, float height) {
+		ContentPane pane = new ContentPane(gc, x, y, width, height);
+		addPanes(pane);
+	}
+	
+	public void addContentPane(float x, float y, float width, float height, Rectangle area) {
 		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}

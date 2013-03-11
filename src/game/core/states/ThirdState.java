@@ -55,7 +55,7 @@ public class ThirdState extends BasicState {
 				Util.notify("Button1 pressed");
 
 			}
-		});
+		});	
 		
 		menuPane.addLabel(1, 0, 0, "Create a game - HOST");
 		menuPane.getLabel(-1).setFont(
