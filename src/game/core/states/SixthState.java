@@ -17,7 +17,7 @@ public class SixthState extends BasicState {
 
 	public static int ID = 5;
 	private ContentPane optionsPane;
-	private ContentPane[] optionsPanes;
+	private ContentPane[] optionsPanes = new ContentPane[4];
 	
 	public void createContent() throws SlickException {
 		//create independent content
@@ -53,34 +53,34 @@ public class SixthState extends BasicState {
 		
 		//GENERAL
 		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneGeneral = optionsPane.getPane(-1);
-		optionsPaneGeneral.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneGeneral.setPosition(ContentPosition.Center);
+		optionsPanes[0]= optionsPane.getPane(-1);
+		optionsPanes[0].setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPanes[0].setPosition(ContentPosition.Center);
 		
 		//SOUND
 		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneSound = optionsPane.getPane(-1);
-		optionsPaneSound.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneSound.setPosition(ContentPosition.Center);
+		optionsPanes[1]= optionsPane.getPane(-1);
+		optionsPanes[1].setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPanes[1].setPosition(ContentPosition.Center);
 		
 
 		//GRAPHICS
 		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneGraphics = optionsPane.getPane(-1);
-		optionsPaneGraphics.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneGraphics.setPosition(ContentPosition.Center);
+		optionsPanes[2]= optionsPane.getPane(-1);
+		optionsPanes[2].setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPanes[2].setPosition(ContentPosition.Center);
 		
 		//GAMEPLAY
 		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneGameplay = optionsPane.getPane(-1);
-		optionsPaneGameplay.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneGameplay.setPosition(ContentPosition.Center);
+		optionsPanes[3]= optionsPane.getPane(-1);
+		optionsPanes[3].setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
+		optionsPanes[3].setPosition(ContentPosition.Center);
 	}
 public void switchToPane(int a){
 	for (int b = 0; b<4;b++){
 		if (b == a){
-			
-		}
+			optionsPanes[a].setVisible(true);
+		}else optionsPanes[a].setVisible(false);
 	}
 }
 	public void init(GameContainer gc, StateBasedGame game)
