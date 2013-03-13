@@ -56,6 +56,7 @@ public class SixthState extends BasicState {
 				new TrueTypeFont(new Font(fontNormalHeader, 50, 30), true));
 		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
 
+
 		// !!Menu Settings Panes!!!
 
 		// GENERAL
@@ -103,6 +104,8 @@ public class SixthState extends BasicState {
 		}
 	}
 
+		
+	
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
