@@ -9,80 +9,100 @@ import game.util.MoreColors;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class SixthState extends BasicState {
 
 	public static int ID = 5;
 	private ContentPane optionsPane;
-	private ContentPane[] optionsPanes;
-	
+	private ContentPane[] optionsPanes = new ContentPane[4];
+
 	public void createContent() throws SlickException {
-		//create independent content
+		// create independent content
 		sb.addLabel(1, 0.5f, 0.5f, "game options");
 		sb.getLabel(-1).setFont(
 				new TrueTypeFont(new Font(fontGreatHeader, 25, 43), true));
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
-		
-		
-		//add & init Options pane
+
+		// add & init Options pane
 		sb.addContentPane(0.25f, 0.25f, 0.5f, 0.5f);
 		optionsPane = sb.getPane(-1);
-		optionsPane.setBackground(MoreColors.getTrans(Color.black, 150), Color.cyan);
-		
+		optionsPane.setBackground(MoreColors.getTrans(Color.black, 150),
+				Color.cyan);
+
 		optionsPane.addLabel(1, 0, 0, "GENERAL");
-		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, 0,20);
-		optionsPane.getLabel(-1).setFont(new TrueTypeFont(new Font(fontNormalHeader, 50, 30),true));
+		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 20);
+		optionsPane.getLabel(-1).setFont(
+				new TrueTypeFont(new Font(fontNormalHeader, 50, 30), true));
 		optionsPane.getLabel(-1).setColor(Color.white);
-		
 
 		optionsPane.addLabel(1, 0, 0, "SOUND");
-		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, (int) (optionsPane.getLabel(-2).getBounds().getWidth()+50),12);
-		optionsPane.getLabel(-1).setFont(new TrueTypeFont(new Font(fontNormalHeader, 50, 30),true));
+		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter,
+				(int) (optionsPane.getLabel(-2).getBounds().getWidth() + 50),
+				12);
+		optionsPane.getLabel(-1).setFont(
+				new TrueTypeFont(new Font(fontNormalHeader, 50, 30), true));
 		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
-		
-		optionsPane.addLabel(1, 0, 0, "GRAPHICS");
-		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, (int) -(optionsPane.getLabel(-3).getBounds().getWidth()+50),12);
-		optionsPane.getLabel(-1).setFont(new TrueTypeFont(new Font(fontNormalHeader, 50, 30),true));
-		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
-		
-		
-	//!!Menu Settings Panes!!!
-		
-		//GENERAL
-		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneGeneral = optionsPane.getPane(-1);
-		optionsPaneGeneral.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneGeneral.setPosition(ContentPosition.Center);
-		
-		//SOUND
-		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneSound = optionsPane.getPane(-1);
-		optionsPaneSound.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneSound.setPosition(ContentPosition.Center);
-		
 
-		//GRAPHICS
-		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneGraphics = optionsPane.getPane(-1);
-		optionsPaneGraphics.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneGraphics.setPosition(ContentPosition.Center);
-		
-		//GAMEPLAY
-		optionsPane.addContentPane(0.1f,0.3f, 0.8f,0.6f);
-		optionsPaneGameplay = optionsPane.getPane(-1);
-		optionsPaneGameplay.setBackground(MoreColors.getTrans(Color.black, 120), Color.white);
-		optionsPaneGameplay.setPosition(ContentPosition.Center);
+		optionsPane.addLabel(1, 0, 0, "GRAPHICS");
+		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter,
+				(int) -(optionsPane.getLabel(-3).getBounds().getWidth() + 50),
+				12);
+		optionsPane.getLabel(-1).setFont(
+				new TrueTypeFont(new Font(fontNormalHeader, 50, 30), true));
+		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
+
+		// !!Menu Settings Panes!!!
+
+		// GENERAL
+		optionsPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
+		optionsPanes[0] = optionsPane.getPane(-1);
+		optionsPanes[0].setBackground(MoreColors.getTrans(Color.orange, 120),
+				Color.white);
+		optionsPanes[0].setPosition(ContentPosition.Center);
+		optionsPanes[0].setVisible(false);
+
+		// SOUND
+		optionsPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
+		optionsPanes[1] = optionsPane.getPane(-1);
+		optionsPanes[1].setBackground(MoreColors.getTrans(Color.blue, 120),
+				Color.white);
+		optionsPanes[1].setPosition(ContentPosition.Center);
+		optionsPanes[1].setVisible(false);
+
+		// GRAPHICS
+		optionsPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
+		optionsPanes[2] = optionsPane.getPane(-1);
+		optionsPanes[2].setBackground(MoreColors.getTrans(Color.red, 120),
+				Color.white);
+		optionsPanes[2].setPosition(ContentPosition.Center);
+		optionsPanes[2].setVisible(false);
+
+		// GAMEPLAY
+		optionsPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
+		optionsPanes[3] = optionsPane.getPane(-1);
+		optionsPanes[3].setBackground(MoreColors.getTrans(Color.pink, 120),
+				Color.white);
+		optionsPanes[3].setPosition(ContentPosition.Center);
+		optionsPanes[3].setVisible(false);
 	}
-public void switchToPane(int a){
-	for (int b = 0; b<4;b++){
-		if (b == a){
-			
+
+	public void switchToPane(int a) {
+		for (int b = 0; b < 4; b++) {
+			if (b == a) {
+				System.out.println(b + "visible");
+				optionsPanes[b].setVisible(true);
+			} else {
+				System.out.println(b + "invisible");
+				optionsPanes[b].setVisible(false);
+			}
 		}
 	}
-}
+
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
@@ -104,4 +124,24 @@ public void switchToPane(int a){
 		super.render(gc, mainGame, g, stateRes);
 
 	}
+	public void keyPressed(int key, char c) {
+		super.keyPressed(key, c);
+		
+		switch (key) {
+
+		case Input.KEY_Q:
+			switchToPane(0);
+			break;
+		case Input.KEY_W:
+			switchToPane(1);
+			break;
+		case Input.KEY_E:
+			switchToPane(2);
+			break;
+		case Input.KEY_R:
+			switchToPane(3);
+			break;
+		}
+
+}
 }
