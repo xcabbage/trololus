@@ -84,6 +84,10 @@ public class FifthState extends BasicState {
 				field.setShipY(300, controlledShip.getID());
 				field.setRotation(0, controlledShip.getID());
 			}
+			if (input.isKeyPressed(33)) {
+				field.placeProjectile(field.getShipX(controlledShip.getID()), field.getShipY(controlledShip.getID()), 90, 1);
+				
+			}
 		}
 	}
 

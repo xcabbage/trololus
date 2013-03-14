@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.newdawn.slick.SlickException;
 
+import game.nonstatic.entities.Projectile;
 import game.nonstatic.entities.controllables.Ship;
 
 /**
@@ -19,6 +20,7 @@ public class BattleField {
 	Ship[] entities = new Ship[0];
 	int[] shipX = new int[0], shipY = new int[0], rotation = new int[0],
 			rotation2 = new int[0];
+	Projectile[] projectiles = new Projectile[0]; 
 	int movementRotation;
 	// constants
 	int SHIP_SPEED = 4, MOVE_TIME = 1;
@@ -39,6 +41,15 @@ public class BattleField {
 				+ entities[entities.length - 1]);
 		entity.setID(entities.length - 1);
 		instance.addShip(entity);
+	}
+	
+	public void placeProjectile(int xPos, int yPos, int angle, int speed) throws SlickException {
+		projectiles = Arrays.copyOf(projectiles, projectiles.length + 1);
+		projectiles[projectiles.length - 1] = new Projectile(xPos,yPos,angle,speed);
+		System.out.println("Fired a projectile..: "
+				+ projectiles[projectiles.length - 1]);
+		projectiles[projectiles.length - 1].setID(projectiles.length - 1);
+		
 	}
 
 	// ENTITY MOVEMENT
@@ -126,8 +137,19 @@ public class BattleField {
 	}
 
 	public int getRotation2(int ship) {
-		// TODO Auto-generated method stub
 		return rotation2[ship];
+	}
+	
+	
+	public void drawProjectiles(){
+		for (int a = 0; a<projectiles.length; a++){
+			if(projectiles[a] != null){
+			projectiles[a].draw();
+			}else System.out.println(a + " is null (projectile");
+		}
+	}
+	public void updateProjectiles(){
+		
 	}
 
 }

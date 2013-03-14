@@ -61,8 +61,7 @@ public class GameInstance {
 
 			
 		}
-	
-	
+
 	public BattleField getField() {
 		return field;
 	}
@@ -101,6 +100,7 @@ public class GameInstance {
 		field.setRotation2(field.getRotation(a),a );
 		ship[a].drawCentered((float)field.getShipX(a), (float)field.getShipY(a)); 
 		}
+		field.drawProjectiles();
 		g.setColor(Color.white);
 	}
 
