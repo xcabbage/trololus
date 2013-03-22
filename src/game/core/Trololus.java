@@ -17,6 +17,8 @@ import game.util.Util;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Trololus extends StateBasedGame {
 
@@ -40,7 +42,7 @@ public class Trololus extends StateBasedGame {
 	static int width = 1000;
 	static int height = 500;
 	static int fpslimit = 60;
-	static boolean ShowFPS = false;
+	static boolean ShowFPS = true;
 
 	public static final float ShipScale = 0.1f;
 
@@ -229,7 +231,9 @@ public class Trololus extends StateBasedGame {
 			if (state.stateRes.button[a].isMouseOver()) {
 				if (a < 6) {
 					Util.printDebug("entering " + a);
-					enterState(a);
+
+			        enterState(a, new FadeOutTransition(Color.black, 600), new FadeInTransition(Color.black, 600) );
+					
 				} else if (a == 6)
 					MUSIC_END_REQUESTED = true;
 				else {

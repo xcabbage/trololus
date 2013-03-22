@@ -15,12 +15,14 @@ import game.nonstatic.entities.controllables.Ship;
 import game.nonstatic.system.Player;
 import game.util.FastGraphics;
 
-/** The GameInstance class that holds each instance of the actual game.
- *  Responsible for drawing the situation and holding all the variables.
+/**
+ * The GameInstance class that holds each instance of the actual game.
+ * Responsible for drawing the situation and holding all the variables.
+ * 
  * @author xCabbage [github.com/xcabbage]
  * 
- * @info  for the Trololus project [github.com/xcabbage/trololus] created
- *         4.2.2013 14:56:16
+ * @info for the Trololus project [github.com/xcabbage/trololus] created
+ *       4.2.2013 14:56:16
  */
 
 public class GameInstance {
@@ -29,45 +31,37 @@ public class GameInstance {
 	Rectangle drawGround = new Rectangle(400, 200, 250, 250);
 	Color fillColor;
 	BattleField field;
-	Image[] ship = new Image[1];
+	public Image[] ship = new Image[1];
 	BasicState state;
 	Trololus game;
-	int rotation2[]= new int[1];
-	
+	int rotation2[] = new int[1];
+
 	// creation of a new game
-	void init() throws SlickException{
+	void init() throws SlickException {
 		field = new BattleField(this);
-		
-				
+
 	}
-	
+
 	@SuppressWarnings("static-access")
-	public	void addShip(Ship ship) throws SlickException{
+	public void addShip(Ship ship) throws SlickException {
 
-		//If ship model array is full, make new one 
+		// If ship model array is full, make new one
 		if (this.ship[this.ship.length - 1] != null) {
-			this.ship = Arrays.copyOf(this.ship, this.ship.length
-					+ 1);
+			this.ship = Arrays.copyOf(this.ship, this.ship.length + 1);
 		}
-		
-		
-		//Then add desired ship into the array
-//			if (this.ship[0] == null) {
-		
-			this.ship[this.ship.length- 1] = new Image(ship.getType().getImgPath()).getScaledCopy(game.ShipScale);
-//			} else {
-//				this.ship[this.ship.length] = new Image(ship.getType().getImgPath()).getScaledCopy(game.ShipScale);
-//			}
 
-			
-		}
+		this.ship[this.ship.length - 1] = new Image(ship.getType().getImgPath())
+				.getScaledCopy(game.ShipScale);
+
+	}
 
 	public BattleField getField() {
 		return field;
 	}
-	
-	public GameInstance(BasicState state,StateBasedGame game,  Player... players) throws SlickException {
-		this.state = state; 
+
+	public GameInstance(BasicState state, StateBasedGame game,
+			Player... players) throws SlickException {
+		this.state = state;
 		this.game = (Trololus) game;
 		player = new Player[players.length];
 		// set up our players (get them from the main frame)
@@ -87,26 +81,24 @@ public class GameInstance {
 	}
 
 	public void draw(Graphics g) {
-		
+		// initial graphics stuff
 		g.setAntiAlias(true);
 		if (player[0] != null) {
 			g.setColor(player[0].getColor());
 		} else
 			System.out.println("Player 0 is null, can't draw stuff!");
-				
-		for (int a = 0; a <field.getEntitiesCount(); a++){
-					
-		ship[a].rotate(field.getRotation(a) -field.getRotation2(a));
-		field.setRotation2(field.getRotation(a),a );
-		ship[a].drawCentered((float)field.getShipX(a), (float)field.getShipY(a)); 
-		}
+
+
+		field.drawShips();
 		field.drawProjectiles();
 		g.setColor(Color.white);
 	}
 
 	public void centerShip(int id) {
-		field.setShipX(500, id);field.setShipY(300,id);field.setRotation(0, id);
-		
+		field.setShipX(500, id);
+		field.setShipY(300, id);
+		field.setRotation(0, id);
+
 	}
 
 }

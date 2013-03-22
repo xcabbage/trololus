@@ -164,5 +164,13 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * @return
+	 */
+	public static Trololus getGame() {
+
+		return game;
+	}
 	
 }

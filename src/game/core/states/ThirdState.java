@@ -6,6 +6,7 @@ import java.io.IOException;
 import game.core.NetworkTest;
 import game.core.parts.ContentPane;
 import game.core.parts.ContentPosition;
+import game.util.MoreColors;
 import game.util.Util;
 
 import org.newdawn.slick.Color;
@@ -29,6 +30,7 @@ public class ThirdState extends BasicState {
 	NetworkTest network = new game.core.NetworkTest();
 	ContentPane togglePane;
 	private ContentPane menuPane;
+	private ContentPane[] optionsPanes = new ContentPane[4];
 
 	public void createContent() throws SlickException {
 		Image buttonImg = new Image("resources/Splash/UI/IG/IG_fps.png")
@@ -57,10 +59,33 @@ public class ThirdState extends BasicState {
 			}
 		});	
 		
-		menuPane.addLabel(1, 0, 0, "Create a game - HOST");
-		menuPane.getLabel(-1).setFont(
+		// !!Creation of options Panes!!!
+
+		// WELCOME
+		menuPane.addContentPane(0.05f, 0.05f, 0.9f, 0.9f);
+		optionsPanes[0] = menuPane.getPane(-1);
+		optionsPanes[0].setBackground(MoreColors.getTrans(Color.orange, 120),
+				Color.white);
+		optionsPanes[0].setPosition(ContentPosition.Center);
+		optionsPanes[0].setVisible(false);
+		optionsPanes[0].addLabel(1, 0, 0, "Create a game - HOST");
+		optionsPanes[0].getLabel(-1).setFont(
 				new TrueTypeFont(new Font("Cambria", 25, 20), true));
-		menuPane.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, -13);
+		optionsPanes[0].getLabel(-1).setPosition(ContentPosition.TopCenter, 0, -13);
+		
+		
+		
+
+		// SOUND
+		menuPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
+		optionsPanes[1] = menuPane.getPane(-1);
+		optionsPanes[1].setBackground(MoreColors.getTrans(Color.blue, 120),
+				Color.white);
+		optionsPanes[1].setPosition(ContentPosition.Center);
+		optionsPanes[1].setVisible(false);
+
+
+			
 		
 		
 		sb.addLabel(1, 0.5f, 0.5f, "Create a game - HOST");
@@ -74,6 +99,9 @@ public class ThirdState extends BasicState {
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
 		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
 
+		
+		//Initially show Welcome pane
+		switchToPane(0);
 	}
 
 	public int getID() {
@@ -96,6 +124,18 @@ public class ThirdState extends BasicState {
 		renderDiffGfx(gc, mainGame, g, stateRes);
 		super.render(gc, mainGame, g, stateRes);
 
+	}
+	
+	public void switchToPane(int a) {
+		for (int b = 0; b < 2; b++) {
+			if (b == a) {
+				System.out.println(b + "visible");
+				optionsPanes[b].setVisible(true);
+			} else {
+				System.out.println(b + "invisible");
+				optionsPanes[b].setVisible(false);
+			}
+		}
 	}
 
 	public void keyPressed(int key, char c) {
@@ -140,6 +180,13 @@ public class ThirdState extends BasicState {
 			}
 		case Input.KEY_NUMPAD5:
 			togglePane.toggleVisibility();
+			break;
+		case Input.KEY_F1:
+			switchToPane(0);
+			break;
+		case Input.KEY_F2:
+			switchToPane(1);
+			break;
 		default:
 			break;
 		}
