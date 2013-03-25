@@ -51,6 +51,7 @@ public class Projectile {
 	private int movementAngle;
 	private Ship ship;
 	private boolean debugIntersectsEnabled;
+	public int friendlyShip;
 
 	public Projectile() {
 		commonInit();
@@ -64,24 +65,27 @@ public class Projectile {
 	 * @param angle
 	 * @param speed
 	 */
-	public Projectile(int xPos, int yPos, int angle, int speed) {
+	public Projectile(int xPos, int yPos, int angle, int speed, int shipID) {
 		super();
 		XPos = xPos;
 		YPos = yPos;
 		this.angle = angle;
 		this.speed = speed;
+		friendlyShip = shipID;
 		commonInit();
 	}
 
-	public Projectile(int xPos, int yPos, int angle, int speed, Ship ship) {
-//		super();
-		
+	public Projectile(int xPos, int yPos, int angle, int speed, Ship ship,
+			int shipID) {
+		// super();
+
 		XPos = xPos;
 		YPos = yPos;
 		this.angle = angle;
 		this.speed = speed;
 		this.ship = ship;
 		debugIntersectsEnabled = true;
+		friendlyShip = shipID;
 		commonInit();
 
 	}
@@ -199,30 +203,40 @@ public class Projectile {
 	}
 
 	public boolean intersectsBounds(Ship ship) {
-		if (ship.getBounds() != null) {
+		try {
 
-			float oldX = getXPos();
-			float oldY = getYPos();
-			float newX;
-			float newY;
+			if (ship.getBounds() != null) {
+				if (ship.getID() != friendlyShip) {
+					float oldX = getXPos();
+					float oldY = getYPos();
+					float newX;
+					float newY;
 
-			AffineTransform transformer = AffineTransform.getRotateInstance(
-					Math.toRadians(angle), oldX, oldY);
-			Point2D before = new Point2D.Double(oldX, oldY
-					- (img.getHeight() / 2) - 2);
-			Point2D after = new Point2D.Double();
-			after = transformer.transform(before, after);
+					AffineTransform transformer = AffineTransform
+							.getRotateInstance(Math.toRadians(angle), oldX,
+									oldY);
+					Point2D before = new Point2D.Double(oldX, oldY
+							- (img.getHeight() / 2) - 2);
+					Point2D after = new Point2D.Double();
+					after = transformer.transform(before, after);
 
-			newX = (float) after.getX();
-			newY = (float) after.getY();
-		
-			if (ship.getBounds().contains(newX, newY))
-				return true;
-			else
+					newX = (float) after.getX();
+					newY = (float) after.getY();
+
+					if (ship.getBounds().contains(newX, newY))
+						return true;
+					else
+						return false;
+				}
+
 				return false;
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Projectile bounds problem");
+			return false;
 		}
-
-		return false;
 	}
 
 	public boolean intersects(Ship ship) {

@@ -57,12 +57,12 @@ public class BattleField {
 		instance.addShip(entity);
 	}
 
-	public void placeProjectile(int xPos, int yPos, int angle, int speed)
+	public void placeProjectile(int xPos, int yPos, int angle, int speed,int friendlyShipID)
 			throws SlickException {
 		projectiles = Arrays.copyOf(projectiles, projectiles.length + 1);
 
 		projectiles[projectiles.length - 1] = new Projectile(xPos, yPos, angle,
-				speed);
+				speed,friendlyShipID);
 		System.out.println("Fired a projectile..: "
 				+ projectiles[projectiles.length - 1]);
 		projectiles[projectiles.length - 1].setID(projectiles.length - 1);
@@ -77,11 +77,11 @@ public class BattleField {
 	 * @param secondShip
 	 */
 	public void placeProjectile(int xPos, int yPos, int angle, int speed,
-			Ship ship) {
+			Ship ship, int friendlyShipID) {
 		projectiles = Arrays.copyOf(projectiles, projectiles.length + 1);
 
 		projectiles[projectiles.length - 1] = new Projectile(xPos, yPos, angle,
-				speed, ship);
+				speed, ship,friendlyShipID);
 		System.out.println("Fired a debug projectile..: "
 				+ projectiles[projectiles.length - 1]);
 		projectiles[projectiles.length - 1].setID(projectiles.length - 1);
@@ -118,16 +118,21 @@ public class BattleField {
 
 	public void updateProjectiles() {
 
-		
 		for (int a = 0; a < projectiles.length; a++) {
 			if (projectiles[a] != null) {
 				projectiles[a].update();
 				for (int b = 0; b < entities.length; b++) {
-				//interakce se shipama - kolize	
+					if (entities[b] != null && entities[b].getBounds()!=null && projectiles[a]!=null) {
+						if (projectiles[a].intersectsBounds(entities[b])) {
+							Util.notify("Ship ID [" + entities[b].getID()
+									+ "] has been hit!");
+							projectiles[a] = null;
+						}
+					}
 				}
 			}
 		}
-		
+
 	}
 
 	public void drawProjectiles() {
@@ -164,14 +169,15 @@ public class BattleField {
 	public void mapBoundsCheck() {
 		for (int a = 0; a < projectiles.length; a++) {
 
-			if (projectiles[a] != null){
+			if (projectiles[a] != null) {
 				if (!fieldRect.contains(projectiles[a].getXPos(),
 						projectiles[a].getYPos())) {
 					projectiles[a] = null;
 
 					System.out.println("anulling a projectile");
 
-				}}
+				}
+			}
 
 		}
 	}
@@ -232,7 +238,6 @@ public class BattleField {
 
 	public void setRotation(int rotation, int ship) {
 
-		
 		entities[ship].setRotation(rotation);
 
 	}

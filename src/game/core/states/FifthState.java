@@ -114,7 +114,7 @@ public class FifthState extends BasicState {
 				field.placeProjectile(field.getShipX(controlledShip.getID()),
 						field.getShipY(controlledShip.getID()) - 5,
 						field.getRotation(controlledShip.getID()),
-						PROJECTILE_SPEED);
+						PROJECTILE_SPEED,controlledShip.getID());
 				System.out.println("placed");
 
 				// field.placeProjectile(controlledShip.getCannonX(0),
@@ -126,15 +126,15 @@ public class FifthState extends BasicState {
 				field.placeProjectile(field.getShipX(controlledShip.getID()),
 						field.getShipY(controlledShip.getID()) + 5,
 						field.getRotation(controlledShip.getID()),
-						PROJECTILE_SPEED);
+						PROJECTILE_SPEED,controlledShip.getID());
 			}
 
 			if (input.isKeyPressed(Input.KEY_RCONTROL)) {
 
-				field.placeProjectile(field.getShipX(controlledShip.getID()),
-						field.getShipY(controlledShip.getID()) - 5,
-						field.getRotation(controlledShip.getID()),
-						PROJECTILE_SPEED);
+				field.placeProjectile(field.getShipX(secondShip.getID()),
+						field.getShipY(secondShip.getID()) - 5,
+						field.getRotation(secondShip.getID()),
+						PROJECTILE_SPEED,secondShip.getID());
 
 				// field.placeProjectile(secondShip.getCannonX(0),
 				// secondShip.getCannonY(0),
