@@ -11,6 +11,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 import game.core.Trololus;
 import game.nonstatic.entities.Projectile;
+import game.nonstatic.entities.Projectile2;
 import game.nonstatic.entities.controllables.Ship;
 import game.util.Util;
 
@@ -29,7 +30,7 @@ public class BattleField {
 	int SHIP_SPEED = 4, MOVE_TIME = 1;
 
 	Ship[] entities = new Ship[0];
-	Projectile[] projectiles = new Projectile[0];
+	Projectile2[] projectiles = new Projectile2[0];
 
 	int movementRotation;
 	public GameInstance instance;
@@ -61,7 +62,7 @@ public class BattleField {
 			throws SlickException {
 		projectiles = Arrays.copyOf(projectiles, projectiles.length + 1);
 
-		projectiles[projectiles.length - 1] = new Projectile(xPos, yPos, angle,
+		projectiles[projectiles.length - 1] = new Projectile2(xPos, yPos, angle,
 				speed,friendlyShipID);
 		System.out.println("Fired a projectile..: "
 				+ projectiles[projectiles.length - 1]);
@@ -80,7 +81,7 @@ public class BattleField {
 			Ship ship, int friendlyShipID) {
 		projectiles = Arrays.copyOf(projectiles, projectiles.length + 1);
 
-		projectiles[projectiles.length - 1] = new Projectile(xPos, yPos, angle,
+		projectiles[projectiles.length - 1] = new Projectile2(xPos, yPos, angle,
 				speed, ship,friendlyShipID);
 		System.out.println("Fired a debug projectile..: "
 				+ projectiles[projectiles.length - 1]);
@@ -170,7 +171,7 @@ public class BattleField {
 		for (int a = 0; a < projectiles.length; a++) {
 
 			if (projectiles[a] != null) {
-				if (!fieldRect.contains(projectiles[a].getXPos(),
+				if (!fieldRect.contains(projectiles[a].getYPos(),
 						projectiles[a].getYPos())) {
 					projectiles[a] = null;
 
