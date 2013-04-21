@@ -109,13 +109,10 @@ public class FifthState extends BasicState {
 				field.setRotation(0, controlledShip.getID());
 			}
 			if (input.isKeyPressed(Input.KEY_SPACE)) {
-
-				System.out.println("placing projectile");
-				field.placeProjectile(field.getShipX(controlledShip.getID()),
+			field.placeProjectile(field.getShipX(controlledShip.getID()),
 						field.getShipY(controlledShip.getID()) - 5,
 						field.getRotation(controlledShip.getID()),
 						PROJECTILE_SPEED,controlledShip.getID());
-				System.out.println("placed");
 
 				// field.placeProjectile(controlledShip.getCannonX(0),
 				// controlledShip.getCannonY(0),

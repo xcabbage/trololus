@@ -44,7 +44,7 @@ public class Projectile {
 	int HullHP;// Percentage?
 	int PlayerOwner = 5;
 	int ID = 3;
-	TrueTypeFont font = new TrueTypeFont(new Font("Tahoma", 25, 25), true);
+	static TrueTypeFont font = new TrueTypeFont(new Font("Tahoma", 25, 25), true);
 	ShipType type; // ShipType includes number of slots, will also very probably
 					// contain ship size
 	private Image img;
