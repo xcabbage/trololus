@@ -113,6 +113,7 @@ public class FifthState extends BasicState {
 						field.getShipY(controlledShip.getID()) - 5,
 						field.getRotation(controlledShip.getID()),
 						PROJECTILE_SPEED,controlledShip.getID());
+			
 
 				// field.placeProjectile(controlledShip.getCannonX(0),
 				// controlledShip.getCannonY(0),

@@ -50,7 +50,7 @@ public class Trololus extends StateBasedGame {
 	static String MUSIC_PATH_INIT = "resources/Audio/BGM1_a.wav";
 	static String MUSIC_PATH_LOOP = "resources/Audio/BGM4.wav";
 	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
-	static float MUSIC_VOLUME = 0.18f;
+	static float MUSIC_VOLUME = 0.05f;
 	static boolean MUSIC_END_REQUESTED;
 
 	// ---------------------------------------------------MainMethod-&-Constructors----------------------------------------------------------------
@@ -60,7 +60,7 @@ public class Trololus extends StateBasedGame {
 
 	public static void main(String[] args) throws SlickException {
 		Util.initFonts();
-		try {
+/*		try {
 			PropertiesHandler.init();
 			MUSIC_VOLUME = Float.parseFloat(PropertiesHandler.getProperty("musicvolume"));
 			
@@ -68,7 +68,7 @@ public class Trololus extends StateBasedGame {
 		} catch (IOException e) {
 
 			e.printStackTrace();
-		}
+		}*/
 	
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
