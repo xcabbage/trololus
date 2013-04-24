@@ -124,8 +124,8 @@ public class Projectile {
 
 		angleVector.set((float) after.getX(), (float) after.getY()); */
 		
-		Point2D point = new Point2D.Double(img.getWidth()/2, img.getHeight());
-		Point2D pivot = new Point2D.Double(0,0);
+		Point2D point = new Point2D.Double(XPos+img.getWidth()/2,YPos);
+		Point2D pivot = new Point2D.Double(XPos+img.getWidth()/2,YPos+img.getHeight()/2);
 		Point2D result = new Point2D.Double();
 	    AffineTransform rotation = new AffineTransform();
 	    double angleInRadians = (angle * Math.PI / 180);
@@ -137,7 +137,7 @@ public class Projectile {
 	    
 		angleVector = new Vector2f();
 
-		angleVector.set((float) result.getX(), (float) result.getY());
+		angleVector.set((float) result.getX()-XPos, (float) result.getY()-YPos);
 		
 		System.out.println(angleVector.x + "" + angleVector.y);
 	}
@@ -210,13 +210,14 @@ public class Projectile {
 
 		Image shipImg = ship.getContainingField().instance.ship[ship.getID()];
 
-		Color col = shipImg.getColor((int) Math.abs(XPos - shipX),
-				(int) Math.abs(YPos - shipY));
+		
+		
+		Color col = shipImg.getColor((int) Math.abs(XPos+ angleVector.getX() - shipX),
+				(int) Math.abs(YPos + angleVector.getY() - shipY));
 		if (col.a < 0.99f)
+			return true; else return false;
 
-			return false;
-
-		return false;
+		
 	}
 
 	public int getID() {
