@@ -41,8 +41,8 @@ public class Trololus extends StateBasedGame {
 	// CONSTANTS
 	static int width = 1000;
 	static int height = 500;
-	static int fpslimit = 60;
-	static boolean ShowFPS = true;
+	static int fpslimit = 30;
+	static boolean ShowFPS = false;
 
 	public static final float ShipScale = 0.1f;
 

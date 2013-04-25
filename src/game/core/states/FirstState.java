@@ -22,13 +22,10 @@ import org.newdawn.slick.state.StateBasedGame;
 public class FirstState extends BasicState {
 
 	public static int ID = 0;
-	
 
 	public void createContent() throws SlickException {
-
-		
-	
-		
+sb.addLabel(0.5f, 0.5F, "resources/Splash/Tlogo.png", 0.12f);
+sb.getLabel(-1).setPosition(ContentPosition.TopCenter,0,125);
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
@@ -45,19 +42,19 @@ public class FirstState extends BasicState {
 			throws SlickException {
 		super.update(gc, mainGame, delta);
 		Input input = gc.getInput();
-	
-		
-//		if(driftRequested){
-//			sb.driftComponentContinue(this);	
-//		}
-//		
-//		
-//		if(input.isMousePressed(0)){
-//			sb.driftComponentTo(input.getMouseX(), input.getMouseY(), sb.getComponent(-1));	
-//			driftRequested = true;
-//			
-//		}
-		
+
+		// if(driftRequested){
+		// sb.driftComponentContinue(this);
+		// }
+		//
+		//
+		// if(input.isMousePressed(0)){
+		// sb.driftComponentTo(input.getMouseX(), input.getMouseY(),
+		// sb.getComponent(-1));
+		// driftRequested = true;
+		//
+		// }
+
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
@@ -66,11 +63,8 @@ public class FirstState extends BasicState {
 		super.render(gc, mainGame, g, stateRes);
 
 	}
-	
+
 	public void mousePressed(int button, int x, int y) {
-		
-
-
 
 	}
 }
