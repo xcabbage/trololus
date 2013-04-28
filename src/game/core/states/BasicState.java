@@ -32,10 +32,10 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class BasicState extends BasicGameState {
 	// CONSTANTS
-	String fontGreatHeader;
-	String fontNormalHeader;
-	String fontEntry;
-	String fontText;
+	static String fontGreatHeader;
+	static String fontNormalHeader;
+	static String fontEntry;
+	static String fontText;
 
 	// declare globals
 	public StateBasedGame game;
