@@ -41,7 +41,6 @@ public class FifthState extends BasicState {
 		super.init(gc, game);
 		StateTitle = "State 5 - Game - GfX test! (once to be Player Profile)";
 
-
 	}
 
 	public int getID() {
@@ -109,11 +108,10 @@ public class FifthState extends BasicState {
 				field.setRotation(0, controlledShip.getID());
 			}
 			if (input.isKeyPressed(Input.KEY_SPACE)) {
-			field.placeProjectile(field.getShipX(controlledShip.getID()),
+				field.placeProjectile(field.getShipX(controlledShip.getID()),
 						field.getShipY(controlledShip.getID()) - 5,
 						field.getRotation(controlledShip.getID()),
-						PROJECTILE_SPEED,controlledShip.getID());
-			
+						PROJECTILE_SPEED, controlledShip.getID());
 
 				// field.placeProjectile(controlledShip.getCannonX(0),
 				// controlledShip.getCannonY(0),
@@ -124,7 +122,7 @@ public class FifthState extends BasicState {
 				field.placeProjectile(field.getShipX(controlledShip.getID()),
 						field.getShipY(controlledShip.getID()) + 5,
 						field.getRotation(controlledShip.getID()),
-						PROJECTILE_SPEED,controlledShip.getID());
+						PROJECTILE_SPEED, controlledShip.getID());
 			}
 
 			if (input.isKeyPressed(Input.KEY_RCONTROL)) {
@@ -132,7 +130,7 @@ public class FifthState extends BasicState {
 				field.placeProjectile(field.getShipX(secondShip.getID()),
 						field.getShipY(secondShip.getID()) - 5,
 						field.getRotation(secondShip.getID()),
-						PROJECTILE_SPEED,secondShip.getID());
+						PROJECTILE_SPEED, secondShip.getID());
 
 				// field.placeProjectile(secondShip.getCannonX(0),
 				// secondShip.getCannonY(0),

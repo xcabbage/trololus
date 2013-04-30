@@ -9,6 +9,7 @@ package game.core.states;
 import java.awt.Font;
 
 import game.core.parts.ContentPosition;
+import game.util.Util;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -26,7 +27,7 @@ public class SecondState extends BasicState {
 	public void createContent() throws SlickException {
 		
 		sb.addLabel(1, 0.5f,  0.5f, "Connect to a remote Game");
-		sb.getLabel(-1).setFont(new TrueTypeFont(new Font("Cambria", 25, 43), true));
+		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 	}
 

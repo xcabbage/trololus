@@ -5,6 +5,7 @@ import java.awt.Font;
 import game.core.parts.ContentPane;
 import game.core.parts.ContentPosition;
 import game.util.MoreColors;
+import game.util.Util;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -24,8 +25,7 @@ public class SixthState extends BasicState {
 	public void createContent() throws SlickException {
 		// create independent content
 		sb.addLabel(1, 0.5f, 0.5f, "game options");
-		sb.getLabel(-1).setFont(
-				new TrueTypeFont(new Font(fontGreatHeader, 25, 43), true));
+		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 
 		// add & init Options pane
@@ -36,26 +36,22 @@ public class SixthState extends BasicState {
 
 		optionsPane.addLabel(1, 0, 0, "GENERAL");
 		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 20);
-		optionsPane.getLabel(-1).setFont(
-				new TrueTypeFont(new Font(fontNormalHeader, 50, 30), true));
+		optionsPane.getLabel(-1).setFont(Util.fontNormalHeader);
 		optionsPane.getLabel(-1).setColor(Color.white);
 
 		optionsPane.addLabel(1, 0, 0, "SOUND");
 		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter,
 				(int) (optionsPane.getLabel(-2).getBounds().getWidth() + 50),
 				12);
-		optionsPane.getLabel(-1).setFont(
-				new TrueTypeFont(new Font(fontNormalHeader, 50, 30), true));
+		optionsPane.getLabel(-1).setFont(Util.fontNormalHeader);
 		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
 
 		optionsPane.addLabel(1, 0, 0, "GRAPHICS");
 		optionsPane.getLabel(-1).setPosition(ContentPosition.TopCenter,
 				(int) -(optionsPane.getLabel(-3).getBounds().getWidth() + 50),
 				12);
-		optionsPane.getLabel(-1).setFont(
-				new TrueTypeFont(new Font(fontNormalHeader, 50, 30), true));
+		optionsPane.getLabel(-1).setFont(Util.fontNormalHeader);
 		optionsPane.getLabel(-1).setColor(Color.white.darker(0.4f));
-
 
 		// !!Menu Settings Panes!!!
 
@@ -104,8 +100,6 @@ public class SixthState extends BasicState {
 		}
 	}
 
-		
-	
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
@@ -127,9 +121,10 @@ public class SixthState extends BasicState {
 		super.render(gc, mainGame, g, stateRes);
 
 	}
+
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-		
+
 		switch (key) {
 
 		case Input.KEY_Q:
@@ -146,5 +141,5 @@ public class SixthState extends BasicState {
 			break;
 		}
 
-}
+	}
 }

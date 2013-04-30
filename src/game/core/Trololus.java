@@ -22,6 +22,13 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Trololus extends StateBasedGame {
 
+	
+	public static final boolean optionsEnabled = false;
+	
+	
+	
+	
+	
 	static public boolean drawing = true;
 	static public AppGameContainer app;
 	static public Dimension res;
@@ -59,7 +66,7 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void main(String[] args) throws SlickException {
-		Util.initFonts();
+		
 /*		try {
 			PropertiesHandler.init();
 			MUSIC_VOLUME = Float.parseFloat(PropertiesHandler.getProperty("musicvolume"));
@@ -77,7 +84,7 @@ public class Trololus extends StateBasedGame {
 		cleanRes();
 		app.setSmoothDeltas(true);
 		app.setTargetFrameRate(fpslimit);
-		app.setVSync(true);
+		app.setVSync(false);
 		app.setIcons(icons);
 		app.setVerbose(false);
 		app.setShowFPS(ShowFPS);

@@ -32,10 +32,12 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class BasicState extends BasicGameState {
 	// CONSTANTS
-	static String fontGreatHeader;
-	static String fontNormalHeader;
-	static String fontEntry;
-	static String fontText;
+
+	public static String fontGreatHeader = "Basica v.2012";
+	public static String fontNormalHeader= "Freedom";
+	public static String fontEntry = "Complex";
+	public static String fontText = "Orena";
+	
 
 	// declare globals
 	public StateBasedGame game;
@@ -44,8 +46,8 @@ public class BasicState extends BasicGameState {
 	GameContainer app;
 	public StateBuilder sb;
 	Input input;
-	public Circle[] buttonHoverCircle = new Circle[10];
-	public MouseOverAreaDav[] button = new MouseOverAreaDav[10];
+	public static Circle[] buttonHoverCircle = new Circle[10];
+	public static MouseOverAreaDav[] button = new MouseOverAreaDav[10];
 	public BasicState stateRes;
 
 	Music music;
@@ -55,6 +57,7 @@ public class BasicState extends BasicGameState {
 	public String StateTitle;
 	public SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown;
 	public int ID;
+	boolean inited;
 
 	// declare gFx constants
 	public boolean gFxInited = false;
@@ -66,13 +69,13 @@ public class BasicState extends BasicGameState {
 	public boolean driftRequested;
 
 	public void initRes() throws SlickException {
+		Util.initFonts();
 		buttonSpriteSheet = new Image(
 				"resources/Splash/UI/Menubar_Spritesheet.png");
 		appWidth = app.getWidth();
 		appHeight = app.getHeight();
 		menuScale = (float) ((appWidth / (float) buttonSpriteSheet.getWidth()) * .75);
-		menuBarWidth = (int) (menubar.getWidth() * 
-				menuScale);
+		menuBarWidth = (int) (menubar.getWidth() * menuScale);
 		menuBarHeight = (int) (menubar.getHeight() * menuScale);
 		menuOffset = (appWidth - menuBarWidth) / 2;
 		buttonSpriteSheet = buttonSpriteSheet.getScaledCopy(menuScale);
@@ -123,18 +126,29 @@ public class BasicState extends BasicGameState {
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed and stateRes set.");
 		reloadProperties();
-		createContent();
 
-		
+	}
+
+	public void enter(GameContainer gc, StateBasedGame game) {
+		if (!inited)
+			try {
+				createContent();
+				inited = true;
+			} catch (SlickException e) {
+
+				e.printStackTrace();
+			}
+
 	}
 
 	void reloadProperties() {
+		if(Trololus.optionsEnabled){
 		// load from properties
 		fontGreatHeader = PropertiesHandler.getProperty("fontGreatHeader");
 		fontNormalHeader = PropertiesHandler.getProperty("fontNormalHeader");
 		fontEntry = PropertiesHandler.getProperty("fontEntry");
-		fontText = PropertiesHandler.getProperty("fontText");
-		
+		fontText = PropertiesHandler.getProperty("fontText");}
+
 	}
 
 	void initDiffGfx() throws SlickException {

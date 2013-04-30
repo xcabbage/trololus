@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 import game.core.states.BasicState;
 import game.util.MoreColors;
+import game.util.Util;
+
 import org.newdawn.slick.Color;
 
 import org.newdawn.slick.AppGameContainer;
@@ -36,6 +38,7 @@ public class StateBuilder {
 	private int driftRequestedX;
 	private int driftRequestedY;
 	private AbstractComponent driftingComponent;
+	
 
 	// constructor
 	public StateBuilder(AppGameContainer gc) {
@@ -46,8 +49,7 @@ public class StateBuilder {
 	// interface methods to create the new objects and queue their addition to
 	// the arrays
 	public void addTextField(int x, int y, int width, int height) {
-		TextField field = new TextField((GUIContext) gc, new TrueTypeFont(
-				new Font("Garamond", 10, 25), true), x, y, width, height);
+		TextField field = new TextField((GUIContext) gc, Util.fontEntry, x, y, width, height);
 		field.setConsumeEvents(true);
 		addComponents(field);
 

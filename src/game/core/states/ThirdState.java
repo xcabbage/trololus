@@ -57,8 +57,8 @@ public class ThirdState extends BasicState {
 				Util.notify("Button1 pressed");
 
 			}
-		});	
-		
+		});
+
 		// !!Creation of options Panes!!!
 
 		// WELCOME
@@ -69,12 +69,9 @@ public class ThirdState extends BasicState {
 		optionsPanes[0].setPosition(ContentPosition.Center);
 		optionsPanes[0].setVisible(false);
 		optionsPanes[0].addLabel(1, 0, 0, "Create a game - HOST");
-		optionsPanes[0].getLabel(-1).setFont(
-				new TrueTypeFont(new Font("Cambria", 25, 20), true));
-		optionsPanes[0].getLabel(-1).setPosition(ContentPosition.TopCenter, 0, -13);
-		
-		
-		
+		optionsPanes[0].getLabel(-1).setFont(Util.fontGreatHeader);
+		optionsPanes[0].getLabel(-1).setPosition(ContentPosition.TopCenter, 0,
+				-13);
 
 		// SOUND
 		menuPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
@@ -84,23 +81,16 @@ public class ThirdState extends BasicState {
 		optionsPanes[1].setPosition(ContentPosition.Center);
 		optionsPanes[1].setVisible(false);
 
-
-			
-		
-		
 		sb.addLabel(1, 0.5f, 0.5f, "Create a game - HOST");
-		sb.getLabel(-1).setFont(
-				new TrueTypeFont(new Font("Cambria", 25, 43), true));
+		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 
 		sb.addLabel(1, 0.5f, 0.5f, "Host a game over LAN, IP or hotseat");
-		sb.getLabel(-1).setFont(
-				new TrueTypeFont(new Font("Cambria", 25, 25), true));
+		sb.getLabel(-1).setFont(Util.fontNormalHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
 		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
 
-		
-		//Initially show Welcome pane
+		// Initially show Welcome pane
 		switchToPane(0);
 	}
 
@@ -125,14 +115,14 @@ public class ThirdState extends BasicState {
 		super.render(gc, mainGame, g, stateRes);
 
 	}
-	
+
 	public void switchToPane(int a) {
 		for (int b = 0; b < 2; b++) {
 			if (b == a) {
-				System.out.println(b + "visible");
+
 				optionsPanes[b].setVisible(true);
 			} else {
-				System.out.println(b + "invisible");
+
 				optionsPanes[b].setVisible(false);
 			}
 		}
