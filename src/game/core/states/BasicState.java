@@ -41,11 +41,11 @@ public class BasicState extends BasicGameState {
 
 	// declare globals
 	public StateBasedGame game;
-	game.util.FastGraphics utilGfx = new game.util.FastGraphics();
-	Dimension res;
-	GameContainer app;
+	static game.util.FastGraphics utilGfx = new game.util.FastGraphics();
+	static Dimension res;
+	static GameContainer app;
 	public StateBuilder sb;
-	Input input;
+	static Input input;
 	public static Circle[] buttonHoverCircle = new Circle[10];
 	public static MouseOverAreaDav[] button = new MouseOverAreaDav[10];
 	public BasicState stateRes;
@@ -53,9 +53,11 @@ public class BasicState extends BasicGameState {
 	Music music;
 	// declare graphics
 
+	
+	static Image arrow;
 	public Image backgroundBack, menubar, buttonSpriteSheet, background;
 	public String StateTitle;
-	public SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown;
+	public static SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown;
 	public int ID;
 	boolean inited;
 
