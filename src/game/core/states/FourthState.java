@@ -1,5 +1,9 @@
 package game.core.states;
 
+import game.core.parts.ContentPosition;
+import game.util.Util;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -17,7 +21,16 @@ public class FourthState extends BasicState {
 //	sb.getLabel(-1).setScale(0.3f);
 //	sb.addLabel(2,0,0,"/resources/Splash/pilots/Pilot_Port4.png");
 //	sb.getLabel(-1).setScale(0.25f);
-	
+
+		
+		sb.addLabel(1, 0.5f, 0.5f, "Profile & Stats");
+		sb.getLabel(-1).setFont(Util.fontGreatHeader);
+		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
+
+		sb.addLabel(1, 0.5f, 0.5f, "Customize your profile, track your stats and achievements.");
+		sb.getLabel(-1).setFont(Util.fontNormalHeader);
+		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
+		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
   	}
 
 

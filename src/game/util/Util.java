@@ -172,7 +172,7 @@ public class Util {
 							"resources/fonts/freedom.ttf")));
 
 			fontGreatHeader = new TrueTypeFont(new Font(BasicState.fontGreatHeader, 25, 43), true);
-			fontNormalHeader = new TrueTypeFont(new Font(BasicState.fontNormalHeader, 10, 35), true);
+			fontNormalHeader = new TrueTypeFont(new Font(BasicState.fontNormalHeader, 10, 20), true);
 			fontEntry = new TrueTypeFont(new Font(BasicState.fontEntry, 10, 25), true);
 			fontText = new TrueTypeFont(new Font(BasicState.fontText, 25, 25),true);
 

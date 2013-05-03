@@ -3,16 +3,14 @@
 
 package game.core.states;
 
-import java.awt.Font;
-
 import game.core.parts.ContentPosition;
 import game.util.Util;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -24,9 +22,17 @@ public class FirstState extends BasicState {
 	public static int ID = 0;
 
 	public void createContent() throws SlickException {
-sb.addLabel(0.5f, 0.5F, "resources/Splash/Tlogo.png", 0.12f);
-sb.getLabel(-1).setPosition(ContentPosition.TopCenter,0,125);
-	}
+
+		sb.addLabel(1, 0.5f, 0.5f, "Trololus ");
+		sb.getLabel(-1).setFont(Util.fontGreatHeader);
+		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
+
+		sb.addLabel(1, 0.5f, 0.5f, "Title screen");
+		sb.getLabel(-1).setFont(Util.fontNormalHeader);
+		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
+		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
+
+		}
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
@@ -41,7 +47,6 @@ sb.getLabel(-1).setPosition(ContentPosition.TopCenter,0,125);
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
-		Input input = gc.getInput();
 
 		// if(driftRequested){
 		// sb.driftComponentContinue(this);

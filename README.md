@@ -7,19 +7,22 @@ A link to the group HQ.: [https://www.facebook.com/groups/trollfaceStudios/]
 
 Initally created by xCabbage 	[https://github.com/xcabbage].
 
-Collaborators (chronological join order):
+Collaborators (ordered by contribution):
 ----------
 Xargo     						[https://github.com/avatarxargo]
 
-Snupicek    					[https://github.com/SnoopCZ]
-
-Nic      			[https://github.com/nic727]
-
-Trixis      					[https://github.com/trixis]
+DusanPilka      				[https://github.com/dusanp]
 
 DannyUfonek      				[https://github.com/DannyUfonek]
 
-DusanPilka      				[https://github.com/dusanp]
+Snupicek    					[https://github.com/SnoopCZ]
+
+Trixis      					[https://github.com/trixis]
+
+Nic      			[https://github.com/nic727]
+
+
+
 
 
 Misc （╯°□°）╯︵ ┻━┻ 

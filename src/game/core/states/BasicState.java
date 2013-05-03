@@ -9,6 +9,7 @@ import game.util.Util;
 import java.awt.Dimension;
 
 import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -18,12 +19,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 /**
- * The BasicState.java class defining the base state of the game's UI.
+ * The BasicState.java class defining the base state of the game's UI and logic.
  * 
  * @author xCabbage [github.com/xcabbage]
  * 
@@ -34,10 +36,9 @@ public class BasicState extends BasicGameState {
 	// CONSTANTS
 
 	public static String fontGreatHeader = "Basica v.2012";
-	public static String fontNormalHeader= "Freedom";
+	public static String fontNormalHeader = "Cambria";
 	public static String fontEntry = "Complex";
 	public static String fontText = "Orena";
-	
 
 	// declare globals
 	public StateBasedGame game;
@@ -53,7 +54,6 @@ public class BasicState extends BasicGameState {
 	Music music;
 	// declare graphics
 
-	
 	static Image arrow;
 	public Image backgroundBack, menubar, buttonSpriteSheet, background;
 	public String StateTitle;
@@ -64,9 +64,9 @@ public class BasicState extends BasicGameState {
 	// declare gFx constants
 	public boolean gFxInited = false;
 	public float menuScale, backgroundScale;
-	public int menuBarWidth, menuBarHeight, appWidth, appHeight, menuOffset,
-			menuX, menuY, buttonsX, buttonsY, buttonsOffset, backgroundY,
-			buttonDist, buttonRadius, buttonsGetY, buttonsSafeY;
+	public static int menuBarWidth, menuBarHeight, appWidth, appHeight,
+			menuOffset, menuX, menuY, buttonsX, buttonsY, buttonsOffset,
+			backgroundY, buttonDist, buttonRadius, buttonsGetY, buttonsSafeY;
 	private boolean stateTitleEnabled;
 	public boolean driftRequested;
 
@@ -93,6 +93,7 @@ public class BasicState extends BasicGameState {
 		backgroundY = (int) (appHeight * .06);
 		backgroundScale = (float) appWidth / background.getWidth();
 		buttonsSafeY = appHeight / 2;
+		arrow = new Image("resources/Splash/UI/pointerArrow.png");
 
 		for (int a = 0; a < menuButtons.getHorizontalCount(); a++) {
 			button[a] = new MouseOverAreaDav(app, menuButtons.getSprite(a, 0),
@@ -124,7 +125,7 @@ public class BasicState extends BasicGameState {
 		if (this.getID() >= 0)
 			stateRes = ((Trololus) game).getResState();
 		sb = new StateBuilder((AppGameContainer) gc);
-		initDiffGfx();
+
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed and stateRes set.");
 		reloadProperties();
@@ -134,6 +135,7 @@ public class BasicState extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame game) {
 		if (!inited)
 			try {
+				initDiffGfx();
 				createContent();
 				inited = true;
 			} catch (SlickException e) {
@@ -144,12 +146,14 @@ public class BasicState extends BasicGameState {
 	}
 
 	void reloadProperties() {
-		if(Trololus.optionsEnabled){
-		// load from properties
-		fontGreatHeader = PropertiesHandler.getProperty("fontGreatHeader");
-		fontNormalHeader = PropertiesHandler.getProperty("fontNormalHeader");
-		fontEntry = PropertiesHandler.getProperty("fontEntry");
-		fontText = PropertiesHandler.getProperty("fontText");}
+		if (Trololus.optionsEnabled) {
+			// load from properties
+			fontGreatHeader = PropertiesHandler.getProperty("fontGreatHeader");
+			fontNormalHeader = PropertiesHandler
+					.getProperty("fontNormalHeader");
+			fontEntry = PropertiesHandler.getProperty("fontEntry");
+			fontText = PropertiesHandler.getProperty("fontText");
+		}
 
 	}
 
@@ -216,8 +220,10 @@ public class BasicState extends BasicGameState {
 			BasicState state) throws SlickException {
 
 		if (Trololus.drawing) {
-			backgroundBack.draw(0, state.backgroundY, state.backgroundScale);
-			state.background.draw(0, state.backgroundY, state.backgroundScale);
+			backgroundBack.draw(0, BasicState.backgroundY,
+					state.backgroundScale);
+			state.background.draw(0, BasicState.backgroundY,
+					state.backgroundScale);
 			if (stateTitleEnabled)
 				g.drawString(StateTitle, 320, 20);
 			drawMenu(g, state);
@@ -227,12 +233,16 @@ public class BasicState extends BasicGameState {
 	}
 
 	public void drawMenu(Graphics g, BasicState state) {
-		state.menubar.draw(state.menuX, state.menuY, state.menuScale);
+		state.menubar.draw(BasicState.menuX, BasicState.menuY, state.menuScale);
 
 		for (int a = 0; a < 7; a++) {
-			state.button[a].render(app, g);
+			BasicState.button[a].render(app, g);
 
 		}
+		arrow.draw(
+				BasicState.buttonsX + buttonsOffset
+						* (game.getCurrentStateID()) - (buttonRadius / 2 + 7),
+				BasicState.buttonsY - (buttonRadius * 2 + 20));
 
 	}
 
@@ -288,32 +298,80 @@ public class BasicState extends BasicGameState {
 
 		case Input.KEY_1:
 		case Input.KEY_NUMPAD1: {
-			game.enterState(0);
+			try {
+				game.getState(0).enter(app, game);
+			} catch (SlickException e) {
+
+				e.printStackTrace();
+			}
+			game.enterState(0, new FadeOutTransition(Color.black, 600),
+					new FadeInTransition(Color.black, 600));
+
 			break;
 		}
 		case Input.KEY_2:
 		case Input.KEY_NUMPAD2: {
-			game.enterState(1);
+			try {
+				game.getState(1).enter(app, game);
+			} catch (SlickException e) {
+
+				e.printStackTrace();
+			}
+			game.enterState(1, new FadeOutTransition(Color.black, 600),
+					new FadeInTransition(Color.black, 600));
+
 			break;
 		}
 		case Input.KEY_3:
 		case Input.KEY_NUMPAD3: {
-			game.enterState(2);
+			try {
+				game.getState(2).enter(app, game);
+			} catch (SlickException e) {
+
+				e.printStackTrace();
+			}
+			game.enterState(2, new FadeOutTransition(Color.black, 600),
+					new FadeInTransition(Color.black, 600));
+
 			break;
 		}
 		case Input.KEY_4:
 		case Input.KEY_NUMPAD4: {
-			game.enterState(3);
+			try {
+				game.getState(3).enter(app, game);
+			} catch (SlickException e) {
+
+				e.printStackTrace();
+			}
+			game.enterState(3, new FadeOutTransition(Color.black, 600),
+					new FadeInTransition(Color.black, 600));
+
 			break;
 		}
 		case Input.KEY_5:
 		case Input.KEY_NUMPAD5: {
-			game.enterState(4);
+			try {
+				game.getState(4).enter(app, game);
+			} catch (SlickException e) {
+
+				e.printStackTrace();
+			}
+			game.enterState(4, new FadeOutTransition(Color.black, 600),
+					new FadeInTransition(Color.black, 600));
+
 			break;
 		}
 		case Input.KEY_6:
 		case Input.KEY_NUMPAD6: {
-			game.enterState(5);
+			try {
+				game.getState(5).enter(app, game);
+			} catch (SlickException e) {
+
+				e.printStackTrace();
+			}
+			game.enterState(5, new FadeOutTransition(Color.black, 600),
+					new FadeInTransition(Color.black, 600));
+
 			break;
 		}
 

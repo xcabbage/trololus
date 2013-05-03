@@ -22,13 +22,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Trololus extends StateBasedGame {
 
-	
 	public static final boolean optionsEnabled = false;
-	
-	
-	
-	
-	
+
 	static public boolean drawing = true;
 	static public AppGameContainer app;
 	static public Dimension res;
@@ -66,17 +61,17 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void main(String[] args) throws SlickException {
-		
-/*		try {
-			PropertiesHandler.init();
-			MUSIC_VOLUME = Float.parseFloat(PropertiesHandler.getProperty("musicvolume"));
-			
-			
-		} catch (IOException e) {
 
-			e.printStackTrace();
-		}*/
-	
+		/*
+		 * try { PropertiesHandler.init(); MUSIC_VOLUME =
+		 * Float.parseFloat(PropertiesHandler.getProperty("musicvolume"));
+		 * 
+		 * 
+		 * } catch (IOException e) {
+		 * 
+		 * e.printStackTrace(); }
+		 */
+
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
@@ -222,7 +217,6 @@ public class Trololus extends StateBasedGame {
 			break;
 		}
 
-
 		case Input.KEY_LALT: {
 			Util.printErr("debug Error");
 			break;
@@ -237,10 +231,16 @@ public class Trololus extends StateBasedGame {
 		for (int a = 0; a < 7; a++)
 			if (state.stateRes.button[a].isMouseOver()) {
 				if (a < 6) {
-					Util.printDebug("entering " + a);
-
-			        enterState(a, new FadeOutTransition(Color.black, 600), new FadeInTransition(Color.black, 600) );
+					Util.printDebug("Entering " + a);
+					try {
+						getState(a).enter(app, this);
+					} catch (SlickException e) {
 					
+						e.printStackTrace();
+					}
+					enterState(a, new FadeOutTransition(Color.black, 600),
+							new FadeInTransition(Color.black, 600));
+
 				} else if (a == 6)
 					MUSIC_END_REQUESTED = true;
 				else {
@@ -258,7 +258,6 @@ public class Trololus extends StateBasedGame {
 	// TODO DH | Rest of ship models
 
 	// TODO DK | Projectile system
-	// TODO DK | Ships rendering img based on their type
 
 	// TODO DP | Connection stream for BattleField sync
 	// TODO DP | TextAreas (input) to set the IPs outside console?

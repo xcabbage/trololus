@@ -11,6 +11,7 @@ import java.awt.Font;
 import game.core.parts.ContentPosition;
 import game.util.Util;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -26,9 +27,15 @@ public class SecondState extends BasicState {
 
 	public void createContent() throws SlickException {
 		
-		sb.addLabel(1, 0.5f,  0.5f, "Connect to a remote Game");
+		sb.addLabel(1, 0.5f, 0.5f, "Connect to a GAME");
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
+
+		sb.addLabel(1, 0.5f, 0.5f, "Join a battle over the Internet, LAN or VPN.");
+		sb.getLabel(-1).setFont(Util.fontNormalHeader);
+		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
+		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
+
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)

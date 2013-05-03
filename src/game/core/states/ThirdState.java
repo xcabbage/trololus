@@ -35,52 +35,9 @@ public class ThirdState extends BasicState {
 	public void createContent() throws SlickException {
 		Image buttonImg = new Image("resources/Splash/UI/IG/IG_fps.png")
 				.getScaledCopy(0.15f);
-
-		sb.addContentPane(0.5f, 0.5f, -175, -50, 420, 100);
-		menuPane = sb.getPane(-1);
-		menuPane.addTextField(20, 10, 300, 25);
-		menuPane.addTextField(20, 60, 300, 25);
-		menuPane.addButton(325, 10, buttonImg);
-		menuPane.getComponent(-1).addListener(new ComponentListener() {
-
-			@Override
-			public void componentActivated(AbstractComponent source) {
-				Util.notify("Button1 pressed");
-
-			}
-		});
-		menuPane.addButton(325, 60, buttonImg);
-		menuPane.getComponent(-1).addListener(new ComponentListener() {
-
-			@Override
-			public void componentActivated(AbstractComponent source) {
-				Util.notify("Button1 pressed");
-
-			}
-		});
-
-		// !!Creation of options Panes!!!
-
-		// WELCOME
-		menuPane.addContentPane(0.05f, 0.05f, 0.9f, 0.9f);
-		optionsPanes[0] = menuPane.getPane(-1);
-		optionsPanes[0].setBackground(MoreColors.getTrans(Color.orange, 120),
-				Color.white);
-		optionsPanes[0].setPosition(ContentPosition.Center);
-		optionsPanes[0].setVisible(false);
-		optionsPanes[0].addLabel(1, 0, 0, "Create a game - HOST");
-		optionsPanes[0].getLabel(-1).setFont(Util.fontGreatHeader);
-		optionsPanes[0].getLabel(-1).setPosition(ContentPosition.TopCenter, 0,
-				-13);
-
-		// SOUND
-		menuPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
-		optionsPanes[1] = menuPane.getPane(-1);
-		optionsPanes[1].setBackground(MoreColors.getTrans(Color.blue, 120),
-				Color.white);
-		optionsPanes[1].setPosition(ContentPosition.Center);
-		optionsPanes[1].setVisible(false);
-
+		
+		
+	//title	
 		sb.addLabel(1, 0.5f, 0.5f, "Create a game - HOST");
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
@@ -90,6 +47,61 @@ public class ThirdState extends BasicState {
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
 		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
 
+		
+		
+		
+		
+
+		sb.addContentPane(0.5f, 0.5f, -175, -50, 420, 100);
+		menuPane = sb.getPane(-1);
+		
+		// !!Creation of options Panes!!!
+
+		// WELCOME
+		menuPane.addContentPane(0.05f, 0.05f, 0.9f, 0.9f);
+		optionsPanes[0] = menuPane.getPane(-1);
+		optionsPanes[0].setBackground(MoreColors.getTrans(Color.orange, 120),
+				Color.white);
+		optionsPanes[0].setPosition(ContentPosition.Center);
+		optionsPanes[0].setVisible(false);
+		optionsPanes[0].addLabel(1, 0, 0, "Connection box");
+		optionsPanes[0].getLabel(-1).setFont(Util.fontText);
+		optionsPanes[0].getLabel(-1).setColor(Color.cyan);
+		optionsPanes[0].getLabel(-1).setPosition(ContentPosition.TopCenter, 0,
+				-40);
+		
+		optionsPanes[0].addTextField(20, 10, 300, 25);
+		optionsPanes[0].addTextField(20, 60, 300, 25);
+		optionsPanes[0].addButton(325, 10, buttonImg);
+		optionsPanes[0].getComponent(-1).addListener(new ComponentListener() {
+
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				Util.notify("Button1 pressed");
+
+			}
+		});
+		optionsPanes[0].addButton(325, 60, buttonImg);
+		optionsPanes[0].getComponent(-1).addListener(new ComponentListener() {
+
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				Util.notify("Button1 pressed");
+
+			}
+		});
+
+		
+
+		// SOUND
+		menuPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
+		optionsPanes[1] = menuPane.getPane(-1);
+		optionsPanes[1].setBackground(MoreColors.getTrans(Color.blue, 120),
+				Color.white);
+		optionsPanes[1].setPosition(ContentPosition.Center);
+		optionsPanes[1].setVisible(false);
+
+		
 		// Initially show Welcome pane
 		switchToPane(0);
 	}
@@ -111,15 +123,15 @@ public class ThirdState extends BasicState {
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
-		renderDiffGfx(gc, mainGame, g, stateRes);
-		super.render(gc, mainGame, g, stateRes);
 
+		super.render(gc, mainGame, g, stateRes);
+		
+		
 	}
 
 	public void switchToPane(int a) {
 		for (int b = 0; b < 2; b++) {
 			if (b == a) {
-
 				optionsPanes[b].setVisible(true);
 			} else {
 
@@ -130,8 +142,8 @@ public class ThirdState extends BasicState {
 
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-		TextField field = (TextField) menuPane.getComponent(0);
-		TextField field2 = (TextField) menuPane.getComponent(1);
+		TextField field = (TextField) optionsPanes[0].getComponent(0);
+		TextField field2 = (TextField) optionsPanes[0].getComponent(1);
 		switch (key) {
 
 		case Input.KEY_I:

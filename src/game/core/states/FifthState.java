@@ -2,12 +2,14 @@ package game.core.states;
 
 import org.newdawn.slick.Color;
 
+import game.core.parts.ContentPosition;
 import game.nonstatic.BattleField;
 import game.nonstatic.GameInstance;
 import game.nonstatic.entities.Projectile;
 import game.nonstatic.entities.controllables.Ship;
 import game.nonstatic.entities.controllables.ShipType;
 import game.nonstatic.system.Player;
+import game.util.Util;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -33,6 +35,16 @@ public class FifthState extends BasicState {
 
 	public void createContent() throws SlickException {
 		initTestingShip();
+		sb.addLabel(1, 0.5f, 0.5f, "News & Friends");
+		sb.getLabel(-1).setFont(Util.fontGreatHeader);
+		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
+
+		sb.addLabel(1, 0.5f, 0.5f,
+				"Track your friends' progress, online state and ongoing games.");
+		sb.getLabel(-1).setFont(Util.fontNormalHeader);
+		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
+		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
+
 	}
 
 	@Override
@@ -185,7 +197,12 @@ public class FifthState extends BasicState {
 	@Override
 	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g,
 			BasicState state) {
+		try {
+			super.renderDiffGfx(gc, mainGame, g, state);
+		} catch (SlickException e) {
 
+			e.printStackTrace();
+		}
 		instance.draw(g);
 	}
 
