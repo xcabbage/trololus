@@ -239,10 +239,20 @@ public class BasicState extends BasicGameState {
 			BasicState.button[a].render(app, g);
 
 		}
-		arrow.draw(
+		
+		Trololus.arrowXdest = BasicState.buttonsX + buttonsOffset
+		* (game.getCurrentStateID()) - (buttonRadius / 2 + 7);
+		
+		Trololus.arrowX = Trololus.arrowX - (Trololus.arrowX - Trololus.arrowXdest)/7;
+		
+		Trololus.arrowY = BasicState.buttonsY - (buttonRadius * 2 + 20);
+		
+		arrow.draw(Trololus.arrowX,Trololus.arrowY);
+				/*
 				BasicState.buttonsX + buttonsOffset
 						* (game.getCurrentStateID()) - (buttonRadius / 2 + 7),
 				BasicState.buttonsY - (buttonRadius * 2 + 20));
+				*/
 
 	}
 

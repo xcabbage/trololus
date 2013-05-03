@@ -54,6 +54,13 @@ public class Trololus extends StateBasedGame {
 	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
 	static float MUSIC_VOLUME = 0.05f;
 	static boolean MUSIC_END_REQUESTED;
+	
+	//by Xargo
+	//Useless crap I need to access from all states, dunno where else to put diz
+	public static float arrowX;
+	public static float arrowY;
+	public static float arrowXdest;
+	//not by Xargo
 
 	// ---------------------------------------------------MainMethod-&-Constructors----------------------------------------------------------------
 	public Trololus(String title) {
