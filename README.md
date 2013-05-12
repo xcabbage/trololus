@@ -17,9 +17,11 @@ DannyUfonek      				[https://github.com/DannyUfonek]
 
 Snupicek    					[https://github.com/SnoopCZ]
 
+Nic      			[https://github.com/nic727]
+
 Trixis      					[https://github.com/trixis]
 
-Nic      			[https://github.com/nic727]
+
 
 
 

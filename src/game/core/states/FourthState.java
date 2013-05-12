@@ -1,15 +1,23 @@
 package game.core.states;
 
+import game.core.parts.ContentPane;
 import game.core.parts.ContentPosition;
+import game.util.MoreColors;
 import game.util.Util;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.gui.AbstractComponent;
+import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class FourthState extends BasicState {
+	private static final float menuButtonsScale = 0.7f;
+
+	ContentPane menu;
 
 	public static int ID = 3;
 
@@ -31,8 +39,58 @@ public class FourthState extends BasicState {
 		sb.getLabel(-1).setFont(Util.fontNormalHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
 		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
-  	}
+  	
+		sb.addContentPane(0.05f, 0.3f, 0.15f, 0.4f);
+	    menu =sb.getPane(-1);
+	    menu.setBackground(MoreColors.getTrans(Color.gray.darker(0.15f), 0.1f),Color.red.darker(0.9f));
 
+	    
+	    menu.addButton(10, 5, new Image("resources/parts/state4/button0.png").getScaledCopy(menuButtonsScale));
+	    menu.getComponent(-1).addListener(new ComponentListener() {
+			
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				
+			}
+		});
+
+	    
+	    menu.addButton(10, 50, new Image("resources/parts/state4/button1.png").getScaledCopy(menuButtonsScale));
+	    menu.getComponent(-1).addListener(new ComponentListener() {
+			
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				
+			}
+		});
+
+	    menu.addButton(10, 95, new Image("resources/parts/state4/button2.png").getScaledCopy(menuButtonsScale));
+	    menu.getComponent(-1).addListener(new ComponentListener() {
+			
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				
+			}
+		});
+	    menu.addButton(10, 140, new Image("resources/parts/state4/button3.png").getScaledCopy(menuButtonsScale));
+	    menu.getComponent(-1).addListener(new ComponentListener() {
+			
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				
+			}
+		});
+	    menu.addButton(10, 185, new Image("resources/parts/state4/button4.png").getScaledCopy(menuButtonsScale));
+	    menu.getComponent(-1).addListener(new ComponentListener() {
+			
+			@Override
+			public void componentActivated(AbstractComponent source) {
+				
+			}
+		});
+
+	    
+	}
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
@@ -44,7 +102,6 @@ public class FourthState extends BasicState {
 		return ID;
 	}
 
-	
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
