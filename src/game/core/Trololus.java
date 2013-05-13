@@ -38,6 +38,7 @@ public class Trololus extends StateBasedGame {
 			"resources/Splash/EXEico/trololus_icon32.tga",
 			"resources/Splash/EXEico/trololus_icon64.tga" };
 	static Image cursor;
+	static Input input;
 	Scanner sc = new Scanner(System.in);
 
 	// CONSTANTS
@@ -54,13 +55,15 @@ public class Trololus extends StateBasedGame {
 	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
 	static float MUSIC_VOLUME = 0.05f;
 	static boolean MUSIC_END_REQUESTED;
-	
-	//by Xargo
-	//Useless crap I need to access from all states, dunno where else to put diz
+
+	// by Xargo
+	// Useless crap I need to access from all states, dunno where else to put
+	// diz
 	public static float arrowX;
 	public static float arrowY;
 	public static float arrowXdest;
-	//not by Xargo
+
+	// not by Xargo
 
 	// ---------------------------------------------------MainMethod-&-Constructors----------------------------------------------------------------
 	public Trololus(String title) {
@@ -120,10 +123,10 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void initAfterStates() throws SlickException {
-		// init the utility class
 
 		// init sound;
-
+		input = app.getInput();
+		input.initControllers();
 		Music musicStart = new Music(MUSIC_PATH_INIT);
 		final Music musicLoop = new Music(MUSIC_PATH_LOOP);
 		final Music musicEnd = new Music(MUSIC_PATH_END);
@@ -242,7 +245,7 @@ public class Trololus extends StateBasedGame {
 					try {
 						getState(a).enter(app, this);
 					} catch (SlickException e) {
-					
+
 						e.printStackTrace();
 					}
 					enterState(a, new FadeOutTransition(Color.black, 600),

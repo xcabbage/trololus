@@ -125,7 +125,7 @@ public class BasicState extends BasicGameState {
 		if (this.getID() >= 0)
 			stateRes = ((Trololus) game).getResState();
 		sb = new StateBuilder((AppGameContainer) gc);
-
+		input = Trololus.app.getInput();
 		System.out.println("Init formula for state ID " + this.getID()
 				+ " completed and stateRes set.");
 		reloadProperties();
@@ -239,20 +239,21 @@ public class BasicState extends BasicGameState {
 			BasicState.button[a].render(app, g);
 
 		}
-		
+
 		Trololus.arrowXdest = BasicState.buttonsX + buttonsOffset
-		* (game.getCurrentStateID()) - (buttonRadius / 2 + 7);
-		
-		Trololus.arrowX = Trololus.arrowX - (Trololus.arrowX - Trololus.arrowXdest)/7;
-		
+				* (game.getCurrentStateID()) - (buttonRadius / 2 + 7);
+
+		Trololus.arrowX = Trololus.arrowX
+				- (Trololus.arrowX - Trololus.arrowXdest) / 7;
+
 		Trololus.arrowY = BasicState.buttonsY - (buttonRadius * 2 + 20);
-		
-		arrow.draw(Trololus.arrowX,Trololus.arrowY);
-				/*
-				BasicState.buttonsX + buttonsOffset
-						* (game.getCurrentStateID()) - (buttonRadius / 2 + 7),
-				BasicState.buttonsY - (buttonRadius * 2 + 20));
-				*/
+
+		arrow.draw(Trololus.arrowX, Trololus.arrowY);
+		/*
+		 * BasicState.buttonsX + buttonsOffset (game.getCurrentStateID()) -
+		 * (buttonRadius / 2 + 7), BasicState.buttonsY - (buttonRadius * 2 +
+		 * 20));
+		 */
 
 	}
 

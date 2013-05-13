@@ -21,6 +21,7 @@ public class SixthState extends BasicState {
 	public static int ID = 5;
 	private ContentPane optionsPane;
 	private ContentPane[] optionsPanes = new ContentPane[4];
+	int openPane = -1;
 
 	public void createContent() throws SlickException {
 		// create independent content
@@ -89,6 +90,7 @@ public class SixthState extends BasicState {
 	}
 
 	public void switchToPane(int a) {
+		openPane = a;
 		for (int b = 0; b < 4; b++) {
 			if (b == a) {
 				System.out.println(b + "visible");
@@ -97,13 +99,32 @@ public class SixthState extends BasicState {
 				System.out.println(b + "invisible");
 				optionsPanes[b].setVisible(false);
 			}
+			sb.driftComponentTo((300 + (100 * a)), 250,
+					optionsPane.getLabel(-1));
 		}
+	}
+
+	void paneLeft() {
+		if (openPane > 0)
+			switchToPane(openPane - 1);
+		else
+			switchToPane(3);
+	}
+
+	void paneRight() {
+		if (openPane < 3)
+			switchToPane(openPane + 1);
+		else
+			switchToPane(0);
+
 	}
 
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "Options state";
+		input.initControllers();
+		Util.print("Number of controllers: " + input.getControllerCount());
 	}
 
 	public int getID() {
@@ -139,6 +160,22 @@ public class SixthState extends BasicState {
 		case Input.KEY_R:
 			switchToPane(3);
 			break;
+		/* case Input.ANY_CONTROLLER: */
+		case Input.KEY_X:
+			paneLeft();
+			break;
+		case Input.KEY_C:
+			paneRight();
+			break;
+		case Input.ANY_CONTROLLER:
+			if (input.isControllerLeft(1)) {
+				paneLeft();
+			} else if (input.isControllerRight(1)) {
+				paneRight();
+			}
+
+			break;
+
 		}
 
 	}
