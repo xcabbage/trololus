@@ -7,6 +7,7 @@ import game.core.parts.ContentPosition;
 import game.util.MoreColors;
 import game.util.Util;
 
+import org.lwjgl.input.Controllers;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -99,8 +100,8 @@ public class SixthState extends BasicState {
 				System.out.println(b + "invisible");
 				optionsPanes[b].setVisible(false);
 			}
-			sb.driftComponentTo((300 + (100 * a)), 250,
-					optionsPane.getLabel(-1));
+//			sb.driftComponentTo((300 + (100 * a)), 250,
+//					optionsPane.getLabel(-1));
 		}
 	}
 
@@ -134,6 +135,8 @@ public class SixthState extends BasicState {
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
+		System.out.println(Controllers.getController(3).getAxisValue(0));
+
 	}
 
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
@@ -167,16 +170,17 @@ public class SixthState extends BasicState {
 		case Input.KEY_C:
 			paneRight();
 			break;
-		case Input.ANY_CONTROLLER:
-			if (input.isControllerLeft(1)) {
-				paneLeft();
-			} else if (input.isControllerRight(1)) {
-				paneRight();
-			}
-
-			break;
+	
 
 		}
 
+		if (input.isControllerLeft(Input.ANY_CONTROLLER)){
+			paneLeft();
+		}
+		if(input.isControllerRight(Input.ANY_CONTROLLER)){
+			paneRight();
+		}
+			
+		
 	}
 }

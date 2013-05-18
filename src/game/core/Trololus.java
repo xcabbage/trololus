@@ -4,17 +4,13 @@
 package game.core;
 
 import java.awt.Dimension;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 import game.core.states.*;
 import game.nonstatic.system.Pepta;
-import game.util.PropertiesHandler;
 import game.util.Util;
 
+import org.lwjgl.input.Controllers;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -123,6 +119,105 @@ public class Trololus extends StateBasedGame {
 		initAfterStates();
 
 	}
+	
+	
+	static void initControllers() throws SlickException{
+		input.initControllers();
+	input.addControllerListener(new ControllerListener() {
+		
+		@Override
+		public void setInput(Input input) {
+		
+			
+		}
+		
+		@Override
+		public boolean isAcceptingInput() {
+		
+			return false;
+		}
+		
+		@Override
+		public void inputStarted() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void inputEnded() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerUpReleased(int controller) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerUpPressed(int controller) {
+			System.out.println("Controller up pressed");
+			
+		}
+		
+		@Override
+		public void controllerRightReleased(int controller) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerRightPressed(int controller) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerLeftReleased(int controller) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerLeftPressed(int controller) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerDownReleased(int controller) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerDownPressed(int controller) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerButtonReleased(int controller, int button) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void controllerButtonPressed(int controller, int button) {
+			System.out.println("button pressed");
+			
+		}
+	});
+	
+	
+	
+	System.out.println(input.getControllerCount());
+	System.out.println(Controllers.getController(0).getName());
+	System.out.println(Controllers.getController(1).getName());
+	System.out.println(Controllers.getController(2).getName());
+		System.out.println(Controllers.getController(3).getName());
+	}
 
 	void init() throws SlickException {
 		cursor = new Image("resources/Splash/UI/mouse.png");
@@ -132,7 +227,7 @@ public class Trololus extends StateBasedGame {
 
 		// init sound;
 		input = app.getInput();
-		input.initControllers();
+	initControllers();
 		Music musicStart = new Music(MUSIC_PATH_INIT);
 		final Music musicLoop = new Music(MUSIC_PATH_LOOP);
 		final Music musicEnd = new Music(MUSIC_PATH_END);
