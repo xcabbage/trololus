@@ -18,7 +18,7 @@ import java.util.Properties;
 //KOMENTAR - DK 
 // fajny ale ty cesty na ty I/O streamy dej obe do jednoho variablu co se bude inicializovat nahore at je to jednotne ovladany (konstanta)
 // + ta cesta by mela bejt absolutni, ne v packagi, ale nekde venku ze hry: treba C://Users/<uzivatel>/myDocuments nebo tak 
-//                                                    at to nedela bordel se syncem pres git kdyz to bude spustest vic lidi
+//                                                    at to nedela bordel se syncem pres git kdyz to bude spoustest vic lidi
 //Koment - HP
 //delam to dobre?
 

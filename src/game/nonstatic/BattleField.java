@@ -119,15 +119,19 @@ public class BattleField {
 
 		for (int a = 0; a < projectiles.length; a++) {
 			if (projectiles[a] != null) {
+				
+				//movement
 				projectiles[a].update();
+				
+				//collision
 				for (int b = 0; b < entities.length; b++) {
 					if (entities[b] != null && entities[b].getBounds()!=null && projectiles[a]!=null) {
-						if (projectiles[a].intersectsBounds(entities[b])) {
+						if (projectiles[a].collidesWith(entities[b])) {
 							
 							//care, this one lags it a bit
 //							Util.notify("Ship ID [" + entities[b].getID()
 //									+ "] has been hit!");
-							System.out.println("ShipHit");
+							
 							projectiles[a] = null;
 						}
 					}

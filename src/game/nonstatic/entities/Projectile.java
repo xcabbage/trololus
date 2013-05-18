@@ -48,8 +48,17 @@ public class Projectile {
 	int HullHP;// Percentage?
 	int PlayerOwner = 5;
 	int ID = 3;
-	static TrueTypeFont font = new TrueTypeFont(new Font("Tahoma", 25, 25),
-			true); // beware, creating a Font object lags like a motherfucker
+	public static TrueTypeFont font;
+
+	
+	
+	
+	static Image debugImg;
+	static int debugPointX, debugPointY;
+	static Color col;
+	static Point2D point;
+	static Point2D pivot;
+	static Point2D result;
 
 	ShipType type; // ShipType includes number of slots, will also very probably
 					// contain ship size
@@ -59,11 +68,28 @@ public class Projectile {
 
 	public int friendlyShip;
 
-	public Projectile() {
-		commonInit();
+	// SYSTEM METHODS
+	public void initClass() {
+		font = new TrueTypeFont(new Font("Tahoma", 25, 25), true);
+		// beware,
+		// creating
+		// a Font
+		// object
+		// lags like
+		// a
+		// motherfucker
+
 	}
 
-	// ----------------------------------GETTERS----------------------------------------------
+	// SYSTEM METHODS
+	@Override
+	public String toString() {
+		return "Projectile [PlayerOwner=" + PlayerOwner + ", ID=" + ID
+				+ ", type=" + type + "]";
+	}
+
+	// ----------------------------------ENTITY
+	// METHODS----------------------------------------------
 
 	/**
 	 * @param xPos
@@ -96,8 +122,8 @@ public class Projectile {
 
 	}
 
-	void toggleDebug() {
-		debugIntersectsEnabled = !debugIntersectsEnabled;
+	public Projectile() {
+		commonInit();
 	}
 
 	void commonInit() {
@@ -111,48 +137,55 @@ public class Projectile {
 	}
 
 	void initializeVector() {
-		
-/*
-		AffineTransform transformer = AffineTransform.getRotateInstance(
-				Math.toRadians(angle), x,y);
-		
-		Point2D before = new Point2D.Double(x, y);
 
-		Point2D after = new Point2D.Double();
-		after = transformer.transform(before, after);
-		angleVector = new Vector2f();
+		/*
+		 * AffineTransform transformer = AffineTransform.getRotateInstance(
+		 * Math.toRadians(angle), x,y);
+		 * 
+		 * Point2D before = new Point2D.Double(x, y);
+		 * 
+		 * Point2D after = new Point2D.Double(); after =
+		 * transformer.transform(before, after); angleVector = new Vector2f();
+		 * 
+		 * angleVector.set((float) after.getX(), (float) after.getY());
+		 */
 
-		angleVector.set((float) after.getX(), (float) after.getY()); */
-		
-		Point2D point = new Point2D.Double(XPos+img.getWidth()/2,YPos);
-		Point2D pivot = new Point2D.Double(XPos+img.getWidth()/2,YPos+img.getHeight()/2);
+		Point2D point = new Point2D.Double(XPos + img.getWidth() / 2, YPos);
+		Point2D pivot = new Point2D.Double(XPos + img.getWidth() / 2, YPos
+				+ img.getHeight() / 2);
 		Point2D result = new Point2D.Double();
-	    AffineTransform rotation = new AffineTransform();
-	    double angleInRadians = (angle * Math.PI / 180);
-	    
-	    
-    
-	    rotation.rotate(angleInRadians, pivot.getX(), pivot.getY());
-	    rotation.transform(point, result);
-	    
+		AffineTransform rotation = new AffineTransform();
+		double angleInRadians = (angle * Math.PI / 180);
+
+		rotation.rotate(angleInRadians, pivot.getX(), pivot.getY());
+		rotation.transform(point, result);
+
 		angleVector = new Vector2f();
 
-		angleVector.set((float) result.getX()-XPos, (float) result.getY()-YPos);
-		
-		System.out.println(angleVector.x + "" + angleVector.y);
-	}
+		angleVector.set((float) result.getX() - XPos, (float) result.getY()
+				- YPos);
 
-	// SYSTEM METHODS
-	@Override
-	public String toString() {
-		return "Projectile [PlayerOwner=" + PlayerOwner + ", ID=" + ID
-				+ ", type=" + type + "]";
 	}
 
 	/**
 	 * 
 	 */
 	public void draw() {
+		if (debugImg != null) {
+			debugImg.draw(0, 0);
+			Trololus.app.getGraphics().drawRect(debugPointX - 1,
+					debugPointY - 1, 2, 2);
+		}
+
+		if (col != null){
+			Color placeholder = Trololus.app.getGraphics().getColor();
+			Trololus.app.getGraphics().setColor(col);
+			
+			Trololus.app.getGraphics().fillRect(250, 250, 50, 50);
+			Trololus.app.getGraphics().setColor(placeholder);
+//			Trololus.app.getGraphics().fillRect(250, 250, 50, 50);
+		}
+		
 		img.rotate(img.getRotation() - angle);
 		img.draw((int) XPos, (int) YPos);
 		if (debugIntersectsEnabled) {
@@ -182,6 +215,17 @@ public class Projectile {
 
 	}
 
+	// ------------------------------------------------------COLLISION-------------------------------------------------------------
+
+	public boolean collidesWith(Ship ship) {
+		if (intersectsBounds(ship)) {
+			if (intersects(ship))
+				return true;
+			return false;
+		}
+		return false;
+	}
+
 	public boolean intersectsBounds(Ship ship) {
 		try {
 
@@ -208,18 +252,38 @@ public class Projectile {
 		int shipX = ship.getContainingField().getShipX(ship.getID());
 		int shipY = ship.getContainingField().getShipY(ship.getID());
 
+		int bulletPosX = (int) (XPos + angleVector.getX() - shipX);
+		int bulletPosY = (int) (YPos + angleVector.getY() - shipY);
+
 		Image shipImg = ship.getContainingField().instance.ship[ship.getID()];
 
-		
-		
-		Color col = shipImg.getColor((int) Math.abs(XPos+ angleVector.getX() - shipX),
-				(int) Math.abs(YPos + angleVector.getY() - shipY));
-		if (col.a < 0.99f)
-			return true; else return false;
+		Point2D point = new Point2D.Double(bulletPosX, bulletPosY);
+		Point2D pivot = new Point2D.Double(shipImg.getWidth() / 2,
+				shipImg.getHeight() / 2);
+		Point2D result = new Point2D.Double();
+		AffineTransform rotation = new AffineTransform();
+		double angleInRadians = (Math.toRadians(360-ship.rotation));
+
+		rotation.rotate(angleInRadians, pivot.getX(), pivot.getY());
+		rotation.transform(point, result);
+
+		bulletPosX = (int) (result.getX());
+		bulletPosY = (int) (result.getY());
+
+		col = shipImg.getColor(bulletPosX, bulletPosY );
+
+		System.out.println(col.getAlpha());
 
 		
+		if (col.getAlpha() > 0.99f) {
+			System.out.println(col.getAlpha());
+			return true;
+		} else
+			return false;
+
 	}
 
+	// --------------------------------------------------------GETTERS-------------------------------------------------------------
 	public int getID() {
 		return ID;
 	}
@@ -288,6 +352,12 @@ public class Projectile {
 
 	public Point getLocation() {
 		return new Point(XPos, YPos);
+	}
+
+	// DEBUGGING
+
+	void toggleDebug() {
+		debugIntersectsEnabled = !debugIntersectsEnabled;
 	}
 
 }

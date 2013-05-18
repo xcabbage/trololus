@@ -109,7 +109,7 @@ public class SixthState extends BasicState {
 			switchToPane(openPane - 1);
 		else
 			switchToPane(3);
-	}
+	}	
 
 	void paneRight() {
 		if (openPane < 3)

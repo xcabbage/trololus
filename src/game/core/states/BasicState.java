@@ -41,7 +41,7 @@ public class BasicState extends BasicGameState {
 	public static String fontText = "Orena";
 
 	// declare globals
-	public StateBasedGame game;
+	public static StateBasedGame game;
 	static game.util.FastGraphics utilGfx = new game.util.FastGraphics();
 	static Dimension res;
 	static GameContainer app;
@@ -49,15 +49,16 @@ public class BasicState extends BasicGameState {
 	static Input input;
 	public static Circle[] buttonHoverCircle = new Circle[10];
 	public static MouseOverAreaDav[] button = new MouseOverAreaDav[10];
-	public BasicState stateRes;
+	public static BasicState stateRes;
 
-	Music music;
+	static Music music;
 	// declare graphics
 
-	static Image arrow;
-	public Image backgroundBack, menubar, buttonSpriteSheet, background;
+	static Image arrow, menubar, buttonSpriteSheet, background;
+	public Image backgroundBack;
 	public String StateTitle;
-	public static SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown;
+	public static SpriteSheet menuButtons, menuButtonsScaled, menuButtonsDown,
+			controllerSpriteSheet;
 	public int ID;
 	boolean inited;
 
@@ -69,6 +70,13 @@ public class BasicState extends BasicGameState {
 			backgroundY, buttonDist, buttonRadius, buttonsGetY, buttonsSafeY;
 	private boolean stateTitleEnabled;
 	public boolean driftRequested;
+
+	public static void drawControllers() {
+		/*
+		 * controllerSpriteSheet for (int a = 0; a < 9; a++) {
+		 * controllerSpriteSheet.getSprite(a, 0).draw(50, 50+(100*a)); }
+		 */
+	}
 
 	public void initRes() throws SlickException {
 		Util.initFonts();
@@ -83,6 +91,11 @@ public class BasicState extends BasicGameState {
 		buttonSpriteSheet = buttonSpriteSheet.getScaledCopy(menuScale);
 		menuButtons = new SpriteSheet(buttonSpriteSheet,
 				(int) (500 * menuScale), (int) (500 * menuScale));
+		controllerSpriteSheet = new SpriteSheet(
+				new Image("resources/parts/game/controllerIconSpritesheet.png")
+						.getScaledCopy(menuScale),
+				(int) (322 * menuScale), (int) (322 * menuScale));
+
 		menuX = appWidth - menuBarWidth - menuOffset;
 		menuY = appHeight - menuBarHeight;
 		buttonsX = (int) (menuX + 600 * menuScale);
@@ -208,6 +221,7 @@ public class BasicState extends BasicGameState {
 				if (stateTitleEnabled)
 					g.drawString(StateTitle, 320, 20);
 				drawMenu(g);
+				drawControllers();
 			}
 		} else {
 
@@ -228,11 +242,12 @@ public class BasicState extends BasicGameState {
 				g.drawString(StateTitle, 320, 20);
 			drawMenu(g, state);
 			renderDiffGfx(gc, mainGame, g, stateRes);
+			drawControllers();
 		}
 
 	}
 
-	public void drawMenu(Graphics g, BasicState state) {
+	public static void drawMenu(Graphics g, BasicState state) {
 		state.menubar.draw(BasicState.menuX, BasicState.menuY, state.menuScale);
 
 		for (int a = 0; a < 7; a++) {

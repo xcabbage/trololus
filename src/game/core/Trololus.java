@@ -21,9 +21,15 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Trololus extends StateBasedGame {
-
+	// constants
+	public static final float ShipScale = 0.1f;
 	public static final boolean optionsEnabled = false;
 
+	private static final boolean ShowFPS = false;
+	private static final boolean DECORATED = true;
+	private static final float MUSIC_VOLUME = 0.05f;
+	private static final String title = "Trololus NightBuild.0";
+	//
 	static public boolean drawing = true;
 	static public AppGameContainer app;
 	static public Dimension res;
@@ -45,15 +51,11 @@ public class Trololus extends StateBasedGame {
 	static int width = 1000;
 	static int height = 500;
 	static int fpslimit = 30;
-	static boolean ShowFPS = false;
 
-	public static final float ShipScale = 0.1f;
-
-	static String title = "Trololus NightBuild.0";
 	static String MUSIC_PATH_INIT = "resources/Audio/BGM1_a.wav";
 	static String MUSIC_PATH_LOOP = "resources/Audio/BGM4.wav";
 	static String MUSIC_PATH_END = "resources/Audio/BGM5.wav";
-	static float MUSIC_VOLUME = 0.05f;
+
 	static boolean MUSIC_END_REQUESTED;
 
 	// by Xargo
@@ -82,6 +84,9 @@ public class Trololus extends StateBasedGame {
 		 * e.printStackTrace(); }
 		 */
 
+		if (!DECORATED) {
+			System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
+		}
 		res = utilGfx.getRes();
 		Pepta pepta = new Pepta();
 		pepta.createPlayers();
@@ -93,6 +98,7 @@ public class Trololus extends StateBasedGame {
 		app.setIcons(icons);
 		app.setVerbose(false);
 		app.setShowFPS(ShowFPS);
+
 		// app.setMouseCursor(cursor, 5, 5);
 		app.start();
 
