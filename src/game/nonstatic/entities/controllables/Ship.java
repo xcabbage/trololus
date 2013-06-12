@@ -6,8 +6,6 @@
  */
 package game.nonstatic.entities.controllables;
 
-import java.awt.geom.AffineTransform;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;

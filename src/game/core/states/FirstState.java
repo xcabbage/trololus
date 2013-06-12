@@ -9,7 +9,6 @@ import game.util.Util;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -21,6 +20,7 @@ public class FirstState extends BasicState {
 
 	public static int ID = 0;
 
+	@Override
 	public void createContent() throws SlickException {
 
 		sb.addLabel(1, 0.5f, 0.5f, "Trololus ");
@@ -34,16 +34,19 @@ public class FirstState extends BasicState {
 
 		}
 
+	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "Main State for trololus 0.1 Alpha - Welcome Screen";
 	}
 
+	@Override
 	public int getID() {
 		return ID;
 	}
 
+	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
@@ -62,6 +65,7 @@ public class FirstState extends BasicState {
 
 	}
 
+	@Override
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 		renderDiffGfx(gc, mainGame, g, stateRes);
@@ -69,6 +73,7 @@ public class FirstState extends BasicState {
 
 	}
 
+	@Override
 	public void mousePressed(int button, int x, int y) {
 
 	}

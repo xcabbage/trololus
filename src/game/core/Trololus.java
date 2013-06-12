@@ -4,10 +4,12 @@
 package game.core;
 
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.Scanner;
 
 import game.core.states.*;
 import game.nonstatic.system.Pepta;
+import game.util.PropertiesHandler;
 import game.util.Util;
 
 import org.lwjgl.input.Controllers;
@@ -18,14 +20,16 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Trololus extends StateBasedGame {
 	// constants
-	public static final float ShipScale = 0.1f;
-	public static final boolean optionsEnabled = false;
 
-	private static final boolean ShowFPS = false;
-	private static final boolean DECORATED = true;
-	private static final float MUSIC_VOLUME = 0.05f;
+	public static boolean optionsEnabled = false;
+	private static boolean isVSyncEnabled = false;
+	private static boolean ShowFPS = false;
+	private static boolean DECORATED = true;
+
+	private static float MUSIC_VOLUME = 0.05f;
 	private static final String title = "Trololus NightBuild.0";
-	//
+	public static float ShipScale = 0.1f;
+
 	static public boolean drawing = true;
 	static public AppGameContainer app;
 	static public Dimension res;
@@ -41,6 +45,7 @@ public class Trololus extends StateBasedGame {
 			"resources/Splash/EXEico/trololus_icon64.tga" };
 	static Image cursor;
 	static Input input;
+
 	Scanner sc = new Scanner(System.in);
 
 	// CONSTANTS
@@ -70,15 +75,13 @@ public class Trololus extends StateBasedGame {
 
 	public static void main(String[] args) throws SlickException {
 
-		/*
-		 * try { PropertiesHandler.init(); MUSIC_VOLUME =
-		 * Float.parseFloat(PropertiesHandler.getProperty("musicvolume"));
-		 * 
-		 * 
-		 * } catch (IOException e) {
-		 * 
-		 * e.printStackTrace(); }
-		 */
+		try {
+			loadProperties();
+
+		} catch (IOException e) {
+			System.out.println("Couldn't properly load properties");
+			e.printStackTrace();
+		}
 
 		if (!DECORATED) {
 			System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
@@ -90,7 +93,7 @@ public class Trololus extends StateBasedGame {
 		cleanRes();
 		app.setSmoothDeltas(true);
 		app.setTargetFrameRate(fpslimit);
-		app.setVSync(false);
+		app.setVSync(isVSyncEnabled);
 		app.setIcons(icons);
 		app.setVerbose(false);
 		app.setShowFPS(ShowFPS);
@@ -101,13 +104,35 @@ public class Trololus extends StateBasedGame {
 	}
 
 	// -------------------------------------------------------The-Game's-Methods-------------------------------------------------------------------
+
+	private static void loadProperties() throws IOException {
+		PropertiesHandler.init();
+		System.out.println("Properties handler initiated...");
+
+		MUSIC_VOLUME = Float.parseFloat(PropertiesHandler
+				.getProperty("musicvolume"));
+
+		optionsEnabled = Boolean.parseBoolean(PropertiesHandler
+				.getProperty("optionsEnabled"));
+		isVSyncEnabled = Boolean.parseBoolean(PropertiesHandler
+				.getProperty("vsyncEnabled"));
+		ShowFPS = Boolean.parseBoolean(PropertiesHandler
+				.getProperty("fpsEnabled"));
+		DECORATED = Boolean.parseBoolean(PropertiesHandler
+				.getProperty("windowDecorated"));
+		ShipScale = Float
+				.parseFloat(PropertiesHandler.getProperty("shipScale"));
+
+		System.out.println("Properties successfully loaded.");
+	}
+
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 
 		resState = new BasicState();
 		resState.init(gc, this);
 		resState.initVars();
-		Util.init(resState.game);
+		Util.init(BasicState.game);
 
 		addState(new FirstState());
 		addState(new SecondState());
@@ -119,104 +144,94 @@ public class Trololus extends StateBasedGame {
 		initAfterStates();
 
 	}
-	
-	
-	static void initControllers() throws SlickException{
+
+	static void initControllers() throws SlickException {
 		input.initControllers();
-	input.addControllerListener(new ControllerListener() {
-		
-		@Override
-		public void setInput(Input input) {
-		
-			
-		}
-		
-		@Override
-		public boolean isAcceptingInput() {
-		
-			return false;
-		}
-		
-		@Override
-		public void inputStarted() {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void inputEnded() {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerUpReleased(int controller) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerUpPressed(int controller) {
-			System.out.println("Controller up pressed");
-			
-		}
-		
-		@Override
-		public void controllerRightReleased(int controller) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerRightPressed(int controller) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerLeftReleased(int controller) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerLeftPressed(int controller) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerDownReleased(int controller) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerDownPressed(int controller) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerButtonReleased(int controller, int button) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void controllerButtonPressed(int controller, int button) {
-			System.out.println("button pressed");
-			
-		}
-	});
-	
-	
-	
-	System.out.println(input.getControllerCount());
-	System.out.println(Controllers.getController(0).getName());
-	System.out.println(Controllers.getController(1).getName());
-	System.out.println(Controllers.getController(2).getName());
-		System.out.println(Controllers.getController(3).getName());
+		if (input.getControllerCount() > 0) {
+			input.addControllerListener(new ControllerListener() {
+
+				@Override
+				public void setInput(Input input) {
+
+				}
+
+				@Override
+				public boolean isAcceptingInput() {
+
+					return false;
+				}
+
+				@Override
+				public void inputStarted() {
+
+				}
+
+				@Override
+				public void inputEnded() {
+
+				}
+
+				@Override
+				public void controllerUpReleased(int controller) {
+
+				}
+
+				@Override
+				public void controllerUpPressed(int controller) {
+					System.out.println("Controller up pressed");
+
+				}
+
+				@Override
+				public void controllerRightReleased(int controller) {
+
+				}
+
+				@Override
+				public void controllerRightPressed(int controller) {
+
+				}
+
+				@Override
+				public void controllerLeftReleased(int controller) {
+
+				}
+
+				@Override
+				public void controllerLeftPressed(int controller) {
+
+				}
+
+				@Override
+				public void controllerDownReleased(int controller) {
+
+				}
+
+				@Override
+				public void controllerDownPressed(int controller) {
+
+				}
+
+				@Override
+				public void controllerButtonReleased(int controller, int button) {
+
+				}
+
+				@Override
+				public void controllerButtonPressed(int controller, int button) {
+					System.out.println("button pressed");
+
+				}
+			});
+
+			System.out.println(input.getControllerCount());
+			System.out.println(Controllers.getController(0).getName());
+			System.out.println(Controllers.getController(1).getName());
+			System.out.println(Controllers.getController(2).getName());
+			System.out.println(Controllers.getController(3).getName());
+		} else
+			System.out.println("No controllers found!");
+
 	}
 
 	void init() throws SlickException {
@@ -227,7 +242,7 @@ public class Trololus extends StateBasedGame {
 
 		// init sound;
 		input = app.getInput();
-	initControllers();
+		initControllers();
 		Music musicStart = new Music(MUSIC_PATH_INIT);
 		final Music musicLoop = new Music(MUSIC_PATH_LOOP);
 		final Music musicEnd = new Music(MUSIC_PATH_END);
@@ -336,11 +351,13 @@ public class Trololus extends StateBasedGame {
 		}
 	}
 
+	@SuppressWarnings("unused")
+	@Override
 	public void mousePressed(int button, int x, int y) {
 		BasicState state = (BasicState) getCurrentState();
 
 		for (int a = 0; a < 7; a++)
-			if (state.stateRes.button[a].isMouseOver()) {
+			if (BasicState.button[a].isMouseOver()) {
 				if (a < 6) {
 					Util.printDebug("Entering " + a);
 					try {

@@ -11,7 +11,6 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.geom.Vector2f;
 
 import game.core.Trololus;
@@ -63,6 +62,7 @@ public class Projectile {
 	ShipType type; // ShipType includes number of slots, will also very probably
 					// contain ship size
 	private Image img;
+	@SuppressWarnings("unused")
 	private int movementAngle;
 	private Ship ship;
 

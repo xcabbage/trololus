@@ -1,6 +1,5 @@
 package game.core.states;
 
-import java.awt.Font;
 import java.io.IOException;
 
 import game.core.NetworkTest;
@@ -15,12 +14,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
-import game.core.parts.*;
 
 public class ThirdState extends BasicState {
 
@@ -32,6 +29,7 @@ public class ThirdState extends BasicState {
 	private ContentPane menuPane;
 	private ContentPane[] optionsPanes = new ContentPane[4];
 
+	@Override
 	public void createContent() throws SlickException {
 		Image buttonImg = new Image("resources/Splash/UI/IG/IG_fps.png")
 				.getScaledCopy(0.15f);
@@ -106,21 +104,25 @@ public class ThirdState extends BasicState {
 		switchToPane(0);
 	}
 
+	@Override
 	public int getID() {
 		return ID;
 	}
 
+	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
 		StateTitle = "Third State: Host a Game";
 	}
 
+	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
 	}
 
+	@Override
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 
@@ -140,6 +142,7 @@ public class ThirdState extends BasicState {
 		}
 	}
 
+	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 		TextField field = (TextField) optionsPanes[0].getComponent(0);

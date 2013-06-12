@@ -1,6 +1,5 @@
 package game.core.parts;
 
-import java.awt.Font;
 import java.util.Arrays;
 
 import game.core.states.BasicState;
@@ -13,15 +12,13 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.AbstractComponent;
-import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.gui.TextField;
 
 /**
- * The StateBuilder.java class responsible for adding all the different drawable
- * elements into the game's states.
+ * The StateBuilder.java class responsible for handling all the different drawable
+ * elements in the game's states.
  * 
  * @author xCabbage [github.com/xcabbage]
  * 
@@ -38,7 +35,6 @@ public class StateBuilder {
 	private int driftRequestedX;
 	private int driftRequestedY;
 	private AbstractComponent driftingComponent;
-	
 
 	// constructor
 	public StateBuilder(AppGameContainer gc) {
@@ -49,7 +45,8 @@ public class StateBuilder {
 	// interface methods to create the new objects and queue their addition to
 	// the arrays
 	public void addTextField(int x, int y, int width, int height) {
-		TextField field = new TextField((GUIContext) gc, Util.fontEntry, x, y, width, height);
+		TextField field = new TextField(gc, Util.fontEntry, x, y,
+				width, height);
 		field.setConsumeEvents(true);
 		addComponents(field);
 
@@ -57,12 +54,11 @@ public class StateBuilder {
 
 	public void driftComponentTo(int targetX, int targetY,
 			AbstractComponent comp) {
-			driftRequestedX = targetX;
-			driftRequestedY = targetY;
-			driftingComponent = comp;
+		driftRequestedX = targetX;
+		driftRequestedY = targetY;
+		driftingComponent = comp;
 
-		}
-	
+	}
 
 	public void driftComponentContinue(BasicState state) {
 
@@ -71,9 +67,7 @@ public class StateBuilder {
 
 		int posX = driftingComponent.getX();
 		int posY = driftingComponent.getY();
-		
 
-		
 		int speed = 5;
 		if ((targetX - posX) * (targetX - posX) + (targetY - posY)
 				* (targetY - posY) > 0) {
@@ -99,6 +93,7 @@ public class StateBuilder {
 
 		int posX = (int) comp.getBounds().getX();
 		int posY = (int) comp.getBounds().getY();
+		@SuppressWarnings("unused")
 		int speed = 4;
 		while ((targetX - posX) * (targetX - posX) + (targetY - posY)
 				* (targetY - posY) > 0) {
@@ -155,13 +150,14 @@ public class StateBuilder {
 		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}
-	
+
 	public void addContentPane(float x, float y, float width, float height) {
 		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}
-	
-	public void addContentPane(float x, float y, float width, float height, Rectangle area) {
+
+	public void addContentPane(float x, float y, float width, float height,
+			Rectangle area) {
 		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}
@@ -248,8 +244,8 @@ public class StateBuilder {
 
 	public Label getLabel(int a) {
 		if (a < 0)
-			return labels[labels.length + a ];
-		
+			return labels[labels.length + a];
+
 		else
 			return labels[a];
 	}
@@ -271,7 +267,7 @@ public class StateBuilder {
 			}
 		if (components[0] != null)
 			for (int a = 0; a < components.length; a++) {
-				components[a].render((GUIContext) gc, g);
+				components[a].render(gc, g);
 
 			}
 

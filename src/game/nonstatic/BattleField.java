@@ -5,12 +5,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
 import game.core.Trololus;
-import game.nonstatic.entities.Projectile;
 import game.nonstatic.entities.Projectile;
 import game.nonstatic.entities.controllables.Ship;
 import game.util.Util;
@@ -40,8 +37,10 @@ public class BattleField {
 	// CONSTRUCTORS
 	public BattleField(GameInstance gameInstance) {
 		instance = gameInstance;
-		fieldRect = new Rectangle(0, 0, Util.getGame().app.getWidth(),
-				Util.getGame().app.getHeight());
+		Util.getGame();
+		Util.getGame();
+		fieldRect = new Rectangle(0, 0, Trololus.app.getWidth(),
+				Trololus.app.getHeight());
 	}
 
 	// ENTITY PLACEMENT
@@ -58,12 +57,12 @@ public class BattleField {
 		instance.addShip(entity);
 	}
 
-	public void placeProjectile(int xPos, int yPos, int angle, int speed,int friendlyShipID)
-			throws SlickException {
+	public void placeProjectile(int xPos, int yPos, int angle, int speed,
+			int friendlyShipID) throws SlickException {
 		projectiles = Arrays.copyOf(projectiles, projectiles.length + 1);
 
 		projectiles[projectiles.length - 1] = new Projectile(xPos, yPos, angle,
-				speed,friendlyShipID);
+				speed, friendlyShipID);
 		System.out.println("Fired a projectile..: "
 				+ projectiles[projectiles.length - 1]);
 		projectiles[projectiles.length - 1].setID(projectiles.length - 1);
@@ -82,7 +81,7 @@ public class BattleField {
 		projectiles = Arrays.copyOf(projectiles, projectiles.length + 1);
 
 		projectiles[projectiles.length - 1] = new Projectile(xPos, yPos, angle,
-				speed, ship,friendlyShipID);
+				speed, ship, friendlyShipID);
 		projectiles[projectiles.length - 1].setID(projectiles.length - 1);
 
 	}
@@ -119,19 +118,20 @@ public class BattleField {
 
 		for (int a = 0; a < projectiles.length; a++) {
 			if (projectiles[a] != null) {
-				
-				//movement
+
+				// movement
 				projectiles[a].update();
-				
-				//collision
+
+				// collision
 				for (int b = 0; b < entities.length; b++) {
-					if (entities[b] != null && entities[b].getBounds()!=null && projectiles[a]!=null) {
+					if (entities[b] != null && entities[b].getBounds() != null
+							&& projectiles[a] != null) {
 						if (projectiles[a].collidesWith(entities[b])) {
-							
-							//care, this one lags it a bit
-//							Util.notify("Ship ID [" + entities[b].getID()
-//									+ "] has been hit!");
-							
+
+							// care, this one lags it a bit
+							// Util.notify("Ship ID [" + entities[b].getID()
+							// + "] has been hit!");
+
 							projectiles[a] = null;
 						}
 					}
@@ -155,7 +155,7 @@ public class BattleField {
 
 			entities[a].img.rotate(getRotation(a) - getRotation2(a));
 			setRotation2(getRotation(a), a);
-			entities[a].img.draw((float) getShipX(a), (float) getShipY(a));
+			entities[a].img.draw(getShipX(a), getShipY(a));
 			Trololus.app.getGraphics().draw(entities[a].getBounds());
 		}
 	}

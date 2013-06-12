@@ -39,6 +39,7 @@ public class BasicState extends BasicGameState {
 	public static String fontNormalHeader = "Cambria";
 	public static String fontEntry = "Complex";
 	public static String fontText = "Orena";
+	public static String fontButton = "Calibri";
 
 	// declare globals
 	public static StateBasedGame game;
@@ -129,11 +130,12 @@ public class BasicState extends BasicGameState {
 
 	}
 
+	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 
 		// init globals
-		this.game = game;
+		BasicState.game = game;
 		app = gc;
 		if (this.getID() >= 0)
 			stateRes = ((Trololus) game).getResState();
@@ -145,6 +147,7 @@ public class BasicState extends BasicGameState {
 
 	}
 
+	@Override
 	public void enter(GameContainer gc, StateBasedGame game) {
 		if (!inited)
 			try {
@@ -189,8 +192,8 @@ public class BasicState extends BasicGameState {
 		menubar = new Image("resources/Splash/UI/Menubar_Back.png");
 		buttonSpriteSheet = new Image(
 				"resources/Splash/UI/Menubar_Spritesheet.png");
-		menuButtons = new SpriteSheet(buttonSpriteSheet, (int) (500),
-				(int) (500));
+		menuButtons = new SpriteSheet(buttonSpriteSheet, (500),
+				(500));
 
 		// init scaling
 		initRes();
@@ -236,7 +239,7 @@ public class BasicState extends BasicGameState {
 		if (Trololus.drawing) {
 			backgroundBack.draw(0, BasicState.backgroundY,
 					state.backgroundScale);
-			state.background.draw(0, BasicState.backgroundY,
+			BasicState.background.draw(0, BasicState.backgroundY,
 					state.backgroundScale);
 			if (stateTitleEnabled)
 				g.drawString(StateTitle, 320, 20);
@@ -248,7 +251,7 @@ public class BasicState extends BasicGameState {
 	}
 
 	public static void drawMenu(Graphics g, BasicState state) {
-		state.menubar.draw(BasicState.menuX, BasicState.menuY, state.menuScale);
+		BasicState.menubar.draw(BasicState.menuX, BasicState.menuY, state.menuScale);
 
 		for (int a = 0; a < 7; a++) {
 			BasicState.button[a].render(app, g);
@@ -273,7 +276,7 @@ public class BasicState extends BasicGameState {
 	}
 
 	public void drawMenu(Graphics g) {
-		this.menubar.draw(menuX, menuY, menuScale);
+		BasicState.menubar.draw(menuX, menuY, menuScale);
 
 		for (int a = 0; a < 7; a++) {
 			button[a].render(app, g);
@@ -318,6 +321,7 @@ public class BasicState extends BasicGameState {
 	}
 
 	// STATE SWITCHING BASED ON KEY PRESSES
+	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 		switch (key) {

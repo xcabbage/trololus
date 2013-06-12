@@ -1,7 +1,5 @@
 package game.core.states;
 
-import java.awt.Font;
-
 import game.core.parts.ContentPane;
 import game.core.parts.ContentPosition;
 import game.util.MoreColors;
@@ -13,8 +11,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class SixthState extends BasicState {
@@ -24,6 +20,7 @@ public class SixthState extends BasicState {
 	private ContentPane[] optionsPanes = new ContentPane[4];
 	int openPane = -1;
 
+	@Override
 	public void createContent() throws SlickException {
 		// create independent content
 		sb.addLabel(1, 0.5f, 0.5f, "game options");
@@ -31,7 +28,7 @@ public class SixthState extends BasicState {
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 
 		// add & init Options pane
-		sb.addContentPane(0.25f, 0.25f, 0.5f, 0.5f);
+		sb.addContentPane(0.25f, 0.25f, 600, 300);
 		optionsPane = sb.getPane(-1);
 		optionsPane.setBackground(MoreColors.getTrans(Color.black, 150),
 				Color.cyan);
@@ -100,8 +97,8 @@ public class SixthState extends BasicState {
 				System.out.println(b + "invisible");
 				optionsPanes[b].setVisible(false);
 			}
-//			sb.driftComponentTo((300 + (100 * a)), 250,
-//					optionsPane.getLabel(-1));
+			// sb.driftComponentTo((300 + (100 * a)), 250,
+			// optionsPane.getLabel(-1));
 		}
 	}
 
@@ -110,7 +107,7 @@ public class SixthState extends BasicState {
 			switchToPane(openPane - 1);
 		else
 			switchToPane(3);
-	}	
+	}
 
 	void paneRight() {
 		if (openPane < 3)
@@ -120,6 +117,7 @@ public class SixthState extends BasicState {
 
 	}
 
+	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
@@ -128,17 +126,29 @@ public class SixthState extends BasicState {
 		Util.print("Number of controllers: " + input.getControllerCount());
 	}
 
+	@Override
 	public int getID() {
 		return ID;
 	}
 
+	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
-		System.out.println(Controllers.getController(3).getAxisValue(0));
+
+		if (Util.debugAxisSoutEnabled) {
+			try {
+				System.out
+						.println(Controllers.getController(3).getAxisValue(0));
+			} catch (Exception e) {
+				System.out
+						.println("An error occurred printing out the axis value");
+			}
+		}
 
 	}
 
+	@Override
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 		renderDiffGfx(gc, mainGame, g, stateRes);
@@ -146,6 +156,7 @@ public class SixthState extends BasicState {
 
 	}
 
+	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 
@@ -170,17 +181,15 @@ public class SixthState extends BasicState {
 		case Input.KEY_C:
 			paneRight();
 			break;
-	
 
 		}
 
-		if (input.isControllerLeft(Input.ANY_CONTROLLER)){
+		if (input.isControllerLeft(Input.ANY_CONTROLLER)) {
 			paneLeft();
 		}
-		if(input.isControllerRight(Input.ANY_CONTROLLER)){
+		if (input.isControllerRight(Input.ANY_CONTROLLER)) {
 			paneRight();
 		}
-			
-		
+
 	}
 }

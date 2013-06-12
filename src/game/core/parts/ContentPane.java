@@ -7,14 +7,12 @@ import game.util.Util;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
 import java.awt.Font;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.AbstractComponent;
-import org.newdawn.slick.gui.GUIContext;
 
 /**
  * The ContentPane.java class responsible for managing and drawing a Content
@@ -35,6 +33,8 @@ public class ContentPane extends StateBuilder {
 
 	private int xOffset = 0, yOffset = 0, posX = 0, posY = 0, posW = 0,
 			posH = 0;
+
+	int fixedWidth, fixedHeight;
 
 	private Rectangle container;
 
@@ -89,6 +89,8 @@ public class ContentPane extends StateBuilder {
 		scalingYf = y;
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
+		fixedWidth = width;
+		fixedHeight = height;
 		posW = width;
 		posH = height;
 		initDefaultColors();
@@ -198,27 +200,35 @@ public class ContentPane extends StateBuilder {
 				(int) (y + this.area.getMinY()), width, height);
 	}
 
+	@Override
 	public void addContentPane(int x, int y, int width, int height) {
 		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
 		addPanes(pane);
 	}
 
+	@Override
 	public void addContentPane(float x, float y, int width, int height) {
+		fixedWidth = width;
+		fixedHeight = height;
 		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
+
 		addPanes(pane);
 	}
 
+	@Override
 	public void addContentPane(float x, float y, float width, float height) {
 		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
 		addPanes(pane);
 	}
 
+	@Override
 	public void addContentPane(float x, float y, float width, float height,
 			Rectangle area) {
 		ContentPane pane = new ContentPane(gc, x, y, width, height, area);
 		addPanes(pane);
 	}
 
+	@Override
 	public void addContentPane(float x, float y, int xOffset, int yOffset,
 			int width, int height) {
 		ContentPane pane = new ContentPane(gc, x, y, xOffset, yOffset, width,
@@ -226,6 +236,7 @@ public class ContentPane extends StateBuilder {
 		addPanes(pane);
 	}
 
+	@Override
 	public void addButton(int x, int y, String image) {
 
 		try {
@@ -236,6 +247,7 @@ public class ContentPane extends StateBuilder {
 		}
 	}
 
+	@Override
 	public void addButton(int x, int y, Image image) {
 
 		try {
@@ -246,12 +258,14 @@ public class ContentPane extends StateBuilder {
 		}
 	}
 
+	@Override
 	public void addLabel(int type, float x, float y, String string)
 			throws SlickException {
 		Label label = new Label(type, x, y, string, area);
 		addLabels(label);
 	}
 
+	@Override
 	public void addLabel(int type, int x, int y, String string)
 			throws SlickException {
 		Label label = new Label(type, x, y, string, area);
@@ -479,13 +493,15 @@ public class ContentPane extends StateBuilder {
 
 	}
 
+	@Override
 	public void rescale() {
 
 		// if (area == null) {
 
-		area = new Rectangle((int) ((scalingXf * container.getWidth()) + posX+xOffset)
-				+ container.getMinX(),
-				(int) ((scalingYf * container.getHeight()) + posY+yOffset)
+		area = new Rectangle(
+				(int) ((scalingXf * container.getWidth()) + posX + xOffset)
+						+ container.getMinX(),
+				(int) ((scalingYf * container.getHeight()) + posY + yOffset)
 						+ container.getMinY(),
 				(int) ((scalingW * container.getWidth()) + posW),
 				(int) ((scalingH * container.getHeight()) + posH));
@@ -498,7 +514,7 @@ public class ContentPane extends StateBuilder {
 		}
 		if (container != null) {
 
-			scaleForContainer = (float) Trololus.app.getWidth() / (float) currW;
+			scaleForContainer = Trololus.app.getWidth() / currW;
 
 			// container = new Rectangle(container.getMinX() *
 			// scaleForContainer,
@@ -509,8 +525,8 @@ public class ContentPane extends StateBuilder {
 			containerW = (int) container.getWidth();
 			containerH = (int) container.getHeight();
 		} else {
-			containerW = (int) Trololus.app.getWidth();
-			containerH = (int) Trololus.app.getHeight();
+			containerW = Trololus.app.getWidth();
+			containerH = Trololus.app.getHeight();
 		}
 
 		switch (scaling) {
@@ -532,8 +548,13 @@ public class ContentPane extends StateBuilder {
 			// initialize starting values
 			int contentW = 0, contentH = 0;
 
-			contentW = (int) area.getWidth();
-			contentH = (int) area.getHeight();
+			if (fixedHeight == 0) {
+				contentW = (int) area.getWidth();
+				contentH = (int) area.getHeight();
+			} else {
+				contentW = fixedWidth;
+				contentH = fixedHeight;
+			}
 
 			// set the actual new X's and Y's
 			switch (position) {
@@ -556,6 +577,7 @@ public class ContentPane extends StateBuilder {
 			case Center:
 				x = (containerW / 2) - (contentW / 2);
 				y = (containerH / 2) - (contentH / 2);
+				System.out.println(containerW + " " + contentW);
 				break;
 			case CenterRight:
 				x = containerW - contentW;
@@ -574,7 +596,7 @@ public class ContentPane extends StateBuilder {
 				y = containerH - contentH;
 				break;
 			default:
-				Util.print("Label Position fucked up - unknown value passed to the method");
+				Util.print("Label Position not able to initialize - unknown value passed to the method");
 				break;
 
 			}
@@ -583,7 +605,7 @@ public class ContentPane extends StateBuilder {
 		}
 
 		default: {
-			Util.print("Label incorrectly initialized - scaling has fucked up");
+			Util.print("Label incorrectly initialized - scaling has thus failed");
 			break;
 		}
 

@@ -5,7 +5,6 @@ import org.newdawn.slick.Color;
 import game.core.parts.ContentPosition;
 import game.nonstatic.BattleField;
 import game.nonstatic.GameInstance;
-import game.nonstatic.entities.Projectile;
 import game.nonstatic.entities.controllables.Ship;
 import game.nonstatic.entities.controllables.ShipType;
 import game.nonstatic.system.Player;
@@ -13,7 +12,6 @@ import game.util.Util;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -33,6 +31,7 @@ public class FifthState extends BasicState {
 	Ship controlledShip;
 	Ship secondShip;
 
+	@Override
 	public void createContent() throws SlickException {
 		initTestingShip();
 		sb.addLabel(1, 0.5f, 0.5f, "News & Friends");
@@ -55,6 +54,7 @@ public class FifthState extends BasicState {
 
 	}
 
+	@Override
 	public int getID() {
 		return ID;
 	}
@@ -71,6 +71,7 @@ public class FifthState extends BasicState {
 		gameRunning = true;
 	}
 
+	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
@@ -206,6 +207,7 @@ public class FifthState extends BasicState {
 		instance.draw(g);
 	}
 
+	@Override
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 

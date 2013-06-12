@@ -5,18 +5,15 @@ import game.util.MoreColors;
 import game.util.Util;
 
 import java.awt.Font;
-import java.awt.Graphics2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.gui.GUIContext;
 
 /**
  * The Label.java class representing a single label (text entry or image) in the
@@ -72,14 +69,9 @@ public class Label {
 	private int scaling = 0;
 	private float scalingX;
 	private float scalingY;
-	private float scale;
 	private boolean inited = false;
 	private ContentPosition position;
 	private boolean centering;
-	private boolean initScaled;
-	private float scaleRequested;
-	private int relativeScaling;
-	private boolean rescaleRelativePaused;
 	private boolean isVisible = true;
 	private int xOffset;
 	private int yOffset;
@@ -253,7 +245,6 @@ public class Label {
 		scalingX = x;
 		scalingY = y;
 		type = 2;
-		this.scale = scale;
 		this.img = new Image(content);
 		img = img.getScaledCopy(scale);
 		commonInit();
@@ -311,7 +302,7 @@ public class Label {
 				Trololus.app.getHeight());
 		currW = (int) containingElement.getWidth();
 		color = new Color(Color.white);
-		
+
 		rescale();
 	}
 
@@ -320,22 +311,14 @@ public class Label {
 		int newWidth = (int) (arg * containingElement.getWidth());
 		img = img.getScaledCopy(newWidth,
 				((img.getWidth() * img.getHeight()) / newWidth));
-		scaleRequested = arg;
-		rescaleRelativePaused = true;
 		rescale();
-		rescaleRelativePaused = false;
 	}
 
 	public void scaleToHeight(float arg) {
 		int newHeight = (int) (arg * containingElement.getHeight());
 		img = img.getScaledCopy((newHeight * img.getWidth()) / img.getHeight(),
 				newHeight);
-		scaleRequested = arg;
-		relativeScaling = 2;
-
-		rescaleRelativePaused = true;
 		rescale();
-		rescaleRelativePaused = false;
 
 	}
 
@@ -343,21 +326,13 @@ public class Label {
 
 		img = img
 				.getScaledCopy(arg, ((img.getWidth() * img.getHeight()) / arg));
-		scaleRequested = arg;
-		rescaleRelativePaused = true;
 		rescale();
-		rescaleRelativePaused = false;
 	}
 
 	public void scaleToHeight(int arg) {
 
 		img = img.getScaledCopy((arg * img.getWidth()) / img.getHeight(), arg);
-		scaleRequested = arg;
-		relativeScaling = 2;
-
-		rescaleRelativePaused = true;
 		rescale();
-		rescaleRelativePaused = false;
 
 	}
 
@@ -374,13 +349,11 @@ public class Label {
 					container.getWidth() * scaleForContainer,
 					container.getHeight() * scaleForContainer);
 
-
-
 			containerW = (int) container.getWidth();
 			containerH = (int) container.getHeight();
 		} else {
-			containerW = (int) Trololus.app.getWidth();
-			containerH = (int) Trololus.app.getHeight();
+			containerW = Trololus.app.getWidth();
+			containerH = Trololus.app.getHeight();
 		}
 
 		if (type == 2) {

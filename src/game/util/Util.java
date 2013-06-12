@@ -15,10 +15,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -30,11 +28,19 @@ import org.newdawn.slick.state.StateBasedGame;
  *       7.2.2013 17:55:46
  */
 public class Util {
+
+	// Options, mainly debug constants, not to clog other classes.
+
+	/*
+	 * BOOLEAN - whether State 6 outputs debug text showing the state of Y axis
+	 */
+	public static final boolean debugAxisSoutEnabled = false;
+
 	static Object[] prolongedArray;
 	// public static Trololus game = Trololus;
 	private static Trololus game;
 	public static TrueTypeFont fontGreatHeader, fontEntry, fontNormalHeader,
-			fontText;
+			fontText, fontButton;
 
 	public static void init(StateBasedGame game) throws SlickException {
 
@@ -171,10 +177,16 @@ public class Util {
 					java.awt.Font.TRUETYPE_FONT, new File(
 							"resources/fonts/freedom.ttf")));
 
-			fontGreatHeader = new TrueTypeFont(new Font(BasicState.fontGreatHeader, 25, 43), true);
-			fontNormalHeader = new TrueTypeFont(new Font(BasicState.fontNormalHeader, 10, 20), true);
-			fontEntry = new TrueTypeFont(new Font(BasicState.fontEntry, 10, 25), true);
-			fontText = new TrueTypeFont(new Font(BasicState.fontText, 25, 25),true);
+			fontGreatHeader = new TrueTypeFont(new Font(
+					BasicState.fontGreatHeader, 25, 43), true);
+			fontNormalHeader = new TrueTypeFont(new Font(
+					BasicState.fontNormalHeader, 10, 20), true);
+			fontEntry = new TrueTypeFont(
+					new Font(BasicState.fontEntry, 10, 25), true);
+			fontText = new TrueTypeFont(new Font(BasicState.fontText, 25, 25),
+					true);
+			fontButton = new TrueTypeFont(new Font(BasicState.fontButton, 10,
+					25), true);
 
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block

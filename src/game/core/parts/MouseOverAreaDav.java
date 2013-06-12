@@ -1,5 +1,7 @@
 package game.core.parts;
 
+import game.util.Util;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -80,7 +82,31 @@ public class MouseOverAreaDav extends AbstractComponent {
 
 	private boolean mouseOverSoundPlaying;
 
+	public String label;
+
+	protected float xOffset, yOffset;
+
 	private int mouseOverSoundDelay = 1000;
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public void setXOffset(float offset) {
+		xOffset = offset;
+
+	}
+
+	public void setYOffset(float offset) {
+		yOffset = offset;
+
+	}
+
+	public void setOffset(float xOffset, float yOffset) {
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+
+	}
 
 	/**
 	 * @return Whether this component is set to draw using the Centered method.
@@ -261,6 +287,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 * 
 	 * @return x
 	 */
+	@Override
 	public int getX() {
 		return (int) area.getX();
 	}
@@ -270,6 +297,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 * 
 	 * @return y
 	 */
+	@Override
 	public int getY() {
 		return (int) area.getY();
 	}
@@ -342,6 +370,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 * @see org.newdawn.slick.gui.AbstractComponent#render(org.newdawn.slick.gui.GUIContext,
 	 *      org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GUIContext container, Graphics g) {
 		if (!centered) {
 			if (currentImage != null) {
@@ -356,6 +385,13 @@ public class MouseOverAreaDav extends AbstractComponent {
 				g.setColor(currentColor);
 				g.fill(area);
 			}
+			if (label != null) {
+				int xp = (int) (area.getX() + (getWidth() * xOffset));
+				int yp = (int) (area.getY() + (getHeight() * yOffset));
+
+				Util.fontButton.drawString(xp, yp, label);
+			}
+
 			updateImage();
 		} else if (centered) {
 			renderCentered(container, g);
@@ -455,6 +491,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseMoved(int, int, int, int)
 	 */
+	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
 		over = area.contains(newx, newy);
 	}
@@ -462,6 +499,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseDragged(int, int, int, int)
 	 */
+	@Override
 	public void mouseDragged(int oldx, int oldy, int newx, int newy) {
 		mouseMoved(oldx, oldy, newx, newy);
 	}
@@ -469,6 +507,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mousePressed(int, int, int)
 	 */
+	@Override
 	public void mousePressed(int button, int mx, int my) {
 		over = area.contains(mx, my);
 		if (button == 0) {
@@ -479,6 +518,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseReleased(int, int, int)
 	 */
+	@Override
 	public void mouseReleased(int button, int mx, int my) {
 		over = area.contains(mx, my);
 		if (button == 0) {
@@ -489,6 +529,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.gui.AbstractComponent#getHeight()
 	 */
+	@Override
 	public int getHeight() {
 		return (int) (area.getMaxY() - area.getY());
 	}
@@ -496,6 +537,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.gui.AbstractComponent#getWidth()
 	 */
+	@Override
 	public int getWidth() {
 		return (int) (area.getMaxX() - area.getX());
 	}
@@ -517,6 +559,7 @@ public class MouseOverAreaDav extends AbstractComponent {
 	 * @param y
 	 *            The y coordiante of this area
 	 */
+	@Override
 	public void setLocation(int x, int y) {
 		setLocation((float) x, (float) y);
 	}

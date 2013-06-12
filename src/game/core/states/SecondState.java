@@ -6,8 +6,6 @@
  */
 package game.core.states;
 
-import java.awt.Font;
-
 import game.core.parts.ContentPosition;
 import game.util.Util;
 
@@ -15,7 +13,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -25,6 +22,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class SecondState extends BasicState {
 	public static final int ID = 1;
 
+	@Override
 	public void createContent() throws SlickException {
 		
 		sb.addLabel(1, 0.5f, 0.5f, "Connect to a GAME");
@@ -38,6 +36,7 @@ public class SecondState extends BasicState {
 
 	}
 
+	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		super.init(gc, game);
@@ -45,10 +44,12 @@ public class SecondState extends BasicState {
 
 	}
 
+	@Override
 	public int getID() {
 		return ID;
 	}
 
+	@Override
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		super.update(gc, mainGame, delta);
@@ -61,6 +62,7 @@ public class SecondState extends BasicState {
 
 	}
 
+	@Override
 	public void render(GameContainer gc, StateBasedGame mainGame, Graphics g)
 			throws SlickException {
 		super.render(gc, mainGame, g, stateRes);
