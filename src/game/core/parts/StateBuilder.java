@@ -17,8 +17,8 @@ import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.TextField;
 
 /**
- * The StateBuilder.java class responsible for handling all the different drawable
- * elements in the game's states.
+ * The StateBuilder.java class responsible for handling all the different
+ * drawable elements in the game's states.
  * 
  * @author xCabbage [github.com/xcabbage]
  * 
@@ -45,8 +45,7 @@ public class StateBuilder {
 	// interface methods to create the new objects and queue their addition to
 	// the arrays
 	public void addTextField(int x, int y, int width, int height) {
-		TextField field = new TextField(gc, Util.fontEntry, x, y,
-				width, height);
+		TextField field = new TextField(gc, Util.fontEntry, x, y, width, height);
 		field.setConsumeEvents(true);
 		addComponents(field);
 
@@ -147,6 +146,7 @@ public class StateBuilder {
 	}
 
 	public void addContentPane(float x, float y, int width, int height) {
+		System.out.println("running ffii from SB");
 		ContentPane pane = new ContentPane(gc, x, y, width, height);
 		addPanes(pane);
 	}

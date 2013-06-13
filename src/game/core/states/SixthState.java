@@ -30,6 +30,7 @@ public class SixthState extends BasicState {
 		// add & init Options pane
 		sb.addContentPane(0.25f, 0.25f, 600, 300);
 		optionsPane = sb.getPane(-1);
+		optionsPane.setPosition(ContentPosition.Center);
 		optionsPane.setBackground(MoreColors.getTrans(Color.black, 150),
 				Color.cyan);
 

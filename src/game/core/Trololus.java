@@ -19,15 +19,18 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Trololus extends StateBasedGame {
+	// OVERRIDE SWITCH
+	private static final boolean constantOverrideEnabled = true;
 	// constants
 
 	public static boolean optionsEnabled = false;
 	private static boolean isVSyncEnabled = false;
 	private static boolean ShowFPS = false;
-	private static boolean DECORATED = true;
+	private static boolean DECORATED = false;
 
 	private static float MUSIC_VOLUME = 0.05f;
 	private static final String title = "Trololus NightBuild.0";
+
 	public static float ShipScale = 0.1f;
 
 	static public boolean drawing = true;
@@ -106,24 +109,29 @@ public class Trololus extends StateBasedGame {
 	// -------------------------------------------------------The-Game's-Methods-------------------------------------------------------------------
 
 	private static void loadProperties() throws IOException {
-		PropertiesHandler.init();
-		System.out.println("Properties handler initiated...");
+		if (!constantOverrideEnabled) {
+			PropertiesHandler.init();
+			System.out.println("Properties handler initiated...");
 
-		MUSIC_VOLUME = Float.parseFloat(PropertiesHandler
-				.getProperty("musicvolume"));
+			MUSIC_VOLUME = Float.parseFloat(PropertiesHandler
+					.getProperty("musicvolume"));
 
-		optionsEnabled = Boolean.parseBoolean(PropertiesHandler
-				.getProperty("optionsEnabled"));
-		isVSyncEnabled = Boolean.parseBoolean(PropertiesHandler
-				.getProperty("vsyncEnabled"));
-		ShowFPS = Boolean.parseBoolean(PropertiesHandler
-				.getProperty("fpsEnabled"));
-		DECORATED = Boolean.parseBoolean(PropertiesHandler
-				.getProperty("windowDecorated"));
-		ShipScale = Float
-				.parseFloat(PropertiesHandler.getProperty("shipScale"));
+			optionsEnabled = Boolean.parseBoolean(PropertiesHandler
+					.getProperty("optionsEnabled"));
+			isVSyncEnabled = Boolean.parseBoolean(PropertiesHandler
+					.getProperty("vsyncEnabled"));
+			ShowFPS = Boolean.parseBoolean(PropertiesHandler
+					.getProperty("fpsEnabled"));
+			DECORATED = Boolean.parseBoolean(PropertiesHandler
+					.getProperty("windowDecorated"));
+			ShipScale = Float.parseFloat(PropertiesHandler
+					.getProperty("shipScale"));
 
-		System.out.println("Properties successfully loaded.");
+			System.out.println("Properties successfully loaded.");
+		} else {
+			System.out
+					.println("Manual override from source constants enabled. Disregarding properties.");
+		}
 	}
 
 	@Override
