@@ -21,6 +21,9 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class Trololus extends StateBasedGame {
 	// OVERRIDE SWITCH
 	private static final boolean constantOverrideEnabled = true;
+
+	// debug
+	private static final boolean discardOtherStates = false;
 	// constants
 
 	public static boolean optionsEnabled = false;
@@ -143,12 +146,14 @@ public class Trololus extends StateBasedGame {
 		Util.init(BasicState.game);
 
 		addState(new FirstState());
-		addState(new SecondState());
-		addState(new ThirdState());
-		addState(new FourthState());
-		addState(new FifthState());
-		addState(new SixthState());
 
+		if (!discardOtherStates) {
+			addState(new SecondState());
+			addState(new ThirdState());
+			addState(new FourthState());
+			addState(new FifthState());
+			addState(new SixthState());
+		}
 		initAfterStates();
 
 	}

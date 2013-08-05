@@ -33,7 +33,7 @@ public class FifthState extends BasicState {
 
 	@Override
 	public void createContent() throws SlickException {
-		initTestingShip();
+		/* initTestingShip(); */
 		sb.addLabel(1, 0.5f, 0.5f, "News & Friends");
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
