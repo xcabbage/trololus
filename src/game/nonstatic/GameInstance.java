@@ -88,7 +88,6 @@ public class GameInstance {
 		} else
 			System.out.println("Player 0 is null, can't draw stuff!");
 
-
 		field.drawShips();
 		field.drawProjectiles();
 		g.setColor(Color.white);
