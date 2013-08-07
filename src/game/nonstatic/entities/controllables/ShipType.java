@@ -22,7 +22,7 @@ SpacePiratesLight(4,1,4,200, "Imperial_Striker_Hull"), SpacePiratesMedium(4,2,5,
 //Xerox Ships
 Wisp(5,1,3,250, "Imperial_Striker_Hull"), XeroxMedium(6,1,4,500, "Imperial_Striker_Hull"), XeroxHeavy(6,1,7,1400, "Imperial_Striker_Hull");
 
-/*TODO HP | Add names of ship types currently unnamed &
+/* TODO HP | Add names of ship types currently unnamed &
  * Fiddle with number of slots to balance game (current balance is based on slot total -
  * - Light=9 slots, Medium=11, Heavy=14) - to sort out in future
 */
