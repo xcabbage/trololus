@@ -192,8 +192,7 @@ public class BasicState extends BasicGameState {
 		menubar = new Image("resources/Splash/UI/Menubar_Back.png");
 		buttonSpriteSheet = new Image(
 				"resources/Splash/UI/Menubar_Spritesheet.png");
-		menuButtons = new SpriteSheet(buttonSpriteSheet, (500),
-				(500));
+		menuButtons = new SpriteSheet(buttonSpriteSheet, (500), (500));
 
 		// init scaling
 		initRes();
@@ -251,7 +250,8 @@ public class BasicState extends BasicGameState {
 	}
 
 	public static void drawMenu(Graphics g, BasicState state) {
-		BasicState.menubar.draw(BasicState.menuX, BasicState.menuY, state.menuScale);
+		BasicState.menubar.draw(BasicState.menuX, BasicState.menuY,
+				state.menuScale);
 
 		for (int a = 0; a < 7; a++) {
 			BasicState.button[a].render(app, g);
@@ -274,7 +274,7 @@ public class BasicState extends BasicGameState {
 		 */
 
 	}
-
+	
 	public void drawMenu(Graphics g) {
 		BasicState.menubar.draw(menuX, menuY, menuScale);
 

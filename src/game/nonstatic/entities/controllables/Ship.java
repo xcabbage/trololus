@@ -2,7 +2,7 @@
  * 
  * @Author DannyUfonek
  * @Author xCabbage 
- *  Rework 19 March '13 by xCabbage - optimalizing, entity stuff
+ *  Rework 19 March '13 by xCabbage - optimizing, entity stuff
  */
 package game.nonstatic.entities.controllables;
 
