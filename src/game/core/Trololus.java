@@ -29,7 +29,7 @@ public class Trololus extends StateBasedGame {
 	public static boolean optionsEnabled = false;
 	private static boolean isVSyncEnabled = false;
 	private static boolean ShowFPS = false;
-	private static boolean DECORATED = false;
+	private static boolean DECORATED = true;
 
 	private static float MUSIC_VOLUME = 0.05f;
 	private static final String title = "Trololus NightBuild.0";
@@ -153,6 +153,7 @@ public class Trololus extends StateBasedGame {
 			addState(new FourthState());
 			addState(new FifthState());
 			addState(new SixthState());
+//			addState(new GameState());
 		}
 		initAfterStates();
 
@@ -360,6 +361,8 @@ public class Trololus extends StateBasedGame {
 			Util.printErr("debug Error");
 			break;
 		}
+		case Input.KEY_0:
+			enterState(6);
 
 		}
 	}
@@ -393,7 +396,7 @@ public class Trololus extends StateBasedGame {
 
 	}
 
-	// -----------------------------------------The-Project's-TO-DO-repository-dump!---------------------------------------------------------------
+	// -----------------------------------------The-Project's-TO-DO-dump!---------------------------------------------------------------
 	// TODO HP | Properties
 
 	// TODO DH | Rest of ship models
