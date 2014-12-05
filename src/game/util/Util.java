@@ -3,6 +3,7 @@ package game.util;
 import game.core.Trololus;
 import game.core.parts.ContentPosition;
 import game.core.parts.Label;
+import game.core.parts.StateBuilder;
 import game.core.states.BasicState;
 
 import java.awt.Font;
@@ -72,7 +73,10 @@ public class Util {
 		System.out.println("[UPrint] " + string);
 		BasicState state = (BasicState) game.getCurrentState();
 		try {
-			state.sb.addLabel(1, 0.5f, 0.5f, string);
+			StateBuilder builder = state.sb;
+			System.out.println(builder);
+			System.out.println(state);
+			builder.addLabel(1, 0.5f, 0.5f, string);
 			final Label notification = state.sb.getLabel(-1);
 			notification.setColor(Color.blue);
 			notification.setPosition(ContentPosition.Center);

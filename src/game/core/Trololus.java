@@ -152,8 +152,8 @@ public class Trololus extends StateBasedGame {
 			addState(new ThirdState());
 			addState(new FourthState());
 			addState(new FifthState());
+			addState(new GameState());
 			addState(new SixthState());
-//			addState(new GameState());
 		}
 		initAfterStates();
 
@@ -237,12 +237,15 @@ public class Trololus extends StateBasedGame {
 
 				}
 			});
-
-			System.out.println(input.getControllerCount());
-			System.out.println(Controllers.getController(0).getName());
-			System.out.println(Controllers.getController(1).getName());
-			System.out.println(Controllers.getController(2).getName());
-			System.out.println(Controllers.getController(3).getName());
+			try {
+				System.out.println(input.getControllerCount());
+				System.out.println(Controllers.getController(0).getName());
+				System.out.println(Controllers.getController(1).getName());
+				System.out.println(Controllers.getController(2).getName());
+				System.out.println(Controllers.getController(3).getName());
+			} catch (Exception e) {
+				System.err.println("Controller num <3");
+			}
 		} else
 			System.out.println("No controllers found!");
 

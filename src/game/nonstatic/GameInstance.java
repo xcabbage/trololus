@@ -83,7 +83,7 @@ public class GameInstance {
 	public void draw(Graphics g) {
 		// initial graphics stuff
 		g.setAntiAlias(true);
-		if (player[0] != null) {
+		if (player[0] != null) {	
 			g.setColor(player[0].getColor());
 		} else
 			System.out.println("Player 0 is null, can't draw stuff!");

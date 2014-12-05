@@ -26,7 +26,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class GameState extends BasicState {
 	private static final int PROJECTILE_SPEED = 8;
-	public static final int ID = 6;
+	public static final int ID = 7;
 	BattleField field;
 	int SPEED = 5;
 	Ship controlledShip;
@@ -35,8 +35,17 @@ public class GameState extends BasicState {
 	Player player = new Player("Davefinek", Color.white);
 	boolean gameRunning = false;
 	
-	GameState state = this;
+	GameState state = null;
 
+	@Override
+	public void init(GameContainer gc, StateBasedGame game)
+			throws SlickException {
+		super.init(gc, game);
+		StateTitle = "Game Debug State";
+		input.initControllers();
+		Util.print("Number of controllers: " + input.getControllerCount());
+	}
+	
 	@Override
 	public void createContent() throws SlickException {
 		initTestingShip();
@@ -49,6 +58,7 @@ public class GameState extends BasicState {
 	public void update(GameContainer gc, StateBasedGame mainGame, int delta)
 			throws SlickException {
 		// ship movement
+
 
 		if (gameRunning) {
 			field.updateProjectiles();
@@ -169,6 +179,7 @@ public class GameState extends BasicState {
 	}
 
 	void initTestingShip() throws SlickException {
+
 		instance = new GameInstance((BasicState) state, game, player);
 		field = instance.getField();
 		controlledShip = new Ship(ShipType.Striker, field);
@@ -178,8 +189,15 @@ public class GameState extends BasicState {
 		instance.centerShip(secondShip.getID());
 		instance.centerShip(controlledShip.getID());
 		gameRunning = true;
+		
+		float a[1][2];; 
 	}
-
+	
+	
+	
+	void takeThis(int[] a){}
+	
+	
 	@Override
 	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g,
 			BasicState state) {
