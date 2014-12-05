@@ -154,6 +154,7 @@ public class Trololus extends StateBasedGame {
 			addState(new FifthState());
 			addState(new GameState());
 			addState(new SixthState());
+			
 		}
 		initAfterStates();
 
@@ -366,7 +367,11 @@ public class Trololus extends StateBasedGame {
 		}
 		case Input.KEY_0:
 			enterState(6);
+			break;
+		case Input.KEY_F7:
+			System.out.println(getCurrentState());
 
+			break;
 		}
 	}
 
