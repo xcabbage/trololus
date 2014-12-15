@@ -51,6 +51,7 @@ public class BasicState extends BasicGameState {
 	public static Circle[] buttonHoverCircle = new Circle[10];
 	public static MouseOverAreaDav[] button = new MouseOverAreaDav[10];
 	public static BasicState stateRes;
+	boolean base_UI_disabled = false;
 
 	static Music music;
 	// declare graphics
@@ -242,7 +243,9 @@ public class BasicState extends BasicGameState {
 					state.backgroundScale);
 			if (stateTitleEnabled)
 				g.drawString(StateTitle, 320, 20);
-			drawMenu(g, state);
+			if (!this.base_UI_disabled) {
+				drawMenu(g, state);
+			}
 			renderDiffGfx(gc, mainGame, g, stateRes);
 			drawControllers();
 		}
@@ -274,7 +277,7 @@ public class BasicState extends BasicGameState {
 		 */
 
 	}
-	
+
 	public void drawMenu(Graphics g) {
 		BasicState.menubar.draw(menuX, menuY, menuScale);
 
@@ -316,7 +319,6 @@ public class BasicState extends BasicGameState {
 
 	@Override
 	public int getID() {
-
 		return 0;
 	}
 

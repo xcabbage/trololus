@@ -154,7 +154,7 @@ public class Trololus extends StateBasedGame {
 			addState(new FifthState());
 			addState(new GameState());
 			addState(new SixthState());
-			
+
 		}
 		initAfterStates();
 
