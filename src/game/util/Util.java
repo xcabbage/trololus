@@ -38,7 +38,7 @@ public class Util {
 	public static final boolean debugAxisSoutEnabled = false;
 
 	static Object[] prolongedArray;
-	// public static Trololus game = Trololus;
+
 	private static Trololus game;
 	public static TrueTypeFont fontGreatHeader, fontEntry, fontNormalHeader,
 			fontText, fontButton;

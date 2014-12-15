@@ -26,7 +26,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class GameState extends BasicState {
 	private static final int PROJECTILE_SPEED = 8;
-	public static final int ID =6;
+	public static final int ID = 6;
 	BattleField field;
 	int SPEED = 5;
 	Ship controlledShip;

@@ -23,6 +23,7 @@ public class FirstState extends BasicState {
 	@Override
 	public void createContent() throws SlickException {
 
+		System.out.println("sb in createContent: " + sb);
 		sb.addLabel(1, 0.5f, 0.5f, "Trololus ");
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
@@ -32,7 +33,7 @@ public class FirstState extends BasicState {
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
 		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
 
-		}
+	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
