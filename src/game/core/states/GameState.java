@@ -1,6 +1,7 @@
 package game.core.states;
 
 import game.core.parts.ContentPosition;
+import game.core.parts.GameComponent;
 import game.util.Util;
 
 import org.lwjgl.input.Controllers;
@@ -10,7 +11,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class GameState extends BasicState {
-
+public GameComponent a;
 	public static int ID = 6;
 
 	@Override
@@ -20,14 +21,10 @@ public class GameState extends BasicState {
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 
-		
-		//down here is nina's 
-		
-		
-		
-		//down here is dusan's
-		
-		
+		// down here is nina's
+
+		// down here is dusan's
+
 	}
 
 	@Override
