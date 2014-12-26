@@ -3,6 +3,7 @@ package game.core.states;
 import game.core.parts.ContentPosition;
 import game.core.parts.GameComponent;
 import game.core.parts.Image;
+import game.core.parts.Timer;
 import game.util.Util;
 
 import org.lwjgl.input.Controllers;
@@ -28,7 +29,7 @@ public class GameState extends BasicState {
 
 		// down here is david's
 		// components test
-		components.add(new Image(this, gc, gc.getGraphics()));
+		components.add(new Timer(this, gc, gc.getGraphics()));
 
 	}
 
