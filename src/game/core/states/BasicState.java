@@ -1,12 +1,15 @@
 package game.core.states;
 
 import game.core.Trololus;
+import game.core.parts.Component;
 import game.core.parts.MouseOverAreaDav;
 import game.core.parts.StateBuilder;
 import game.util.PropertiesHandler;
 import game.util.Util;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
@@ -54,8 +57,8 @@ public class BasicState extends BasicGameState {
 	boolean base_UI_disabled = false;
 
 	static Music music;
-	// declare graphics
 
+	// declare graphics
 	static Image arrow, menubar, buttonSpriteSheet, background;
 	public Image backgroundBack;
 	public String StateTitle;
@@ -64,14 +67,25 @@ public class BasicState extends BasicGameState {
 	public int ID;
 	boolean inited;
 
-	// declare gFx constants
-	public boolean gFxInited = false;
+	// declare gFx variables
+	public static boolean gFxInited = false;
 	public float menuScale, backgroundScale;
 	public static int menuBarWidth, menuBarHeight, appWidth, appHeight,
 			menuOffset, menuX, menuY, buttonsX, buttonsY, buttonsOffset,
 			backgroundY, buttonDist, buttonRadius, buttonsGetY, buttonsSafeY;
 	private boolean stateTitleEnabled;
 	public boolean driftRequested;
+
+	// COMPONENTS PART
+	// Components (unique to each state
+	List<Component> components;
+
+	// Component register code
+	public void addComponent(Component component) {
+
+		components.add(component);
+
+	}
 
 	public static void drawControllers() {
 		/*
@@ -127,7 +141,8 @@ public class BasicState extends BasicGameState {
 				+ this.getID());
 	}
 
-	public void createContent() throws SlickException {
+	public void createContent(GameContainer gc, StateBasedGame game)
+			throws SlickException {
 
 	}
 
@@ -136,6 +151,7 @@ public class BasicState extends BasicGameState {
 			throws SlickException {
 
 		// init globals
+		components = new ArrayList<Component>();
 		BasicState.game = game;
 		app = gc;
 		if (this.getID() >= 0)
@@ -150,10 +166,11 @@ public class BasicState extends BasicGameState {
 
 	@Override
 	public void enter(GameContainer gc, StateBasedGame game) {
+
 		if (!inited)
 			try {
 				initDiffGfx();
-				createContent();
+				createContent(gc, game);
 				inited = true;
 			} catch (SlickException e) {
 
@@ -183,6 +200,11 @@ public class BasicState extends BasicGameState {
 	void renderDiffGfx(GameContainer gc, StateBasedGame mainGame, Graphics g,
 			BasicState state) throws SlickException {
 		sb.drawComponents(g);
+
+		// Draw components
+		for (Component c : components) {
+			c.render();
+		}
 	}
 
 	public void initVars() throws SlickException {
@@ -210,6 +232,12 @@ public class BasicState extends BasicGameState {
 		if (input.isKeyDown(1)) {
 			System.out.println("Shutting Down.. [command: " + ID + ".]");
 			System.exit(0);
+
+		}
+
+		// Update components
+		for (Component c : components) {
+			c.update();
 		}
 	}
 
@@ -225,6 +253,7 @@ public class BasicState extends BasicGameState {
 					g.drawString(StateTitle, 320, 20);
 				drawMenu(g);
 				drawControllers();
+
 			}
 		} else {
 
