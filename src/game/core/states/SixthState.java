@@ -21,7 +21,8 @@ public class SixthState extends BasicState {
 	int openPane = -1;
 
 	@Override
-	public void createContent() throws SlickException {
+	public void createContent(GameContainer gc, StateBasedGame game)
+			throws SlickException {
 		// create independent content
 		sb.addLabel(1, 0.5f, 0.5f, "game options");
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);

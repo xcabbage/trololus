@@ -21,7 +21,8 @@ public class FirstState extends BasicState {
 	public static int ID = 0;
 
 	@Override
-	public void createContent() throws SlickException {
+	public void createContent(GameContainer gc, StateBasedGame game)
+			throws SlickException {
 
 		System.out.println("sb in createContent: " + sb);
 		sb.addLabel(1, 0.5f, 0.5f, "Trololus ");

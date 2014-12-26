@@ -30,12 +30,12 @@ public class ThirdState extends BasicState {
 	private ContentPane[] optionsPanes = new ContentPane[4];
 
 	@Override
-	public void createContent() throws SlickException {
+	public void createContent(GameContainer gc, StateBasedGame game)
+			throws SlickException {
 		Image buttonImg = new Image("resources/Splash/UI/IG/IG_fps.png")
 				.getScaledCopy(0.15f);
-		
-		
-	//title	
+
+		// title
 		sb.addLabel(1, 0.5f, 0.5f, "Create a game - HOST");
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
@@ -45,14 +45,9 @@ public class ThirdState extends BasicState {
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 100);
 		sb.getLabel(-1).setColor(Color.white.darker(0.1f));
 
-		
-		
-		
-		
-
 		sb.addContentPane(0.5f, 0.5f, -175, -50, 420, 100);
 		menuPane = sb.getPane(-1);
-		
+
 		// !!Creation of options Panes!!!
 
 		// WELCOME
@@ -67,7 +62,7 @@ public class ThirdState extends BasicState {
 		optionsPanes[0].getLabel(-1).setColor(Color.cyan);
 		optionsPanes[0].getLabel(-1).setPosition(ContentPosition.TopCenter, 0,
 				-40);
-		
+
 		optionsPanes[0].addTextField(20, 10, 300, 25);
 		optionsPanes[0].addTextField(20, 60, 300, 25);
 		optionsPanes[0].addButton(325, 10, buttonImg);
@@ -89,8 +84,6 @@ public class ThirdState extends BasicState {
 			}
 		});
 
-		
-
 		// SOUND
 		menuPane.addContentPane(0.1f, 0.3f, 0.8f, 0.6f);
 		optionsPanes[1] = menuPane.getPane(-1);
@@ -99,7 +92,6 @@ public class ThirdState extends BasicState {
 		optionsPanes[1].setPosition(ContentPosition.Center);
 		optionsPanes[1].setVisible(false);
 
-		
 		// Initially show Welcome pane
 		switchToPane(0);
 	}
@@ -127,8 +119,7 @@ public class ThirdState extends BasicState {
 			throws SlickException {
 
 		super.render(gc, mainGame, g, stateRes);
-		
-		
+
 	}
 
 	public void switchToPane(int a) {

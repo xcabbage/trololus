@@ -23,7 +23,8 @@ public class FifthState extends BasicState {
 	FifthState state = this;
 
 	@Override
-	public void createContent() throws SlickException {
+	public void createContent(GameContainer gc, StateBasedGame game)
+			throws SlickException {
 
 		sb.addLabel(1, 0.5f, 0.5f, "News & Friends");
 		sb.getLabel(-1).setFont(Util.fontGreatHeader);

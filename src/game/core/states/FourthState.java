@@ -22,8 +22,8 @@ public class FourthState extends BasicState {
 	public static int ID = 3;
 
 	@Override
-	public void createContent() throws SlickException {
-
+	public void createContent(GameContainer gc, StateBasedGame game)
+			throws SlickException {
 		// sb.addLabel(2,-250,-350,"/resources/Splash/pilots/Pilot4a.png");
 		// sb.addLabel(1, 550,650, "GIVE ME YOUR CHICKEN, HUMAN!");
 		// sb.addLabel(2,680,450,"/resources/Splash/Missing_Icon.png");

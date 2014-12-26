@@ -122,6 +122,7 @@ public class BasicState extends BasicGameState {
 		backgroundY = (int) (appHeight * .06);
 		backgroundScale = (float) appWidth / background.getWidth();
 		buttonsSafeY = appHeight / 2;
+
 		arrow = new Image("resources/Splash/UI/pointerArrow.png");
 
 		for (int a = 0; a < menuButtons.getHorizontalCount(); a++) {
