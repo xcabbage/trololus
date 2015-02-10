@@ -136,7 +136,7 @@ public class Shop extends Component {
 
 		if(shopVis == true){
 		shop.draw(300, 200);
-		buyButton.draw(400, 300);
+		buyButton.draw(400, 320);
 		description(gc, g);
 		
 		}
