@@ -1,5 +1,6 @@
 package game.core.states;
 
+import game.core.parts.Clouds;
 import game.core.parts.ContentPosition;
 import game.core.parts.GameComponent;
 import game.core.parts.Image;
@@ -28,6 +29,9 @@ public class GameState extends BasicState {
 
 		// down here is nina's
 		components.add(new Shop(this, gc, gc.getGraphics()));
+		components.add(new Clouds( this, gc, gc.getGraphics()));
+		
+		
 		// down here is david's
 		// components test
 		components.add(new Timer(this, gc, gc.getGraphics()));
