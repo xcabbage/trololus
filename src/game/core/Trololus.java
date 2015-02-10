@@ -30,6 +30,7 @@ public class Trololus extends StateBasedGame {
 	private static boolean isVSyncEnabled = false;
 	private static boolean ShowFPS = false;
 	private static boolean DECORATED = true;
+	private static final boolean PRINT_ERRORS = true;
 
 	private static float MUSIC_VOLUME = 0.05f;
 	private static final String title = "Trololus NightBuild.0";
@@ -401,6 +402,32 @@ public class Trololus extends StateBasedGame {
 									+ a + " :O");
 				}
 			}
+
+	}
+
+	// ---------------------------------------------------Error handling &
+	// Output-------------------------------------------------------------------
+
+	/**
+	 * @param string
+	 */
+	public static void error(String string) {
+		// TODO popups? logs? fluff?
+		if (PRINT_ERRORS) {
+			System.out.println(string);
+		}
+
+	}
+
+	/**
+	 * @param string
+	 */
+	public static void error(StackTraceElement[] trace) {
+		// TODO popups? logs? fluff?
+		if (PRINT_ERRORS) {
+
+			System.out.println(trace);
+		}
 
 	}
 
