@@ -2,9 +2,14 @@ package game.core.parts;
 
 public abstract interface GameComponent {
 
-	public void init();
+	public abstract void init();
 
-	public void update();
+	public abstract void update();
 
-	public void render();
+	public abstract void render();
+
+	public abstract void mouseClicked(int button, int x, int y, int clickCount);
+
+	public abstract void mousePressed(int button, int x, int y);
+
 }
