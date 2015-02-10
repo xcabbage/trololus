@@ -443,4 +443,18 @@ public class BasicState extends BasicGameState {
 		}
 
 	}
+
+	@Override
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+		for (Component c : components) {
+			c.mouseClicked(button, x, y, clickCount);
+		}
+	}
+
+	@Override
+	public void mousePressed(int button, int x, int y) {
+		for (Component c : components) {
+			c.mousePressed(button, x, y);
+		}
+	}
 }

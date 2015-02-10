@@ -32,4 +32,11 @@ public class Component implements GameComponent {
 
 	}
 
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+
+	}
+
+	public void mousePressed(int button, int x, int y) {
+
+	}
 }
