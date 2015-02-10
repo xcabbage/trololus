@@ -4,6 +4,7 @@ import game.core.parts.ContentPosition;
 import game.core.parts.GameComponent;
 import game.core.parts.Image;
 import game.core.parts.Timer;
+import game.core.states.gamestate.Shop;
 import game.util.Util;
 
 import org.lwjgl.input.Controllers;
@@ -26,7 +27,7 @@ public class GameState extends BasicState {
 		sb.getLabel(-1).setPosition(ContentPosition.TopCenter, 0, 50);
 
 		// down here is nina's
-
+		components.add(new Shop(this, gc, gc.getGraphics()));
 		// down here is david's
 		// components test
 		components.add(new Timer(this, gc, gc.getGraphics()));

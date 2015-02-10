@@ -6,8 +6,8 @@ import org.newdawn.slick.state.GameState;
 
 public class Component implements GameComponent {
 	GameState state;
-	GameContainer gc;
-	Graphics g;
+	protected GameContainer gc;
+	protected Graphics g;
 
 	public Component(GameState state, GameContainer gc, Graphics g) {
 		this.state = state;
