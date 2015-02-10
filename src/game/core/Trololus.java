@@ -57,7 +57,7 @@ public class Trololus extends StateBasedGame {
 	// CONSTANTS
 	static int width = 1000;
 	static int height = 500;
-	static int fpslimit = 30;
+	static int fpslimit = 60;
 
 	static String MUSIC_PATH_INIT = "resources/Audio/BGM1_a.wav";
 	static String MUSIC_PATH_LOOP = "resources/Audio/BGM4.wav";
