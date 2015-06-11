@@ -13,13 +13,12 @@ Xargo     						[https://github.com/avatarxargo]
 
 DusanPilka      				[https://github.com/dusanp]
 
-DannyUfonek      				[https://github.com/DannyUfonek]
-
-Snupicek    					[https://github.com/SnoopCZ]
-
 Nic      			[https://github.com/nic727]
 
-Trixis      					[https://github.com/trixis]
+DannyUfonek      				[https://github.com/DannyUfonek]
+
+
+
 
 
 
