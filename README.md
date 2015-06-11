@@ -1,4 +1,4 @@
-Trololus Primary branch (Night v.0)
+Trololus Primary branch (alpha)
 ========
 
 A repo for the Trololus Game project. 
