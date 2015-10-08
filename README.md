@@ -1,4 +1,4 @@
-Trololus Primary branch (alpha)
+Trololus 
 ========
 
 A repo for the Trololus Game project. 
@@ -28,4 +28,4 @@ DannyUfonek      				[https://github.com/DannyUfonek]
 
 Misc （╯°□°）╯︵ ┻━┻ 
 ----------
-Development MindMap on [http://bit.ly/TrololusMap]. For edit rights, PM me (gh/xCabbage)
+--REDACTED--  
