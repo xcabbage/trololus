@@ -5,7 +5,7 @@ A repo for the Trololus Game project.
 ----------
 A link to the group HQ.: [https://www.facebook.com/groups/trollfaceStudios/]
 
-Initally created by xCabbage 	[https://github.com/xcabbage].
+Initally created by dkambersky 	[https://github.com/dkambersky].
 
 Collaborators (ordered by contribution):
 ----------
