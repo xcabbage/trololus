@@ -8,8 +8,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.GameState;
 
-import core.nic.cc.Cloud;
-
 
 public class Clouds extends Component {
 	
@@ -25,8 +23,8 @@ public class Clouds extends Component {
 	public void init() {
 		
 		//images
-		image = new Image("core/nic/cc/nic/podklad.png");
-		cloudbrush = new SpriteSheet("core/nic/cc/nic/cloudbrush.png", 340, 340);
+//		image = new Image("core/nic/cc/nic/podklad.png");
+//		cloudbrush = new SpriteSheet("core/nic/cc/nic/cloudbrush.png", 340, 340);
 		
 		//cloud creation
 		cl = new Cloud[22];
