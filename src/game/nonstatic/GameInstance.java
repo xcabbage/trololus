@@ -36,31 +36,7 @@ public class GameInstance {
 	Trololus game;
 	int rotation2[] = new int[1];
 
-	// creation of a new game
-	void init() throws SlickException {
-		field = new BattleField(this);
-
-	}
-
-	@SuppressWarnings("static-access")
-	public void addShip(Ship ship) throws SlickException {
-
-		// If ship model array is full, make new one
-		if (this.ship[this.ship.length - 1] != null) {
-			this.ship = Arrays.copyOf(this.ship, this.ship.length + 1);
-		}
-
-		this.ship[this.ship.length - 1] = new Image(ship.getType().getImgPath())
-				.getScaledCopy(game.ShipScale);
-
-	}
-
-	public BattleField getField() {
-		return field;
-	}
-
-	public GameInstance(BasicState state, StateBasedGame game,
-			Player... players) throws SlickException {
+	public GameInstance(BasicState state, StateBasedGame game, Player... players) throws SlickException {
 		this.state = state;
 		this.game = (Trololus) game;
 		player = new Player[players.length];
@@ -80,10 +56,32 @@ public class GameInstance {
 		init();
 	}
 
+	// creation of a new game
+	void init() throws SlickException {
+		field = new BattleField(this);
+
+	}
+
+	@SuppressWarnings("static-access")
+	public void addShip(Ship ship) throws SlickException {
+
+		// If ship model array is full, make new one
+		if (this.ship[this.ship.length - 1] != null) {
+			this.ship = Arrays.copyOf(this.ship, this.ship.length + 1);
+		}
+
+		this.ship[this.ship.length - 1] = new Image(ship.getType().getImgPath()).getScaledCopy(game.ShipScale);
+
+	}
+
+	public BattleField getField() {
+		return field;
+	}
+
 	public void draw(Graphics g) {
 		// initial graphics stuff
 		g.setAntiAlias(true);
-		if (player[0] != null) {	
+		if (player[0] != null) {
 			g.setColor(player[0].getColor());
 		} else
 			System.out.println("Player 0 is null, can't draw stuff!");

@@ -48,8 +48,7 @@ public class Trololus extends StateBasedGame {
 	static BasicState resState;
 	static NetworkTest pomocnik = new game.core.NetworkTest();
 	static String[] icons = { "resources/Splash/EXEico/trololus_icon16.tga",
-			"resources/Splash/EXEico/trololus_icon32.tga",
-			"resources/Splash/EXEico/trololus_icon64.tga" };
+			"resources/Splash/EXEico/trololus_icon32.tga", "resources/Splash/EXEico/trololus_icon64.tga" };
 	static Image cursor;
 	static Input input;
 
@@ -117,24 +116,17 @@ public class Trololus extends StateBasedGame {
 			PropertiesHandler.init();
 			System.out.println("Properties handler initiated...");
 
-			MUSIC_VOLUME = Float.parseFloat(PropertiesHandler
-					.getProperty("musicvolume"));
+			MUSIC_VOLUME = Float.parseFloat(PropertiesHandler.getProperty("musicvolume"));
 
-			optionsEnabled = Boolean.parseBoolean(PropertiesHandler
-					.getProperty("optionsEnabled"));
-			isVSyncEnabled = Boolean.parseBoolean(PropertiesHandler
-					.getProperty("vsyncEnabled"));
-			ShowFPS = Boolean.parseBoolean(PropertiesHandler
-					.getProperty("fpsEnabled"));
-			DECORATED = Boolean.parseBoolean(PropertiesHandler
-					.getProperty("windowDecorated"));
-			ShipScale = Float.parseFloat(PropertiesHandler
-					.getProperty("shipScale"));
+			optionsEnabled = Boolean.parseBoolean(PropertiesHandler.getProperty("optionsEnabled"));
+			isVSyncEnabled = Boolean.parseBoolean(PropertiesHandler.getProperty("vsyncEnabled"));
+			ShowFPS = Boolean.parseBoolean(PropertiesHandler.getProperty("fpsEnabled"));
+			DECORATED = Boolean.parseBoolean(PropertiesHandler.getProperty("windowDecorated"));
+			ShipScale = Float.parseFloat(PropertiesHandler.getProperty("shipScale"));
 
 			System.out.println("Properties successfully loaded.");
 		} else {
-			System.out
-					.println("Manual override from source constants enabled. Disregarding properties.");
+			System.out.println("Manual override from source constants enabled. Disregarding properties.");
 		}
 	}
 
@@ -314,8 +306,7 @@ public class Trololus extends StateBasedGame {
 	}
 
 	public static void cleanRes() throws SlickException {
-		app.setDisplayMode((int) (res.width * .75), (int) (res.height * .75),
-				fullscreen);
+		app.setDisplayMode((int) (res.width * .75), (int) (res.height * .75), fullscreen);
 	}
 
 	public BasicState getResState() {
@@ -340,8 +331,7 @@ public class Trololus extends StateBasedGame {
 				if (!app.isFullscreen()) {
 
 					Util.printDebug("Entering FullScreen mode.");
-					app.setDisplayMode(utilGfx.getRes().width,
-							utilGfx.getRes().height, true);
+					app.setDisplayMode(utilGfx.getRes().width, utilGfx.getRes().height, true);
 
 				} else {
 					Util.printDebug("Returning from fullscreen.");
@@ -391,15 +381,13 @@ public class Trololus extends StateBasedGame {
 
 						e.printStackTrace();
 					}
-					enterState(a, new FadeOutTransition(Color.black, 600),
-							new FadeInTransition(Color.black, 600));
+					enterState(a, new FadeOutTransition(Color.black, 600), new FadeInTransition(Color.black, 600));
 
 				} else if (a == 6)
 					MUSIC_END_REQUESTED = true;
 				else {
-					System.out
-							.println("There was a really weird error. You clicked on a nonexisting button, "
-									+ a + " :O");
+					System.out.println(
+							"There was a really weird error. You clicked on a nonexisting button, " + a + " :O");
 				}
 			}
 
@@ -425,7 +413,6 @@ public class Trololus extends StateBasedGame {
 	public static void error(StackTraceElement[] trace) {
 		// TODO popups? logs? fluff?
 		if (PRINT_ERRORS) {
-
 			System.out.println(trace);
 		}
 
