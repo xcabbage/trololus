@@ -1,11 +1,10 @@
 Trololus 
 ========
+[currently on hold]
 
 A repo for the Trololus Game project. 
 ----------
-A link to the group HQ.: [https://www.facebook.com/groups/trollfaceStudios/]
-
-Initally created by dkambersky 	[https://github.com/dkambersky].
+Created by dkambersky 	[https://github.com/dkambersky].
 
 Collaborators (ordered by contribution):
 ----------
@@ -16,9 +15,6 @@ DusanPilka      				[https://github.com/dusanp]
 Nic      			[https://github.com/nic727]
 
 DannyUfonek      				[https://github.com/DannyUfonek]
-
-
-
 
 
 
